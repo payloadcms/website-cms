@@ -1,4 +1,6 @@
 import { CollectionConfig } from 'payload/types';
+import { isAdmin } from '../access/isAdmin';
+import { publishedOnly } from '../access/publishedOnly';
 import { CallToAction } from '../blocks/CallToAction';
 import { CardGrid } from '../blocks/CardGrid';
 import { CaseStudiesHighlight } from '../blocks/CaseStudiesHighlight';
@@ -19,6 +21,16 @@ export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
     useAsTitle: 'title',
+  },
+  versions: {
+    drafts: true,
+  },
+  access: {
+    create: isAdmin,
+    read: publishedOnly,
+    readVersions: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
   },
   fields: [
     {

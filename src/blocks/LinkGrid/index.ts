@@ -1,9 +1,11 @@
 import { Block } from "payload/types";
-import richText from "../../fields/richText";
+import linkGroup from "../../fields/linkGroup";
 
 export const LinkGrid: Block = {
   slug: 'linkGrid',
   fields: [
-    richText(),
+    linkGroup({
+      appearances: false,
+    })
   ]
 }

@@ -1,4 +1,6 @@
 import { CollectionConfig } from 'payload/types';
+import { isAdmin } from '../access/isAdmin';
+import { publishedOnly } from '../access/publishedOnly';
 import { CallToAction } from '../blocks/CallToAction';
 import { CardGrid } from '../blocks/CardGrid';
 import { CaseStudiesHighlight } from '../blocks/CaseStudiesHighlight';
@@ -16,6 +18,13 @@ export const ReusableContent: CollectionConfig = {
   slug: 'reusable-content',
   admin: {
     useAsTitle: 'title',
+  },
+  access: {
+    create: isAdmin,
+    read: publishedOnly,
+    readVersions: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
   },
   labels: {
     singular: 'Reusable Content',

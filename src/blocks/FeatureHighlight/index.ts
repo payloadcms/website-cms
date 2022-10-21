@@ -1,9 +1,66 @@
 import { Block } from "payload/types";
+import link from "../../fields/link";
 import richText from "../../fields/richText";
 
 export const FeatureHighlight: Block = {
   slug: 'featureHighlight',
   fields: [
-    richText(),
+    {
+      name: 'features',
+      type: 'array',
+      required: true,
+      fields: [
+        {
+          name: 'type',
+          type: 'radio',
+          defaultValue: 'code',
+          options: [
+            {
+              label: 'Code Block',
+              value: 'code',
+            },
+            {
+              label: 'Media',
+              value: 'media',
+            },
+          ],
+          admin: {
+            layout: 'horizontal',
+          }
+        },
+        {
+          name: 'label',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'content',
+          type: 'richText',
+          admin: {
+            elements: ['link'],
+          },
+        },
+        link({
+          appearances: false,
+        }),
+        {
+          name: 'code',
+          type: 'code',
+          required: true,
+          admin: {
+            condition: (_, siblingData) => siblingData.type === 'code',
+          }
+        },
+        {
+          name: 'media',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+          admin: {
+            condition: (_, siblingData) => siblingData.type === 'media',
+          }
+        },
+      ]
+    }
   ]
 }

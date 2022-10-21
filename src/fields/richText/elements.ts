@@ -10,6 +10,7 @@ const elements: RichTextElement[] = [
   'h6',
   'link',
   largeBody,
+  // NEED LABEL ELEMENT
 ];
 
 export default elements;

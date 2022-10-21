@@ -1,6 +1,7 @@
 import { buildConfig } from 'payload/config';
 import path from 'path';
 import formBuilder from '@payloadcms/plugin-form-builder';
+import seo from '@payloadcms/plugin-seo';
 import { ReusableContent } from './collections/ReusableContent'
 import { Users } from './collections/Users';
 import { CaseStudies } from './collections/CaseStudies';
@@ -30,5 +31,14 @@ export default buildConfig({
   },
   plugins: [
     formBuilder({}),
+    seo({
+      collections: [
+        'case-studies',
+        'pages',
+        'posts',
+        'use-cases',
+      ],
+      uploadsCollection: 'media',
+    })
   ]
 });
