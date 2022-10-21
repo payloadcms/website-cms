@@ -50,22 +50,22 @@ const insertVideo = (editor, { id, source }) => {
 };
 
 const VideoButton: React.FC<{ path: string }> = ({ path }) => {
-  const { open, closeAll } = useModal();
+  const { openModal, closeAllModals } = useModal();
   const editor = useSlate();
   const [renderModal, setRenderModal] = useState(false);
   const modalSlug = `${path}-add-video`;
 
   const handleAddVideo = useCallback((_, { id, source }) => {
     insertVideo(editor, { id, source });
-    closeAll();
+    closeAllModals();
     setRenderModal(false);
-  }, [editor, closeAll]);
+  }, [editor, closeAllModals]);
 
   useEffect(() => {
     if (renderModal) {
-      open(modalSlug);
+      openModal(modalSlug);
     }
-  }, [renderModal, open, modalSlug]);
+  }, [renderModal, openModal, modalSlug]);
 
   return (
     <Fragment>
@@ -88,7 +88,7 @@ const VideoButton: React.FC<{ path: string }> = ({ path }) => {
               <Button
                 buttonStyle="none"
                 onClick={() => {
-                  closeAll();
+                  closeAllModals();
                   setRenderModal(false);
                 }}
               >
