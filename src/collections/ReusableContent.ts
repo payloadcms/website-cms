@@ -1,9 +1,12 @@
 import { CollectionConfig } from 'payload/types';
 import { isAdmin } from '../access/isAdmin';
 import { publishedOnly } from '../access/publishedOnly';
+import { Banner } from '../blocks/Banner';
+import { BlogContent } from '../blocks/BlogContent';
 import { CallToAction } from '../blocks/CallToAction';
 import { CardGrid } from '../blocks/CardGrid';
 import { CaseStudiesHighlight } from '../blocks/CaseStudiesHighlight';
+import { Code } from '../blocks/Code';
 import { Content } from '../blocks/Content';
 import { ContentGrid } from '../blocks/ContentGrid';
 import { FeatureHighlight } from '../blocks/FeatureHighlight';
@@ -34,15 +37,19 @@ export const ReusableContent: CollectionConfig = {
     {
       name: 'title',
       type: 'text',
+      required: true,
     },
     {
       name: 'layout',
       type: 'blocks',
       required: true,
       blocks: [
+        Banner,
+        BlogContent,
         CallToAction,
         CardGrid,
         CaseStudiesHighlight,
+        Code,
         Content,
         ContentGrid,
         FeatureHighlight,

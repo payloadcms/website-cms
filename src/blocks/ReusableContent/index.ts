@@ -1,5 +1,4 @@
 import { Block } from "payload/types";
-import richText from "../../fields/richText";
 
 export const ReusableContent: Block = {
   slug: 'reusableContentBlock',

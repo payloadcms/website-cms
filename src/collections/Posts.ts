@@ -49,5 +49,14 @@ export const Posts: CollectionConfig = {
       required: true,
     },
     slugField(),
+    {
+      name: 'author',
+      type: 'relationship',
+      relationTo: 'users',
+      required: true,
+      admin: {
+        position: 'sidebar',
+      }
+    },
   ]
 }
