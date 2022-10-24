@@ -9,6 +9,7 @@ export const slugField: Slug = (fieldToUse = 'title', overrides) => deepMerge<Fi
     name: 'slug',
     label: 'Slug',
     type: 'text',
+    index: true,
     admin: {
       position: 'sidebar',
     },

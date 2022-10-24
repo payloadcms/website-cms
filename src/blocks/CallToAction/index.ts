@@ -14,6 +14,7 @@ export const CallToAction: Block = {
       name: 'feature',
       type: 'select',
       defaultValue: 'none',
+      required: true,
       options: [
         {
           label: 'None',

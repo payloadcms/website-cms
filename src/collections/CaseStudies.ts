@@ -43,7 +43,7 @@ export const CaseStudies: CollectionConfig = {
       name: 'introContent',
     }),
     {
-      name: 'heroMedia',
+      name: 'featuredImage',
       type: 'upload',
       relationTo: 'media',
       required: true,

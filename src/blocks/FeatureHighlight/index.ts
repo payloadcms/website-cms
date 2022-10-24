@@ -29,13 +29,9 @@ export const FeatureHighlight: Block = {
           }
         },
         {
-          name: 'label',
-          type: 'text',
-          required: true,
-        },
-        {
           name: 'content',
           type: 'richText',
+          required: true,
           admin: {
             elements: ['link'],
           },

@@ -31,6 +31,7 @@ export const CardGrid: Block = {
         },
         link({
           disableLabel: true,
+          appearances: false,
         }),
       ]
     },

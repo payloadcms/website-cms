@@ -173,7 +173,6 @@ export interface Page {
                   relationTo: 'case-studies';
                 };
             url: string;
-            appearance?: 'default' | 'primary' | 'secondary';
           };
           id?: string;
         }[];
@@ -569,7 +568,6 @@ export interface UseCase {
                   relationTo: 'case-studies';
                 };
             url: string;
-            appearance?: 'default' | 'primary' | 'secondary';
           };
           id?: string;
         }[];
@@ -779,7 +777,7 @@ export interface CaseStudy {
   introContent: {
     [k: string]: unknown;
   }[];
-  heroMedia: string | Media;
+  featuredImage: string | Media;
   layout: (
     | {
         richText: {
@@ -870,7 +868,6 @@ export interface CaseStudy {
                   relationTo: 'case-studies';
                 };
             url: string;
-            appearance?: 'default' | 'primary' | 'secondary';
           };
           id?: string;
         }[];
@@ -1330,7 +1327,6 @@ export interface ReusableContent {
                   relationTo: 'case-studies';
                 };
             url: string;
-            appearance?: 'default' | 'primary' | 'secondary';
           };
           id?: string;
         }[];
