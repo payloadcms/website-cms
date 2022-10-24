@@ -40,5 +40,8 @@ export default buildConfig({
       ],
       uploadsCollection: 'media',
     })
-  ]
+  ],
+  cors: [
+    process.env.PAYLOAD_PUBLIC_APP_URL,
+  ].filter(Boolean),
 });

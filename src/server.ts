@@ -21,4 +21,6 @@ payload.init({
 
 // Add your own express routes here
 
-app.listen(8000);
+app.listen(process.env.PORT, async () => {
+  payload.logger.info(`Server listening on port ${process.env.PORT}`);
+});
