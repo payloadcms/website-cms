@@ -7,11 +7,13 @@ import { Code } from '../blocks/Code';
 import { MediaBlock } from '../blocks/Media';
 import richText from '../fields/richText';
 import { slugField } from '../fields/slug';
+import { formatPreviewURL } from '../utilities/formatPreviewURL';
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
     useAsTitle: 'title',
+    preview: (doc) => formatPreviewURL('posts', doc),
   },
   versions: {
     drafts: true,

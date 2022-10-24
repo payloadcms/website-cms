@@ -16,11 +16,13 @@ import { Slider } from '../blocks/Slider';
 import { Steps } from '../blocks/Steps';
 import { hero } from '../fields/hero';
 import { slugField } from '../fields/slug';
+import { formatPreviewURL } from '../utilities/formatPreviewURL';
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
     useAsTitle: 'title',
+    preview: (doc) => formatPreviewURL('pages', doc),
   },
   versions: {
     drafts: true,
