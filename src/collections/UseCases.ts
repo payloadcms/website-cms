@@ -17,12 +17,16 @@ import { Slider } from '../blocks/Slider';
 import { Steps } from '../blocks/Steps';
 import { slugField } from '../fields/slug';
 import { formatPreviewURL } from '../utilities/formatPreviewURL';
+import { regeneratePage } from '../utilities/regeneratePage';
 
 export const UseCases: CollectionConfig = {
   slug: 'use-cases',
   admin: {
     useAsTitle: 'title',
     preview: (doc) => formatPreviewURL('use-cases', doc),
+  },
+  versions: {
+    drafts: true,
   },
   access: {
     create: isAdmin,
@@ -31,8 +35,16 @@ export const UseCases: CollectionConfig = {
     update: isAdmin,
     delete: isAdmin,
   },
-  versions: {
-    drafts: true,
+  hooks: {
+    afterChange: [
+      ({ req: { payload }, doc }) => {
+        regeneratePage({ 
+          payload,
+          collection: 'use-cases', 
+          doc 
+        });
+      },
+    ]
   },
   fields: [
     {

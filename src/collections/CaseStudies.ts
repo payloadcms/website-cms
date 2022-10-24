@@ -18,12 +18,16 @@ import { Steps } from '../blocks/Steps';
 import { slugField } from '../fields/slug';
 import link from '../fields/link';
 import { formatPreviewURL } from '../utilities/formatPreviewURL';
+import { regeneratePage } from '../utilities/regeneratePage';
 
 export const CaseStudies: CollectionConfig = {
   slug: 'case-studies',
   admin: {
     useAsTitle: 'title',
     preview: (doc) => formatPreviewURL('case-studies', doc),
+  },
+  versions: {
+    drafts: true,
   },
   access: {
     create: isAdmin,
@@ -32,8 +36,16 @@ export const CaseStudies: CollectionConfig = {
     update: isAdmin,
     delete: isAdmin,
   },
-  versions: {
-    drafts: true,
+  hooks: {
+    afterChange: [
+      ({ req: { payload }, doc }) => {
+        regeneratePage({
+          payload,
+          collection: 'case-studies',
+          doc
+        });
+      },
+    ]
   },
   fields: [
     {

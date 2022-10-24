@@ -8,6 +8,7 @@ import { MediaBlock } from '../blocks/Media';
 import richText from '../fields/richText';
 import { slugField } from '../fields/slug';
 import { formatPreviewURL } from '../utilities/formatPreviewURL';
+import { regeneratePage } from '../utilities/regeneratePage';
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -24,6 +25,17 @@ export const Posts: CollectionConfig = {
     readVersions: isAdmin,
     update: isAdmin,
     delete: isAdmin,
+  },
+  hooks: {
+    afterChange: [
+      ({ req: { payload }, doc }) => {
+        regeneratePage({ 
+          payload,
+          collection: 'posts', 
+          doc 
+        });
+      },
+    ]
   },
   fields: [
     {
