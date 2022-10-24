@@ -17,6 +17,7 @@ import { Steps } from '../blocks/Steps';
 import { hero } from '../fields/hero';
 import { slugField } from '../fields/slug';
 import { formatPreviewURL } from '../utilities/formatPreviewURL';
+import { regeneratePage } from '../utilities/regeneratePage';
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -33,6 +34,17 @@ export const Pages: CollectionConfig = {
     readVersions: isAdmin,
     update: isAdmin,
     delete: isAdmin,
+  },
+  hooks: {
+    afterChange: [
+      ({ req: { payload }, doc }) => {
+        regeneratePage({ 
+          payload,
+          collection: 'pages', 
+          doc 
+        });
+      },
+    ]
   },
   fields: [
     {
