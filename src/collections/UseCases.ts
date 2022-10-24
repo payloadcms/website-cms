@@ -16,11 +16,13 @@ import { ReusableContent } from '../blocks/ReusableContent';
 import { Slider } from '../blocks/Slider';
 import { Steps } from '../blocks/Steps';
 import { slugField } from '../fields/slug';
+import { formatPreviewURL } from '../utilities/formatPreviewURL';
 
 export const UseCases: CollectionConfig = {
   slug: 'use-cases',
   admin: {
     useAsTitle: 'title',
+    preview: (doc) => formatPreviewURL('use-cases', doc),
   },
   access: {
     create: isAdmin,

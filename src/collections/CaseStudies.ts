@@ -17,11 +17,13 @@ import { Slider } from '../blocks/Slider';
 import { Steps } from '../blocks/Steps';
 import { slugField } from '../fields/slug';
 import link from '../fields/link';
+import { formatPreviewURL } from '../utilities/formatPreviewURL';
 
 export const CaseStudies: CollectionConfig = {
   slug: 'case-studies',
   admin: {
     useAsTitle: 'title',
+    preview: (doc) => formatPreviewURL('case-studies', doc),
   },
   access: {
     create: isAdmin,
