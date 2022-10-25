@@ -214,22 +214,20 @@ export interface Page {
       }
     | {
         contentGridFields: {
-          contentGridFields: {
+          cells: {
+            forceDarkBackground?: boolean;
             content: {
-              forceDarkBackground?: boolean;
-              content: {
-                [k: string]: unknown;
-              }[];
-              id?: string;
+              [k: string]: unknown;
             }[];
-          };
+            id?: string;
+          }[];
         };
         id?: string;
         blockName?: string;
         blockType: 'contentGrid';
       }
     | {
-        featureHighlighFields: {
+        featureHighlightFields: {
           features: {
             type?: 'code' | 'media';
             content: {
@@ -644,22 +642,20 @@ export interface UseCase {
       }
     | {
         contentGridFields: {
-          contentGridFields: {
+          cells: {
+            forceDarkBackground?: boolean;
             content: {
-              forceDarkBackground?: boolean;
-              content: {
-                [k: string]: unknown;
-              }[];
-              id?: string;
+              [k: string]: unknown;
             }[];
-          };
+            id?: string;
+          }[];
         };
         id?: string;
         blockName?: string;
         blockType: 'contentGrid';
       }
     | {
-        featureHighlighFields: {
+        featureHighlightFields: {
           features: {
             type?: 'code' | 'media';
             content: {
@@ -971,22 +967,20 @@ export interface CaseStudy {
       }
     | {
         contentGridFields: {
-          contentGridFields: {
+          cells: {
+            forceDarkBackground?: boolean;
             content: {
-              forceDarkBackground?: boolean;
-              content: {
-                [k: string]: unknown;
-              }[];
-              id?: string;
+              [k: string]: unknown;
             }[];
-          };
+            id?: string;
+          }[];
         };
         id?: string;
         blockName?: string;
         blockType: 'contentGrid';
       }
     | {
-        featureHighlighFields: {
+        featureHighlightFields: {
           features: {
             type?: 'code' | 'media';
             content: {
@@ -1470,22 +1464,20 @@ export interface ReusableContent {
       }
     | {
         contentGridFields: {
-          contentGridFields: {
+          cells: {
+            forceDarkBackground?: boolean;
             content: {
-              forceDarkBackground?: boolean;
-              content: {
-                [k: string]: unknown;
-              }[];
-              id?: string;
+              [k: string]: unknown;
             }[];
-          };
+            id?: string;
+          }[];
         };
         id?: string;
         blockName?: string;
         blockType: 'contentGrid';
       }
     | {
-        featureHighlighFields: {
+        featureHighlightFields: {
           features: {
             type?: 'code' | 'media';
             content: {
