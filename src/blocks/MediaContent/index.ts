@@ -1,54 +1,60 @@
 import { Block } from "payload/types";
+import { blockFields } from "../../fields/blockFields";
 import link from "../../fields/link";
 import richText from "../../fields/richText";
 
 export const MediaContent: Block = {
   slug: 'mediaContent',
   fields: [
-    {
-      type: 'row',
+    blockFields({
+      name: 'mediaContentFields',
       fields: [
         {
-          name: 'alignment',
-          type: 'select',
-          defaultValue: 'contentMedia',
-          options: [
+          type: 'row',
+          fields: [
             {
-              label: 'Content + Media',
-              value: 'contentMedia',
+              name: 'alignment',
+              type: 'select',
+              defaultValue: 'contentMedia',
+              options: [
+                {
+                  label: 'Content + Media',
+                  value: 'contentMedia',
+                },
+                {
+                  label: 'Media + Content',
+                  value: 'mediaContent',
+                },
+              ],
+              admin: {
+                description: 'Choose how to align the content for this block.',
+                width: '50%',
+              }
             },
             {
-              label: 'Media + Content',
-              value: 'mediaContent',
+              name: 'container',
+              type: 'checkbox',
+              admin: {
+                description: 'Check this box to render this block with a background container.',
+                width: '50%',
+                style: {
+                  alignSelf: 'flex-end',
+                },
+              }
             },
-          ],
-          admin: {
-            description: 'Choose how to align the content for this block.',
-            width: '50%',
-          }
+          ]
         },
+        richText(),
+        link({
+          appearances: false,
+        }),
         {
-          name: 'container',
-          type: 'checkbox',
-          admin: {
-            description: 'Check this box to render this block with a background container.',
-            width: '50%',
-            style: {
-              alignSelf: 'flex-end',
-            },
-          }
-        },
+          name: 'media',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        }
       ]
-    },
-    richText(),
-    link({
-      appearances: false,
-    }),
-    {
-      name: 'media',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-    }
+    })
   ]
 }

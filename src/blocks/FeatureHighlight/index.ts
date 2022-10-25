@@ -1,62 +1,68 @@
 import { Block } from "payload/types";
+import { blockFields } from "../../fields/blockFields";
 import link from "../../fields/link";
 import richText from "../../fields/richText";
 
 export const FeatureHighlight: Block = {
   slug: 'featureHighlight',
   fields: [
-    {
-      name: 'features',
-      type: 'array',
-      required: true,
+    blockFields({
+      name: 'featureHighlighFields',
       fields: [
         {
-          name: 'type',
-          type: 'radio',
-          defaultValue: 'code',
-          options: [
+          name: 'features',
+          type: 'array',
+          required: true,
+          fields: [
             {
-              label: 'Code Block',
-              value: 'code',
+              name: 'type',
+              type: 'radio',
+              defaultValue: 'code',
+              options: [
+                {
+                  label: 'Code Block',
+                  value: 'code',
+                },
+                {
+                  label: 'Media',
+                  value: 'media',
+                },
+              ],
+              admin: {
+                layout: 'horizontal',
+              }
             },
             {
-              label: 'Media',
-              value: 'media',
+              name: 'content',
+              type: 'richText',
+              required: true,
+              admin: {
+                elements: ['link'],
+              },
             },
-          ],
-          admin: {
-            layout: 'horizontal',
-          }
-        },
-        {
-          name: 'content',
-          type: 'richText',
-          required: true,
-          admin: {
-            elements: ['link'],
-          },
-        },
-        link({
-          appearances: false,
-        }),
-        {
-          name: 'code',
-          type: 'code',
-          required: true,
-          admin: {
-            condition: (_, siblingData) => siblingData.type === 'code',
-          }
-        },
-        {
-          name: 'media',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-          admin: {
-            condition: (_, siblingData) => siblingData.type === 'media',
-          }
-        },
+            link({
+              appearances: false,
+            }),
+            {
+              name: 'code',
+              type: 'code',
+              required: true,
+              admin: {
+                condition: (_, siblingData) => siblingData.type === 'code',
+              }
+            },
+            {
+              name: 'media',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+              admin: {
+                condition: (_, siblingData) => siblingData.type === 'media',
+              }
+            },
+          ]
+        }
       ]
-    }
+    })
   ]
 }

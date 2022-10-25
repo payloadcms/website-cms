@@ -1,4 +1,5 @@
 import { Block } from "payload/types";
+import { blockFields } from "../../fields/blockFields";
 import linkGroup from "../../fields/linkGroup";
 import richText from "../../fields/richText";
 
@@ -9,25 +10,30 @@ export const CallToAction: Block = {
     plural: 'Calls to Action',
   },
   fields: [
-    richText(),
-    {
-      name: 'feature',
-      type: 'select',
-      defaultValue: 'none',
-      required: true,
-      options: [
+    blockFields({
+      name: 'ctaFields',
+      fields: [
+        richText(),
         {
-          label: 'None',
-          value: 'none',
+          name: 'feature',
+          type: 'select',
+          defaultValue: 'none',
+          required: true,
+          options: [
+            {
+              label: 'None',
+              value: 'none',
+            },
+            {
+              label: 'Create Payload App',
+              value: 'cpa',
+            },
+          ]
         },
-        {
-          label: 'Create Payload App',
-          value: 'cpa',
-        },
+        linkGroup({
+          appearances: false,
+        }),
       ]
-    },
-    linkGroup({
-      appearances: false,
-    }),
+    })
   ]
 }

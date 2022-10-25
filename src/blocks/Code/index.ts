@@ -1,32 +1,37 @@
 import { Block } from "payload/types";
-import richText from "../../fields/richText";
+import { blockFields } from "../../fields/blockFields";
 
 export const Code: Block = {
   slug: 'code',
   fields: [
-    {
-      name: 'language',
-      type: 'select',
-      defaultValue: 'none',
-      options: [
+    blockFields({
+      name: 'codeFields',
+      fields: [
         {
-          label: 'None',
-          value: 'none',
+          name: 'language',
+          type: 'select',
+          defaultValue: 'none',
+          options: [
+            {
+              label: 'None',
+              value: 'none',
+            },
+            {
+              label: 'JavaScript',
+              value: 'js',
+            },
+            {
+              label: 'TypeScript',
+              value: 'ts',
+            },
+          ]
         },
         {
-          label: 'JavaScript',
-          value: 'js',
-        },
-        {
-          label: 'TypeScript',
-          value: 'ts',
+          name: 'code',
+          type: 'code',
+          required: true,
         },
       ]
-    },
-    {
-      name: 'code',
-      type: 'code',
-      required: true,
-    },
+    })
   ]
 }

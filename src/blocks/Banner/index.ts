@@ -1,58 +1,64 @@
 import { Block } from "payload/types";
+import { blockFields } from "../../fields/blockFields";
 
 export const Banner: Block = {
   slug: 'banner',
   fields: [
-    {
-      type: 'row',
+    blockFields({
+      name: 'bannerFields',
       fields: [
         {
-          name: 'type',
-          type: 'select',
-          defaultValue: 'default',
-          options: [
+          type: 'row',
+          fields: [
             {
-              label: 'Default',
-              value: 'default',
+              name: 'type',
+              type: 'select',
+              defaultValue: 'default',
+              options: [
+                {
+                  label: 'Default',
+                  value: 'default',
+                },
+                {
+                  label: 'Success',
+                  value: 'success',
+                },
+                {
+                  label: 'Warning',
+                  value: 'warning',
+                },
+                {
+                  label: 'Error',
+                  value: 'error',
+                },
+              ],
+              admin: {
+                width: '50%',
+              }
             },
             {
-              label: 'Success',
-              value: 'success',
+              name: 'addCheckmark',
+              type: 'checkbox',
+              admin: {
+                width: '50%',
+                style: {
+                  alignSelf: 'center',
+                }
+              }
             },
-            {
-              label: 'Warning',
-              value: 'warning',
-            },
-            {
-              label: 'Error',
-              value: 'error',
-            },
-          ],
-          admin: {
-            width: '50%',
-          }
+          ]
         },
         {
-          name: 'addCheckmark',
-          type: 'checkbox',
+          name: 'content',
+          type: 'richText',
+          required: true,
           admin: {
-            width: '50%',
-            style: {
-              alignSelf: 'flex-end',
-            }
+            elements: [
+              'link',
+            ],
           }
-        },
+        }
       ]
-    },
-    {
-      name: 'content',
-      type: 'richText',
-      required: true,
-      admin: {
-        elements: [
-          'link',
-        ],
-      }
-    }
+    }),
   ]
 }

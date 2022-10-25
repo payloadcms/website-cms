@@ -1,4 +1,5 @@
 import { Block } from "payload/types";
+import { blockFields } from "../../fields/blockFields";
 import richText from "../../fields/richText";
 
 export const Form: Block = {
@@ -8,19 +9,24 @@ export const Form: Block = {
     plural: 'Form Blocks',
   },
   fields: [
-    {
-      name: 'container',
-      type: 'checkbox',
-      admin: {
-        description: 'Check this box to render this block with a background container.'
-      }
-    },
-    richText(),
-    {
-      name: 'form',
-      type: 'relationship',
-      relationTo: 'forms',
-      required: true,
-    }
+    blockFields({
+      name: 'formFields',
+      fields: [
+        {
+          name: 'container',
+          type: 'checkbox',
+          admin: {
+            description: 'Check this box to render this block with a background container.'
+          }
+        },
+        richText(),
+        {
+          name: 'form',
+          type: 'relationship',
+          relationTo: 'forms',
+          required: true,
+        }
+      ]
+    })
   ]
 }
