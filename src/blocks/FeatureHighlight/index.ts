@@ -7,7 +7,7 @@ export const FeatureHighlight: Block = {
   slug: 'featureHighlight',
   fields: [
     blockFields({
-      name: 'featureHighlighFields',
+      name: 'featureHighlightFields',
       fields: [
         {
           name: 'features',

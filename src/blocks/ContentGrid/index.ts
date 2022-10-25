@@ -8,32 +8,26 @@ export const ContentGrid: Block = {
       name: 'contentGridFields',
       fields: [
         {
-          name: 'contentGridFields',
-          type: 'group',
+          name: 'cells',
+          type: 'array',
           fields: [
             {
+              name: 'forceDarkBackground',
+              type: 'checkbox',
+              admin: {
+                description: 'Check this box to force this block to have a dark background.'
+              }
+            },
+            {
               name: 'content',
-              type: 'array',
-              fields: [
-                {
-                  name: 'forceDarkBackground',
-                  type: 'checkbox',
-                  admin: {
-                    description: 'Check this box to force this block to have a dark background.'
-                  }
-                },
-                {
-                  name: 'content',
-                  type: 'richText',
-                  required: true,
-                  admin: {
-                    elements: [
-                      'link',
-                      'h4',
-                    ],
-                  },
-                },
-              ]
+              type: 'richText',
+              required: true,
+              admin: {
+                elements: [
+                  'link',
+                  'h4',
+                ],
+              },
             },
           ]
         },
