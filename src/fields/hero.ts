@@ -1,14 +1,6 @@
 import { Field } from 'payload/types';
-import link from './link';
 import linkGroup from './linkGroup';
-import richText from './richText';
 import largeBody from './richText/largeBody';
-
-type Args = {
-  name?: string,
-  hideGutter?: boolean,
-  condition?: (data: any, sibling: any) => boolean,
-}
 
 export const hero: Field = {
   name: 'hero',
@@ -30,18 +22,73 @@ export const hero: Field = {
           label: 'Content and Media',
           value: 'contentMedia',
         },
+        {
+          label: 'Home',
+          value: 'home',
+        },
       ],
     },
-    richText(),
-    linkGroup(),
+    {
+      name: 'richText',
+      type: 'richText',
+      admin: {
+        elements: ['h1', largeBody, 'ul'],
+        leaves: [],
+      }
+    },
+    linkGroup({
+      overrides: {
+        admin: {
+          condition: (_, { type } = {}) => ['contentMedia', 'default'].includes(type),
+        },
+      }
+    }),
+    linkGroup({
+      appearances: false,
+      overrides: {
+        name: 'actions',
+        label: 'Sidebar Actions',
+        maxRows: 3,
+        admin: {
+          condition: (_, { type }) => type === 'home',
+        }
+      }
+    }),
+    linkGroup({
+      appearances: ['primary', 'secondary'],
+      overrides: {
+        name: 'buttons',
+        label: 'Buttons',
+        maxRows: 2,
+        admin: {
+          condition: (_, { type }) => type === 'home',
+        }
+      }
+    }),
     {
       name: 'media',
       type: 'upload',
       relationTo: 'media',
       required: true,
       admin: {
-        condition: (_, { type } = {}) => type === 'contentMedia',
+        condition: (_, { type } = {}) => ['contentMedia', 'home'].includes(type),
       },
+    },
+    {
+      name: 'adjectives',
+      type: 'array',
+      minRows: 3,
+      maxRows: 6,
+      fields: [
+        {
+          name: 'adjective',
+          type: 'text',
+          required: true,
+        }
+      ],
+      admin: {
+        condition: (_, { type }) => type === 'home',
+      }
     },
   ],
 };
