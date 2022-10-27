@@ -50,8 +50,8 @@ export interface Page {
   id: string;
   title: string;
   hero: {
-    type: 'default' | 'contentMedia';
-    richText: {
+    type: 'default' | 'contentMedia' | 'home';
+    richText?: {
       [k: string]: unknown;
     }[];
     links: {
@@ -81,7 +81,64 @@ export interface Page {
       };
       id?: string;
     }[];
+    actions: {
+      link: {
+        type?: 'reference' | 'custom';
+        newTab?: boolean;
+        reference:
+          | {
+              value: string | Page;
+              relationTo: 'pages';
+            }
+          | {
+              value: string | Post;
+              relationTo: 'posts';
+            }
+          | {
+              value: string | UseCase;
+              relationTo: 'use-cases';
+            }
+          | {
+              value: string | CaseStudy;
+              relationTo: 'case-studies';
+            };
+        url: string;
+        label: string;
+      };
+      id?: string;
+    }[];
+    buttons: {
+      link: {
+        type?: 'reference' | 'custom';
+        newTab?: boolean;
+        reference:
+          | {
+              value: string | Page;
+              relationTo: 'pages';
+            }
+          | {
+              value: string | Post;
+              relationTo: 'posts';
+            }
+          | {
+              value: string | UseCase;
+              relationTo: 'use-cases';
+            }
+          | {
+              value: string | CaseStudy;
+              relationTo: 'case-studies';
+            };
+        url: string;
+        label: string;
+        appearance?: 'primary' | 'secondary';
+      };
+      id?: string;
+    }[];
     media: string | Media;
+    adjectives: {
+      adjective: string;
+      id?: string;
+    }[];
   };
   layout: (
     | {
