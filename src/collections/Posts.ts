@@ -53,7 +53,7 @@ export const Posts: CollectionConfig = {
       name: "excerpt",
     }),
     {
-      name: "layout",
+      name: "content",
       type: "blocks",
       blocks: [Banner, BlogContent, Code, MediaBlock],
       required: true,
