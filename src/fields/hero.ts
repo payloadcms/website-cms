@@ -33,7 +33,7 @@ export const hero: Field = {
       type: 'richText',
       admin: {
         elements: ['h1', largeBody, 'ul'],
-        leaves: [],
+        leaves: ['underline'],
       }
     },
     linkGroup({
