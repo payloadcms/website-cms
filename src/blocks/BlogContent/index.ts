@@ -3,13 +3,11 @@ import { blockFields } from "../../fields/blockFields";
 import richText from "../../fields/richText";
 
 export const BlogContent: Block = {
-  slug: 'blogContent',
+  slug: "blogContent",
   fields: [
     blockFields({
-      name: 'blogContentFields',
-      fields: [
-        richText(),
-      ]
-    })
-  ]
-}
+      name: "blogContentFields",
+      fields: [richText({}, { elements: ["ul"] })],
+    }),
+  ],
+};

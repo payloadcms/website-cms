@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload/types';
 import { isAdminFieldLevel } from '../access/isAdmin';
-import { isAdminOrSelf } from '../access/isAdminOrSelf';
+import { isAdminOrSelf, isAdminOrSelfFieldLevel } from '../access/isAdminOrSelf';
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -10,7 +10,7 @@ export const Users: CollectionConfig = {
   },
   access: {
     create: () => true,
-    read: isAdminOrSelf,
+    read: () => true,
     update: isAdminOrSelf,
     delete: isAdminOrSelf,
   },
@@ -46,6 +46,7 @@ export const Users: CollectionConfig = {
       defaultValue: ['public'],
       required: true,
       access: {
+        read: isAdminOrSelfFieldLevel,
         create: isAdminFieldLevel,
         update: isAdminFieldLevel,
       },

@@ -460,12 +460,12 @@ export interface Page {
  */
 export interface Post {
   id: string;
-  title?: string;
+  title: string;
   image: string | Media;
   excerpt: {
     [k: string]: unknown;
   }[];
-  content: (
+  layout: (
     | {
         bannerFields: {
           type?: 'default' | 'success' | 'warning' | 'error';
