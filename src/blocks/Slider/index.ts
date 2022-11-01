@@ -3,13 +3,66 @@ import { blockFields } from "../../fields/blockFields";
 import richText from "../../fields/richText";
 
 export const Slider: Block = {
-  slug: 'slider',
+  slug: "slider",
   fields: [
     blockFields({
-      name: 'sliderFields',
+      name: "sliderFields",
       fields: [
-        richText(),
-      ]
-    })
-  ]
-}
+        {
+          type: "select",
+          name: "sliderType",
+          required: true,
+          options: [
+            {
+              label: "Quote Slider",
+              value: "quoteSlider",
+            },
+            {
+              label: "Image Slider",
+              value: "imageSlider",
+            },
+          ],
+        },
+        {
+          type: "array",
+          name: "imageSlides",
+          required: true,
+          minRows: 3,
+          admin: {
+            condition: (_, siblingData) =>
+              siblingData.sliderType === "imageSlider",
+          },
+          fields: [
+            {
+              type: "upload",
+              name: "image",
+              relationTo: "media",
+              required: true,
+            },
+          ],
+        },
+        {
+          type: "array",
+          name: "quoteSlides",
+          required: true,
+          minRows: 3,
+          admin: {
+            condition: (_, siblingData) =>
+              siblingData.sliderType === "quoteSlider",
+          },
+          fields: [
+            richText({
+              name: "richText",
+              required: true,
+            }),
+            {
+              type: "date",
+              name: "quoteDate",
+              required: true,
+            },
+          ],
+        },
+      ],
+    }),
+  ],
+};
