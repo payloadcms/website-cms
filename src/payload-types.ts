@@ -247,7 +247,7 @@ export interface Page {
           richText: {
             [k: string]: unknown;
           }[];
-          caseStudies: string | CaseStudy;
+          caseStudies: string[] | CaseStudy[];
         };
         id?: string;
         blockName?: string;
@@ -684,7 +684,7 @@ export interface UseCase {
           richText: {
             [k: string]: unknown;
           }[];
-          caseStudies: string | CaseStudy;
+          caseStudies: string[] | CaseStudy[];
         };
         id?: string;
         blockName?: string;
@@ -1018,7 +1018,7 @@ export interface CaseStudy {
           richText: {
             [k: string]: unknown;
           }[];
-          caseStudies: string | CaseStudy;
+          caseStudies: string[] | CaseStudy[];
         };
         id?: string;
         blockName?: string;
@@ -1515,7 +1515,7 @@ export interface ReusableContent {
           richText: {
             [k: string]: unknown;
           }[];
-          caseStudies: string | CaseStudy;
+          caseStudies: string[] | CaseStudy[];
         };
         id?: string;
         blockName?: string;
