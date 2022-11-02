@@ -50,7 +50,7 @@ export interface Page {
   id: string;
   title: string;
   hero: {
-    type: 'default' | 'contentMedia' | 'home';
+    type: 'default' | 'contentMedia' | 'form' | 'home';
     richText?: {
       [k: string]: unknown;
     }[];
@@ -139,6 +139,7 @@ export interface Page {
       adjective: string;
       id?: string;
     }[];
+    form?: string | Form;
   };
   layout: (
     | {
