@@ -23,6 +23,10 @@ export const hero: Field = {
           value: 'contentMedia',
         },
         {
+          label: 'Form',
+          value: 'form',
+        },
+        {
           label: 'Home',
           value: 'home',
         },
@@ -88,6 +92,14 @@ export const hero: Field = {
       ],
       admin: {
         condition: (_, { type }) => type === 'home',
+      }
+    },
+    {
+      name: 'form',
+      type: 'relationship',
+      relationTo: 'forms',
+      admin: {
+        condition: (_, { type }) => type === 'form',
       }
     },
   ],
