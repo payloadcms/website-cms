@@ -50,7 +50,7 @@ export interface Page {
   id: string;
   title: string;
   hero: {
-    type: 'default' | 'contentMedia' | 'home';
+    type: 'default' | 'contentMedia' | 'form' | 'home';
     richText?: {
       [k: string]: unknown;
     }[];
@@ -139,6 +139,7 @@ export interface Page {
       adjective: string;
       id?: string;
     }[];
+    form?: string | Form;
   };
   layout: (
     | {
@@ -246,7 +247,7 @@ export interface Page {
           richText: {
             [k: string]: unknown;
           }[];
-          caseStudies: string | CaseStudy;
+          caseStudies: string[] | CaseStudy[];
         };
         id?: string;
         blockName?: string;
@@ -683,7 +684,7 @@ export interface UseCase {
           richText: {
             [k: string]: unknown;
           }[];
-          caseStudies: string | CaseStudy;
+          caseStudies: string[] | CaseStudy[];
         };
         id?: string;
         blockName?: string;
@@ -1017,7 +1018,7 @@ export interface CaseStudy {
           richText: {
             [k: string]: unknown;
           }[];
-          caseStudies: string | CaseStudy;
+          caseStudies: string[] | CaseStudy[];
         };
         id?: string;
         blockName?: string;
@@ -1514,7 +1515,7 @@ export interface ReusableContent {
           richText: {
             [k: string]: unknown;
           }[];
-          caseStudies: string | CaseStudy;
+          caseStudies: string[] | CaseStudy[];
         };
         id?: string;
         blockName?: string;

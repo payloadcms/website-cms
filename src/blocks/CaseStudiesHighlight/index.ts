@@ -13,6 +13,7 @@ export const CaseStudiesHighlight: Block = {
           name: 'caseStudies',
           type: 'relationship',
           relationTo: 'case-studies',
+          hasMany: true,
           required: true,
         }
       ]
