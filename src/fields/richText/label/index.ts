@@ -1,11 +1,11 @@
 import { RichTextCustomElement } from "payload/types";
 import Button from "./Button";
 import Element from "./Element";
-import withLargeBody from "./plugin";
+import withLabel from "./plugin";
 
 export default {
-  name: "large-body",
+  name: "label",
   Button,
   Element,
-  plugins: [withLargeBody],
+  plugins: [withLabel],
 } as RichTextCustomElement;

@@ -4,57 +4,67 @@ import link from "../../fields/link";
 import richText from "../../fields/richText";
 
 export const MediaContent: Block = {
-  slug: 'mediaContent',
+  slug: "mediaContent",
   fields: [
     blockFields({
-      name: 'mediaContentFields',
+      name: "mediaContentFields",
       fields: [
         {
-          type: 'row',
+          type: "row",
           fields: [
             {
-              name: 'alignment',
-              type: 'select',
-              defaultValue: 'contentMedia',
+              name: "alignment",
+              type: "select",
+              defaultValue: "contentMedia",
               options: [
                 {
-                  label: 'Content + Media',
-                  value: 'contentMedia',
+                  label: "Content + Media",
+                  value: "contentMedia",
                 },
                 {
-                  label: 'Media + Content',
-                  value: 'mediaContent',
+                  label: "Media + Content",
+                  value: "mediaContent",
                 },
               ],
               admin: {
-                description: 'Choose how to align the content for this block.',
-                width: '50%',
-              }
+                description: "Choose how to align the content for this block.",
+                width: "50%",
+              },
             },
             {
-              name: 'container',
-              type: 'checkbox',
+              name: "container",
+              type: "checkbox",
               admin: {
-                description: 'Check this box to render this block with a background container.',
-                width: '50%',
+                description:
+                  "Check this box to render this block with a background container.",
+                width: "50%",
                 style: {
-                  alignSelf: 'flex-end',
+                  alignSelf: "flex-end",
                 },
-              }
+              },
             },
-          ]
+          ],
         },
         richText(),
+        {
+          name: "enableLink",
+          type: "checkbox",
+        },
         link({
           appearances: false,
+          overrides: {
+            admin: {
+              condition: (_, { enableLink }) => enableLink,
+            },
+          },
         }),
         {
-          name: 'media',
-          type: 'upload',
-          relationTo: 'media',
+          name: "media",
+          type: "upload",
+          relationTo: "media",
           required: true,
-        }
-      ]
-    })
-  ]
-}
+        },
+      ],
+    }),
+  ],
+};

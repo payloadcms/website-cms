@@ -3,7 +3,7 @@ const withLargeBody = (incomingEditor) => {
   const { shouldBreakOutOnEnter } = editor;
 
   editor.shouldBreakOutOnEnter = (element) =>
-    element.type === "large-body" ? true : shouldBreakOutOnEnter(element);
+    element.type === "label" ? true : shouldBreakOutOnEnter(element);
 
   return editor;
 };
