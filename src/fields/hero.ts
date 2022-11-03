@@ -37,7 +37,7 @@ export const hero: Field = {
       name: "pageLabel",
       label: "Page Label",
       admin: {
-        condition: (_, { type }) => type === "home",
+        condition: (_, { type }) => type === "default",
       },
     },
     {
@@ -52,9 +52,9 @@ export const hero: Field = {
       name: "sidebarContent",
       type: "richText",
       admin: {
-        elements: [],
-        leaves: [],
-        condition: (_, { type } = {}) => type === "home",
+        elements: ["link"],
+        leaves: ["underline"],
+        condition: (_, { type } = {}) => type === "default",
       },
     },
     linkGroup({
