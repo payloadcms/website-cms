@@ -11,6 +11,7 @@ import { Footer } from './globals/Footer';
 import { MainMenu } from './globals/MainMenu';
 import { Posts } from './collections/Posts';
 import { Media } from './collections/Media';
+import richText from './fields/richText';
 
 export default buildConfig({
   collections: [
@@ -33,10 +34,13 @@ export default buildConfig({
     formBuilder({
       formOverrides: {
         fields: [
-          {
+          richText({
             name: 'leader',
-            type: 'richText',
-          }
+            label: 'Leader Text',
+            admin: {
+              elements: []
+            }
+          }),
         ]
       }
     }),
