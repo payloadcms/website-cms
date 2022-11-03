@@ -31,11 +31,19 @@ export const CardGrid: Block = {
             {
               name: 'description',
               type: 'textarea',
-              required: true,
+            },
+            {
+              name: 'enableLink',
+              type: 'checkbox',
             },
             link({
               disableLabel: true,
               appearances: false,
+              overrides: {
+                admin: {
+                  condition: (_, { enableLink }) => enableLink ,
+                }
+              }
             }),
           ]
         },

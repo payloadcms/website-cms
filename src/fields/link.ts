@@ -1,4 +1,4 @@
-import { Field } from 'payload/types';
+import { Field, GroupField } from 'payload/types';
 import deepMerge from '../utilities/deepMerge';
 
 export const appearanceOptions = {
@@ -22,7 +22,7 @@ type LinkType = (
   options?: {
     appearances?: LinkAppearances[] | false
     disableLabel?: boolean
-    overrides?: Record<string, unknown>
+    overrides?: Partial<GroupField>
   }
 ) => Field;
 
@@ -36,6 +36,7 @@ const link: LinkType = ({
     type: 'group',
     admin: {
       hideGutter: true,
+      ...overrides?.admin || {},
     },
     fields: [
       {
