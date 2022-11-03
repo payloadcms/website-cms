@@ -30,7 +30,16 @@ export default buildConfig({
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
   plugins: [
-    formBuilder({}),
+    formBuilder({
+      formOverrides: {
+        fields: [
+          {
+            name: 'leader',
+            type: 'richText',
+          }
+        ]
+      }
+    }),
     seo({
       collections: [
         'case-studies',
