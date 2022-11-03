@@ -1404,6 +1404,9 @@ export interface Form {
     }[];
     id?: string;
   }[];
+  leader: {
+    [k: string]: unknown;
+  }[];
   createdAt: string;
   updatedAt: string;
 }
