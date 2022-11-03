@@ -4,6 +4,7 @@ import { publishedOnly } from '../access/publishedOnly';
 import { CallToAction } from '../blocks/CallToAction';
 import { CardGrid } from '../blocks/CardGrid';
 import { CaseStudiesHighlight } from '../blocks/CaseStudiesHighlight';
+import { CaseStudyCards } from '../blocks/CaseStudyCards';
 import { Content } from '../blocks/Content';
 import { ContentGrid } from '../blocks/ContentGrid';
 import { FeatureHighlight } from '../blocks/FeatureHighlight';
@@ -71,6 +72,7 @@ export const Pages: CollectionConfig = {
               blocks: [
                 CallToAction,
                 CardGrid,
+                CaseStudyCards,
                 CaseStudiesHighlight,
                 Content,
                 ContentGrid,

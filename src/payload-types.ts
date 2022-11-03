@@ -247,6 +247,17 @@ export interface Page {
         blockType: 'cardGrid';
       }
     | {
+        caseStudyCardFields: {
+          richText: {
+            [k: string]: unknown;
+          }[];
+          caseStudies: string[] | CaseStudy[];
+        };
+        id?: string;
+        blockName?: string;
+        blockType: 'caseStudyCards';
+      }
+    | {
         caseStudiesHighlightFields: {
           richText: {
             [k: string]: unknown;
