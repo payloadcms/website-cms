@@ -3,54 +3,73 @@ import { blockFields } from "../../fields/blockFields";
 import richText from "../../fields/richText";
 
 export const Content: Block = {
-  slug: 'content',
+  slug: "content",
   fields: [
     blockFields({
-      name: 'contentFields',
+      name: "contentFields",
       fields: [
         {
-          name: 'layout',
-          type: 'select',
-          defaultValue: 'oneColumn',
-          options: [
-            {
-              label: 'One Column',
-              value: 'oneColumn',
-            },
-            {
-              label: 'Two Columns',
-              value: 'twoColumns',
-            },
-            {
-              label: 'Two Thirds + One Third',
-              value: 'twoThirdsOneThird',
-            },
-            {
-              label: 'Half + Half',
-              value: 'halfAndHalf',
-            },
-            {
-              label: 'Three Columns',
-              value: 'threeColumns',
-            },
-          ]
+          name: "useLeadingHeader",
+          label: "Use Leading Header",
+          type: "checkbox",
         },
         richText({
-          name: 'columnOne',
+          name: "leadingHeader",
+          label: "Leading Header",
+          admin: {
+            condition: (_, siblingData) => siblingData.useLeadingHeader,
+          },
+        }),
+        {
+          name: "layout",
+          type: "select",
+          defaultValue: "oneColumn",
+          options: [
+            {
+              label: "One Column",
+              value: "oneColumn",
+            },
+            {
+              label: "Two Columns",
+              value: "twoColumns",
+            },
+            {
+              label: "Two Thirds + One Third",
+              value: "twoThirdsOneThird",
+            },
+            {
+              label: "Half + Half",
+              value: "halfAndHalf",
+            },
+            {
+              label: "Three Columns",
+              value: "threeColumns",
+            },
+          ],
+        },
+        richText({
+          name: "columnOne",
         }),
         richText({
-          name: 'columnTwo',
+          name: "columnTwo",
           admin: {
-            condition: (_, siblingData) => ['twoColumns', 'twoThirdsOneThird', 'halfAndHalf', 'threeColumns'].includes(siblingData.layout),
-          }
+            condition: (_, siblingData) =>
+              [
+                "twoColumns",
+                "twoThirdsOneThird",
+                "halfAndHalf",
+                "threeColumns",
+              ].includes(siblingData.layout),
+          },
         }),
         richText({
-          name: 'columnThree',
+          name: "columnThree",
           admin: {
-            condition: (_, siblingData) => siblingData.layout === 'threeColumns',
-          }
+            condition: (_, siblingData) =>
+              siblingData.layout === "threeColumns",
+          },
         }),
-      ]
-    })
-  ]
-}
+      ],
+    }),
+  ],
+};

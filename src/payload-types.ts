@@ -51,7 +51,11 @@ export interface Page {
   title: string;
   hero: {
     type: 'default' | 'contentMedia' | 'form' | 'home';
+    pageLabel?: string;
     richText?: {
+      [k: string]: unknown;
+    }[];
+    sidebarContent?: {
       [k: string]: unknown;
     }[];
     links: {
@@ -255,6 +259,10 @@ export interface Page {
       }
     | {
         contentFields: {
+          useLeadingHeader?: boolean;
+          leadingHeader: {
+            [k: string]: unknown;
+          }[];
           layout?: 'oneColumn' | 'twoColumns' | 'twoThirdsOneThird' | 'halfAndHalf' | 'threeColumns';
           columnOne: {
             [k: string]: unknown;
@@ -692,6 +700,10 @@ export interface UseCase {
       }
     | {
         contentFields: {
+          useLeadingHeader?: boolean;
+          leadingHeader: {
+            [k: string]: unknown;
+          }[];
           layout?: 'oneColumn' | 'twoColumns' | 'twoThirdsOneThird' | 'halfAndHalf' | 'threeColumns';
           columnOne: {
             [k: string]: unknown;
@@ -1026,6 +1038,10 @@ export interface CaseStudy {
       }
     | {
         contentFields: {
+          useLeadingHeader?: boolean;
+          leadingHeader: {
+            [k: string]: unknown;
+          }[];
           layout?: 'oneColumn' | 'twoColumns' | 'twoThirdsOneThird' | 'halfAndHalf' | 'threeColumns';
           columnOne: {
             [k: string]: unknown;
@@ -1532,6 +1548,10 @@ export interface ReusableContent {
       }
     | {
         contentFields: {
+          useLeadingHeader?: boolean;
+          leadingHeader: {
+            [k: string]: unknown;
+          }[];
           layout?: 'oneColumn' | 'twoColumns' | 'twoThirdsOneThird' | 'halfAndHalf' | 'threeColumns';
           columnOne: {
             [k: string]: unknown;

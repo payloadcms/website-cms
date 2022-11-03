@@ -1,106 +1,125 @@
-import { Field } from 'payload/types';
-import linkGroup from './linkGroup';
-import largeBody from './richText/largeBody';
+import { Field } from "payload/types";
+import linkGroup from "./linkGroup";
+import largeBody from "./richText/largeBody";
 
 export const hero: Field = {
-  name: 'hero',
+  name: "hero",
   label: false,
-  type: 'group',
+  type: "group",
   fields: [
     {
-      type: 'select',
-      name: 'type',
-      label: 'Type',
+      type: "select",
+      name: "type",
+      label: "Type",
       required: true,
-      defaultValue: 'default',
+      defaultValue: "default",
       options: [
         {
-          label: 'Default',
-          value: 'default',
+          label: "Default",
+          value: "default",
         },
         {
-          label: 'Content and Media',
-          value: 'contentMedia',
+          label: "Content and Media",
+          value: "contentMedia",
         },
         {
-          label: 'Form',
-          value: 'form',
+          label: "Form",
+          value: "form",
         },
         {
-          label: 'Home',
-          value: 'home',
+          label: "Home",
+          value: "home",
         },
       ],
     },
     {
-      name: 'richText',
-      type: 'richText',
+      type: "text",
+      name: "pageLabel",
+      label: "Page Label",
       admin: {
-        elements: ['h1', largeBody, 'ul'],
-        leaves: ['underline'],
-      }
+        condition: (_, { type }) => type === "home",
+      },
+    },
+    {
+      name: "richText",
+      type: "richText",
+      admin: {
+        elements: ["h1", largeBody, "ul"],
+        leaves: ["underline"],
+      },
+    },
+    {
+      name: "sidebarContent",
+      type: "richText",
+      admin: {
+        elements: [],
+        leaves: [],
+        condition: (_, { type } = {}) => type === "home",
+      },
     },
     linkGroup({
       overrides: {
         admin: {
-          condition: (_, { type } = {}) => ['contentMedia', 'default'].includes(type),
+          condition: (_, { type } = {}) =>
+            ["contentMedia", "default"].includes(type),
         },
-      }
+      },
     }),
     linkGroup({
       appearances: false,
       overrides: {
-        name: 'actions',
-        label: 'Sidebar Actions',
+        name: "actions",
+        label: "Sidebar Actions",
         maxRows: 3,
         admin: {
-          condition: (_, { type }) => type === 'home',
-        }
-      }
+          condition: (_, { type }) => type === "home",
+        },
+      },
     }),
     linkGroup({
-      appearances: ['primary', 'secondary'],
+      appearances: ["primary", "secondary"],
       overrides: {
-        name: 'buttons',
-        label: 'Buttons',
+        name: "buttons",
+        label: "Buttons",
         maxRows: 2,
         admin: {
-          condition: (_, { type }) => type === 'home',
-        }
-      }
+          condition: (_, { type }) => type === "home",
+        },
+      },
     }),
     {
-      name: 'media',
-      type: 'upload',
-      relationTo: 'media',
+      name: "media",
+      type: "upload",
+      relationTo: "media",
       required: true,
       admin: {
-        condition: (_, { type } = {}) => ['contentMedia', 'home'].includes(type),
+        condition: (_, { type } = {}) =>
+          ["contentMedia", "home"].includes(type),
       },
     },
     {
-      name: 'adjectives',
-      type: 'array',
+      name: "adjectives",
+      type: "array",
       minRows: 3,
       maxRows: 6,
       fields: [
         {
-          name: 'adjective',
-          type: 'text',
+          name: "adjective",
+          type: "text",
           required: true,
-        }
+        },
       ],
       admin: {
-        condition: (_, { type }) => type === 'home',
-      }
+        condition: (_, { type }) => type === "home",
+      },
     },
     {
-      name: 'form',
-      type: 'relationship',
-      relationTo: 'forms',
+      name: "form",
+      type: "relationship",
+      relationTo: "forms",
       admin: {
-        condition: (_, { type }) => type === 'form',
-      }
+        condition: (_, { type }) => type === "form",
+      },
     },
   ],
 };
