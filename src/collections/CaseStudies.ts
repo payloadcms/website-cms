@@ -15,6 +15,9 @@ import { MediaContent } from '../blocks/MediaContent';
 import { ReusableContent } from '../blocks/ReusableContent';
 import { Slider } from '../blocks/Slider';
 import { Steps } from '../blocks/Steps';
+import { CodeFeature } from '../blocks/CodeFeature';
+import { HoverHighlights } from '../blocks/HoverHighlights';
+import { StickyHighlights } from '../blocks/StickyHighlights';
 import { slugField } from '../fields/slug';
 import link from '../fields/link';
 import { formatPreviewURL } from '../utilities/formatPreviewURL';
@@ -69,16 +72,19 @@ export const CaseStudies: CollectionConfig = {
         CallToAction,
         CardGrid,
         CaseStudiesHighlight,
+        CodeFeature,
         Content,
         ContentGrid,
         FeatureHighlight,
         Form,
+        HoverHighlights,
         LinkGrid,
         MediaBlock,
         MediaContent,
         ReusableContent,
         Slider,
         Steps,
+        StickyHighlights,
       ]
     },
     slugField(),

@@ -8,15 +8,18 @@ import { CardGrid } from "../blocks/CardGrid";
 import { CaseStudiesHighlight } from "../blocks/CaseStudiesHighlight";
 import { CaseStudyCards } from "../blocks/CaseStudyCards";
 import { Code } from "../blocks/Code";
+import { CodeFeature } from "../blocks/CodeFeature";
 import { Content } from "../blocks/Content";
 import { ContentGrid } from "../blocks/ContentGrid";
 import { FeatureHighlight } from "../blocks/FeatureHighlight";
 import { Form } from "../blocks/Form";
+import { HoverHighlights } from "../blocks/HoverHighlights";
 import { LinkGrid } from "../blocks/LinkGrid";
 import { MediaBlock } from "../blocks/Media";
 import { MediaContent } from "../blocks/MediaContent";
 import { Slider } from "../blocks/Slider";
 import { Steps } from "../blocks/Steps";
+import { StickyHighlights } from "../blocks/StickyHighlights";
 
 export const ReusableContent: CollectionConfig = {
   slug: "reusable-content",
@@ -45,22 +48,25 @@ export const ReusableContent: CollectionConfig = {
       type: "blocks",
       required: true,
       blocks: [
+        Banner,
+        BlogContent,
         CallToAction,
         CardGrid,
         CaseStudyCards,
         CaseStudiesHighlight,
+        Code,
+        CodeFeature,
         Content,
         ContentGrid,
-        Banner,
         FeatureHighlight,
-        BlogContent,
-        Code,
         Form,
+        HoverHighlights,
         LinkGrid,
         MediaBlock,
         MediaContent,
         Slider,
         Steps,
+        StickyHighlights,
       ],
     },
   ],

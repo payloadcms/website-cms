@@ -4821,7 +4821,7 @@ express-rate-limit@^5.1.3:
   resolved "https://registry.npmjs.org/express-rate-limit/-/express-rate-limit-5.5.1.tgz#110c23f6a65dfa96ab468eda95e71697bc6987a2"
   integrity sha512-MTjE2eIbHv5DyfuFz4zLYWxpqVhEhkTiwFGuB74Q9CSou2WHO52nlE5y3Zlg6SIsiYUIPj6ifFxnkPz6O3sIUg==
 
-express@^4.17.1:
+express@^4.17.1, express@^4.18.2:
   version "4.18.2"
   resolved "https://registry.npmjs.org/express/-/express-4.18.2.tgz#3fabe08296e930c796c19e3c516979386ba9fd59"
   integrity sha512-5/PsL6iGPdfQ/lKM1UuielYgv3BUoJfz1aUwU9vHZ+J7gyvwdQXFEBIEIaxeGf0GIcreATNyBExtalisDbuMqQ==
@@ -7607,7 +7607,7 @@ pause@0.0.1:
 
 payload@^1.1.19:
   version "1.1.19"
-  resolved "https://registry.yarnpkg.com/payload/-/payload-1.1.19.tgz#c86d0f4410ef94895ffe589a0ff4de16efbe0c76"
+  resolved "https://registry.npmjs.org/payload/-/payload-1.1.19.tgz#c86d0f4410ef94895ffe589a0ff4de16efbe0c76"
   integrity sha512-oZLFKIdevcfDWCGTOb1hUuTL/wFqel5wl2ncvqYGZS0jepH4vVcV4j0HjaxAydK2HrEH2xe/cP4tdAZ4jYV2qA==
   dependencies:
     "@babel/cli" "^7.12.8"

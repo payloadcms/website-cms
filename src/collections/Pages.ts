@@ -5,16 +5,19 @@ import { CallToAction } from '../blocks/CallToAction';
 import { CardGrid } from '../blocks/CardGrid';
 import { CaseStudiesHighlight } from '../blocks/CaseStudiesHighlight';
 import { CaseStudyCards } from '../blocks/CaseStudyCards';
+import { CodeFeature } from '../blocks/CodeFeature';
 import { Content } from '../blocks/Content';
 import { ContentGrid } from '../blocks/ContentGrid';
 import { FeatureHighlight } from '../blocks/FeatureHighlight';
 import { Form } from '../blocks/Form';
+import { HoverHighlights } from '../blocks/HoverHighlights';
 import { LinkGrid } from '../blocks/LinkGrid';
 import { MediaBlock } from '../blocks/Media';
 import { MediaContent } from '../blocks/MediaContent';
 import { ReusableContent } from '../blocks/ReusableContent';
 import { Slider } from '../blocks/Slider';
 import { Steps } from '../blocks/Steps';
+import { StickyHighlights } from '../blocks/StickyHighlights';
 import { hero } from '../fields/hero';
 import { slugField } from '../fields/slug';
 import { formatPreviewURL } from '../utilities/formatPreviewURL';
@@ -39,10 +42,10 @@ export const Pages: CollectionConfig = {
   hooks: {
     afterChange: [
       ({ req: { payload }, doc }) => {
-        regeneratePage({ 
+        regeneratePage({
           payload,
-          collection: 'pages', 
-          doc 
+          collection: 'pages',
+          doc
         });
       },
     ]
@@ -74,16 +77,19 @@ export const Pages: CollectionConfig = {
                 CardGrid,
                 CaseStudyCards,
                 CaseStudiesHighlight,
+                CodeFeature,
                 Content,
                 ContentGrid,
                 FeatureHighlight,
                 Form,
+                HoverHighlights,
                 LinkGrid,
                 MediaBlock,
                 MediaContent,
                 ReusableContent,
                 Slider,
                 Steps,
+                StickyHighlights,
               ]
             }
           ]

@@ -18,6 +18,9 @@ import { Steps } from '../blocks/Steps';
 import { slugField } from '../fields/slug';
 import { formatPreviewURL } from '../utilities/formatPreviewURL';
 import { regeneratePage } from '../utilities/regeneratePage';
+import { CodeFeature } from '../blocks/CodeFeature';
+import { HoverHighlights } from '../blocks/HoverHighlights';
+import { StickyHighlights } from '../blocks/StickyHighlights';
 
 export const UseCases: CollectionConfig = {
   slug: 'use-cases',
@@ -38,10 +41,10 @@ export const UseCases: CollectionConfig = {
   hooks: {
     afterChange: [
       ({ req: { payload }, doc }) => {
-        regeneratePage({ 
+        regeneratePage({
           payload,
-          collection: 'use-cases', 
-          doc 
+          collection: 'use-cases',
+          doc
         });
       },
     ]
@@ -68,16 +71,19 @@ export const UseCases: CollectionConfig = {
         CallToAction,
         CardGrid,
         CaseStudiesHighlight,
+        CodeFeature,
         Content,
         ContentGrid,
         FeatureHighlight,
         Form,
+        HoverHighlights,
         LinkGrid,
         MediaBlock,
         MediaContent,
         ReusableContent,
         Slider,
         Steps,
+        StickyHighlights,
       ]
     },
     slugField(),
