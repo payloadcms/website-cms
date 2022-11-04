@@ -632,7 +632,7 @@ export interface Page {
                               relationTo: 'case-studies';
                             };
                         url: string;
-                        appearance?: 'default' | 'primary' | 'secondary';
+                        label: string;
                       };
                       type?: 'code' | 'media';
                       code: string;
@@ -680,7 +680,7 @@ export interface Page {
                     relationTo: 'case-studies';
                   };
               url: string;
-              appearance?: 'default' | 'primary' | 'secondary';
+              label: string;
             };
             type?: 'code' | 'media';
             code: string;
@@ -1293,7 +1293,7 @@ export interface UseCase {
                               relationTo: 'case-studies';
                             };
                         url: string;
-                        appearance?: 'default' | 'primary' | 'secondary';
+                        label: string;
                       };
                       type?: 'code' | 'media';
                       code: string;
@@ -1341,7 +1341,7 @@ export interface UseCase {
                     relationTo: 'case-studies';
                   };
               url: string;
-              appearance?: 'default' | 'primary' | 'secondary';
+              label: string;
             };
             type?: 'code' | 'media';
             code: string;
@@ -1851,7 +1851,7 @@ export interface CaseStudy {
                               relationTo: 'case-studies';
                             };
                         url: string;
-                        appearance?: 'default' | 'primary' | 'secondary';
+                        label: string;
                       };
                       type?: 'code' | 'media';
                       code: string;
@@ -1899,7 +1899,7 @@ export interface CaseStudy {
                     relationTo: 'case-studies';
                   };
               url: string;
-              appearance?: 'default' | 'primary' | 'secondary';
+              label: string;
             };
             type?: 'code' | 'media';
             code: string;
@@ -2587,7 +2587,7 @@ export interface ReusableContent {
                               relationTo: 'case-studies';
                             };
                         url: string;
-                        appearance?: 'default' | 'primary' | 'secondary';
+                        label: string;
                       };
                       type?: 'code' | 'media';
                       code: string;
@@ -2635,7 +2635,7 @@ export interface ReusableContent {
                     relationTo: 'case-studies';
                   };
               url: string;
-              appearance?: 'default' | 'primary' | 'secondary';
+              label: string;
             };
             type?: 'code' | 'media';
             code: string;
