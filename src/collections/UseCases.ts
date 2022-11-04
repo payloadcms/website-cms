@@ -7,7 +7,6 @@ import { CardGrid } from '../blocks/CardGrid';
 import { CaseStudiesHighlight } from '../blocks/CaseStudiesHighlight';
 import { Content } from '../blocks/Content';
 import { ContentGrid } from '../blocks/ContentGrid';
-import { FeatureHighlight } from '../blocks/FeatureHighlight';
 import { Form } from '../blocks/Form';
 import { LinkGrid } from '../blocks/LinkGrid';
 import { MediaBlock } from '../blocks/Media';
@@ -74,7 +73,6 @@ export const UseCases: CollectionConfig = {
         CodeFeature,
         Content,
         ContentGrid,
-        FeatureHighlight,
         Form,
         HoverHighlights,
         LinkGrid,

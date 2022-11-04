@@ -19,6 +19,7 @@ export const StickyHighlights: Block = {
               type: 'checkbox',
             },
             link({
+              disableLabel: true,
               overrides: {
                 admin: {
                   condition: (_, { enableLink }) => Boolean(enableLink),

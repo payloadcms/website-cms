@@ -11,7 +11,6 @@ import { Code } from "../blocks/Code";
 import { CodeFeature } from "../blocks/CodeFeature";
 import { Content } from "../blocks/Content";
 import { ContentGrid } from "../blocks/ContentGrid";
-import { FeatureHighlight } from "../blocks/FeatureHighlight";
 import { Form } from "../blocks/Form";
 import { HoverHighlights } from "../blocks/HoverHighlights";
 import { LinkGrid } from "../blocks/LinkGrid";
@@ -58,7 +57,6 @@ export const ReusableContent: CollectionConfig = {
         CodeFeature,
         Content,
         ContentGrid,
-        FeatureHighlight,
         Form,
         HoverHighlights,
         LinkGrid,

@@ -39,6 +39,8 @@ export const HoverHighlights: Block = {
               type: 'checkbox',
             },
             link({
+              appearances: false,
+              disableLabel: true,
               overrides: {
                 admin: {
                   condition: (_, { enableLink }) => Boolean(enableLink),

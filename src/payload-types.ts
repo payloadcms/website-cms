@@ -342,45 +342,6 @@ export interface Page {
         blockType: 'contentGrid';
       }
     | {
-        featureHighlightFields: {
-          features: {
-            type?: 'code' | 'media';
-            content: {
-              [k: string]: unknown;
-            }[];
-            link: {
-              type?: 'reference' | 'custom';
-              newTab?: boolean;
-              reference:
-                | {
-                    value: string | Page;
-                    relationTo: 'pages';
-                  }
-                | {
-                    value: string | Post;
-                    relationTo: 'posts';
-                  }
-                | {
-                    value: string | UseCase;
-                    relationTo: 'use-cases';
-                  }
-                | {
-                    value: string | CaseStudy;
-                    relationTo: 'case-studies';
-                  };
-              url: string;
-              label: string;
-            };
-            code: string;
-            media: string | Media;
-            id?: string;
-          }[];
-        };
-        id?: string;
-        blockName?: string;
-        blockType: 'featureHighlight';
-      }
-    | {
         formFields: {
           container?: boolean;
           richText: {
@@ -424,8 +385,6 @@ export interface Page {
                     relationTo: 'case-studies';
                   };
               url: string;
-              label: string;
-              appearance?: 'default' | 'primary' | 'secondary';
             };
             id?: string;
           }[];
@@ -637,8 +596,6 @@ export interface Page {
                               relationTo: 'case-studies';
                             };
                         url: string;
-                        label: string;
-                        appearance?: 'default' | 'primary' | 'secondary';
                       };
                       id?: string;
                     }[];
@@ -675,7 +632,6 @@ export interface Page {
                               relationTo: 'case-studies';
                             };
                         url: string;
-                        label: string;
                         appearance?: 'default' | 'primary' | 'secondary';
                       };
                       type?: 'code' | 'media';
@@ -724,7 +680,6 @@ export interface Page {
                     relationTo: 'case-studies';
                   };
               url: string;
-              label: string;
               appearance?: 'default' | 'primary' | 'secondary';
             };
             type?: 'code' | 'media';
@@ -1048,45 +1003,6 @@ export interface UseCase {
         blockType: 'contentGrid';
       }
     | {
-        featureHighlightFields: {
-          features: {
-            type?: 'code' | 'media';
-            content: {
-              [k: string]: unknown;
-            }[];
-            link: {
-              type?: 'reference' | 'custom';
-              newTab?: boolean;
-              reference:
-                | {
-                    value: string | Page;
-                    relationTo: 'pages';
-                  }
-                | {
-                    value: string | Post;
-                    relationTo: 'posts';
-                  }
-                | {
-                    value: string | UseCase;
-                    relationTo: 'use-cases';
-                  }
-                | {
-                    value: string | CaseStudy;
-                    relationTo: 'case-studies';
-                  };
-              url: string;
-              label: string;
-            };
-            code: string;
-            media: string | Media;
-            id?: string;
-          }[];
-        };
-        id?: string;
-        blockName?: string;
-        blockType: 'featureHighlight';
-      }
-    | {
         formFields: {
           container?: boolean;
           richText: {
@@ -1130,8 +1046,6 @@ export interface UseCase {
                     relationTo: 'case-studies';
                   };
               url: string;
-              label: string;
-              appearance?: 'default' | 'primary' | 'secondary';
             };
             id?: string;
           }[];
@@ -1343,8 +1257,6 @@ export interface UseCase {
                               relationTo: 'case-studies';
                             };
                         url: string;
-                        label: string;
-                        appearance?: 'default' | 'primary' | 'secondary';
                       };
                       id?: string;
                     }[];
@@ -1381,7 +1293,6 @@ export interface UseCase {
                               relationTo: 'case-studies';
                             };
                         url: string;
-                        label: string;
                         appearance?: 'default' | 'primary' | 'secondary';
                       };
                       type?: 'code' | 'media';
@@ -1430,7 +1341,6 @@ export interface UseCase {
                     relationTo: 'case-studies';
                   };
               url: string;
-              label: string;
               appearance?: 'default' | 'primary' | 'secondary';
             };
             type?: 'code' | 'media';
@@ -1651,45 +1561,6 @@ export interface CaseStudy {
         blockType: 'contentGrid';
       }
     | {
-        featureHighlightFields: {
-          features: {
-            type?: 'code' | 'media';
-            content: {
-              [k: string]: unknown;
-            }[];
-            link: {
-              type?: 'reference' | 'custom';
-              newTab?: boolean;
-              reference:
-                | {
-                    value: string | Page;
-                    relationTo: 'pages';
-                  }
-                | {
-                    value: string | Post;
-                    relationTo: 'posts';
-                  }
-                | {
-                    value: string | UseCase;
-                    relationTo: 'use-cases';
-                  }
-                | {
-                    value: string | CaseStudy;
-                    relationTo: 'case-studies';
-                  };
-              url: string;
-              label: string;
-            };
-            code: string;
-            media: string | Media;
-            id?: string;
-          }[];
-        };
-        id?: string;
-        blockName?: string;
-        blockType: 'featureHighlight';
-      }
-    | {
         formFields: {
           container?: boolean;
           richText: {
@@ -1733,8 +1604,6 @@ export interface CaseStudy {
                     relationTo: 'case-studies';
                   };
               url: string;
-              label: string;
-              appearance?: 'default' | 'primary' | 'secondary';
             };
             id?: string;
           }[];
@@ -1946,8 +1815,6 @@ export interface CaseStudy {
                               relationTo: 'case-studies';
                             };
                         url: string;
-                        label: string;
-                        appearance?: 'default' | 'primary' | 'secondary';
                       };
                       id?: string;
                     }[];
@@ -1984,7 +1851,6 @@ export interface CaseStudy {
                               relationTo: 'case-studies';
                             };
                         url: string;
-                        label: string;
                         appearance?: 'default' | 'primary' | 'secondary';
                       };
                       type?: 'code' | 'media';
@@ -2033,7 +1899,6 @@ export interface CaseStudy {
                     relationTo: 'case-studies';
                   };
               url: string;
-              label: string;
               appearance?: 'default' | 'primary' | 'secondary';
             };
             type?: 'code' | 'media';
@@ -2440,45 +2305,6 @@ export interface ReusableContent {
         blockType: 'contentGrid';
       }
     | {
-        featureHighlightFields: {
-          features: {
-            type?: 'code' | 'media';
-            content: {
-              [k: string]: unknown;
-            }[];
-            link: {
-              type?: 'reference' | 'custom';
-              newTab?: boolean;
-              reference:
-                | {
-                    value: string | Page;
-                    relationTo: 'pages';
-                  }
-                | {
-                    value: string | Post;
-                    relationTo: 'posts';
-                  }
-                | {
-                    value: string | UseCase;
-                    relationTo: 'use-cases';
-                  }
-                | {
-                    value: string | CaseStudy;
-                    relationTo: 'case-studies';
-                  };
-              url: string;
-              label: string;
-            };
-            code: string;
-            media: string | Media;
-            id?: string;
-          }[];
-        };
-        id?: string;
-        blockName?: string;
-        blockType: 'featureHighlight';
-      }
-    | {
         formFields: {
           container?: boolean;
           richText: {
@@ -2522,8 +2348,6 @@ export interface ReusableContent {
                     relationTo: 'case-studies';
                   };
               url: string;
-              label: string;
-              appearance?: 'default' | 'primary' | 'secondary';
             };
             id?: string;
           }[];
@@ -2727,8 +2551,6 @@ export interface ReusableContent {
                               relationTo: 'case-studies';
                             };
                         url: string;
-                        label: string;
-                        appearance?: 'default' | 'primary' | 'secondary';
                       };
                       id?: string;
                     }[];
@@ -2765,7 +2587,6 @@ export interface ReusableContent {
                               relationTo: 'case-studies';
                             };
                         url: string;
-                        label: string;
                         appearance?: 'default' | 'primary' | 'secondary';
                       };
                       type?: 'code' | 'media';
@@ -2814,7 +2635,6 @@ export interface ReusableContent {
                     relationTo: 'case-studies';
                   };
               url: string;
-              label: string;
               appearance?: 'default' | 'primary' | 'secondary';
             };
             type?: 'code' | 'media';
