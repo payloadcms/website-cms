@@ -54,6 +54,10 @@ export const Slider: Block = {
             richText({
               name: "richText",
               required: true,
+              admin: {
+                elements: [],
+                leaves: ["underline"],
+              },
             }),
             {
               type: "date",
