@@ -27,6 +27,9 @@ export default buildConfig({
     Footer,
     MainMenu,
   ],
+  graphQL: {
+    disablePlaygroundInProduction: false,
+  },
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
