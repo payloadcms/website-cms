@@ -5,6 +5,10 @@ import richText from "../../fields/richText";
 
 export const StickyHighlights: Block = {
   slug: 'stickyHighlights',
+  labels: {
+    singular: 'Sticky Highlights Block',
+    plural: 'Sticky Highlights Blocks',
+  },
   fields: [
     blockFields({
       name: 'stickyHighlightsFields',

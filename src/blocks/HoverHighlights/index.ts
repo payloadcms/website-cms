@@ -5,6 +5,10 @@ import richText from "../../fields/richText";
 
 export const HoverHighlights: Block = {
   slug: 'hoverHighlights',
+  labels: {
+    singular: 'Hover Highlights Block',
+    plural: 'Hover Highlights Blocks',
+  },
   fields: [
     blockFields({
       name: 'hoverHighlightsFields',
