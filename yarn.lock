@@ -7605,10 +7605,10 @@ pause@0.0.1:
   resolved "https://registry.npmjs.org/pause/-/pause-0.0.1.tgz#1d408b3fdb76923b9543d96fb4c9dfd535d9cb5d"
   integrity sha512-KG8UEiEVkR3wGEb4m5yZkVCzigAD+cVEJck2CzYZO37ZGJfctvVptVO192MwrtPhzONn6go8ylnOdMhKqi4nfg==
 
-payload@^1.1.19:
-  version "1.1.19"
-  resolved "https://registry.npmjs.org/payload/-/payload-1.1.19.tgz#c86d0f4410ef94895ffe589a0ff4de16efbe0c76"
-  integrity sha512-oZLFKIdevcfDWCGTOb1hUuTL/wFqel5wl2ncvqYGZS0jepH4vVcV4j0HjaxAydK2HrEH2xe/cP4tdAZ4jYV2qA==
+payload@^1.1.20:
+  version "1.1.20"
+  resolved "https://registry.npmjs.org/payload/-/payload-1.1.20.tgz#eee16b9af563ae49a1c22bda7a711cecdb37320d"
+  integrity sha512-xKJD5OfAcQAmsDpuBuvggJxQ1YkoRYuizypPh33hAmminXwbu282WVtwk62dBmDbc2ICxRYbxuzQr2Lryr1p4A==
   dependencies:
     "@babel/cli" "^7.12.8"
     "@babel/core" "^7.11.6"

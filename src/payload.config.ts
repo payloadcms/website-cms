@@ -60,4 +60,18 @@ export default buildConfig({
   cors: [
     process.env.PAYLOAD_PUBLIC_APP_URL,
   ].filter(Boolean),
+  admin: {
+    webpack: (config) => ({
+      ...config,
+      resolve: {
+        ...config.resolve,
+        alias: {
+          ...config.resolve.alias,
+          react: path.resolve(__dirname, '../node_modules/react'),
+          'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
+          'react-router-dom': path.resolve(__dirname, '../node_modules/react-router-dom'),
+        }
+      }
+    })
+  }
 });
