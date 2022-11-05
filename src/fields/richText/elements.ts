@@ -3,7 +3,6 @@ import largeBody from "./largeBody";
 import label from "./label";
 
 const elements: RichTextElement[] = [
-  "blockquote",
   "h2",
   "h3",
   "h4",
@@ -12,6 +11,8 @@ const elements: RichTextElement[] = [
   "link",
   largeBody,
   label,
+  "ul",
+  "ol"
 ];
 
 export default elements;
