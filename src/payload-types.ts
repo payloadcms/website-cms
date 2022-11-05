@@ -274,6 +274,7 @@ export interface Page {
           richText: {
             [k: string]: unknown;
           }[];
+          enableLink?: boolean;
           link: {
             type?: 'reference' | 'custom';
             newTab?: boolean;
@@ -511,6 +512,7 @@ export interface Page {
                     richText: {
                       [k: string]: unknown;
                     }[];
+                    enableLink?: boolean;
                     link: {
                       type?: 'reference' | 'custom';
                       newTab?: boolean;
@@ -935,6 +937,7 @@ export interface UseCase {
           richText: {
             [k: string]: unknown;
           }[];
+          enableLink?: boolean;
           link: {
             type?: 'reference' | 'custom';
             newTab?: boolean;
@@ -1172,6 +1175,7 @@ export interface UseCase {
                     richText: {
                       [k: string]: unknown;
                     }[];
+                    enableLink?: boolean;
                     link: {
                       type?: 'reference' | 'custom';
                       newTab?: boolean;
@@ -1493,6 +1497,7 @@ export interface CaseStudy {
           richText: {
             [k: string]: unknown;
           }[];
+          enableLink?: boolean;
           link: {
             type?: 'reference' | 'custom';
             newTab?: boolean;
@@ -1730,6 +1735,7 @@ export interface CaseStudy {
                     richText: {
                       [k: string]: unknown;
                     }[];
+                    enableLink?: boolean;
                     link: {
                       type?: 'reference' | 'custom';
                       newTab?: boolean;
@@ -2237,6 +2243,7 @@ export interface ReusableContent {
           richText: {
             [k: string]: unknown;
           }[];
+          enableLink?: boolean;
           link: {
             type?: 'reference' | 'custom';
             newTab?: boolean;
@@ -2466,6 +2473,7 @@ export interface ReusableContent {
                     richText: {
                       [k: string]: unknown;
                     }[];
+                    enableLink?: boolean;
                     link: {
                       type?: 'reference' | 'custom';
                       newTab?: boolean;

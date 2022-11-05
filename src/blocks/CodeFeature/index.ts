@@ -10,7 +10,17 @@ export const CodeFeature: Block = {
       name: 'codeFeatureFields',
       fields: [
         richText(),
-        link(),
+        {
+          name: 'enableLink',
+          type: 'checkbox',
+        },
+        link({
+          overrides: {
+            admin: {
+              condition: (_, { enableLink }) => Boolean(enableLink)
+            }
+          }
+        }),
         {
           type: 'row',
           fields: [
