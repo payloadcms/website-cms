@@ -9,7 +9,16 @@ export const CodeFeature: Block = {
     blockFields({
       name: 'codeFeatureFields',
       fields: [
-        richText(),
+        {
+          name: 'heading',
+          type: 'text',
+          required: true,
+        },
+        richText({
+          admin: {
+            elements: ['ul', 'ol', 'link']
+          }
+        }),
         {
           name: 'enableLink',
           type: 'checkbox',
