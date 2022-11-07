@@ -1,5 +1,6 @@
 import { Field } from "payload/types";
 import linkGroup from "./linkGroup";
+import label from "./richText/label";
 import largeBody from "./richText/largeBody";
 
 export const hero: Field = {
@@ -44,8 +45,8 @@ export const hero: Field = {
       name: "richText",
       type: "richText",
       admin: {
-        elements: ["h1", largeBody, "ul"],
-        leaves: ["underline"],
+        elements: ["h1", largeBody, "ul", label],
+        leaves: ["underline",],
       },
     },
     {
