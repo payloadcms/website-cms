@@ -1,6 +1,7 @@
 import { RichTextElement } from "payload/dist/fields/config/types";
 import largeBody from "./largeBody";
 import label from "./label";
+import video from "./video";
 
 const elements: RichTextElement[] = [
   "h2",
@@ -11,6 +12,7 @@ const elements: RichTextElement[] = [
   "link",
   largeBody,
   label,
+  video,
   "ul",
   "ol"
 ];
