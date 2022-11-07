@@ -1,37 +1,36 @@
 import { Block } from "payload/types";
 import { blockFields } from "../../fields/blockFields";
+import label from "../../fields/richText/label";
 
 export const ContentGrid: Block = {
-  slug: 'contentGrid',
+  slug: "contentGrid",
   fields: [
     blockFields({
-      name: 'contentGridFields',
+      name: "contentGridFields",
       fields: [
         {
-          name: 'cells',
-          type: 'array',
+          name: "forceDarkBackground",
+          type: "checkbox",
+          admin: {
+            description:
+              "Check this box to force this block to have a dark background.",
+          },
+        },
+        {
+          name: "cells",
+          type: "array",
           fields: [
             {
-              name: 'forceDarkBackground',
-              type: 'checkbox',
-              admin: {
-                description: 'Check this box to force this block to have a dark background.'
-              }
-            },
-            {
-              name: 'content',
-              type: 'richText',
+              name: "content",
+              type: "richText",
               required: true,
               admin: {
-                elements: [
-                  'link',
-                  'h4',
-                ],
+                elements: ["link", "h4", label],
               },
             },
-          ]
+          ],
         },
-      ]
-    })
-  ]
-}
+      ],
+    }),
+  ],
+};

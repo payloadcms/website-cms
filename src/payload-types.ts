@@ -249,10 +249,13 @@ export interface Page {
       }
     | {
         caseStudyCardFields: {
-          richText: {
-            [k: string]: unknown;
+          cards: {
+            richText: {
+              [k: string]: unknown;
+            }[];
+            caseStudy: string | CaseStudy;
+            id?: string;
           }[];
-          caseStudies: string[] | CaseStudy[];
         };
         id?: string;
         blockName?: string;
@@ -331,8 +334,8 @@ export interface Page {
       }
     | {
         contentGridFields: {
+          forceDarkBackground?: boolean;
           cells: {
-            forceDarkBackground?: boolean;
             content: {
               [k: string]: unknown;
             }[];
@@ -1004,8 +1007,8 @@ export interface UseCase {
       }
     | {
         contentGridFields: {
+          forceDarkBackground?: boolean;
           cells: {
-            forceDarkBackground?: boolean;
             content: {
               [k: string]: unknown;
             }[];
@@ -1566,8 +1569,8 @@ export interface CaseStudy {
       }
     | {
         contentGridFields: {
+          forceDarkBackground?: boolean;
           cells: {
-            forceDarkBackground?: boolean;
             content: {
               [k: string]: unknown;
             }[];
@@ -2223,10 +2226,13 @@ export interface ReusableContent {
       }
     | {
         caseStudyCardFields: {
-          richText: {
-            [k: string]: unknown;
+          cards: {
+            richText: {
+              [k: string]: unknown;
+            }[];
+            caseStudy: string | CaseStudy;
+            id?: string;
           }[];
-          caseStudies: string[] | CaseStudy[];
         };
         id?: string;
         blockName?: string;
@@ -2314,8 +2320,8 @@ export interface ReusableContent {
       }
     | {
         contentGridFields: {
+          forceDarkBackground?: boolean;
           cells: {
-            forceDarkBackground?: boolean;
             content: {
               [k: string]: unknown;
             }[];
