@@ -751,6 +751,14 @@ export interface Post {
         blockType: 'code';
       }
     | {
+        blogMarkdownFields: {
+          markdown: string;
+        };
+        id?: string;
+        blockName?: string;
+        blockType: 'blogMarkdown';
+      }
+    | {
         mediaBlockFields: {
           position?: 'default' | 'wide';
           media: string | Media;
