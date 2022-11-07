@@ -2124,6 +2124,14 @@ export interface ReusableContent {
         blockType: 'blogContent';
       }
     | {
+        blogMarkdownFields: {
+          markdown: string;
+        };
+        id?: string;
+        blockName?: string;
+        blockType: 'blogMarkdown';
+      }
+    | {
         ctaFields: {
           richText: {
             [k: string]: unknown;

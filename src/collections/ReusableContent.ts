@@ -3,6 +3,7 @@ import { isAdmin } from "../access/isAdmin";
 import { publishedOnly } from "../access/publishedOnly";
 import { Banner } from "../blocks/Banner";
 import { BlogContent } from "../blocks/BlogContent";
+import { BlogMarkdown } from "../blocks/BlogMarkdown";
 import { CallToAction } from "../blocks/CallToAction";
 import { CardGrid } from "../blocks/CardGrid";
 import { CaseStudiesHighlight } from "../blocks/CaseStudiesHighlight";
@@ -49,6 +50,7 @@ export const ReusableContent: CollectionConfig = {
       blocks: [
         Banner,
         BlogContent,
+        BlogMarkdown,
         CallToAction,
         CardGrid,
         CaseStudyCards,
