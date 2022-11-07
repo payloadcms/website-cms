@@ -11,7 +11,7 @@ import VideoIcon from '../Icon';
 import './index.scss';
 
 const initialFormData = {
-  source: 'vimeo',
+  source: 'youtube',
 };
 
 const sources = [
@@ -50,16 +50,16 @@ const insertVideo = (editor, { id, source }) => {
 };
 
 const VideoButton: React.FC<{ path: string }> = ({ path }) => {
-  const { openModal, closeAllModals } = useModal();
+  const { openModal, toggleModal } = useModal();
   const editor = useSlate();
   const [renderModal, setRenderModal] = useState(false);
   const modalSlug = `${path}-add-video`;
 
   const handleAddVideo = useCallback((_, { id, source }) => {
     insertVideo(editor, { id, source });
-    closeAllModals();
+    toggleModal(modalSlug);
     setRenderModal(false);
-  }, [editor, closeAllModals]);
+  }, [editor, toggleModal]);
 
   useEffect(() => {
     if (renderModal) {
@@ -72,23 +72,25 @@ const VideoButton: React.FC<{ path: string }> = ({ path }) => {
       <ElementButton
         className={baseClass}
         format="video"
-        onClick={() => setRenderModal(true)}
+        onClick={(e) => {
+          e.preventDefault();
+          setRenderModal(true)
+        }}
       >
         <VideoIcon />
       </ElementButton>
       {renderModal && (
-        // @ts-ignore TODO: remove this when faceless-ui/modal is updated to react 18
         <Modal
           slug={modalSlug}
           className={`${baseClass}__modal`}
         >
-          <MinimalTemplate>
+          <MinimalTemplate className={`${baseClass}__template`}>
             <header className={`${baseClass}__header`}>
               <h3>Add Video</h3>
               <Button
                 buttonStyle="none"
                 onClick={() => {
-                  closeAllModals();
+                  toggleModal(modalSlug);
                   setRenderModal(false);
                 }}
               >
