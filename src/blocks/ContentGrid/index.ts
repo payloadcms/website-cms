@@ -1,5 +1,6 @@
 import { Block } from "payload/types";
 import { blockFields } from "../../fields/blockFields";
+import label from "../../fields/richText/label";
 
 export const ContentGrid: Block = {
   slug: "contentGrid",
@@ -24,7 +25,7 @@ export const ContentGrid: Block = {
               type: "richText",
               required: true,
               admin: {
-                elements: ["link", "h4"],
+                elements: ["link", "h4", label],
               },
             },
           ],
