@@ -27,6 +27,7 @@ export const Pages: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     preview: (doc) => formatPreviewURL('pages', doc),
+    defaultColumns: ['title', 'slug', 'createdAt', 'updatedAt'],
   },
   versions: {
     drafts: true,

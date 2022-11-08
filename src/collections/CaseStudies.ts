@@ -86,14 +86,13 @@ export const CaseStudies: CollectionConfig = {
       ]
     },
     slugField(),
-    link({
-      overrides: {
-        admin: {
-          position: 'sidebar',
-        },
-      },
-      appearances: false,
-      disableLabel: true,
-    }),
+    {
+      name: 'url',
+      label: 'URL',
+      type: 'text',
+      admin: {
+        position: 'sidebar'
+      }
+    }
   ]
 }
