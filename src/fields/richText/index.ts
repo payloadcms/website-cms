@@ -29,38 +29,6 @@ const richText: RichText = (
           media: {
             fields: [
               {
-                type: 'richText',
-                name: 'caption',
-                label: 'Caption',
-                admin: {
-                  elements: [
-                    ...elements,
-                  ],
-                  leaves: [
-                    ...leaves,
-                  ],
-                },
-              },
-              {
-                type: 'radio',
-                name: 'alignment',
-                label: 'Alignment',
-                options: [
-                  {
-                    label: 'Left',
-                    value: 'left',
-                  },
-                  {
-                    label: 'Center',
-                    value: 'center',
-                  },
-                  {
-                    label: 'Right',
-                    value: 'right',
-                  },
-                ],
-              },
-              {
                 name: 'enableLink',
                 type: 'checkbox',
                 label: 'Enable Link',
