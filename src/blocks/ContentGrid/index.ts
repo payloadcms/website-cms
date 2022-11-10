@@ -25,7 +25,7 @@ export const ContentGrid: Block = {
               type: "richText",
               required: true,
               admin: {
-                elements: ["link", "h4", label],
+                elements: ["link", "h4", label, "upload"],
               },
             },
           ],
