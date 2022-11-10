@@ -47,7 +47,6 @@ export interface Page {
   title: string;
   hero: {
     type: 'default' | 'contentMedia' | 'form' | 'home';
-    pageLabel?: string;
     richText?: {
       [k: string]: unknown;
     }[];
@@ -646,6 +645,13 @@ export interface Page {
     description?: string;
     image?: string | Media;
   };
+  parent?: string | Page;
+  breadcrumbs: {
+    doc?: string | Page;
+    url?: string;
+    label?: string;
+    id?: string;
+  }[];
   _status?: 'draft' | 'published';
   createdAt: string;
   updatedAt: string;

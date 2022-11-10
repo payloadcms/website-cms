@@ -34,14 +34,6 @@ export const hero: Field = {
       ],
     },
     {
-      type: "text",
-      name: "pageLabel",
-      label: "Page Label",
-      admin: {
-        condition: (_, { type }) => type === "default",
-      },
-    },
-    {
       name: "richText",
       type: "richText",
       admin: {

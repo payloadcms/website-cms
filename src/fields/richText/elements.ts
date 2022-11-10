@@ -13,6 +13,7 @@ const elements: RichTextElement[] = [
   largeBody,
   label,
   video,
+  "upload",
   "ul",
   "ol"
 ];
