@@ -28,7 +28,7 @@ export const ReusableContent: CollectionConfig = {
   },
   access: {
     create: isAdmin,
-    read: publishedOnly,
+    read: () => true,
     readVersions: isAdmin,
     update: isAdmin,
     delete: isAdmin,
