@@ -18,7 +18,6 @@ import { CodeFeature } from '../blocks/CodeFeature';
 import { HoverHighlights } from '../blocks/HoverHighlights';
 import { StickyHighlights } from '../blocks/StickyHighlights';
 import { slugField } from '../fields/slug';
-import link from '../fields/link';
 import { formatPreviewURL } from '../utilities/formatPreviewURL';
 import { regeneratePage } from '../utilities/regeneratePage';
 

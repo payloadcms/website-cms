@@ -1,12 +1,12 @@
 import { buildConfig } from 'payload/config';
 import path from 'path';
+import nestedDocs from '@payloadcms/plugin-nested-docs';
 import formBuilder from '@payloadcms/plugin-form-builder';
 import seo from '@payloadcms/plugin-seo';
 import { ReusableContent } from './collections/ReusableContent'
 import { Users } from './collections/Users';
 import { CaseStudies } from './collections/CaseStudies';
 import { Pages } from './collections/Pages';
-import { UseCases } from './collections/UseCases';
 import { Footer } from './globals/Footer';
 import { MainMenu } from './globals/MainMenu';
 import { Posts } from './collections/Posts';
@@ -20,7 +20,6 @@ export default buildConfig({
     Pages,
     Posts,
     ReusableContent,
-    UseCases,
     Users,
   ],
   globals: [
@@ -52,10 +51,16 @@ export default buildConfig({
         'case-studies',
         'pages',
         'posts',
-        'use-cases',
       ],
       uploadsCollection: 'media',
-    })
+    }),
+    nestedDocs({
+      collections: ['pages'],
+      parentFieldSlug: 'parent',
+      breadcrumbsFieldSlug: 'breadcrumbs',
+      generateLabel: (_, doc) => doc.title as string,
+      generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
+    }),
   ],
   cors: [
     process.env.PAYLOAD_PUBLIC_APP_URL,

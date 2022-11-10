@@ -82,7 +82,7 @@ const link: LinkType = ({
       name: 'reference',
       label: 'Document to link to',
       type: 'relationship',
-      relationTo: ['pages', 'posts', 'use-cases', 'case-studies'],
+      relationTo: ['pages', 'posts', 'case-studies'],
       required: true,
       maxDepth: 1,
       admin: {
