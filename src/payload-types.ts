@@ -45,6 +45,7 @@ export interface Footer {
 export interface Page {
   id: string;
   title: string;
+  fullTitle?: string;
   hero: {
     type: 'default' | 'contentMedia' | 'form' | 'home';
     richText?: {
