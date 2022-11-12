@@ -303,6 +303,10 @@ export interface Page {
     | {
         contentGridFields: {
           forceDarkBackground?: boolean;
+          useLeadingHeader?: boolean;
+          leadingHeader: {
+            [k: string]: unknown;
+          }[];
           cells: {
             content: {
               [k: string]: unknown;
@@ -944,6 +948,10 @@ export interface CaseStudy {
     | {
         contentGridFields: {
           forceDarkBackground?: boolean;
+          useLeadingHeader?: boolean;
+          leadingHeader: {
+            [k: string]: unknown;
+          }[];
           cells: {
             content: {
               [k: string]: unknown;
@@ -1642,6 +1650,10 @@ export interface ReusableContent {
     | {
         contentGridFields: {
           forceDarkBackground?: boolean;
+          useLeadingHeader?: boolean;
+          leadingHeader: {
+            [k: string]: unknown;
+          }[];
           cells: {
             content: {
               [k: string]: unknown;
