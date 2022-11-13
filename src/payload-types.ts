@@ -246,6 +246,7 @@ export interface Page {
       }
     | {
         codeFeatureFields: {
+          disableBlockSpacing?: boolean;
           heading: string;
           richText: {
             [k: string]: unknown;
@@ -477,6 +478,7 @@ export interface Page {
             layout: (
               | {
                   codeFeatureFields: {
+                    disableBlockSpacing?: boolean;
                     heading: string;
                     richText: {
                       [k: string]: unknown;
@@ -891,6 +893,7 @@ export interface CaseStudy {
       }
     | {
         codeFeatureFields: {
+          disableBlockSpacing?: boolean;
           heading: string;
           richText: {
             [k: string]: unknown;
@@ -1122,6 +1125,7 @@ export interface CaseStudy {
             layout: (
               | {
                   codeFeatureFields: {
+                    disableBlockSpacing?: boolean;
                     heading: string;
                     richText: {
                       [k: string]: unknown;
@@ -1593,6 +1597,7 @@ export interface ReusableContent {
       }
     | {
         codeFeatureFields: {
+          disableBlockSpacing?: boolean;
           heading: string;
           richText: {
             [k: string]: unknown;
@@ -1816,6 +1821,7 @@ export interface ReusableContent {
             layout: (
               | {
                   codeFeatureFields: {
+                    disableBlockSpacing?: boolean;
                     heading: string;
                     richText: {
                       [k: string]: unknown;

@@ -10,6 +10,10 @@ export const CodeFeature: Block = {
       name: 'codeFeatureFields',
       fields: [
         {
+          name: 'disableBlockSpacing',
+          type: 'checkbox',
+        },
+        {
           name: 'heading',
           type: 'text',
           required: true,
