@@ -20,6 +20,7 @@ import { StickyHighlights } from '../blocks/StickyHighlights';
 import { slugField } from '../fields/slug';
 import { formatPreviewURL } from '../utilities/formatPreviewURL';
 import { regeneratePage } from '../utilities/regeneratePage';
+import largeBody from '../fields/richText/largeBody';
 
 export const CaseStudies: CollectionConfig = {
   slug: 'case-studies',
@@ -56,6 +57,10 @@ export const CaseStudies: CollectionConfig = {
     },
     richText({
       name: 'introContent',
+      admin: {
+        elements: ['h1', largeBody],
+        leaves: ['underline'],
+      }
     }),
     {
       name: 'featuredImage',
