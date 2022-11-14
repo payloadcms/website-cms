@@ -62,6 +62,7 @@ export default buildConfig({
   ],
   cors: [
     process.env.PAYLOAD_PUBLIC_APP_URL,
+    'https://payloadcms.com',
   ].filter(Boolean),
   admin: {
     webpack: (config) => ({
