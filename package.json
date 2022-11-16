@@ -18,7 +18,7 @@
     "@aws-sdk/client-s3": "^3.192.0",
     "@payloadcms/plugin-cloud-storage": "^1.0.12",
     "@payloadcms/plugin-form-builder": "^1.0.8",
-    "@payloadcms/plugin-nested-docs": "^1.0.3",
+    "@payloadcms/plugin-nested-docs": "^1.0.4",
     "@payloadcms/plugin-seo": "^1.0.8",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
