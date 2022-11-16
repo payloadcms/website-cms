@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload/types';
-import { isAdminFieldLevel } from '../access/isAdmin';
+import { isAdmin, isAdminFieldLevel } from '../access/isAdmin';
 import { isAdminOrSelf, isAdminOrSelfFieldLevel } from '../access/isAdminOrSelf';
 
 export const Users: CollectionConfig = {
@@ -9,7 +9,7 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   access: {
-    create: () => true,
+    create: isAdmin,
     read: () => true,
     update: isAdminOrSelf,
     delete: isAdminOrSelf,
