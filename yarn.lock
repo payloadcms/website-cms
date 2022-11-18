@@ -2511,7 +2511,7 @@
   resolved "https://registry.yarnpkg.com/@payloadcms/plugin-cloud-storage/-/plugin-cloud-storage-1.0.12.tgz#a5716eb2ac6679e94ee26464289a55d09bbf340f"
   integrity sha512-TG4D/Dq8rzFZchapQ/BNXJ2PTqK1ZGUgW3XB1OY3/d7glGW3M6hcXrUCwuY8aOQZQglP69EAFkNP+XRDs2+QJA==
 
-"@payloadcms/plugin-form-builder@^1.0.8":
+"@payloadcms/plugin-form-builder@^1.0.9":
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/@payloadcms/plugin-form-builder/-/plugin-form-builder-1.0.9.tgz#a914cadd321c5b9a4706dc81bca0a750060436e0"
   integrity sha512-F+oO6enxK3JZNzR6k5bDLeCY113ReTbuhlYJRNXJDbE6TQQZfZ/KcR90WguwZnxM4U6u8jnzPZvUnaxGOzuRCA==
@@ -2524,7 +2524,7 @@
   resolved "https://registry.yarnpkg.com/@payloadcms/plugin-nested-docs/-/plugin-nested-docs-1.0.4.tgz#8a9933bbf0813839804be4fa20f9ddf401ed9bec"
   integrity sha512-vjhk3fE/uRkUSNg0UuAv/NIEvDDMRcbEHSgxOo/MbmXOT2LFsh3fPq+Gq4+cL1H9s+FStiIkygigv7J5fgOZwA==
 
-"@payloadcms/plugin-seo@^1.0.8":
+"@payloadcms/plugin-seo@^1.0.9":
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/@payloadcms/plugin-seo/-/plugin-seo-1.0.9.tgz#77a047acd9937f267bb1d3d959840dc7e2e9743c"
   integrity sha512-CmRXvdfL9/yPegjSjB/rt1cH7+OCqqqBPtcOv/WE9wkE31TO7xqisld07a4LlEZdECJVu4imNCaBxl+PmOlihw==
