@@ -18,23 +18,27 @@ const sendgridConfig = {
   }),
 };
 
-// Initialize Payload
-payload.init({
-  secret: process.env.PAYLOAD_SECRET,
-  mongoURL: process.env.MONGODB_URI,
-  express: app,
-  email: {
-    fromName: 'Payload CMS',
-    fromAddress: 'info@payloadcms.org',
-    ...sendgridConfig,
-  },
-  onInit: () => {
-    payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
-  },
-})
+const start = async () => {
+  // Initialize Payload
+  await payload.init({
+    secret: process.env.PAYLOAD_SECRET,
+    mongoURL: process.env.MONGODB_URI,
+    express: app,
+    email: {
+      fromName: 'Payload CMS',
+      fromAddress: 'info@payloadcms.org',
+      ...sendgridConfig,
+    },
+    onInit: () => {
+      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
+    },
+  })
 
-// Add your own express routes here
+  // Add your own express routes here
 
-app.listen(process.env.PORT, async () => {
-  payload.logger.info(`Server listening on port ${process.env.PORT}`);
-});
+  app.listen(process.env.PORT, async () => {
+    payload.logger.info(`Server listening on port ${process.env.PORT}`);
+  });
+}
+
+start();
