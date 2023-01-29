@@ -4,7 +4,7 @@ FROM base as builder
 
 WORKDIR /home/node
 COPY package*.json ./
-COPY payload.config.ts ./payload.config.ts
+COPY /src/payload.config.ts ./payload.config.ts
 
 COPY . .
 RUN yarn install
