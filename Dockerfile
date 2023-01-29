@@ -52,4 +52,6 @@ RUN yarn build
 # Ensure we are not running as root
 USER nobody:nobody
 
+EXPOSE 80
+
 CMD ["node", "dist/server.js"]
