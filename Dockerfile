@@ -16,7 +16,7 @@ ENV NODE_ENV=production
 
 WORKDIR /home/node
 COPY package*.json  ./
-COPY /payload.config.ts ./payload.config.ts
+COPY payload.config.ts ./payload.config.ts
 
 RUN yarn install --production
 COPY --from=builder /home/node/dist ./dist
