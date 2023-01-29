@@ -1,4 +1,4 @@
-FROM node:18-alpine as base
+FROM node:18-alpine
 
 #FROM base as builder
 
@@ -38,20 +38,20 @@ RUN apk add --no-cache tzdata && \
     echo 'nobody:x:65534:65534:nobody:/:' > /user/passwd && \
     echo 'nobody:x:65534:' > /user/group
 
+# Set the working directory
+WORKDIR /app
 
-
-COPY package.json package.json
-RUN yarn install
-
+# Copy the Payload CMS code into the container
 COPY . .
 
-RUN yarn build
+# Install dependencies
+RUN npm install
 
+# Build the Payload CMS for production
+RUN npm run build
 
+# Expose the default Payload CMS port
+EXPOSE 3000
 
-# Ensure we are not running as root
-USER nobody:nobody
-
-EXPOSE 80
-
-CMD ["node", "dist/server.js"]
+# Set the command to start the Payload CMS in production
+CMD ["npm", "serve"]
