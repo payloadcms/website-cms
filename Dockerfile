@@ -54,4 +54,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Set the command to start the Payload CMS in production
-CMD ["npm", "serve"]
+CMD ["npm", "run", "serve"]
