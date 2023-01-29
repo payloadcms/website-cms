@@ -1,0 +1,26 @@
+version: "3.4"
+
+services:
+
+  ### MongoDB Server #####################################
+  mongopayload:
+    image: mongo:4.2.14
+    ports:
+      - "27017:27017"
+    environment:
+      - TZ=Europe/Zurich
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=rootPassXXX
+      - MONGO_INITDB_DATABASE=playground
+    volumes:
+      - mongodb:/data/db
+    networks:
+      - mongo-compose-network
+
+
+volumes:
+  mongodb:
+    driver: "local"
+networks:
+  mongo-compose-network:
+    driver: bridge
