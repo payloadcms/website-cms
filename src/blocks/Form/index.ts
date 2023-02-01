@@ -8,6 +8,9 @@ export const Form: Block = {
     singular: 'Form Block',
     plural: 'Form Blocks',
   },
+  graphQL: {
+    singularName: 'FormBlock',
+  },
   fields: [
     blockFields({
       name: 'formFields',
