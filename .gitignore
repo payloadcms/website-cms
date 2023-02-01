@@ -165,5 +165,8 @@ dist
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode
 
+# Apple MacOS operating system
+.DS_Store
+
 media
 build
