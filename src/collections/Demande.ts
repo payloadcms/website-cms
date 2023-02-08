@@ -33,11 +33,6 @@ export const Demande: CollectionConfig = {
     },
     fields: [
         {
-            name: 'id',
-            type: 'number',
-            required: false,
-        },
-        {
             name: 'limite',
             type: 'number',
             required: false,
