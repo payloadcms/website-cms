@@ -12,8 +12,9 @@ export const getSerpapiData = async ({
     collection: string,
     payload: Payload
 }): Promise<void> => {
+    payload.logger.info(`Revalidated path coffee`);
 
-    const params = {
+    /*const params = {
         q: "coffee",
         ll: "@40.7455096,-74.0083012,15.1z",
         type: "search",
@@ -27,7 +28,7 @@ export const getSerpapiData = async ({
         payload.logger.info(`Revalidated path coffee ${response["local_results"]}`);
     }catch (err) {
         payload.logger.error(`Error hitting revalidate route for coffee}`);
-    }
+    }*/
     /*const path = await formatPagePath(collection, doc);
 
     try {

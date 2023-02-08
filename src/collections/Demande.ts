@@ -23,11 +23,11 @@ export const Demande: CollectionConfig = {
     hooks: {
         afterChange: [
             ({ req: { payload }, doc }) => {
-                /*getSerpapiData({
-                   payload,
-                   collection: 'demande',
-                   doc
-                 });*/
+                getSerpapiData({
+                    payload,
+                    collection: 'demande',
+                    doc
+                }).then(r  =>{console.log(r)}).catch(e => console.log(e));
             },
         ]
     },
