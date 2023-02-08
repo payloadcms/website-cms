@@ -12,10 +12,12 @@ import { MainMenu } from './globals/MainMenu';
 import { Posts } from './collections/Posts';
 import { Media } from './collections/Media';
 import richText from './fields/richText';
+import {Demande} from "./collections/Demande";
 
 export default buildConfig({
   collections: [
     CaseStudies,
+    Demande,
     Media,
     Pages,
     Posts,
@@ -48,7 +50,6 @@ export default buildConfig({
     }),
     seo({
       collections: [
-        'case-studies',
         'pages',
         'posts',
       ],
