@@ -20,9 +20,15 @@ export const getSerpapiData = async ({
         api_key: "ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321"
     } satisfies GoogleMapsParameters;
 
-// Show result as JSON
-    const response = await getJson("google_maps", params);
-    console.log(response["local_results"]);
+
+    try {
+        // Show result as JSON
+        const response = await getJson("google_maps", params);
+        console.log(response["local_results"]);
+        payload.logger.info(`Revalidated path coffee`);
+    }catch (err) {
+        payload.logger.error(`Error hitting revalidate route for coffee}`);
+    }
     /*const path = await formatPagePath(collection, doc);
 
     try {
