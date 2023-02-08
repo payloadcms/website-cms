@@ -2,7 +2,7 @@ import { CollectionConfig } from 'payload/types';
 import { isAdmin } from '../access/isAdmin';
 import { publishedOnly } from '../access/publishedOnly';
 import { formatPreviewURL } from '../utilities/formatPreviewURL';
-import { getSerpapiData } from '../utilities/getSerpapiData';
+// import { getSerpapiData } from '../utilities/getSerpapiData';
 
 export const Demande: CollectionConfig = {
     slug: 'demande',
@@ -20,17 +20,19 @@ export const Demande: CollectionConfig = {
         update: isAdmin,
         delete: isAdmin,
     },
-    hooks: {
+    /*hooks: {
         afterChange: [
             ({ req: { payload }, doc }) => {
                 getSerpapiData({
                    payload,
                    collection: 'demande',
                    doc
-                 });
+                 }).then((data) => {
+                    console.log(data);
+                });
             },
         ]
-    },
+    },*/
     fields: [
         {
             name: 'limite',
