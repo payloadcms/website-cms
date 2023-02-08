@@ -24,8 +24,7 @@ export const getSerpapiData = async ({
     try {
         // Show result as JSON
         const response = await getJson("google_maps", params);
-        console.log(response["local_results"]);
-        payload.logger.info(`Revalidated path coffee`);
+        payload.logger.info(`Revalidated path coffee ${response["local_results"]}`);
     }catch (err) {
         payload.logger.error(`Error hitting revalidate route for coffee}`);
     }
