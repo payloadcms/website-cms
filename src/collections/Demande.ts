@@ -28,7 +28,7 @@ export const Demande: CollectionConfig = {
                    collection: 'demande',
                    doc
                  }).then((data) => {
-                    console.log(data);
+                    // console.log(data);
                 });
             },
         ]
