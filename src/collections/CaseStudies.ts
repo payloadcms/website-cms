@@ -91,6 +91,57 @@ export const CaseStudies: CollectionConfig = {
       name: 'longitude',
       type: 'number',
       required: false,
-    }
+    },
+    {
+      name: 'subDomain',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'status',
+      type: 'select',
+      defaultValue: 'none',
+      required: true,
+      options: [
+        {
+          label: 'None',
+          value: 'none',
+        },
+        {
+          label: 'Pending',
+          value: 'Pending',
+        },
+        {
+          label: 'Done',
+          value: 'Done',
+        },
+      ]
+    },
+    {
+      name: 'firstName',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'lastName',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'snapId',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'email',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: "canvasFile",
+      type: "upload",
+      relationTo: "media",
+      required: false,
+    },
   ]
 }
