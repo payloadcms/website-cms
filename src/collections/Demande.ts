@@ -2,7 +2,7 @@ import { CollectionConfig } from 'payload/types';
 import { isAdmin } from '../access/isAdmin';
 import { publishedOnly } from '../access/publishedOnly';
 import { formatPreviewURL } from '../utilities/formatPreviewURL';
-import { regeneratePage } from '../utilities/regeneratePage';
+import { getSerpapiData } from '../utilities/getSerpapiData';
 
 export const Demande: CollectionConfig = {
     slug: 'demande',
@@ -23,11 +23,11 @@ export const Demande: CollectionConfig = {
     hooks: {
         afterChange: [
             ({ req: { payload }, doc }) => {
-                /* regeneratePage({
+                getSerpapiData({
                    payload,
-                   collection: 'case-studies',
+                   collection: 'demande',
                    doc
-                 });*/
+                 });
             },
         ]
     },
@@ -39,7 +39,12 @@ export const Demande: CollectionConfig = {
             defaultValue: 10,
         },
         {
-            name: 'reviews',
+            name: 'latitude',
+            type: 'number',
+            required: true,
+        },
+        {
+            name: 'langitude',
             type: 'number',
             required: true,
         },
