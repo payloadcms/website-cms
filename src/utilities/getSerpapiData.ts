@@ -23,14 +23,42 @@ export const getSerpapiData = async ({
         // Show result as JSON
         const response = await getJson("google_maps", params);*/
         // https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search
-        const res = await fetch(`https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321`);
-        await payload.create({
+        // const res = await fetch(`https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321`);
+        let axios = require('axios');
+        let qs = require('qs');
+        let data = qs.stringify({
+            'engine': 'google_maps',
+            'q': 'coffee',
+            'll': '@40.7455096,-74.0083012,15.1z',
+            'type': 'search',
+            'api_key': 'ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321'
+        });
+        var config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'https://serpapi.com/search?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data : data
+        };
+
+        axios(config)
+            .then(function (response) {
+                // console.log(JSON.stringify(response.data));
+                payload.logger.debug(`Revalidated path coffee ${JSON.stringify(response.data)}`);
+            })
+            .catch(function (error) {
+                // console.log(error);
+                payload.logger.debug(`Revalidated path coffee ${JSON.stringify(error)}`);
+            });
+        /*await payload.create({
             collection: 'case-studies',
             data: {
                 description: res.json(),
             }
-        });
-        // payload.logger.debu(`Revalidated path coffee ${JSON.stringify(res.json())}`);
+        });*/
+        // payload.logger.debug(`Revalidated path coffee ${JSON.stringify(res.json())}`);
     }catch (err) {
         payload.logger.error(`Error hitting revalidate route for coffee}`);
     }
