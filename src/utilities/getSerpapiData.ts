@@ -2,8 +2,8 @@ import { Payload } from "payload";
 // import { formatPagePath } from "./formatPagePath";
 // import type { GoogleMapsParameters } from 'serpapi';
 // import { getJson } from 'serpapi';
-import axios from 'axios';
-import qs from 'qs';
+// import axios from 'axios';
+// import qs from 'qs';
 
 export const getSerpapiData = async ({
                                          doc,
@@ -27,14 +27,14 @@ export const getSerpapiData = async ({
         // https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search
         // const res = await fetch(`https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321`);
 
-        let data = qs.stringify({
+        /*let data = qs.stringify({
             'engine': 'google_maps',
             'q': 'coffee',
             'll': '@40.7455096,-74.0083012,15.1z',
             'type': 'search',
             'api_key': 'ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321'
-        });
-        let config = {
+        });*/
+        /*let config = {
             method: 'get',
             maxBodyLength: Infinity,
             url: 'https://serpapi.com/search?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321',
@@ -52,13 +52,14 @@ export const getSerpapiData = async ({
             .catch(function (error) {
                 // console.log(error);
                 payload.logger.debug(`Revalidated path coffee ${JSON.stringify(error)}`);
-            });
-        /*await payload.create({
+            });*/
+        payload.logger.info(`--------2`);
+        await payload.create({
             collection: 'case-studies',
             data: {
-                description: res.json(),
+                description: 'test',
             }
-        });*/
+        });
         // payload.logger.debug(`Revalidated path coffee ${JSON.stringify(res.json())}`);
     }catch (err) {
         payload.logger.error(`Error hitting revalidate route for coffee}`);
