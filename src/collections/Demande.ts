@@ -23,11 +23,12 @@ export const Demande: CollectionConfig = {
     hooks: {
         afterChange: [
             async ({ req: { payload }, doc }) => {
-                await getSerpapiData({
+                payload.logger.info(`--------`);
+               /* await getSerpapiData({
                     payload,
                     collection: 'demande',
                     doc
-                })
+                })*/
             },
         ]
     },

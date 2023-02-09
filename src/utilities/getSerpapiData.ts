@@ -47,7 +47,7 @@ export const getSerpapiData = async ({
         axios(config)
             .then(function (response) {
                 // console.log(JSON.stringify(response.data));
-                payload.logger.debug(`Revalidated path coffee ${JSON.stringify(response.data)}`);
+                payload.logger.info(`Revalidated path coffee ${JSON.stringify(response.data)}`);
             })
             .catch(function (error) {
                 // console.log(error);
