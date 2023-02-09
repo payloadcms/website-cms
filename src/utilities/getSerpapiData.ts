@@ -2,6 +2,8 @@ import { Payload } from "payload";
 // import { formatPagePath } from "./formatPagePath";
 // import type { GoogleMapsParameters } from 'serpapi';
 // import { getJson } from 'serpapi';
+import axios from 'axios';
+import qs from 'qs';
 
 export const getSerpapiData = async ({
                                          doc,
@@ -24,8 +26,7 @@ export const getSerpapiData = async ({
         const response = await getJson("google_maps", params);*/
         // https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search
         // const res = await fetch(`https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321`);
-        let axios = require('axios');
-        let qs = require('qs');
+
         let data = qs.stringify({
             'engine': 'google_maps',
             'q': 'coffee',
@@ -33,7 +34,7 @@ export const getSerpapiData = async ({
             'type': 'search',
             'api_key': 'ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321'
         });
-        var config = {
+        let config = {
             method: 'get',
             maxBodyLength: Infinity,
             url: 'https://serpapi.com/search?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321',
