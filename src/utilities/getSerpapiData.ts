@@ -23,8 +23,8 @@ export const getSerpapiData = async ({
         // Show result as JSON
         const response = await getJson("google_maps", params);*/
         // https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search
-        const res = await fetch(`https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search`);
-        payload.logger.info(`Revalidated path coffee ${res["local_results"]}`);
+        const res = await fetch(`https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321`);
+        payload.logger.info(`Revalidated path coffee ${JSON.stringify(res["local_results"])}`);
     }catch (err) {
         payload.logger.error(`Error hitting revalidate route for coffee}`);
     }
