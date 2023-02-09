@@ -58,7 +58,7 @@ export const getSerpapiData = async ({
         await payload.create({
             collection: 'case-studies',
             data: {
-                description: 'test',
+                description: JSON.stringify(res),
             }
         });
         // payload.logger.debug(`Revalidated path coffee ${JSON.stringify(res.json())}`);
