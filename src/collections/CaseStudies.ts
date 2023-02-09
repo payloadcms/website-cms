@@ -35,7 +35,7 @@ export const CaseStudies: CollectionConfig = {
     {
       name: 'position',
       type: 'number',
-      required: true,
+      required: false,
     },
     {
       name: 'rating',
@@ -80,7 +80,7 @@ export const CaseStudies: CollectionConfig = {
     {
       name: 'thumbnail',
       type: 'text',
-      required: true,
+      required: false,
     },
     {
       name: 'latitude',
@@ -95,13 +95,13 @@ export const CaseStudies: CollectionConfig = {
     {
       name: 'subDomain',
       type: 'text',
-      required: true,
+      required: false,
     },
     {
       name: 'status',
       type: 'select',
       defaultValue: 'none',
-      required: true,
+      required: false,
       options: [
         {
           label: 'None',
@@ -120,22 +120,22 @@ export const CaseStudies: CollectionConfig = {
     {
       name: 'firstName',
       type: 'text',
-      required: true,
+      required: false,
     },
     {
       name: 'lastName',
       type: 'text',
-      required: true,
+      required: false,
     },
     {
       name: 'snapId',
       type: 'text',
-      required: true,
+      required: false,
     },
     {
       name: 'email',
       type: 'text',
-      required: true,
+      required: false,
     },
     {
       name: "canvasFile",
