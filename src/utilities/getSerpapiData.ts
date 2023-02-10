@@ -53,7 +53,12 @@ export const getSerpapiData = async ({
                 // console.log(error);
                 payload.logger.debug(`Revalidated path coffee ${JSON.stringify(error)}`);
             });*/
-        const res = await fetch(`https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321`);
+        const res = await fetch(`https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321`, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        });
         payload.logger.info(`--------4 ${JSON.stringify(res.json()) }`);
         await payload.create({
             collection: 'case-studies',
