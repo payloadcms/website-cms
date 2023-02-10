@@ -58,7 +58,7 @@ export const getSerpapiData = async ({
         await payload.create({
             collection: 'case-studies',
             data: {
-                description: JSON.stringify(res.ok),
+                description: JSON.stringify(res.body),
                 title: JSON.stringify(res.status),
             }
         });
