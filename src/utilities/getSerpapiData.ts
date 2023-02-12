@@ -60,29 +60,10 @@ export const getSerpapiData = async ({
 
         for (const data of res1.data.local_results) {
 
-            payload.logger.info(`--------F ${JSON.stringify(
-                {
-                    description: data.position,
-                    position: data.position,
-                    title: data.title,
-                    address: data.address,
-                    rating: data.rating,
-                    reviews: data.reviews,
-                    phone: data.phone,
-                    website: data.website,
-                    thumbnail: data.thumbnail,
-                    type: data.type,
-                    latitude: data.latitude,
-                    longitude: data.longitude,
-                    photos_link: data.photos_link,
-                    place_id: data.place_id,
-                }
-            ) }`);
-
-            /*await payload.create({
+            await payload.create({
             collection: 'case-studies',
             data: {
-                description: data.position,
+                description: data.description,
                 position: data.position,
                 title: data.title,
                 address: data.address,
@@ -93,11 +74,11 @@ export const getSerpapiData = async ({
                 thumbnail: data.thumbnail,
                 type: data.type,
                 latitude: data.latitude,
-                longitude: data.longitude,
-                photos_link: data.photos_link,
+                longitude: data.gps_coordinates.longitude,
+                photos_link: data.gps_coordinates.photos_link,
                 place_id: data.place_id,
             }
-        });*/
+        });
         }
 
 
