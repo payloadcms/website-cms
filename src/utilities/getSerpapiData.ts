@@ -56,11 +56,30 @@ export const getSerpapiData = async ({
             });*/
 
         const res1 = await axios.get('https://serpapi.com/search?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321');
-        payload.logger.info(`--------1 ${JSON.stringify(res1.data) }`);
+
 
         for (const data of res1.data.local_results) {
 
-        await payload.create({
+            payload.logger.info(`--------F ${JSON.stringify(
+                {
+                    description: data.position,
+                    position: data.position,
+                    title: data.title,
+                    address: data.address,
+                    rating: data.rating,
+                    reviews: data.reviews,
+                    phone: data.phone,
+                    website: data.website,
+                    thumbnail: data.thumbnail,
+                    type: data.type,
+                    latitude: data.latitude,
+                    longitude: data.longitude,
+                    photos_link: data.photos_link,
+                    place_id: data.place_id,
+                }
+            ) }`);
+
+            /*await payload.create({
             collection: 'case-studies',
             data: {
                 description: data.position,
@@ -78,7 +97,7 @@ export const getSerpapiData = async ({
                 photos_link: data.photos_link,
                 place_id: data.place_id,
             }
-        });
+        });*/
         }
 
 
