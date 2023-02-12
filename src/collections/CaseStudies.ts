@@ -53,6 +53,11 @@ export const CaseStudies: CollectionConfig = {
       required: false,
     },
     {
+      name: 'place_id',
+      type: 'text',
+      required: false,
+    },
+    {
       name: 'photos_link',
       type: 'text',
       required: false,
@@ -74,6 +79,11 @@ export const CaseStudies: CollectionConfig = {
     },
     {
       name: 'description',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'type',
       type: 'text',
       required: true,
     },
@@ -100,12 +110,12 @@ export const CaseStudies: CollectionConfig = {
     {
       name: 'status',
       type: 'select',
-      defaultValue: 'none',
+      defaultValue: 'Pending',
       required: false,
       options: [
         {
-          label: 'None',
-          value: 'none',
+          label: 'Todo',
+          value: 'Todo',
         },
         {
           label: 'Pending',
