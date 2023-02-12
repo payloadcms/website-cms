@@ -4,6 +4,7 @@ import { Payload } from "payload";
 // import { getJson } from 'serpapi';
 // import axios from 'axios';
 // import qs from 'qs';
+import axios from 'axios';
 
 export const getSerpapiData = async ({
                                          doc,
@@ -53,7 +54,13 @@ export const getSerpapiData = async ({
                 // console.log(error);
                 payload.logger.debug(`Revalidated path coffee ${JSON.stringify(error)}`);
             });*/
-        const res = await fetch(`https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321`);
+
+        const tt = await axios.get('https://serpapi.com/search?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321');
+        payload.logger.info(`--------1 ${JSON.stringify(tt.data) }`);
+
+
+
+        /*const res = await fetch(`https://serpapi.com/search.json?engine=google_maps&q=coffee&ll=@40.7455096,-74.0083012,15.1z&type=search&api_key=ba9a3e5451c9d663d8a75d8e5ca834a8fb68fa89722aa1c0655183aa833eb321`);
         payload.logger.info(`--------4 ${JSON.stringify(res.status) }`);
         await payload.create({
             collection: 'case-studies',
@@ -61,7 +68,12 @@ export const getSerpapiData = async ({
                 description: JSON.stringify(res.ok),
                 title: JSON.stringify(res.status),
             }
-        });
+        });*/
+
+
+
+
+
         // payload.logger.debug(`Revalidated path coffee ${JSON.stringify(res.json())}`);
     }catch (err) {
         payload.logger.error(`Error hitting revalidate route for coffee}`);
