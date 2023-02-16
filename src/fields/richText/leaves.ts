@@ -1,10 +1,5 @@
-import { RichTextLeaf } from 'payload/dist/fields/config/types';
+import type { RichTextLeaf } from 'payload/dist/fields/config/types'
 
-const defaultLeaves: RichTextLeaf[] = [
-  'bold',
-  'italic',
-  'underline',
-  'code',
-];
+const defaultLeaves: RichTextLeaf[] = ['bold', 'italic', 'underline', 'code']
 
-export default defaultLeaves;
+export default defaultLeaves

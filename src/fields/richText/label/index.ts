@@ -1,11 +1,14 @@
-import { RichTextCustomElement } from "payload/types";
-import Button from "./Button";
-import Element from "./Element";
-import withLabel from "./plugin";
+import type { RichTextCustomElement } from 'payload/types'
 
-export default {
-  name: "label",
+import Button from './Button'
+import Element from './Element'
+import withLabel from './plugin'
+
+const richTextLabel: RichTextCustomElement = {
+  name: 'label',
   Button,
   Element,
   plugins: [withLabel],
-} as RichTextCustomElement;
+}
+
+export default richTextLabel

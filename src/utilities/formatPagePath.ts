@@ -1,20 +1,23 @@
-export const formatPagePath = (collection: string, doc: any): string => {
-  const { slug } = doc;
+export const formatPagePath = (
+  collection: string,
+  doc: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+): string => {
+  const { slug } = doc
 
-  let prefix = '';
+  let prefix = ''
 
   if (collection) {
     switch (collection) {
       case 'pages':
-        prefix = '';
-        break;
+        prefix = ''
+        break
       case 'posts':
-        prefix = '/blog';
-        break;
+        prefix = '/blog'
+        break
       default:
-        prefix = `/${collection}`;
+        prefix = `/${collection}`
     }
   }
 
-  return `${prefix}/${slug}`;
+  return `${prefix}/${slug}`
 }

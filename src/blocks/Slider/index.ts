@@ -1,79 +1,78 @@
-import { Block } from "payload/types";
-import { blockFields } from "../../fields/blockFields";
-import richText from "../../fields/richText";
+import type { Block } from 'payload/types'
+
+import { blockFields } from '../../fields/blockFields'
+import richText from '../../fields/richText'
 
 export const Slider: Block = {
-  slug: "slider",
+  slug: 'slider',
   fields: [
     blockFields({
-      name: "sliderFields",
+      name: 'sliderFields',
       fields: [
         {
-          name: "useLeadingHeader",
-          label: "Use Leading Header",
-          type: "checkbox",
+          name: 'useLeadingHeader',
+          label: 'Use Leading Header',
+          type: 'checkbox',
         },
         richText({
-          name: "leadingHeader",
-          label: "Leading Header",
+          name: 'leadingHeader',
+          label: 'Leading Header',
           admin: {
             condition: (_, siblingData) => siblingData.useLeadingHeader,
           },
         }),
         {
-          type: "select",
-          name: "sliderType",
+          type: 'select',
+          name: 'sliderType',
           required: true,
           options: [
             {
-              label: "Quote Slider",
-              value: "quoteSlider",
+              label: 'Quote Slider',
+              value: 'quoteSlider',
             },
             {
-              label: "Image Slider",
-              value: "imageSlider",
+              label: 'Image Slider',
+              value: 'imageSlider',
             },
           ],
         },
         {
-          type: "array",
-          name: "imageSlides",
+          type: 'array',
+          name: 'imageSlides',
           required: true,
           minRows: 3,
           admin: {
-            condition: (_, siblingData) =>
-              siblingData.sliderType === "imageSlider",
+            condition: (_, siblingData) => siblingData.sliderType === 'imageSlider',
           },
           fields: [
             {
-              type: "upload",
-              name: "image",
-              relationTo: "media",
+              type: 'upload',
+              name: 'image',
+              relationTo: 'media',
               required: true,
             },
           ],
         },
         {
-          type: "array",
-          name: "quoteSlides",
+          type: 'array',
+          name: 'quoteSlides',
           required: true,
           minRows: 3,
           admin: {
-            condition: (_, siblingData) =>
-              siblingData.sliderType === "quoteSlider",
+            condition: (_, siblingData) => siblingData.sliderType === 'quoteSlider',
           },
           fields: [
             richText({
-              name: "richText",
+              name: 'richText',
               required: true,
               admin: {
                 elements: [],
-                leaves: ["underline"],
+                leaves: ['underline'],
               },
             }),
             {
-              type: "date",
-              name: "quoteDate",
+              type: 'date',
+              name: 'quoteDate',
               required: true,
             },
           ],
@@ -81,4 +80,4 @@ export const Slider: Block = {
       ],
     }),
   ],
-};
+}

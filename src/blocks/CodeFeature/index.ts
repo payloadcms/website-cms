@@ -1,7 +1,8 @@
-import { Block } from "payload/types";
-import { blockFields } from "../../fields/blockFields";
-import link from "../../fields/link";
-import richText from "../../fields/richText";
+import type { Block } from 'payload/types'
+
+import { blockFields } from '../../fields/blockFields'
+import link from '../../fields/link'
+import richText from '../../fields/richText'
 
 export const CodeFeature: Block = {
   slug: 'codeFeature',
@@ -20,8 +21,8 @@ export const CodeFeature: Block = {
         },
         richText({
           admin: {
-            elements: ['ul', 'ol', 'link']
-          }
+            elements: ['ul', 'ol', 'link'],
+          },
         }),
         {
           name: 'enableLink',
@@ -30,9 +31,9 @@ export const CodeFeature: Block = {
         link({
           overrides: {
             admin: {
-              condition: (_, { enableLink }) => Boolean(enableLink)
-            }
-          }
+              condition: (_, { enableLink }) => Boolean(enableLink),
+            },
+          },
         }),
         {
           type: 'row',
@@ -54,21 +55,21 @@ export const CodeFeature: Block = {
                   label: 'TypeScript',
                   value: 'ts',
                 },
-              ]
+              ],
             },
             {
               name: 'label',
               label: 'Code Label',
               type: 'text',
             },
-          ]
+          ],
         },
         {
           name: 'code',
           type: 'code',
           required: true,
         },
-      ]
-    })
-  ]
+      ],
+    }),
+  ],
 }

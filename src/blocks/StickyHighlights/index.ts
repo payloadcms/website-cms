@@ -1,7 +1,8 @@
-import { Block } from "payload/types";
-import { blockFields } from "../../fields/blockFields";
-import link from "../../fields/link";
-import richText from "../../fields/richText";
+import type { Block } from 'payload/types'
+
+import { blockFields } from '../../fields/blockFields'
+import link from '../../fields/link'
+import richText from '../../fields/richText'
 
 export const StickyHighlights: Block = {
   slug: 'stickyHighlights',
@@ -27,8 +28,8 @@ export const StickyHighlights: Block = {
               overrides: {
                 admin: {
                   condition: (_, { enableLink }) => Boolean(enableLink),
-                }
-              }
+                },
+              },
             }),
             {
               name: 'type',
@@ -49,8 +50,8 @@ export const StickyHighlights: Block = {
               type: 'code',
               required: true,
               admin: {
-                condition: (_, { type }) => type === 'code'
-              }
+                condition: (_, { type }) => type === 'code',
+              },
             },
             {
               name: 'media',
@@ -58,12 +59,12 @@ export const StickyHighlights: Block = {
               relationTo: 'media',
               required: true,
               admin: {
-                condition: (_, { type }) => type === 'media'
-              }
+                condition: (_, { type }) => type === 'media',
+              },
             },
           ],
         },
       ],
-    })
-  ]
+    }),
+  ],
 }

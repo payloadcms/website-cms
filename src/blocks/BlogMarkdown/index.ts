@@ -1,16 +1,17 @@
-import { Block } from "payload/types";
-import { blockFields } from "../../fields/blockFields";
-import { BlogMarkdownField } from "./Field";
+import type { Block } from 'payload/types'
+
+import { blockFields } from '../../fields/blockFields'
+import { BlogMarkdownField } from './Field'
 
 export const BlogMarkdown: Block = {
-  slug: "blogMarkdown",
+  slug: 'blogMarkdown',
   labels: {
     singular: 'Markdown',
     plural: 'Markdown Blocks',
   },
   fields: [
     blockFields({
-      name: "blogMarkdownFields",
+      name: 'blogMarkdownFields',
       fields: [
         {
           name: 'markdown',
@@ -18,11 +19,11 @@ export const BlogMarkdown: Block = {
           required: true,
           admin: {
             components: {
-              Field: BlogMarkdownField
-            }
-          }
-        }
+              Field: BlogMarkdownField,
+            },
+          },
+        },
       ],
     }),
   ],
-};
+}

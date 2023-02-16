@@ -1,75 +1,72 @@
-import { Block } from "payload/types";
-import { blockFields } from "../../fields/blockFields";
-import richText from "../../fields/richText";
+import type { Block } from 'payload/types'
+
+import { blockFields } from '../../fields/blockFields'
+import richText from '../../fields/richText'
 
 export const Content: Block = {
-  slug: "content",
+  slug: 'content',
   fields: [
     blockFields({
-      name: "contentFields",
+      name: 'contentFields',
       fields: [
         {
-          name: "useLeadingHeader",
-          label: "Use Leading Header",
-          type: "checkbox",
+          name: 'useLeadingHeader',
+          label: 'Use Leading Header',
+          type: 'checkbox',
         },
         richText({
-          name: "leadingHeader",
-          label: "Leading Header",
+          name: 'leadingHeader',
+          label: 'Leading Header',
           admin: {
             condition: (_, siblingData) => siblingData.useLeadingHeader,
           },
         }),
         {
-          name: "layout",
-          type: "select",
-          defaultValue: "oneColumn",
+          name: 'layout',
+          type: 'select',
+          defaultValue: 'oneColumn',
           options: [
             {
-              label: "One Column",
-              value: "oneColumn",
+              label: 'One Column',
+              value: 'oneColumn',
             },
             {
-              label: "Two Columns",
-              value: "twoColumns",
+              label: 'Two Columns',
+              value: 'twoColumns',
             },
             {
-              label: "Two Thirds + One Third",
-              value: "twoThirdsOneThird",
+              label: 'Two Thirds + One Third',
+              value: 'twoThirdsOneThird',
             },
             {
-              label: "Half + Half",
-              value: "halfAndHalf",
+              label: 'Half + Half',
+              value: 'halfAndHalf',
             },
             {
-              label: "Three Columns",
-              value: "threeColumns",
+              label: 'Three Columns',
+              value: 'threeColumns',
             },
           ],
         },
         richText({
-          name: "columnOne",
+          name: 'columnOne',
         }),
         richText({
-          name: "columnTwo",
+          name: 'columnTwo',
           admin: {
             condition: (_, siblingData) =>
-              [
-                "twoColumns",
-                "twoThirdsOneThird",
-                "halfAndHalf",
-                "threeColumns",
-              ].includes(siblingData.layout),
+              ['twoColumns', 'twoThirdsOneThird', 'halfAndHalf', 'threeColumns'].includes(
+                siblingData.layout,
+              ),
           },
         }),
         richText({
-          name: "columnThree",
+          name: 'columnThree',
           admin: {
-            condition: (_, siblingData) =>
-              siblingData.layout === "threeColumns",
+            condition: (_, siblingData) => siblingData.layout === 'threeColumns',
           },
         }),
       ],
     }),
   ],
-};
+}
