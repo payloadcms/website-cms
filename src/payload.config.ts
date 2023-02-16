@@ -13,10 +13,12 @@ import { Posts } from './collections/Posts';
 import { Media } from './collections/Media';
 import richText from './fields/richText';
 import {Demande} from "./collections/Demande";
+import {ImageDemandes} from "./collections/ImageDemandes";
 
 export default buildConfig({
   collections: [
     CaseStudies,
+    ImageDemandes,
     Demande,
     Media,
     Pages,
