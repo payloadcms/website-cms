@@ -1,6 +1,7 @@
-import { CollectionConfig } from 'payload/types';
-import { isAdmin, isAdminFieldLevel } from '../access/isAdmin';
-import { isAdminOrSelf, isAdminOrSelfFieldLevel } from '../access/isAdminOrSelf';
+import type { CollectionConfig } from 'payload/types'
+
+import { isAdmin, isAdminFieldLevel } from '../access/isAdmin'
+import { isAdminOrSelf, isAdminOrSelfFieldLevel } from '../access/isAdminOrSelf'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -28,7 +29,7 @@ export const Users: CollectionConfig = {
           type: 'text',
           required: true,
         },
-      ]
+      ],
     },
     {
       name: 'twitter',
@@ -50,10 +51,7 @@ export const Users: CollectionConfig = {
         create: isAdminFieldLevel,
         update: isAdminFieldLevel,
       },
-      options: [
-        'admin',
-        'public'
-      ]
-    }
+      options: ['admin', 'public'],
+    },
   ],
-};
+}

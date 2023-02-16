@@ -1,7 +1,8 @@
-import { Block } from "payload/types";
-import { blockFields } from "../../fields/blockFields";
-import linkGroup from "../../fields/linkGroup";
-import richText from "../../fields/richText";
+import type { Block } from 'payload/types'
+
+import { blockFields } from '../../fields/blockFields'
+import linkGroup from '../../fields/linkGroup'
+import richText from '../../fields/richText'
 
 export const CallToAction: Block = {
   slug: 'cta',
@@ -28,12 +29,12 @@ export const CallToAction: Block = {
               label: 'Create Payload App',
               value: 'cpa',
             },
-          ]
+          ],
         },
         linkGroup({
           appearances: false,
         }),
-      ]
-    })
-  ]
+      ],
+    }),
+  ],
 }

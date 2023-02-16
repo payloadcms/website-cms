@@ -1,12 +1,13 @@
-import { GlobalConfig } from "payload/types";
-import { isAdmin } from "../access/isAdmin";
-import link from "../fields/link";
+import type { GlobalConfig } from 'payload/types'
+
+import { isAdmin } from '../access/isAdmin'
+import link from '../fields/link'
 
 export const Footer: GlobalConfig = {
   slug: 'footer',
   access: {
     read: () => true,
-    update: isAdmin
+    update: isAdmin,
   },
   fields: [
     {
@@ -22,9 +23,9 @@ export const Footer: GlobalConfig = {
             link({
               appearances: false,
             }),
-          ]
-        }
-      ]
-    }
-  ]
+          ],
+        },
+      ],
+    },
+  ],
 }

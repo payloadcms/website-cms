@@ -1,10 +1,13 @@
-const withVideo = (incomingEditor) => {
-  const editor = incomingEditor;
-  const { isVoid } = editor;
+import type { RichTextCustomElement } from 'payload/types'
 
-  editor.isVoid = (element) => (element.type === 'video' ? true : isVoid(element));
+const withVideo: RichTextCustomElement['plugins'][0] = incomingEditor => {
+  const editor = incomingEditor
+  const { isVoid } = editor
 
-  return editor;
-};
+  // @ts-expect-error
+  editor.isVoid = element => (element.type === 'video' ? true : isVoid(element))
 
-export default withVideo;
+  return editor
+}
+
+export default withVideo

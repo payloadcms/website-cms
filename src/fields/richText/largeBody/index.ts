@@ -1,11 +1,14 @@
-import { RichTextCustomElement } from "payload/types";
-import Button from "./Button";
-import Element from "./Element";
-import withLargeBody from "./plugin";
+import type { RichTextCustomElement } from 'payload/types'
 
-export default {
-  name: "large-body",
+import Button from './Button'
+import Element from './Element'
+import { withLargeBody } from './plugin'
+
+const largeBody: RichTextCustomElement = {
+  name: 'large-body',
   Button,
   Element,
   plugins: [withLargeBody],
-} as RichTextCustomElement;
+}
+
+export default largeBody

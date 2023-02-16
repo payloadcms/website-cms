@@ -1,6 +1,7 @@
-import { CollectionConfig } from 'payload/types';
-import path from 'path';
-import { isAdmin } from '../access/isAdmin';
+import path from 'path'
+import type { CollectionConfig } from 'payload/types'
+
+import { isAdmin } from '../access/isAdmin'
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -24,8 +25,8 @@ export const Media: CollectionConfig = {
       type: 'upload',
       relationTo: 'media',
       admin: {
-        description: 'Choose an upload to render if the visitor is using dark mode.'
-      }
+        description: 'Choose an upload to render if the visitor is using dark mode.',
+      },
     },
-  ]
+  ],
 }

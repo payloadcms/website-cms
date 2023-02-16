@@ -1,5 +1,6 @@
-import { Block } from "payload/types";
-import { blockFields } from "../../fields/blockFields";
+import type { Block } from 'payload/types'
+
+import { blockFields } from '../../fields/blockFields'
 
 export const ReusableContent: Block = {
   slug: 'reusableContentBlock',
@@ -12,8 +13,8 @@ export const ReusableContent: Block = {
           type: 'relationship',
           relationTo: 'reusable-content',
           required: true,
-        }
-      ]
-    })
-  ]
+        },
+      ],
+    }),
+  ],
 }

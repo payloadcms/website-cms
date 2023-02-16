@@ -1,13 +1,16 @@
-const payload = require("payload");
+// @ts-nocheck
 
-require("dotenv").config();
+import payload from 'payload'
 
-const { PAYLOAD_SECRET, MONGODB_URI } = process.env;
+// eslint-disable-next-line
+require('dotenv').config()
+
+const { PAYLOAD_SECRET, MONGODB_URI } = process.env
 
 // This function ensures that there is at least one corresponding version for any document
 // within each of your draft-enabled collections.
 
-const ensureAtLeastOneVersion = async () => {
+const ensureAtLeastOneVersion = async (): Promise<void> => {
   // Initialize Payload
   // IMPORTANT: make sure your ENV variables are filled properly here
   // as the below variable names are just for reference.
@@ -15,7 +18,7 @@ const ensureAtLeastOneVersion = async () => {
     secret: PAYLOAD_SECRET,
     mongoURL: MONGODB_URI,
     local: true,
-  });
+  })
 
   // For each collection
   await Promise.all(
@@ -26,14 +29,15 @@ const ensureAtLeastOneVersion = async () => {
           collection: slug,
           limit: 0,
           depth: 0,
-          locale: "all",
-        });
+          locale: 'all',
+        })
 
-        const VersionsModel = payload.versions[slug];
-        const existingCollectionDocIds: Array<string> = [];
+        const VersionsModel = payload.versions[slug]
+        const existingCollectionDocIds: string[] = []
         await Promise.all(
-          docs.map(async (doc) => {
-            existingCollectionDocIds.push(doc.id);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          docs.map(async (doc: any) => {
+            existingCollectionDocIds.push(doc.id)
             // Find at least one version for the doc
             const versionDocs = await VersionsModel.find(
               {
@@ -41,8 +45,8 @@ const ensureAtLeastOneVersion = async () => {
                 updatedAt: { $gte: doc.updatedAt },
               },
               null,
-              { limit: 1 }
-            ).lean();
+              { limit: 1 },
+            ).lean()
 
             // If there are no corresponding versions,
             // we need to create one
@@ -54,36 +58,36 @@ const ensureAtLeastOneVersion = async () => {
                   autosave: Boolean(versions?.drafts?.autosave),
                   updatedAt: doc.updatedAt,
                   createdAt: doc.createdAt,
-                });
-              } catch (e) {
-                console.error(
+                })
+              } catch (e: unknown) {
+                payload.logger.error(
                   `Unable to create version corresponding with collection ${slug} document ID ${doc.id}`,
-                  e?.errors || e
-                );
+                  e?.errors || e,
+                )
               }
 
-              console.log(
-                `Created version corresponding with ${slug} document ID ${doc.id}`
-              );
+              payload.logger.info(
+                `Created version corresponding with ${slug} document ID ${doc.id}`,
+              )
             }
-          })
-        );
+          }),
+        )
 
         const versionsWithoutParentDocs = await VersionsModel.deleteMany({
           parent: { $nin: existingCollectionDocIds },
-        });
+        })
 
         if (versionsWithoutParentDocs.deletedCount > 0) {
-          console.log(
-            `Removing ${versionsWithoutParentDocs.deletedCount} versions for ${slug} collection - parent documents no longer exist`
-          );
+          payload.logger.info(
+            `Removing ${versionsWithoutParentDocs.deletedCount} versions for ${slug} collection - parent documents no longer exist`,
+          )
         }
       }
-    })
-  );
+    }),
+  )
 
-  console.log("Done!");
-  process.exit(0);
-};
+  payload.logger.info('Done!')
+  process.exit(0)
+}
 
-ensureAtLeastOneVersion();
+ensureAtLeastOneVersion()

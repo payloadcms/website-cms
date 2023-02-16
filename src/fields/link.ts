@@ -1,5 +1,6 @@
-import { Field, GroupField } from 'payload/types';
-import deepMerge from '../utilities/deepMerge';
+import type { Field, GroupField } from 'payload/types'
+
+import deepMerge from '../utilities/deepMerge'
 
 export const appearanceOptions = {
   primary: {
@@ -14,29 +15,23 @@ export const appearanceOptions = {
     label: 'Default',
     value: 'default',
   },
-};
+}
 
 export type LinkAppearances = 'primary' | 'secondary' | 'default'
 
-type LinkType = (
-  options?: {
-    appearances?: LinkAppearances[] | false
-    disableLabel?: boolean
-    overrides?: Partial<GroupField>
-  }
-) => Field;
+type LinkType = (options?: {
+  appearances?: LinkAppearances[] | false
+  disableLabel?: boolean
+  overrides?: Partial<GroupField>
+}) => Field
 
-const link: LinkType = ({
-  appearances,
-  disableLabel = false,
-  overrides = {},
-} = {}) => {
+const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = {}) => {
   let linkResult: Field = {
     name: 'link',
     type: 'group',
     admin: {
       hideGutter: true,
-      ...overrides?.admin || {},
+      ...(overrides?.admin || {}),
     },
     fields: [
       {
@@ -69,13 +64,13 @@ const link: LinkType = ({
               width: '50%',
               style: {
                 alignSelf: 'flex-end',
-              }
-            }
-          }
+              },
+            },
+          },
         ],
       },
     ],
-  };
+  }
 
   let linkTypes: Field[] = [
     {
@@ -101,8 +96,8 @@ const link: LinkType = ({
   ]
 
   if (!disableLabel) {
-    linkTypes[0].admin.width = '50%';
-    linkTypes[1].admin.width = '50%';
+    linkTypes[0].admin.width = '50%'
+    linkTypes[1].admin.width = '50%'
 
     linkResult.fields.push({
       type: 'row',
@@ -115,14 +110,13 @@ const link: LinkType = ({
           required: true,
           admin: {
             width: '50%',
-          }
-        }
-      ]
+          },
+        },
+      ],
     })
   } else {
-    linkResult.fields = [...linkResult.fields, ...linkTypes];
+    linkResult.fields = [...linkResult.fields, ...linkTypes]
   }
-
 
   if (appearances !== false) {
     let appearanceOptionsToUse = [
@@ -132,7 +126,7 @@ const link: LinkType = ({
     ]
 
     if (appearances) {
-      appearanceOptionsToUse = appearances.map((appearance) => appearanceOptions[appearance])
+      appearanceOptionsToUse = appearances.map(appearance => appearanceOptions[appearance])
     }
 
     linkResult.fields.push({
@@ -141,12 +135,12 @@ const link: LinkType = ({
       defaultValue: 'default',
       options: appearanceOptionsToUse,
       admin: {
-        description: 'Choose how the link should be rendered.'
-      }
-    });
+        description: 'Choose how the link should be rendered.',
+      },
+    })
   }
 
-  return deepMerge(linkResult, overrides);
-};
+  return deepMerge(linkResult, overrides)
+}
 
-export default link;
+export default link

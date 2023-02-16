@@ -1,11 +1,16 @@
-const withLargeBody = (incomingEditor) => {
-  const editor = incomingEditor;
-  const { shouldBreakOutOnEnter } = editor;
+import type { RichTextCustomElement } from 'payload/types'
 
-  editor.shouldBreakOutOnEnter = (element) =>
-    element.type === "label" ? true : shouldBreakOutOnEnter(element);
+const withLargeBody: RichTextCustomElement['plugins'][0] = incomingEditor => {
+  const editor = incomingEditor
 
-  return editor;
-};
+  // @ts-expect-error
+  const { shouldBreakOutOnEnter } = editor
 
-export default withLargeBody;
+  // @ts-expect-error
+  editor.shouldBreakOutOnEnter = element =>
+    element.type === 'label' ? true : shouldBreakOutOnEnter(element)
+
+  return editor
+}
+
+export default withLargeBody

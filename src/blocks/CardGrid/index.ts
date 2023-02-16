@@ -1,8 +1,9 @@
-import { Block } from "payload/types";
-import { blockFields } from "../../fields/blockFields";
-import link from "../../fields/link";
-import linkGroup from "../../fields/linkGroup";
-import richText from "../../fields/richText";
+import type { Block } from 'payload/types'
+
+import { blockFields } from '../../fields/blockFields'
+import link from '../../fields/link'
+import linkGroup from '../../fields/linkGroup'
+import richText from '../../fields/richText'
 
 export const CardGrid: Block = {
   slug: 'cardGrid',
@@ -15,9 +16,9 @@ export const CardGrid: Block = {
           appearances: false,
           overrides: {
             admin: {
-              description: 'These links will be placed above the card grid as calls-to-action.'
-            }
-          }
+              description: 'These links will be placed above the card grid as calls-to-action.',
+            },
+          },
         }),
         {
           name: 'cards',
@@ -41,13 +42,13 @@ export const CardGrid: Block = {
               appearances: false,
               overrides: {
                 admin: {
-                  condition: (_, { enableLink }) => enableLink ,
-                }
-              }
+                  condition: (_, { enableLink }) => enableLink,
+                },
+              },
             }),
-          ]
+          ],
         },
-      ]
-    })
-  ]
+      ],
+    }),
+  ],
 }

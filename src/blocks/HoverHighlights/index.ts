@@ -1,7 +1,8 @@
-import { Block } from "payload/types";
-import { blockFields } from "../../fields/blockFields";
-import link from "../../fields/link";
-import richText from "../../fields/richText";
+import type { Block } from 'payload/types'
+
+import { blockFields } from '../../fields/blockFields'
+import link from '../../fields/link'
+import richText from '../../fields/richText'
 
 export const HoverHighlights: Block = {
   slug: 'hoverHighlights',
@@ -48,12 +49,12 @@ export const HoverHighlights: Block = {
               overrides: {
                 admin: {
                   condition: (_, { enableLink }) => Boolean(enableLink),
-                }
-              }
+                },
+              },
             }),
           ],
         },
       ],
-    })
-  ]
+    }),
+  ],
 }

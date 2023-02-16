@@ -1,5 +1,6 @@
-import { Block } from "payload/types";
-import { blockFields } from "../../fields/blockFields";
+import type { Block } from 'payload/types'
+
+import { blockFields } from '../../fields/blockFields'
 
 export const MediaBlock: Block = {
   slug: 'mediaBlock',
@@ -19,8 +20,8 @@ export const MediaBlock: Block = {
             {
               label: 'Wide',
               value: 'wide',
-            }
-          ]
+            },
+          ],
         },
         {
           name: 'media',
@@ -32,12 +33,10 @@ export const MediaBlock: Block = {
           name: 'caption',
           type: 'richText',
           admin: {
-            elements: [
-              'link',
-            ]
-          }
-        }
-      ]
-    })
-  ]
+            elements: ['link'],
+          },
+        },
+      ],
+    }),
+  ],
 }

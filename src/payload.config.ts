@@ -1,31 +1,22 @@
-import { buildConfig } from 'payload/config';
-import path from 'path';
-import nestedDocs from '@payloadcms/plugin-nested-docs';
-import formBuilder from '@payloadcms/plugin-form-builder';
-import seo from '@payloadcms/plugin-seo';
+import formBuilder from '@payloadcms/plugin-form-builder'
+import nestedDocs from '@payloadcms/plugin-nested-docs'
+import seo from '@payloadcms/plugin-seo'
+import path from 'path'
+import { buildConfig } from 'payload/config'
+
+import { CaseStudies } from './collections/CaseStudies'
+import { Media } from './collections/Media'
+import { Pages } from './collections/Pages'
+import { Posts } from './collections/Posts'
 import { ReusableContent } from './collections/ReusableContent'
-import { Users } from './collections/Users';
-import { CaseStudies } from './collections/CaseStudies';
-import { Pages } from './collections/Pages';
-import { Footer } from './globals/Footer';
-import { MainMenu } from './globals/MainMenu';
-import { Posts } from './collections/Posts';
-import { Media } from './collections/Media';
-import richText from './fields/richText';
+import { Users } from './collections/Users'
+import richText from './fields/richText'
+import { Footer } from './globals/Footer'
+import { MainMenu } from './globals/MainMenu'
 
 export default buildConfig({
-  collections: [
-    CaseStudies,
-    Media,
-    Pages,
-    Posts,
-    ReusableContent,
-    Users,
-  ],
-  globals: [
-    Footer,
-    MainMenu,
-  ],
+  collections: [CaseStudies, Media, Pages, Posts, ReusableContent, Users],
+  globals: [Footer, MainMenu],
   graphQL: {
     disablePlaygroundInProduction: false,
   },
@@ -40,32 +31,25 @@ export default buildConfig({
             name: 'leader',
             label: 'Leader Text',
             admin: {
-              elements: []
-            }
+              elements: [],
+            },
           }),
-        ]
-      }
+        ],
+      },
     }),
     seo({
-      collections: [
-        'case-studies',
-        'pages',
-        'posts',
-      ],
+      collections: ['case-studies', 'pages', 'posts'],
       uploadsCollection: 'media',
     }),
     nestedDocs({
       collections: ['pages'],
       generateLabel: (_, doc) => doc.title as string,
-      generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
+      generateURL: docs => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
     }),
   ],
-  cors: [
-    process.env.PAYLOAD_PUBLIC_APP_URL,
-    'https://payloadcms.com',
-  ].filter(Boolean),
+  cors: [process.env.PAYLOAD_PUBLIC_APP_URL, 'https://payloadcms.com'].filter(Boolean),
   admin: {
-    webpack: (config) => ({
+    webpack: config => ({
       ...config,
       resolve: {
         ...config.resolve,
@@ -74,8 +58,8 @@ export default buildConfig({
           react: path.resolve(__dirname, '../node_modules/react'),
           'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
           'react-router-dom': path.resolve(__dirname, '../node_modules/react-router-dom'),
-        }
-      }
-    })
-  }
-});
+        },
+      },
+    }),
+  },
+})
