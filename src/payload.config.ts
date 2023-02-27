@@ -11,12 +11,13 @@ import { Posts } from './collections/Posts'
 import { ReusableContent } from './collections/ReusableContent'
 import { Users } from './collections/Users'
 import richText from './fields/richText'
+import { Announcement } from './globals/Announcement'
 import { Footer } from './globals/Footer'
 import { MainMenu } from './globals/MainMenu'
 
 export default buildConfig({
   collections: [CaseStudies, Media, Pages, Posts, ReusableContent, Users],
-  globals: [Footer, MainMenu],
+  globals: [Announcement, Footer, MainMenu],
   graphQL: {
     disablePlaygroundInProduction: false,
   },
