@@ -1,6 +1,7 @@
 import type { Field } from 'payload/types'
 
 import linkGroup from './linkGroup'
+import livestreamFields from './livestreamFields'
 import label from './richText/label'
 import largeBody from './richText/largeBody'
 
@@ -38,41 +39,7 @@ export const hero: Field = {
         },
       ],
     },
-    {
-      type: 'row',
-
-      fields: [
-        {
-          name: 'youtubeID',
-          label: 'YouTube ID',
-          type: 'text',
-          admin: {
-            condition: (_, { type }) => type === 'livestream',
-          },
-        },
-        {
-          label: 'Date / Time (PST)',
-          name: 'date',
-          type: 'date',
-          required: true,
-          admin: {
-            date: {
-              pickerAppearance: 'dayAndTime',
-            },
-            condition: (_, { type }) => type === 'livestream',
-          },
-        },
-      ],
-    },
-    {
-      name: 'richText',
-      type: 'richText',
-      admin: {
-        elements: ['h1', largeBody, 'upload'],
-        leaves: ['bold', 'underline'],
-        condition: (_, { type }) => type === 'livestream',
-      },
-    },
+    livestreamFields,
     {
       name: 'richText',
       type: 'richText',
