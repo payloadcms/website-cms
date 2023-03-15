@@ -32,7 +32,46 @@ export const hero: Field = {
           label: 'Home',
           value: 'home',
         },
+        {
+          label: 'Livestream',
+          value: 'livestream',
+        },
       ],
+    },
+    {
+      type: 'row',
+
+      fields: [
+        {
+          name: 'youtubeID',
+          label: 'YouTube ID',
+          type: 'text',
+          admin: {
+            condition: (_, { type }) => type === 'livestream',
+          },
+        },
+        {
+          label: 'Date / Time (PST)',
+          name: 'date',
+          type: 'date',
+          required: true,
+          admin: {
+            date: {
+              pickerAppearance: 'dayAndTime',
+            },
+            condition: (_, { type }) => type === 'livestream',
+          },
+        },
+      ],
+    },
+    {
+      name: 'richText',
+      type: 'richText',
+      admin: {
+        elements: ['h1', largeBody, 'upload'],
+        leaves: ['bold', 'underline'],
+        condition: (_, { type }) => type === 'livestream',
+      },
     },
     {
       name: 'richText',
@@ -40,6 +79,7 @@ export const hero: Field = {
       admin: {
         elements: ['h1', largeBody, 'ul', label],
         leaves: ['underline'],
+        condition: (_, { type }) => type !== 'livestream',
       },
     },
     {
@@ -54,7 +94,7 @@ export const hero: Field = {
     linkGroup({
       overrides: {
         admin: {
-          condition: (_, { type } = {}) => ['contentMedia', 'default'].includes(type),
+          condition: (_, { type } = {}) => ['contentMedia', 'default', 'livestream'].includes(type),
         },
       },
     }),
