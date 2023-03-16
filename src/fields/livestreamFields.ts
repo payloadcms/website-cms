@@ -24,7 +24,7 @@ const livestreamFields: Field = {
           type: 'text',
         },
         {
-          label: 'Date / Time (PST)',
+          label: 'Date / Time (GMT)',
           name: 'date',
           type: 'date',
           required: true,
