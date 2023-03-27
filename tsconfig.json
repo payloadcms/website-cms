@@ -20,7 +20,7 @@
   "include": [
     "src",
     "src/payload.config.ts",
-    "src/scripts/migrateVersions.ts"
+    "src/scripts/migrateVersions.ts",
   ],
   "exclude": [
     "node_modules",

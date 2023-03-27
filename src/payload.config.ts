@@ -6,6 +6,7 @@ import { buildConfig } from 'payload/config'
 
 import { Announcements } from './collections/Announcements'
 import { CaseStudies } from './collections/CaseStudies'
+import { CommunityHelp } from './collections/CommunityHelp'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
@@ -16,7 +17,16 @@ import { Footer } from './globals/Footer'
 import { MainMenu } from './globals/MainMenu'
 
 export default buildConfig({
-  collections: [Announcements, CaseStudies, Media, Pages, Posts, ReusableContent, Users],
+  collections: [
+    Announcements,
+    CaseStudies,
+    CommunityHelp,
+    Media,
+    Pages,
+    Posts,
+    ReusableContent,
+    Users,
+  ],
   globals: [Footer, MainMenu],
   graphQL: {
     disablePlaygroundInProduction: false,
