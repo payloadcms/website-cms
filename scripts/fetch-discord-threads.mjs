@@ -116,6 +116,7 @@ client.once(Events.ClientReady, async c => {
         // should combine with prev message - same author
         if (prevMessage.author.id === message.author.id) {
           prevMessage.content += `\n \n ${message.content}`
+          prevMessage.attachments = prevMessage.attachments.concat(message.attachments)
           newAuthor = false
         }
       }
