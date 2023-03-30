@@ -1,0 +1,76 @@
+import type { Block } from 'payload/types'
+
+import { blockFields } from '../../fields/blockFields'
+import link from '../../fields/link'
+
+export const Pricing: Block = {
+  slug: 'pricing',
+  fields: [
+    blockFields({
+      name: 'pricingFields',
+      fields: [
+        {
+          name: 'plans',
+          type: 'array',
+          minRows: 1,
+          maxRows: 3,
+          fields: [
+            {
+              name: 'name',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'price',
+              label: 'Price per month',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+            },
+            {
+              name: 'enableLink',
+              type: 'checkbox',
+            },
+            link({
+              disableLabel: true,
+              appearances: false,
+              overrides: {
+                admin: {
+                  condition: (_, { enableLink }) => enableLink,
+                },
+              },
+            }),
+            {
+              name: 'features',
+              type: 'array',
+              fields: [
+                {
+                  name: 'icon',
+                  type: 'radio',
+                  options: [
+                    {
+                      label: 'Check',
+                      value: 'check',
+                    },
+                    {
+                      label: 'X',
+                      value: 'x',
+                    },
+                  ],
+                },
+                {
+                  name: 'feature',
+                  label: false,
+                  type: 'text',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    }),
+  ],
+}
