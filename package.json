@@ -7,8 +7,6 @@
   "scripts": {
     "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
     "drop": "cross-env PAYLOAD_DROP_DATABASE=true PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
-    "fetchDiscordThreads": "PAYLOAD_CONFIG_PATH=src/payload.config.ts ts-node scripts/fetch-discord-threads.mjs",
-    "fetchDocsGit": "PAYLOAD_CONFIG_PATH=src/payload.config.ts ts-node scripts/fetch-github-discussions.mjs",
     "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
     "build:server": "tsc",
     "build": "yarn copyfiles && yarn build:payload && yarn build:server",

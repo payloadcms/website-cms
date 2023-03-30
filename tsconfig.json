@@ -21,6 +21,8 @@
     "src",
     "src/payload.config.ts",
     "src/scripts/migrateVersions.ts",
+    "src/scripts/fetch-discord.ts",
+    "src/scripts/fetch-github.ts",
   ],
   "exclude": [
     "node_modules",

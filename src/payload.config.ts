@@ -1,6 +1,7 @@
 import formBuilder from '@payloadcms/plugin-form-builder'
 import nestedDocs from '@payloadcms/plugin-nested-docs'
 import seo from '@payloadcms/plugin-seo'
+import dotenv from 'dotenv'
 import path from 'path'
 import { buildConfig } from 'payload/config'
 
@@ -15,6 +16,12 @@ import { Users } from './collections/Users'
 import richText from './fields/richText'
 import { Footer } from './globals/Footer'
 import { MainMenu } from './globals/MainMenu'
+
+dotenv.config({
+  path: path.resolve(__dirname, '../.env'),
+})
+
+const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 
 export default buildConfig({
   collections: [
@@ -69,6 +76,11 @@ export default buildConfig({
           react: path.resolve(__dirname, '../node_modules/react'),
           'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
           'react-router-dom': path.resolve(__dirname, '../node_modules/react-router-dom'),
+          [path.resolve(__dirname, './scripts/fetch-discord')]: mockModulePath,
+          [path.resolve(__dirname, '../node_modules/cli-progress')]: mockModulePath,
+          [path.resolve(__dirname, '../node_modules/discord.js')]: mockModulePath,
+          [path.resolve(__dirname, '../node_modules/discord-markdown')]: mockModulePath,
+          [path.resolve(__dirname, './scripts/fetch-github')]: mockModulePath,
         },
       },
     }),
