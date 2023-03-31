@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload/types'
 
-import { fetchDiscordThreadsScript } from '../scripts/fetch-discord'
-import { fetchGithubDiscussionsScript } from '../scripts/fetch-github'
+import { fetchDiscordThreads } from '../scripts/fetch-discord'
+import { fetchGithubDiscussions } from '../scripts/fetch-github'
 
 export const CommunityHelp: CollectionConfig = {
   slug: 'community-help',
@@ -79,8 +79,8 @@ export const CommunityHelp: CollectionConfig = {
       method: 'get',
       handler: async req => {
         if (process.env.NEXT_PRIVATE_CRON_KEY === req.get('CRON-ENV-VAR')) {
-          fetchDiscordThreadsScript()
-          fetchGithubDiscussionsScript()
+          fetchDiscordThreads(req.payload)
+          fetchGithubDiscussions(req.payload)
         }
       },
     },

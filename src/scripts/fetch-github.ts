@@ -1,55 +1,48 @@
 /* eslint-disable no-underscore-dangle */
 import fetch from 'node-fetch'
-import payload from 'payload'
+import type { Payload } from 'payload'
 
-export function fetchGithubDiscussionsScript(): void {
-  function slugify(string: string): string {
-    const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
-    const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
-    const p = new RegExp(a.split('').join('|'), 'g')
-
-    return string
-      .toString()
-      .toLowerCase()
-      .replace(/\s+/g, '-') // Replace spaces with -
-      .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
-      .replace(/&/g, '-and-') // Replace & with 'and'
-      .replace(/[^\w\-]+/g, '') // Remove all non-word characters
-      .replace(/\-\-+/g, '-') // Replace multiple - with single -
-      .replace(/^-+/, '') // Trim - from start of text
-      .replace(/-+$/, '') // Trim - from end of text
-  }
-
-  // eslint-disable-next-line
+// eslint-disable-next-line
 require('dotenv').config()
 
-  const headers = {
-    Authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
+const headers = {
+  Authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
+}
+
+function slugify(string: string): string {
+  const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
+  const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
+  const p = new RegExp(a.split('').join('|'), 'g')
+
+  return string
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, '-') // Replace spaces with -
+    .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+    .replace(/&/g, '-and-') // Replace & with 'and'
+    .replace(/[^\w\-]+/g, '') // Remove all non-word characters
+    .replace(/\-\-+/g, '-') // Replace multiple - with single -
+    .replace(/^-+/, '') // Trim - from start of text
+    .replace(/-+$/, '') // Trim - from end of text
+}
+
+export async function fetchGithubDiscussions(payload: Payload): Promise<void> {
+  if (!process.env.GITHUB_ACCESS_TOKEN) {
+    /* eslint-disable no-console */
+    console.log('No GitHub access token found - skipping discussions retrieval')
+    process.exit(0)
   }
-  /* eslint-disable-next-line @typescript-eslint/explicit-function-return-type */
-  const fetchGithubDiscussions = async () => {
-    await payload.init({
-      secret: process.env.PAYLOAD_SECRET,
-      mongoURL: process.env.MONGODB_URI,
-      local: true,
-    })
 
-    if (!process.env.GITHUB_ACCESS_TOKEN) {
-      /* eslint-disable no-console */
-      console.log('No GitHub access token found - skipping discussions retrieval')
-      process.exit(0)
-    }
+  const discussionData = []
 
-    const discussionData = []
+  /* eslint-disable-next-line @typescript-eslint/default-param-last */
+  const createQuery = (cursor = null, hasNextPage: boolean): string => {
+    const queryLine =
+      cursor && hasNextPage
+        ? `(first: 100, categoryId: "MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyMzY4NTUw", after: "${cursor}")`
+        : `(first: 100, categoryId: "MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyMzY4NTUw")`
 
-    /* eslint-disable-next-line @typescript-eslint/default-param-last */
-    const createQuery = (cursor = null, hasNextPage: boolean): string => {
-      const queryLine =
-        cursor && hasNextPage
-          ? `(first: 100, categoryId: "MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyMzY4NTUw", after: "${cursor}")`
-          : `(first: 100, categoryId: "MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyMzY4NTUw")`
-
-      return `query {
+    return `query {
       repository(owner:"payloadcms", name:"payload") {
         discussions${queryLine} {
           pageInfo {
@@ -129,42 +122,71 @@ require('dotenv').config()
         }
       }
     }`
-    }
+  }
 
-    const initialReq = await fetch('https://api.github.com/graphql', {
+  const initialReq = await fetch('https://api.github.com/graphql', {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      // @ts-expect-error
+      query: createQuery(),
+    }),
+  }).then(res => res.json())
+
+  discussionData.push(...initialReq.data.repository.discussions.nodes)
+  let hasNextPage = initialReq.data.repository.discussions.pageInfo.hasNextPage
+  let cursor = initialReq.data.repository.discussions.pageInfo.endCursor
+
+  while (hasNextPage) {
+    const nextReq = await fetch('https://api.github.com/graphql', {
       method: 'POST',
       headers,
       body: JSON.stringify({
-        // @ts-expect-error
-        query: createQuery(),
+        query: createQuery(cursor, hasNextPage),
       }),
     }).then(res => res.json())
 
-    discussionData.push(...initialReq.data.repository.discussions.nodes)
-    let hasNextPage = initialReq.data.repository.discussions.pageInfo.hasNextPage
-    let cursor = initialReq.data.repository.discussions.pageInfo.endCursor
+    discussionData.push(...nextReq.data.repository.discussions.nodes)
 
-    while (hasNextPage) {
-      const nextReq = await fetch('https://api.github.com/graphql', {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          query: createQuery(cursor, hasNextPage),
-        }),
-      }).then(res => res.json())
+    hasNextPage = nextReq.data.repository.discussions.pageInfo.hasNextPage
+    cursor = nextReq.data.repository.discussions.pageInfo.endCursor
+  }
 
-      discussionData.push(...nextReq.data.repository.discussions.nodes)
+  console.log(`Retrieved ${discussionData.length} discussions from GitHub`)
+  const formattedDiscussions = discussionData.map(discussion => {
+    const { answer, answerChosenAt, answerChosenBy, category } = discussion
 
-      hasNextPage = nextReq.data.repository.discussions.pageInfo.hasNextPage
-      cursor = nextReq.data.repository.discussions.pageInfo.endCursor
-    }
+    if (answer !== null && category.isAnswerable) {
+      const answerReplies = answer?.replies.edges.map(replyEdge => {
+        const reply = replyEdge.node
 
-    console.log(`Retrieved ${discussionData.length} discussions from GitHub`)
-    const formattedDiscussions = discussionData.map(discussion => {
-      const { answer, answerChosenAt, answerChosenBy, category } = discussion
+        return {
+          author: {
+            name: reply.author.login,
+            avatar: reply.author.avatarUrl,
+            url: reply.author.url,
+          },
+          body: reply.bodyHTML,
+          createdAt: reply.createdAt,
+        }
+      })
 
-      if (answer !== null && category.isAnswerable) {
-        const answerReplies = answer?.replies.edges.map(replyEdge => {
+      const formattedAnswer = {
+        author: {
+          name: answer.author?.login,
+          avatar: answer.author?.avatarUrl,
+          url: answer.author?.url,
+        },
+        body: answer.bodyHTML,
+        createdAt: answer.createdAt,
+        chosenAt: answerChosenAt,
+        chosenBy: answerChosenBy?.login,
+        replies: answerReplies?.length > 0 ? answerReplies : null,
+      }
+      const comments = discussion.comments.edges.map(edge => {
+        const comment = edge.node
+
+        const replies = comment.replies.edges.map(replyEdge => {
           const reply = replyEdge.node
 
           return {
@@ -178,109 +200,77 @@ require('dotenv').config()
           }
         })
 
-        const formattedAnswer = {
+        return {
           author: {
-            name: answer.author?.login,
-            avatar: answer.author?.avatarUrl,
-            url: answer.author?.url,
+            name: comment.author.login,
+            avatar: comment.author.avatarUrl,
+            url: comment.author.url,
           },
-          body: answer.bodyHTML,
-          createdAt: answer.createdAt,
-          chosenAt: answerChosenAt,
-          chosenBy: answerChosenBy?.login,
-          replies: answerReplies?.length > 0 ? answerReplies : null,
+          body: comment.bodyHTML,
+          createdAt: comment.createdAt,
+          replies: replies?.length ? replies : null,
         }
-        const comments = discussion.comments.edges.map(edge => {
-          const comment = edge.node
+      })
 
-          const replies = comment.replies.edges.map(replyEdge => {
-            const reply = replyEdge.node
+      return {
+        title: discussion.title,
+        body: discussion.bodyHTML,
+        url: discussion.url,
+        id: String(discussion.number),
+        slug: slugify(discussion.title),
+        createdAt: discussion.createdAt,
+        upvotes: discussion.upvoteCount,
+        commentTotal: discussion.comments.totalCount,
+        author: {
+          name: discussion.author?.login,
+          avatar: discussion.author?.avatarUrl,
+          url: discussion.author?.url,
+        },
+        comments,
+        answer: formattedAnswer,
+      }
+    }
+    return null
+  })
 
-            return {
-              author: {
-                name: reply.author.login,
-                avatar: reply.author.avatarUrl,
-                url: reply.author.url,
-              },
-              body: reply.bodyHTML,
-              createdAt: reply.createdAt,
-            }
-          })
+  const filteredDiscussions = formattedDiscussions.filter(discussion => discussion !== null)
 
-          return {
-            author: {
-              name: comment.author.login,
-              avatar: comment.author.avatarUrl,
-              url: comment.author.url,
-            },
-            body: comment.bodyHTML,
-            createdAt: comment.createdAt,
-            replies: replies?.length ? replies : null,
-          }
+  await Promise.all(
+    filteredDiscussions.map(async discussion => {
+      if (discussion) {
+        // Check if discussion exists, if it does update existing discussion else add discussion to collection
+        const existingDiscussion = await payload.find({
+          collection: 'community-help',
+          where: { githubID: { equals: discussion.id } },
+          limit: 1,
+          depth: 0,
         })
 
-        return {
-          title: discussion.title,
-          body: discussion.bodyHTML,
-          url: discussion.url,
-          id: String(discussion.number),
-          slug: slugify(discussion.title),
-          createdAt: discussion.createdAt,
-          upvotes: discussion.upvoteCount,
-          commentTotal: discussion.comments.totalCount,
-          author: {
-            name: discussion.author?.login,
-            avatar: discussion.author?.avatarUrl,
-            url: discussion.author?.url,
-          },
-          comments,
-          answer: formattedAnswer,
-        }
-      }
-      return null
-    })
+        const discussionExists = // @ts-expect-error
+          existingDiscussion.docs[0]?.communityHelpJSON?.id === discussion?.id
 
-    const filteredDiscussions = formattedDiscussions.filter(discussion => discussion !== null)
-
-    await Promise.all(
-      filteredDiscussions.map(async discussion => {
-        if (discussion) {
-          // Check if discussion exists, if it does update existing discussion else add discussion to collection
-          const existingDiscussion = await payload.find({
+        if (discussionExists) {
+          await payload.update({
             collection: 'community-help',
-            where: { githubID: { equals: discussion.id } },
-            limit: 1,
+            id: existingDiscussion.docs[0]?.id,
+            data: {
+              communityHelpJSON: discussion,
+            },
             depth: 0,
           })
-
-          const discussionExists = // @ts-expect-error
-            existingDiscussion.docs[0]?.communityHelpJSON?.id === discussion?.id
-
-          if (discussionExists) {
-            await payload.update({
-              collection: 'community-help',
-              id: existingDiscussion.docs[0]?.id,
-              data: {
-                communityHelpJSON: discussion,
-              },
-              depth: 0,
-            })
-          } else {
-            await payload.create({
-              collection: 'community-help',
-              data: {
-                title: discussion?.title,
-                communityHelpType: 'github',
-                githubID: discussion?.id,
-                communityHelpJSON: discussion,
-                slug: discussion?.slug,
-              },
-            })
-          }
+        } else {
+          await payload.create({
+            collection: 'community-help',
+            data: {
+              title: discussion?.title,
+              communityHelpType: 'github',
+              githubID: discussion?.id,
+              communityHelpJSON: discussion,
+              slug: discussion?.slug,
+            },
+          })
         }
-      }),
-    )
-  }
-
-  fetchGithubDiscussions()
+      }
+    }),
+  )
 }

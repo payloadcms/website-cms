@@ -2,44 +2,51 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, no-console, no-underscore-dangle, no-use-before-define */
 import { Bar } from 'cli-progress'
 import { ChannelType, Client, Events, GatewayIntentBits } from 'discord.js'
-import DiscordMarkdown from 'discord-markdown'
-import payload from 'payload'
+import { toHTML } from 'discord-markdown'
+import type { Payload } from 'payload'
 
-export function fetchDiscordThreadsScript(): void {
-  function slugify(string: string): string {
-    const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
-    const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
-    const p = new RegExp(a.split('').join('|'), 'g')
+// eslint-disable-next-line
+require('dotenv').config()
 
-    return string
-      .toString()
-      .toLowerCase()
-      .replace(/\s+/g, '-') // Replace spaces with -
-      .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
-      .replace(/&/g, '-and-') // Replace & with 'and'
-      .replace(/[^\w\-]+/g, '') // Remove all non-word characters
-      .replace(/\-\-+/g, '-') // Replace multiple - with single -
-      .replace(/^-+/, '') // Trim - from start of text
-      .replace(/-+$/, '') // Trim - from end of text
-  }
+const { DISCORD_TOKEN, DISCORD_SCRAPE_CHANNEL_ID, PAYLOAD_SECRET, MONGODB_URI } = process.env
 
-  const { toHTML } = DiscordMarkdown
+if (!DISCORD_TOKEN) {
+  throw new Error('DISCORD_TOKEN is required')
+}
+if (!DISCORD_SCRAPE_CHANNEL_ID) {
+  throw new Error('DISCORD_SCRAPE_CHANNEL_ID is required')
+}
 
-  // eslint-disable-next-line
-  require('dotenv').config()
+async function mapAsync(
+  arr: any[],
+  callbackfn: (value: any, index: number, array: any[]) => Promise<any>,
+): Promise<any[]> {
+  return Promise.all(arr.map(callbackfn))
+}
 
-  const { DISCORD_TOKEN, DISCORD_SCRAPE_CHANNEL_ID, PAYLOAD_SECRET, MONGODB_URI } = process.env
+function slugify(string: string): string {
+  const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
+  const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
+  const p = new RegExp(a.split('').join('|'), 'g')
 
-  if (!DISCORD_TOKEN) {
-    throw new Error('DISCORD_TOKEN is required')
-  }
-  if (!DISCORD_SCRAPE_CHANNEL_ID) {
-    throw new Error('DISCORD_SCRAPE_CHANNEL_ID is required')
-  }
+  return string
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, '-') // Replace spaces with -
+    .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+    .replace(/&/g, '-and-') // Replace & with 'and'
+    .replace(/[^\w\-]+/g, '') // Remove all non-word characters
+    .replace(/\-\-+/g, '-') // Replace multiple - with single -
+    .replace(/^-+/, '') // Trim - from start of text
+    .replace(/-+$/, '') // Trim - from end of text
+}
 
+export async function fetchDiscordThreads(payload: Payload): Promise<void> {
   const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent],
   })
+
+  client.login(process.env.DISCORD_TOKEN)
 
   const tagMap = {
     answered: '1034538089546264577',
@@ -48,12 +55,6 @@ export function fetchDiscordThreadsScript(): void {
   }
 
   client.once(Events.ClientReady, async c => {
-    await payload.init({
-      secret: PAYLOAD_SECRET,
-      mongoURL: MONGODB_URI,
-      local: true,
-    })
-
     console.log(`Ready! Logged in as ${c.user.tag}`)
 
     // Get the community help channel
@@ -194,13 +195,4 @@ export function fetchDiscordThreadsScript(): void {
       }),
     )
   })
-
-  client.login(process.env.DISCORD_TOKEN)
-
-  async function mapAsync(
-    arr: any[],
-    callbackfn: (value: any, index: number, array: any[]) => Promise<any>,
-  ): Promise<any[]> {
-    return Promise.all(arr.map(callbackfn))
-  }
 }
