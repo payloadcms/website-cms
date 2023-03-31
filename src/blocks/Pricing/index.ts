@@ -70,6 +70,10 @@ export const Pricing: Block = {
             },
           ],
         },
+        {
+          name: 'disclaimer',
+          type: 'text',
+        },
       ],
     }),
   ],

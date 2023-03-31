@@ -368,6 +368,7 @@ export interface CaseStudy {
             }[];
             id?: string;
           }[];
+          disclaimer?: string;
         };
         id?: string;
         blockName?: string;
@@ -1051,6 +1052,7 @@ export interface Page {
             }[];
             id?: string;
           }[];
+          disclaimer?: string;
         };
         id?: string;
         blockName?: string;
@@ -1877,6 +1879,7 @@ export interface ReusableContent {
             }[];
             id?: string;
           }[];
+          disclaimer?: string;
         };
         id?: string;
         blockName?: string;
