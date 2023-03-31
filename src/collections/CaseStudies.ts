@@ -13,6 +13,7 @@ import { HoverHighlights } from '../blocks/HoverHighlights'
 import { LinkGrid } from '../blocks/LinkGrid'
 import { MediaBlock } from '../blocks/Media'
 import { MediaContent } from '../blocks/MediaContent'
+import { Pricing } from '../blocks/Pricing'
 import { ReusableContent } from '../blocks/ReusableContent'
 import { Slider } from '../blocks/Slider'
 import { Steps } from '../blocks/Steps'
@@ -84,6 +85,7 @@ export const CaseStudies: CollectionConfig = {
         LinkGrid,
         MediaBlock,
         MediaContent,
+        Pricing,
         ReusableContent,
         Slider,
         Steps,

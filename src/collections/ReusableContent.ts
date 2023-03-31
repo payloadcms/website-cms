@@ -17,6 +17,7 @@ import { HoverHighlights } from '../blocks/HoverHighlights'
 import { LinkGrid } from '../blocks/LinkGrid'
 import { MediaBlock } from '../blocks/Media'
 import { MediaContent } from '../blocks/MediaContent'
+import { Pricing } from '../blocks/Pricing'
 import { Slider } from '../blocks/Slider'
 import { Steps } from '../blocks/Steps'
 import { StickyHighlights } from '../blocks/StickyHighlights'
@@ -64,6 +65,7 @@ export const ReusableContent: CollectionConfig = {
         LinkGrid,
         MediaBlock,
         MediaContent,
+        Pricing,
         Slider,
         Steps,
         StickyHighlights,
