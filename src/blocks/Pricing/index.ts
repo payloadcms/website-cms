@@ -21,10 +21,26 @@ export const Pricing: Block = {
               required: true,
             },
             {
+              name: 'hasPrice',
+              type: 'checkbox',
+            },
+            {
               name: 'price',
               label: 'Price per month',
               type: 'text',
               required: true,
+              admin: {
+                condition: (_, { hasPrice }) => Boolean(hasPrice),
+              },
+            },
+            {
+              name: 'title',
+              label: 'Title',
+              type: 'text',
+              required: true,
+              admin: {
+                condition: (_, { hasPrice }) => !Boolean(hasPrice),
+              },
             },
             {
               name: 'description',
