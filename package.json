@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
+    "drop": "cross-env PAYLOAD_DROP_DATABASE=true PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
     "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
     "build:server": "tsc",
     "build": "yarn copyfiles && yarn build:payload && yarn build:server",
@@ -14,7 +15,8 @@
     "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types",
     "generate:graphQLSchema": "PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:graphQLSchema",
     "lint": "eslint src",
-    "lint:fix": "eslint --fix --ext .ts,.tsx src"
+    "lint:fix": "eslint --fix --ext .ts,.tsx src",
+    "populate-ch": "ts-node src/scripts/populate-community-help.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.192.0",
@@ -22,7 +24,10 @@
     "@payloadcms/plugin-form-builder": "^1.0.13",
     "@payloadcms/plugin-nested-docs": "^1.0.4",
     "@payloadcms/plugin-seo": "^1.0.9",
+    "cli-progress": "^3.12.0",
     "cross-env": "^7.0.3",
+    "discord-markdown": "^2.5.1",
+    "discord.js": "^14.8.0",
     "dotenv": "^8.2.0",
     "express": "^4.18.2",
     "nodemailer-sendgrid": "^1.0.3",

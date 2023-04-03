@@ -1,5 +1,6 @@
 import type { Field } from 'payload/types'
 
+import label from './richText/label'
 import largeBody from './richText/largeBody'
 
 const livestreamFields: Field = {
@@ -37,10 +38,14 @@ const livestreamFields: Field = {
       ],
     },
     {
+      name: 'hideBreadcrumbs',
+      type: 'checkbox',
+    },
+    {
       name: 'richText',
       type: 'richText',
       admin: {
-        elements: ['h1', largeBody, 'upload'],
+        elements: ['h1', largeBody, label, 'upload'],
         leaves: ['bold', 'underline'],
       },
     },

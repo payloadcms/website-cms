@@ -1,11 +1,13 @@
 import formBuilder from '@payloadcms/plugin-form-builder'
 import nestedDocs from '@payloadcms/plugin-nested-docs'
 import seo from '@payloadcms/plugin-seo'
+import dotenv from 'dotenv'
 import path from 'path'
 import { buildConfig } from 'payload/config'
 
 import { Announcements } from './collections/Announcements'
 import { CaseStudies } from './collections/CaseStudies'
+import { CommunityHelp } from './collections/CommunityHelp'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
@@ -15,8 +17,23 @@ import richText from './fields/richText'
 import { Footer } from './globals/Footer'
 import { MainMenu } from './globals/MainMenu'
 
+dotenv.config({
+  path: path.resolve(__dirname, '../.env'),
+})
+
+const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
+
 export default buildConfig({
-  collections: [Announcements, CaseStudies, Media, Pages, Posts, ReusableContent, Users],
+  collections: [
+    Announcements,
+    CaseStudies,
+    CommunityHelp,
+    Media,
+    Pages,
+    Posts,
+    ReusableContent,
+    Users,
+  ],
   globals: [Footer, MainMenu],
   graphQL: {
     disablePlaygroundInProduction: false,
@@ -59,6 +76,11 @@ export default buildConfig({
           react: path.resolve(__dirname, '../node_modules/react'),
           'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
           'react-router-dom': path.resolve(__dirname, '../node_modules/react-router-dom'),
+          [path.resolve(__dirname, './scripts/fetch-discord')]: mockModulePath,
+          [path.resolve(__dirname, '../node_modules/cli-progress')]: mockModulePath,
+          [path.resolve(__dirname, '../node_modules/discord.js')]: mockModulePath,
+          [path.resolve(__dirname, '../node_modules/discord-markdown')]: mockModulePath,
+          [path.resolve(__dirname, './scripts/fetch-github')]: mockModulePath,
         },
       },
     }),
