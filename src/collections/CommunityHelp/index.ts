@@ -1,8 +1,5 @@
 import type { CollectionConfig } from 'payload/types'
 
-import { fetchDiscordThreads } from '../scripts/fetch-discord'
-import { fetchGithubDiscussions } from '../scripts/fetch-github'
-
 export const CommunityHelp: CollectionConfig = {
   slug: 'community-help',
   admin: {
@@ -70,19 +67,6 @@ export const CommunityHelp: CollectionConfig = {
       index: true,
       admin: {
         position: 'sidebar',
-      },
-    },
-  ],
-  endpoints: [
-    {
-      path: '/cron',
-      method: 'get',
-      handler: async (req, res) => {
-        if (process.env.NEXT_PRIVATE_CRON_KEY === req.query.key) {
-          fetchDiscordThreads(req.payload)
-          fetchGithubDiscussions(req.payload)
-        }
-        return res.json({ message: 'success' })
       },
     },
   ],
