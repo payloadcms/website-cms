@@ -43,6 +43,7 @@ interface GithubDoc {
 }
 
 export const syncToAlgolia = async (): Promise<void> => {
+  console.log('RUNNING ALGOLIA SYNC')
   await fetchDiscordThreads(payload)
   await fetchGithubDiscussions(payload)
 
