@@ -77,11 +77,12 @@ export const CommunityHelp: CollectionConfig = {
     {
       path: '/cron',
       method: 'get',
-      handler: async req => {
+      handler: async (req, res) => {
         if (process.env.NEXT_PRIVATE_CRON_KEY === req.get('CRON-ENV-VAR')) {
           fetchDiscordThreads(req.payload)
           fetchGithubDiscussions(req.payload)
         }
+        return res.json({ message: 'success' })
       },
     },
   ],
