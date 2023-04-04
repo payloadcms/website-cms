@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": [
+        "-r",
+        "./node_modules/ts-node/register"
+      ],
+      "request": "launch",
+      "name": "Launch Payload Website CMS",
+      "program": "${workspaceFolder}/src/server.ts",
+      "env": {
+        "PAYLOAD_CONFIG_PATH": "src/payload.config.ts"
+      },
+      "outputCapture": "std",
+
+      // "preLaunchTask": "npm: build:server",
+    },
+  ]
+}

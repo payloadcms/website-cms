@@ -15,7 +15,7 @@ const index = client.initIndex(indexName)
 
 const cronOptions: cron.ScheduleOptions = {
   timezone: 'America/Detroit',
-  scheduled: true,
+  scheduled: false,
 }
 
 interface DiscordDoc {
@@ -42,7 +42,7 @@ interface GithubDoc {
   slug: string
 }
 
-const sync = async (): Promise<void> => {
+export const syncToAlgolia = async (): Promise<void> => {
   await fetchDiscordThreads(payload)
   await fetchGithubDiscussions(payload)
 
@@ -114,4 +114,4 @@ const sync = async (): Promise<void> => {
 }
 
 const schedule = '0 1 * * *' // 1am
-export const syncToAlgolia = cron.schedule(schedule, sync, cronOptions)
+export const syncToAlgoliaCron = cron.schedule(schedule, syncToAlgolia, cronOptions)

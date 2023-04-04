@@ -10,9 +10,10 @@ export const CommunityHelp: CollectionConfig = {
     plural: 'Community Helps',
   },
   access: {
-    create: () => true,
+    create: () => false,
     read: () => true,
-    update: () => true,
+    update: () => false,
+    delete: () => false,
   },
   fields: [
     {
