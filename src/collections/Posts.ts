@@ -75,6 +75,9 @@ export const Posts: CollectionConfig = {
       type: 'date',
       required: true,
       admin: {
+        date: {
+          pickerAppearance: 'dayAndTime',
+        },
         position: 'sidebar',
       },
     },
