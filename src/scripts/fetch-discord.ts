@@ -175,7 +175,9 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
               collection: 'community-help',
               id: existingThread.docs[0]?.id,
               data: {
+                title: thread?.info?.name,
                 communityHelpJSON: thread,
+                slug: thread?.slug,
               },
               depth: 0,
             })
