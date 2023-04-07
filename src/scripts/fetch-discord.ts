@@ -101,7 +101,22 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
       // Filter out all threads that are not marked as unanswered
       if (info.appliedTags.includes(tagMap.unanswered)) return null
 
-      const messages = await info.messages.fetch()
+      let messages = await info.messages.fetch({ limit: 100 })
+
+      if (info.messageCount > 100) {
+        let lastMessage = messages.last()?.id
+
+        while (true) {
+          const moreMessages = await info.messages.fetch({
+            limit: 100,
+            before: lastMessage,
+          })
+
+          messages = messages.concat(moreMessages)
+          lastMessage = moreMessages.last()?.id
+          if (!moreMessages) break
+        }
+      }
 
       const [intro, ...combinedResponses] = messages.reverse().reduce((acc, message) => {
         const prevMessage = acc[acc.length - 1]
