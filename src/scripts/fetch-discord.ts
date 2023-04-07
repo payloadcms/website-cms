@@ -112,9 +112,9 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
             before: lastMessage,
           })
 
+          if (!moreMessages.last()) break
           messages = messages.concat(moreMessages)
           lastMessage = moreMessages.last()?.id
-          if (!moreMessages) break
         }
       }
 
