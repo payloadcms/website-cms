@@ -1,5 +1,6 @@
 import formBuilder from '@payloadcms/plugin-form-builder'
 import nestedDocs from '@payloadcms/plugin-nested-docs'
+import redirects from '@payloadcms/plugin-redirects'
 import seo from '@payloadcms/plugin-seo'
 import dotenv from 'dotenv'
 import path from 'path'
@@ -63,6 +64,9 @@ export default buildConfig({
       collections: ['pages'],
       generateLabel: (_, doc) => doc.title as string,
       generateURL: docs => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
+    }),
+    redirects({
+      collections: ['pages', 'posts'],
     }),
   ],
   cors: [process.env.PAYLOAD_PUBLIC_APP_URL, 'https://payloadcms.com'].filter(Boolean),

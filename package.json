@@ -24,6 +24,7 @@
     "@payloadcms/plugin-cloud-storage": "^1.0.12",
     "@payloadcms/plugin-form-builder": "^1.0.13",
     "@payloadcms/plugin-nested-docs": "^1.0.4",
+    "@payloadcms/plugin-redirects": "^1.0.0",
     "@payloadcms/plugin-seo": "^1.0.9",
     "algoliasearch": "^4.17.0",
     "cli-progress": "^3.12.0",
