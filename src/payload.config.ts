@@ -66,7 +66,7 @@ export default buildConfig({
       generateURL: docs => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
     }),
     redirects({
-      collections: ['pages', 'posts'],
+      collections: ['case-studies', 'pages', 'posts'],
     }),
   ],
   cors: [process.env.PAYLOAD_PUBLIC_APP_URL, 'https://payloadcms.com'].filter(Boolean),
