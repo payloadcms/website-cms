@@ -2113,6 +2113,7 @@ export interface CommunityHelp {
     | boolean
     | null;
   slug?: string;
+  omit?: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -2133,6 +2134,10 @@ export interface Redirect {
   to: {
     type?: 'reference' | 'custom';
     reference:
+      | {
+          value: string | CaseStudy;
+          relationTo: 'case-studies';
+        }
       | {
           value: string | Page;
           relationTo: 'pages';

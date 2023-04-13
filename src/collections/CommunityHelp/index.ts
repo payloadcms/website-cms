@@ -1,5 +1,8 @@
 import type { CollectionConfig } from 'payload/types'
 
+import { isAdmin } from '../../access/isAdmin'
+import { removeFromAlgolia } from './removeFromAlgolia'
+
 export const CommunityHelp: CollectionConfig = {
   slug: 'community-help',
   admin: {
@@ -12,8 +15,18 @@ export const CommunityHelp: CollectionConfig = {
   access: {
     create: () => false,
     read: () => true,
-    update: () => false,
+    update: isAdmin,
     delete: () => false,
+  },
+  hooks: {
+    afterChange: [
+      ({ operation, doc }) => {
+        if (operation === 'update' && doc?.omit) {
+          const docID = doc.communityHelpType === 'discord' ? doc.discordID : doc.githubID
+          removeFromAlgolia(docID)
+        }
+      },
+    ],
   },
   fields: [
     {
@@ -65,6 +78,15 @@ export const CommunityHelp: CollectionConfig = {
       name: 'slug',
       label: 'Slug',
       type: 'text',
+      index: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'omit',
+      label: 'Omit from site and search index',
+      type: 'checkbox',
       index: true,
       admin: {
         position: 'sidebar',
