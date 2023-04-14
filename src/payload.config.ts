@@ -53,6 +53,13 @@ export default buildConfig({
               elements: [],
             },
           }),
+          {
+            name: 'hubSpotFormID',
+            type: 'text',
+            admin: {
+              position: 'sidebar',
+            },
+          },
         ],
       },
     }),
