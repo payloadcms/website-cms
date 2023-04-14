@@ -22,6 +22,7 @@ export interface Config {
   globals: {
     footer: Footer;
     'main-menu': MainMenu;
+    'top-bar': TopBar;
   };
 }
 export interface Announcement {
@@ -2134,6 +2135,10 @@ export interface Redirect {
     type?: 'reference' | 'custom';
     reference:
       | {
+          value: string | CaseStudy;
+          relationTo: 'case-studies';
+        }
+      | {
           value: string | Page;
           relationTo: 'pages';
         }
@@ -2198,4 +2203,16 @@ export interface MainMenu {
     };
     id?: string;
   }[];
+}
+export interface TopBar {
+  id: string;
+  starText?: {
+    desktop?: {
+      [k: string]: unknown;
+    }[];
+    mobile?: {
+      [k: string]: unknown;
+    }[];
+  };
+  announcement?: string | Announcement;
 }
