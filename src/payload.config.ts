@@ -62,6 +62,44 @@ export default buildConfig({
           },
         ],
       },
+      formSubmissionOverrides: {
+        hooks: {
+          afterChange: [
+            ({ doc, req }) => {
+              const sendSubmissionToHubSpot = async (): Promise<void> => {
+                const { form, submissionData } = doc
+                const portalID = process.env.NEXT_PRIVATE_HUBSPOT_PORTAL_KEY
+                const data = {
+                  fields: submissionData.map(key => ({
+                    name: key.field,
+                    value: key.value,
+                  })),
+                  context: {
+                    hutk: req.body?.hubspotCookie,
+                    pageUri: req.body?.pageUri,
+                    pageName: req.body?.pageName,
+                  },
+                }
+                try {
+                  await fetch(
+                    `https://api.hsforms.com/submissions/v3/integration/submit/${portalID}/${form.hubSpotFormID}`,
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify(data),
+                    },
+                  )
+                } catch (err: unknown) {
+                  console.warn(err) // eslint-disable-line no-console
+                }
+              }
+              sendSubmissionToHubSpot()
+            },
+          ],
+        },
+      },
     }),
     seo({
       collections: ['case-studies', 'pages', 'posts'],
