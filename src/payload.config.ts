@@ -92,7 +92,7 @@ export default buildConfig({
                     },
                   )
                 } catch (err: unknown) {
-                  console.warn(err) // eslint-disable-line no-console
+                  req.payload.logger.error({ msg: 'Something went wrong...', err })
                 }
               }
               sendSubmissionToHubSpot()
