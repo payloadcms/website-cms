@@ -68,7 +68,7 @@ export default buildConfig({
             ({ doc, req }) => {
               const sendSubmissionToHubSpot = async (): Promise<void> => {
                 const { form, submissionData } = doc
-                const portalID = process.env.NEXT_PRIVATE_HUBSPOT_PORTAL_KEY
+                const portalID = process.env.PRIVATE_HUBSPOT_PORTAL_KEY
                 const data = {
                   fields: submissionData.map(key => ({
                     name: key.field,
