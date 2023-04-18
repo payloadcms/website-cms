@@ -92,7 +92,10 @@ export default buildConfig({
                     },
                   )
                 } catch (err: unknown) {
-                  req.payload.logger.error({ msg: 'Something went wrong...', err })
+                  req.payload.logger.error({
+                    msg: 'Fetch to HubSpot form submissions failed',
+                    err,
+                  })
                 }
               }
               sendSubmissionToHubSpot()
