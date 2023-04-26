@@ -1,6 +1,7 @@
 // @ts-check
 /* eslint-disable @typescript-eslint/no-unused-vars, no-console, no-underscore-dangle, no-use-before-define */
 import { Bar } from 'cli-progress'
+import type { AnyThreadChannel, Message } from 'discord.js'
 import { ChannelType, Client, Events, GatewayIntentBits } from 'discord.js'
 import { toHTML } from 'discord-markdown'
 import type { Payload } from 'payload'
@@ -94,7 +95,7 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
     progress.start(allThreads.length, 0)
 
     const formattedThreads = await mapAsync(allThreads, async t => {
-      const info = await t
+      const info: AnyThreadChannel<boolean> = await t
 
       progress.increment()
 
@@ -118,7 +119,7 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
         }
       }
 
-      const [intro, ...combinedResponses] = messages.reverse().reduce((acc, message) => {
+      const [intro, ...combinedResponses] = messages.reverse().reduce((acc: Message[], message) => {
         const prevMessage = acc[acc.length - 1]
         let newAuthor = true
 
