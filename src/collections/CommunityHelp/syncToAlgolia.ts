@@ -41,7 +41,6 @@ interface GithubDoc {
   messageCount: number
   slug: string
 }
-
 export const syncToAlgolia = async (): Promise<void> => {
   console.log('RUNNING')
   await fetchDiscordThreads(payload)
@@ -56,7 +55,9 @@ export const syncToAlgolia = async (): Promise<void> => {
   const githubDocs: GithubDoc[] = []
 
   docs.forEach(doc => {
-    const { communityHelpJSON, discordID, githubID } = doc
+    const { communityHelpJSON, discordID, githubID, omit } = doc
+    if (omit) return null
+
     if (discordID) {
       const { info, intro, slug, messageCount, messages } = communityHelpJSON as any
 

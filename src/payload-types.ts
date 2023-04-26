@@ -2114,6 +2114,7 @@ export interface CommunityHelp {
     | boolean
     | null;
   slug?: string;
+  omit?: boolean;
   createdAt: string;
   updatedAt: string;
 }
