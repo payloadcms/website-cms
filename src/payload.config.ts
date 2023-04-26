@@ -17,6 +17,7 @@ import { Users } from './collections/Users'
 import richText from './fields/richText'
 import { Footer } from './globals/Footer'
 import { MainMenu } from './globals/MainMenu'
+import { TopBar } from './globals/TopBar'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -35,7 +36,7 @@ export default buildConfig({
     ReusableContent,
     Users,
   ],
-  globals: [Footer, MainMenu],
+  globals: [Footer, MainMenu, TopBar],
   graphQL: {
     disablePlaygroundInProduction: false,
   },
