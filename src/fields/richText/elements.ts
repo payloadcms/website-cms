@@ -1,5 +1,6 @@
 import type { RichTextElement } from 'payload/dist/fields/config/types'
 
+import br from './br'
 import label from './label'
 import largeBody from './largeBody'
 import video from './video'
@@ -14,6 +15,7 @@ const elements: RichTextElement[] = [
   largeBody,
   label,
   video,
+  br,
   'upload',
   'ul',
   'ol',

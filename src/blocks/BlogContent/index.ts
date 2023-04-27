@@ -8,7 +8,7 @@ export const BlogContent: Block = {
   fields: [
     blockFields({
       name: 'blogContentFields',
-      fields: [richText({}, { elements: ['ul'] })],
+      fields: [richText()],
     }),
   ],
 }

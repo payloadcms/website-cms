@@ -35,7 +35,7 @@
     "express": "^4.18.2",
     "node-cron": "^3.0.2",
     "nodemailer-sendgrid": "^1.0.3",
-    "payload": "^1.6.31"
+    "payload": "^1.7.2"
   },
   "devDependencies": {
     "@payloadcms/eslint-config": "^0.0.1",
