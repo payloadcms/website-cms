@@ -3,7 +3,7 @@ import { useFocused, useSelected } from 'slate-react'
 
 import './index.scss'
 
-const baseClass = 'rich-text-video'
+const baseClass = 'br'
 
 type Source = 'youtube' | 'vimeo'
 
