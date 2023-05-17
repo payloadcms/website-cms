@@ -26,6 +26,9 @@ dotenv.config({
 const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 
 export default buildConfig({
+  rateLimit: {
+    max: 2000,
+  },
   collections: [
     Announcements,
     CaseStudies,
