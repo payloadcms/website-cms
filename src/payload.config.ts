@@ -27,7 +27,8 @@ const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 
 export default buildConfig({
   rateLimit: {
-    max: 2000,
+    trustProxy: true,
+    max: 4000,
   },
   collections: [
     Announcements,
