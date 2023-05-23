@@ -102,8 +102,8 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
       progress.increment()
 
       // Filter out all threads that are not marked as unanswered
-      if (info.appliedTags.includes(tagMap.unanswered)) return null
-
+      if (info.appliedTags.includes(tagMap.unanswered) || info.appliedTags.includes(tagMap.stale))
+        return null
       const omit = info.appliedTags.includes(tagMap.noindex)
 
       let messages = await info.messages.fetch({ limit: 100 })
