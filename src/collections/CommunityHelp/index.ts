@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload/types'
 
 import { isAdmin } from '../../access/isAdmin'
+import { extractDescription } from './extract-description'
 import { removeFromAlgolia } from './removeFromAlgolia'
 
 export const CommunityHelp: CollectionConfig = {
@@ -73,6 +74,26 @@ export const CommunityHelp: CollectionConfig = {
       name: 'communityHelpJSON',
       type: 'json',
       required: true,
+    },
+    {
+      name: 'introDescription',
+      type: 'text',
+      hidden: true,
+      hooks: {
+        beforeChange: [
+          ({ siblingData }) => {
+            delete siblingData.introDescription
+          },
+        ],
+        afterRead: [
+          ({ data }) => {
+            if (data.communityHelpType === 'discord') {
+              return extractDescription(data.communityHelpJSON.intro.content)
+            }
+            return extractDescription(data.communityHelpJSON.body)
+          },
+        ],
+      },
     },
     {
       name: 'slug',

@@ -26,6 +26,10 @@ dotenv.config({
 const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 
 export default buildConfig({
+  rateLimit: {
+    trustProxy: true,
+    max: 4000,
+  },
   collections: [
     Announcements,
     CaseStudies,

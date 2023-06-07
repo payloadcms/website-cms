@@ -31,8 +31,8 @@ export interface Announcement {
   content: {
     [k: string]: unknown;
   }[];
-  createdAt: string;
   updatedAt: string;
+  createdAt: string;
 }
 export interface CaseStudy {
   id: string;
@@ -595,22 +595,22 @@ export interface CaseStudy {
     description?: string;
     image?: string | Media;
   };
-  _status?: 'draft' | 'published';
-  createdAt: string;
   updatedAt: string;
+  createdAt: string;
+  _status?: 'draft' | 'published';
 }
 export interface Media {
   id: string;
   alt: string;
   darkModeFallback?: string | Media;
+  updatedAt: string;
+  createdAt: string;
   url?: string;
   filename?: string;
   mimeType?: string;
   filesize?: number;
   width?: number;
   height?: number;
-  createdAt: string;
-  updatedAt: string;
 }
 export interface Page {
   id: string;
@@ -1287,9 +1287,9 @@ export interface Page {
     label?: string;
     id?: string;
   }[];
-  _status?: 'draft' | 'published';
-  createdAt: string;
   updatedAt: string;
+  createdAt: string;
+  _status?: 'draft' | 'published';
 }
 export interface Post {
   id: string;
@@ -1350,6 +1350,14 @@ export interface Post {
         blockName?: string;
         blockType: 'mediaBlock';
       }
+    | {
+        reusableContentBlockFields: {
+          reusableContent: string | ReusableContent;
+        };
+        id?: string;
+        blockName?: string;
+        blockType: 'reusableContentBlock';
+      }
   )[];
   slug?: string;
   author: string | User;
@@ -1359,146 +1367,9 @@ export interface Post {
     description?: string;
     image?: string | Media;
   };
+  updatedAt: string;
+  createdAt: string;
   _status?: 'draft' | 'published';
-  createdAt: string;
-  updatedAt: string;
-}
-export interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  twitter?: string;
-  photo?: string | Media;
-  roles: ('admin' | 'public')[];
-  email?: string;
-  resetPasswordToken?: string;
-  resetPasswordExpiration?: string;
-  loginAttempts?: number;
-  lockUntil?: string;
-  createdAt: string;
-  updatedAt: string;
-  password?: string;
-}
-export interface Form {
-  id: string;
-  title: string;
-  fields?: (
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        defaultValue?: string;
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'text';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        defaultValue?: string;
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'textarea';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        defaultValue?: string;
-        options: {
-          label: string;
-          value: string;
-          id?: string;
-        }[];
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'select';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'email';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'state';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'country';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        defaultValue?: number;
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'number';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        required?: boolean;
-        defaultValue?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'checkbox';
-      }
-    | {
-        message?: {
-          [k: string]: unknown;
-        }[];
-        id?: string;
-        blockName?: string;
-        blockType: 'message';
-      }
-  )[];
-  submitButtonLabel?: string;
-  confirmationType?: 'message' | 'redirect';
-  confirmationMessage: {
-    [k: string]: unknown;
-  }[];
-  redirect?: {
-    url: string;
-  };
-  emails: {
-    emailTo?: string;
-    cc?: string;
-    bcc?: string;
-    replyTo?: string;
-    emailFrom?: string;
-    subject: string;
-    message?: {
-      [k: string]: unknown;
-    }[];
-    id?: string;
-  }[];
-  leader: {
-    [k: string]: unknown;
-  }[];
-  createdAt: string;
-  updatedAt: string;
 }
 export interface ReusableContent {
   id: string;
@@ -2095,8 +1966,146 @@ export interface ReusableContent {
         blockType: 'stickyHighlights';
       }
   )[];
-  createdAt: string;
   updatedAt: string;
+  createdAt: string;
+}
+export interface Form {
+  id: string;
+  title: string;
+  fields?: (
+    | {
+        name: string;
+        label?: string;
+        width?: number;
+        defaultValue?: string;
+        required?: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'text';
+      }
+    | {
+        name: string;
+        label?: string;
+        width?: number;
+        defaultValue?: string;
+        required?: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'textarea';
+      }
+    | {
+        name: string;
+        label?: string;
+        width?: number;
+        defaultValue?: string;
+        options: {
+          label: string;
+          value: string;
+          id?: string;
+        }[];
+        required?: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'select';
+      }
+    | {
+        name: string;
+        label?: string;
+        width?: number;
+        required?: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'email';
+      }
+    | {
+        name: string;
+        label?: string;
+        width?: number;
+        required?: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'state';
+      }
+    | {
+        name: string;
+        label?: string;
+        width?: number;
+        required?: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'country';
+      }
+    | {
+        name: string;
+        label?: string;
+        width?: number;
+        defaultValue?: number;
+        required?: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'number';
+      }
+    | {
+        name: string;
+        label?: string;
+        width?: number;
+        required?: boolean;
+        defaultValue?: boolean;
+        id?: string;
+        blockName?: string;
+        blockType: 'checkbox';
+      }
+    | {
+        message?: {
+          [k: string]: unknown;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'message';
+      }
+  )[];
+  submitButtonLabel?: string;
+  confirmationType?: 'message' | 'redirect';
+  confirmationMessage: {
+    [k: string]: unknown;
+  }[];
+  redirect?: {
+    url: string;
+  };
+  emails: {
+    emailTo?: string;
+    cc?: string;
+    bcc?: string;
+    replyTo?: string;
+    emailFrom?: string;
+    subject: string;
+    message?: {
+      [k: string]: unknown;
+    }[];
+    id?: string;
+  }[];
+  leader: {
+    [k: string]: unknown;
+  }[];
+  hubSpotFormID?: string;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  twitter?: string;
+  photo?: string | Media;
+  roles: ('admin' | 'public')[];
+  updatedAt: string;
+  createdAt: string;
+  email?: string;
+  resetPasswordToken?: string;
+  resetPasswordExpiration?: string;
+  loginAttempts?: number;
+  lockUntil?: string;
+  password?: string;
 }
 export interface CommunityHelp {
   id: string;
@@ -2113,10 +2122,11 @@ export interface CommunityHelp {
     | number
     | boolean
     | null;
+  introDescription?: string;
   slug?: string;
   omit?: boolean;
-  createdAt: string;
   updatedAt: string;
+  createdAt: string;
 }
 export interface FormSubmission {
   id: string;
@@ -2126,8 +2136,8 @@ export interface FormSubmission {
     value: string;
     id?: string;
   }[];
-  createdAt: string;
   updatedAt: string;
+  createdAt: string;
 }
 export interface Redirect {
   id: string;
@@ -2149,8 +2159,8 @@ export interface Redirect {
         };
     url: string;
   };
-  createdAt: string;
   updatedAt: string;
+  createdAt: string;
 }
 export interface Footer {
   id: string;

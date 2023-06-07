@@ -53,6 +53,8 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
     answered: '1034538089546264577',
     unanswered: '1043188477002526750',
     stale: '1052600637898096710',
+    noindex: '1110285350028460052',
+    payloadTeam: '1100551774043127851',
   }
 
   client.once(Events.ClientReady, async c => {
@@ -100,7 +102,9 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
       progress.increment()
 
       // Filter out all threads that are not marked as unanswered
-      if (info.appliedTags.includes(tagMap.unanswered)) return null
+      if (info.appliedTags.includes(tagMap.unanswered) || info.appliedTags.includes(tagMap.stale))
+        return null
+      const omit = info.appliedTags.includes(tagMap.noindex)
 
       let messages = await info.messages.fetch({ limit: 100 })
 
@@ -168,6 +172,7 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
         }),
         messageCount: info.messageCount,
         slug: slugify(info.name),
+        omit,
       }
     })
     console.log('\n')
@@ -194,6 +199,7 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
                 title: thread?.info?.name,
                 communityHelpJSON: thread,
                 slug: thread?.slug,
+                omit: thread?.omit,
               },
               depth: 0,
             })
@@ -206,6 +212,7 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
                 discordID: thread?.info?.id,
                 communityHelpJSON: thread,
                 slug: thread?.slug,
+                omit: thread?.omit,
               },
             })
           }
