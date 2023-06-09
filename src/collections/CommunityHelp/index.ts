@@ -17,7 +17,7 @@ export const CommunityHelp: CollectionConfig = {
     create: () => false,
     read: () => true,
     update: isAdmin,
-    delete: () => false,
+    delete: isAdmin,
   },
   hooks: {
     afterChange: [
