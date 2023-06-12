@@ -101,9 +101,16 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
 
       progress.increment()
 
-      // Filter out all threads that are not marked as unanswered
-      if (info.appliedTags.includes(tagMap.unanswered) || info.appliedTags.includes(tagMap.stale))
+      // Ensure that the thread belongs to the community-help channel
+      if (info.parentId !== DISCORD_SCRAPE_CHANNEL_ID) {
         return null
+      }
+
+      // Filter out all threads that are not marked as unanswered
+      if (info.appliedTags.includes(tagMap.unanswered) || info.appliedTags.includes(tagMap.stale)) {
+        return null
+      }
+
       const omit = info.appliedTags.includes(tagMap.noindex)
 
       let messages = await info.messages.fetch({ limit: 100 })
