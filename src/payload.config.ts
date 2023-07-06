@@ -18,6 +18,7 @@ import richText from './fields/richText'
 import { Footer } from './globals/Footer'
 import { MainMenu } from './globals/MainMenu'
 import { TopBar } from './globals/TopBar'
+import syncDocs from './scripts/syncDocs'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -39,6 +40,13 @@ export default buildConfig({
     Posts,
     ReusableContent,
     Users,
+  ],
+  endpoints: [
+    {
+      path: '/docs/sync',
+      method: 'get',
+      handler: syncDocs,
+    },
   ],
   globals: [Footer, MainMenu, TopBar],
   graphQL: {
