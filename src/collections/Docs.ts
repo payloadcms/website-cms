@@ -6,6 +6,7 @@ export const Docs: CollectionConfig = {
   slug: 'docs',
   admin: {
     useAsTitle: 'title',
+    defaultColumns: ['topic', 'slug', 'title', 'order'],
   },
   access: {
     create: isAdmin,
@@ -16,63 +17,47 @@ export const Docs: CollectionConfig = {
   },
   fields: [
     {
-      name: 'topicSlug',
+      name: 'topic',
       type: 'text',
       admin: {
         position: 'sidebar',
-        readOnly: true,
       },
     },
     {
-      name: 'docs',
-      type: 'group',
+      name: 'slug',
+      type: 'text',
       admin: {
-        readOnly: true,
+        position: 'sidebar',
       },
-      fields: [
-        {
-          name: 'title',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'slug',
-          type: 'text',
-          admin: {
-            position: 'sidebar',
-          },
-        },
-        {
-          name: 'label',
-          type: 'text',
-        },
-        {
-          name: 'order',
-          type: 'number',
-        },
-        {
-          name: 'description',
-          type: 'text',
-        },
-        {
-          name: 'keywords',
-          type: 'text',
-        },
-        {
-          name: 'headings',
-          type: 'json',
-        },
-        {
-          name: 'content',
-          type: 'group',
-          fields: [
-            {
-              name: 'compiledSource',
-              type: 'textarea',
-            },
-          ],
-        },
-      ],
+    },
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'label',
+      type: 'text',
+    },
+    {
+      name: 'order',
+      type: 'number',
+    },
+    {
+      name: 'description',
+      type: 'text',
+    },
+    {
+      name: 'keywords',
+      type: 'text',
+    },
+    {
+      name: 'headings',
+      type: 'json',
+    },
+    {
+      name: 'content',
+      type: 'textarea',
     },
   ],
 }

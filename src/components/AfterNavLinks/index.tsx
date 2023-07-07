@@ -13,7 +13,7 @@ const AfterNavLinks: React.FC = () => {
 
   return (
     <div className={baseClass}>
-      <NavLink to={`${api}/sync/docs`}>Sync Docs</NavLink>
+      <a href={`${api}/sync/docs`}>Sync Docs</a>
     </div>
   )
 }
