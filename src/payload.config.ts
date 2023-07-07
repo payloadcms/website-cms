@@ -9,11 +9,13 @@ import { buildConfig } from 'payload/config'
 import { Announcements } from './collections/Announcements'
 import { CaseStudies } from './collections/CaseStudies'
 import { CommunityHelp } from './collections/CommunityHelp'
+import { Docs } from './collections/Docs'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { ReusableContent } from './collections/ReusableContent'
 import { Users } from './collections/Users'
+import AfterNavLinks from './components/AfterNavLinks'
 import richText from './fields/richText'
 import { Footer } from './globals/Footer'
 import { MainMenu } from './globals/MainMenu'
@@ -35,6 +37,7 @@ export default buildConfig({
     Announcements,
     CaseStudies,
     CommunityHelp,
+    Docs,
     Media,
     Pages,
     Posts,
@@ -43,7 +46,7 @@ export default buildConfig({
   ],
   endpoints: [
     {
-      path: '/docs/sync',
+      path: '/sync/docs',
       method: 'get',
       handler: syncDocs,
     },
@@ -149,5 +152,8 @@ export default buildConfig({
         },
       },
     }),
+    components: {
+      afterNavLinks: [AfterNavLinks],
+    },
   },
 })
