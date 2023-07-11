@@ -87,10 +87,10 @@ export const CommunityHelp: CollectionConfig = {
         ],
         afterRead: [
           ({ data }) => {
-            if (data.communityHelpType === 'discord') {
+            if (data?.communityHelpType === 'discord') {
               return extractDescription(data.communityHelpJSON.intro.content)
             }
-            return extractDescription(data.communityHelpJSON.body)
+            return extractDescription(data?.communityHelpJSON.body)
           },
         ],
       },
@@ -109,6 +109,15 @@ export const CommunityHelp: CollectionConfig = {
       label: 'Omit from site and search index',
       type: 'checkbox',
       index: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'relatedDocs',
+      type: 'relationship',
+      relationTo: 'docs',
+      hasMany: true,
       admin: {
         position: 'sidebar',
       },

@@ -10,6 +10,7 @@ export interface Config {
     announcements: Announcement;
     'case-studies': CaseStudy;
     'community-help': CommunityHelp;
+    docs: Doc;
     media: Media;
     pages: Page;
     posts: Post;
@@ -48,7 +49,7 @@ export interface CaseStudy {
             [k: string]: unknown;
           }[];
           feature: 'none' | 'cpa';
-          links: {
+          links?: {
             link: {
               type?: 'reference' | 'custom';
               newTab?: boolean;
@@ -80,7 +81,7 @@ export interface CaseStudy {
           richText: {
             [k: string]: unknown;
           }[];
-          links: {
+          links?: {
             link: {
               type?: 'reference' | 'custom';
               newTab?: boolean;
@@ -102,7 +103,7 @@ export interface CaseStudy {
             };
             id?: string;
           }[];
-          cards: {
+          cards?: {
             title: string;
             description?: string;
             enableLink?: boolean;
@@ -206,7 +207,7 @@ export interface CaseStudy {
           leadingHeader: {
             [k: string]: unknown;
           }[];
-          cells: {
+          cells?: {
             content: {
               [k: string]: unknown;
             }[];
@@ -235,7 +236,7 @@ export interface CaseStudy {
             [k: string]: unknown;
           }[];
           addRowNumbers?: boolean;
-          highlights: {
+          highlights?: {
             title: string;
             description: string;
             media: string | Media;
@@ -266,8 +267,8 @@ export interface CaseStudy {
         blockType: 'hoverHighlights';
       }
     | {
-        linkGridFields: {
-          links: {
+        linkGridFields?: {
+          links?: {
             link: {
               type?: 'reference' | 'custom';
               newTab?: boolean;
@@ -340,8 +341,8 @@ export interface CaseStudy {
         blockType: 'mediaContent';
       }
     | {
-        pricingFields: {
-          plans: {
+        pricingFields?: {
+          plans?: {
             name: string;
             hasPrice?: boolean;
             price: string;
@@ -477,7 +478,7 @@ export interface CaseStudy {
                       [k: string]: unknown;
                     }[];
                     addRowNumbers?: boolean;
-                    highlights: {
+                    highlights?: {
                       title: string;
                       description: string;
                       media: string | Media;
@@ -508,8 +509,8 @@ export interface CaseStudy {
                   blockType: 'hoverHighlights';
                 }
               | {
-                  stickyHighlightsFields: {
-                    highlights: {
+                  stickyHighlightsFields?: {
+                    highlights?: {
                       richText: {
                         [k: string]: unknown;
                       }[];
@@ -552,8 +553,8 @@ export interface CaseStudy {
         blockType: 'steps';
       }
     | {
-        stickyHighlightsFields: {
-          highlights: {
+        stickyHighlightsFields?: {
+          highlights?: {
             richText: {
               [k: string]: unknown;
             }[];
@@ -720,7 +721,7 @@ export interface Page {
             [k: string]: unknown;
           }[];
           feature: 'none' | 'cpa';
-          links: {
+          links?: {
             link: {
               type?: 'reference' | 'custom';
               newTab?: boolean;
@@ -752,7 +753,7 @@ export interface Page {
           richText: {
             [k: string]: unknown;
           }[];
-          links: {
+          links?: {
             link: {
               type?: 'reference' | 'custom';
               newTab?: boolean;
@@ -774,7 +775,7 @@ export interface Page {
             };
             id?: string;
           }[];
-          cards: {
+          cards?: {
             title: string;
             description?: string;
             enableLink?: boolean;
@@ -804,8 +805,8 @@ export interface Page {
         blockType: 'cardGrid';
       }
     | {
-        caseStudyCardFields: {
-          cards: {
+        caseStudyCardFields?: {
+          cards?: {
             richText: {
               [k: string]: unknown;
             }[];
@@ -892,7 +893,7 @@ export interface Page {
           leadingHeader: {
             [k: string]: unknown;
           }[];
-          cells: {
+          cells?: {
             content: {
               [k: string]: unknown;
             }[];
@@ -921,7 +922,7 @@ export interface Page {
             [k: string]: unknown;
           }[];
           addRowNumbers?: boolean;
-          highlights: {
+          highlights?: {
             title: string;
             description: string;
             media: string | Media;
@@ -952,8 +953,8 @@ export interface Page {
         blockType: 'hoverHighlights';
       }
     | {
-        linkGridFields: {
-          links: {
+        linkGridFields?: {
+          links?: {
             link: {
               type?: 'reference' | 'custom';
               newTab?: boolean;
@@ -1026,8 +1027,8 @@ export interface Page {
         blockType: 'mediaContent';
       }
     | {
-        pricingFields: {
-          plans: {
+        pricingFields?: {
+          plans?: {
             name: string;
             hasPrice?: boolean;
             price: string;
@@ -1163,7 +1164,7 @@ export interface Page {
                       [k: string]: unknown;
                     }[];
                     addRowNumbers?: boolean;
-                    highlights: {
+                    highlights?: {
                       title: string;
                       description: string;
                       media: string | Media;
@@ -1194,8 +1195,8 @@ export interface Page {
                   blockType: 'hoverHighlights';
                 }
               | {
-                  stickyHighlightsFields: {
-                    highlights: {
+                  stickyHighlightsFields?: {
+                    highlights?: {
                       richText: {
                         [k: string]: unknown;
                       }[];
@@ -1238,8 +1239,8 @@ export interface Page {
         blockType: 'steps';
       }
     | {
-        stickyHighlightsFields: {
-          highlights: {
+        stickyHighlightsFields?: {
+          highlights?: {
             richText: {
               [k: string]: unknown;
             }[];
@@ -1411,7 +1412,7 @@ export interface ReusableContent {
             [k: string]: unknown;
           }[];
           feature: 'none' | 'cpa';
-          links: {
+          links?: {
             link: {
               type?: 'reference' | 'custom';
               newTab?: boolean;
@@ -1443,7 +1444,7 @@ export interface ReusableContent {
           richText: {
             [k: string]: unknown;
           }[];
-          links: {
+          links?: {
             link: {
               type?: 'reference' | 'custom';
               newTab?: boolean;
@@ -1465,7 +1466,7 @@ export interface ReusableContent {
             };
             id?: string;
           }[];
-          cards: {
+          cards?: {
             title: string;
             description?: string;
             enableLink?: boolean;
@@ -1495,8 +1496,8 @@ export interface ReusableContent {
         blockType: 'cardGrid';
       }
     | {
-        caseStudyCardFields: {
-          cards: {
+        caseStudyCardFields?: {
+          cards?: {
             richText: {
               [k: string]: unknown;
             }[];
@@ -1592,7 +1593,7 @@ export interface ReusableContent {
           leadingHeader: {
             [k: string]: unknown;
           }[];
-          cells: {
+          cells?: {
             content: {
               [k: string]: unknown;
             }[];
@@ -1621,7 +1622,7 @@ export interface ReusableContent {
             [k: string]: unknown;
           }[];
           addRowNumbers?: boolean;
-          highlights: {
+          highlights?: {
             title: string;
             description: string;
             media: string | Media;
@@ -1652,8 +1653,8 @@ export interface ReusableContent {
         blockType: 'hoverHighlights';
       }
     | {
-        linkGridFields: {
-          links: {
+        linkGridFields?: {
+          links?: {
             link: {
               type?: 'reference' | 'custom';
               newTab?: boolean;
@@ -1726,8 +1727,8 @@ export interface ReusableContent {
         blockType: 'mediaContent';
       }
     | {
-        pricingFields: {
-          plans: {
+        pricingFields?: {
+          plans?: {
             name: string;
             hasPrice?: boolean;
             price: string;
@@ -1855,7 +1856,7 @@ export interface ReusableContent {
                       [k: string]: unknown;
                     }[];
                     addRowNumbers?: boolean;
-                    highlights: {
+                    highlights?: {
                       title: string;
                       description: string;
                       media: string | Media;
@@ -1886,8 +1887,8 @@ export interface ReusableContent {
                   blockType: 'hoverHighlights';
                 }
               | {
-                  stickyHighlightsFields: {
-                    highlights: {
+                  stickyHighlightsFields?: {
+                    highlights?: {
                       richText: {
                         [k: string]: unknown;
                       }[];
@@ -1930,8 +1931,8 @@ export interface ReusableContent {
         blockType: 'steps';
       }
     | {
-        stickyHighlightsFields: {
-          highlights: {
+        stickyHighlightsFields?: {
+          highlights?: {
             richText: {
               [k: string]: unknown;
             }[];
@@ -1998,7 +1999,7 @@ export interface Form {
         label?: string;
         width?: number;
         defaultValue?: string;
-        options: {
+        options?: {
           label: string;
           value: string;
           id?: string;
@@ -2072,7 +2073,7 @@ export interface Form {
   redirect?: {
     url: string;
   };
-  emails: {
+  emails?: {
     emailTo?: string;
     cc?: string;
     bcc?: string;
@@ -2103,6 +2104,8 @@ export interface User {
   email?: string;
   resetPasswordToken?: string;
   resetPasswordExpiration?: string;
+  salt?: string;
+  hash?: string;
   loginAttempts?: number;
   lockUntil?: string;
   password?: string;
@@ -2128,10 +2131,32 @@ export interface CommunityHelp {
   updatedAt: string;
   createdAt: string;
 }
+export interface Doc {
+  id: string;
+  title: string;
+  description?: string;
+  keywords?: string;
+  headings?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  content?: string;
+  topic?: string;
+  slug?: string;
+  label?: string;
+  order?: number;
+  updatedAt: string;
+  createdAt: string;
+}
 export interface FormSubmission {
   id: string;
   form: string | Form;
-  submissionData: {
+  submissionData?: {
     field: string;
     value: string;
     id?: string;
@@ -2164,8 +2189,8 @@ export interface Redirect {
 }
 export interface Footer {
   id: string;
-  columns: {
-    navItems: {
+  columns?: {
+    navItems?: {
       link: {
         type?: 'reference' | 'custom';
         newTab?: boolean;
@@ -2189,10 +2214,12 @@ export interface Footer {
     }[];
     id?: string;
   }[];
+  updatedAt?: string;
+  createdAt?: string;
 }
 export interface MainMenu {
   id: string;
-  navItems: {
+  navItems?: {
     link: {
       type?: 'reference' | 'custom';
       newTab?: boolean;
@@ -2214,6 +2241,8 @@ export interface MainMenu {
     };
     id?: string;
   }[];
+  updatedAt?: string;
+  createdAt?: string;
 }
 export interface TopBar {
   id: string;
@@ -2226,4 +2255,6 @@ export interface TopBar {
     }[];
   };
   announcement?: string | Announcement;
+  updatedAt?: string;
+  createdAt?: string;
 }

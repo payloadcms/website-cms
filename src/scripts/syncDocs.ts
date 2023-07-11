@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import matter from 'gray-matter'
 import fetch from 'node-fetch'
 import type { PayloadHandler } from 'payload/config'
+
+import type { Doc } from '../payload-types'
 // import remarkGfm from 'remark-gfm'
 // import { serialize } from 'next-mdx-remote/serialize'
 
@@ -61,7 +63,7 @@ const headers = {
   Authorization: `token ${process.env.GITHUB_ACCESS_TOKEN}`,
 }
 
-async function getHeadings(source: string) {
+function getHeadings(source: string) {
   const headingLines = source.split('\n').filter((line: string) => {
     return line.match(/^#{1,3}\s.+/gm)
   })
@@ -77,14 +79,73 @@ const syncDocs: PayloadHandler = async (req, res) => {
   const { payload } = req
 
   try {
-    // 1. fetch docs from GitHub (same way we are currently doing on the website repo)
-    // 2. check if doc exists in the database
-    // 3. if yes, update it
-    // 4. if no, create it
-    // 5. use success / error banner
     if (!process.env.GITHUB_ACCESS_TOKEN) {
       console.log('No GitHub access token found - skipping docs retrieval') // eslint-disable-line no-console
       process.exit(0)
+    }
+
+    const fetchDoc = async (topicSlug: string, docFilename: string): Promise<Doc> => {
+      const json = await fetch(`${githubAPI}/contents/docs/${topicSlug}/${docFilename}`, {
+        headers,
+      }).then(response => response.json())
+
+      const parsedDoc = matter(decodeBase64(json.content))
+
+      const doc: Doc = {
+        // content: serialize(parsedDoc.content, {
+        //   mdxOptions: {
+        //     remarkPlugins: [remarkGfm],
+        //   },
+        // }),
+        content: parsedDoc.content,
+        title: parsedDoc.data.title,
+        topic: topicSlug,
+        slug: docFilename.replace('.mdx', ''),
+        label: parsedDoc.data.label,
+        order: parsedDoc.data.order,
+        description: parsedDoc.data.desc || '',
+        keywords: parsedDoc.data.keywords || '',
+        headings: await getHeadings(parsedDoc.content),
+        id: '',
+        updatedAt: '',
+        createdAt: '',
+      }
+
+      return doc
+    }
+
+    const processDoc = async (doc: Doc) => {
+      const existingDocs = await payload.find({
+        collection: 'docs',
+        where: {
+          topic: { equals: doc.topic },
+          slug: { equals: doc.slug },
+        },
+      })
+      if (existingDocs.totalDocs === 1) {
+        await payload.update({
+          collection: 'docs',
+          data: doc,
+          where: {
+            id: { equals: existingDocs.docs[0]._id },
+          },
+        })
+      } else if (existingDocs.totalDocs === 0) {
+        await payload.create({
+          collection: 'docs',
+          data: doc,
+        })
+      } else if (existingDocs.totalDocs > 1) {
+        payload.logger.error(
+          `Found ${existingDocs.totalDocs} documents with identical topic and slug: ${doc.topic} ${doc.slug}`,
+        )
+      }
+    }
+
+    const processAllDocs = async (finalDocs: Doc[][]) => {
+      for (const docs of finalDocs) {
+        await Promise.all(docs.map(processDoc))
+      }
     }
 
     const allDocs = await Promise.all(
@@ -98,73 +159,19 @@ const syncDocs: PayloadHandler = async (req, res) => {
         const docFilenames = docs.map(({ name }) => name)
 
         const parsedDocs = await Promise.all(
-          docFilenames.map(async (docFilename: string) => {
-            const json = await fetch(`${githubAPI}/contents/docs/${topicSlug}/${docFilename}`, {
-              headers,
-            }).then(response => response.json())
-
-            const parsedDoc = matter(decodeBase64(json.content))
-
-            const doc = {
-              // I can't get this to work with next-mdx-remote, maybe we can serialize on the frontend when we render idk
-              // content: serialize(parsedDoc.content, {
-              //   mdxOptions: {
-              //     remarkPlugins: [remarkGfm],
-              //   },
-              // }),
-              content: parsedDoc.content,
-              title: parsedDoc.data.title,
-              topic: unsanitizedTopicSlug,
-              slug: docFilename.replace('.mdx', ''),
-              label: parsedDoc.data.label,
-              order: parsedDoc.data.order,
-              description: parsedDoc.data.desc || '',
-              keywords: parsedDoc.data.keywords || '',
-              headings: await getHeadings(parsedDoc.content),
-            }
-
-            return doc
-          }),
+          docFilenames.map(docFilename => fetchDoc(topicSlug, docFilename)),
         )
 
         return parsedDocs
       }),
     )
 
-    allDocs.forEach(async (docs: any) => {
-      docs.forEach(async (doc: any) => {
-        const existingDoc = await payload.find({
-          collection: 'docs',
-          where: {
-            topic: { equals: doc.topic },
-            slug: { equals: doc.slug },
-          },
-        })
+    await processAllDocs(allDocs)
 
-        if (existingDoc.totalDocs > 1) {
-          throw new Error(
-            `Found ${existingDoc.totalDocs} documents with the same slug: ${doc.slug} in topic: ${doc.topic}`,
-          )
-        }
-        if (existingDoc.totalDocs === 1) {
-          await payload.update({
-            collection: 'docs',
-            data: doc,
-            where: {
-              id: { equals: existingDoc.docs[0]._id },
-            },
-          })
-        } else {
-          await payload.create({
-            collection: 'docs',
-            data: doc,
-          })
-        }
-      })
-    })
+    return res.status(200).json({ success: true })
   } catch (err: unknown) {
     payload.logger.error(err)
-    return res.status(500).json({ error: err })
+    return res.status(500).json({ success: false })
   }
 }
 

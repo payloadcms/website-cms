@@ -15,7 +15,7 @@ import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { ReusableContent } from './collections/ReusableContent'
 import { Users } from './collections/Users'
-import AfterNavLinks from './components/AfterNavLinks'
+import SyncDocsButton from './components/SyncDocsButton'
 import richText from './fields/richText'
 import { Footer } from './globals/Footer'
 import { MainMenu } from './globals/MainMenu'
@@ -133,14 +133,14 @@ export default buildConfig({
       collections: ['case-studies', 'pages', 'posts'],
     }),
   ],
-  cors: [process.env.PAYLOAD_PUBLIC_APP_URL, 'https://payloadcms.com'].filter(Boolean),
+  cors: [process.env.PAYLOAD_PUBLIC_APP_URL || '', 'https://payloadcms.com'].filter(Boolean),
   admin: {
     webpack: config => ({
       ...config,
       resolve: {
         ...config.resolve,
         alias: {
-          ...config.resolve.alias,
+          ...config?.resolve?.alias,
           react: path.resolve(__dirname, '../node_modules/react'),
           'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
           'react-router-dom': path.resolve(__dirname, '../node_modules/react-router-dom'),
@@ -153,7 +153,7 @@ export default buildConfig({
       },
     }),
     components: {
-      afterNavLinks: [AfterNavLinks],
+      afterNavLinks: [SyncDocsButton],
     },
   },
 })

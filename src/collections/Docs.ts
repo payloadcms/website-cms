@@ -5,21 +5,72 @@ import { isAdmin } from '../access/isAdmin'
 export const Docs: CollectionConfig = {
   slug: 'docs',
   admin: {
-    useAsTitle: 'title',
-    defaultColumns: ['topic', 'slug', 'title', 'order'],
+    useAsTitle: 'path',
+    defaultColumns: ['path', 'topic', 'slug', 'title'],
   },
   access: {
     create: isAdmin,
     read: () => true,
-    readVersions: isAdmin,
     update: isAdmin,
     delete: isAdmin,
   },
   fields: [
     {
+      name: 'title',
+      type: 'text',
+      required: true,
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
+      name: 'description',
+      type: 'text',
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
+      name: 'keywords',
+      type: 'text',
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
+      name: 'headings',
+      type: 'json',
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
+      name: 'content',
+      type: 'textarea',
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
+      name: 'path',
+      type: 'text',
+      hooks: {
+        afterRead: [
+          ({ data }) => {
+            if (data) return `${data.topic}/${data.slug}`
+          },
+        ],
+      },
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'topic',
       type: 'text',
       admin: {
+        readOnly: true,
         position: 'sidebar',
       },
     },
@@ -27,37 +78,25 @@ export const Docs: CollectionConfig = {
       name: 'slug',
       type: 'text',
       admin: {
+        readOnly: true,
         position: 'sidebar',
       },
     },
     {
-      name: 'title',
-      type: 'text',
-      required: true,
-    },
-    {
       name: 'label',
       type: 'text',
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+      },
     },
     {
       name: 'order',
       type: 'number',
-    },
-    {
-      name: 'description',
-      type: 'text',
-    },
-    {
-      name: 'keywords',
-      type: 'text',
-    },
-    {
-      name: 'headings',
-      type: 'json',
-    },
-    {
-      name: 'content',
-      type: 'textarea',
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+      },
     },
   ],
 }
