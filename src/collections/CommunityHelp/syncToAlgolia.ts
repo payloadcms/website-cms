@@ -5,9 +5,9 @@ import payload from 'payload'
 import { fetchDiscordThreads } from '../../scripts/fetch-discord'
 import { fetchGithubDiscussions } from '../../scripts/fetch-github'
 
-const appID = process.env.ALGOLIA_CH_ID
-const apiKey = process.env.ALGOLIA_API_KEY
-const indexName = process.env.ALGOLIA_CH_INDEX_NAME
+const appID = process.env.ALGOLIA_CH_ID || ''
+const apiKey = process.env.ALGOLIA_API_KEY || ''
+const indexName = process.env.ALGOLIA_CH_INDEX_NAME || ''
 
 const client = algoliasearch(appID, apiKey)
 
@@ -55,12 +55,10 @@ export const syncToAlgolia = async (): Promise<void> => {
   const githubDocs: GithubDoc[] = []
 
   docs.forEach(doc => {
-    const { communityHelpJSON, discordID, githubID, omit } = doc
-    if (omit) return null
+    const { communityHelpJSON, discordID, githubID } = doc
 
     if (discordID) {
       const { info, intro, slug, messageCount, messages } = communityHelpJSON as any
-
       discordDocs.push({
         objectID: info.id,
         platform: 'Discord',
@@ -112,7 +110,7 @@ export const syncToAlgolia = async (): Promise<void> => {
 
   const records = [...discordDocs, ...githubDocs]
 
-  await index.saveObjects(records).wait()
+  // await index.saveObjects(records).wait()
 }
 
 const schedule = '0 1 * * *' // 1am

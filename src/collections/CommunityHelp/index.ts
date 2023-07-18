@@ -20,11 +20,14 @@ export const CommunityHelp: CollectionConfig = {
     delete: isAdmin,
   },
   hooks: {
-    afterChange: [
-      ({ operation, doc }) => {
-        if (operation === 'update' && doc?.omit) {
+    afterDelete: [
+      ({ doc }) => {
+        try {
           const docID = doc.communityHelpType === 'discord' ? doc.discordID : doc.githubID
           removeFromAlgolia(docID)
+        } catch (err: unknown) {
+          // eslint-disable-next-line no-console
+          console.error(err)
         }
       },
     ],
@@ -99,15 +102,6 @@ export const CommunityHelp: CollectionConfig = {
       name: 'slug',
       label: 'Slug',
       type: 'text',
-      index: true,
-      admin: {
-        position: 'sidebar',
-      },
-    },
-    {
-      name: 'omit',
-      label: 'Omit from site and search index',
-      type: 'checkbox',
       index: true,
       admin: {
         position: 'sidebar',

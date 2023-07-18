@@ -91,6 +91,8 @@ const syncDocs: PayloadHandler = async (req, res) => {
 
       const parsedDoc = matter(decodeBase64(json.content))
 
+      const slug = docFilename.replace('.mdx', '')
+
       const doc: Doc = {
         // content: serialize(parsedDoc.content, {
         //   mdxOptions: {
@@ -100,12 +102,13 @@ const syncDocs: PayloadHandler = async (req, res) => {
         content: parsedDoc.content,
         title: parsedDoc.data.title,
         topic: topicSlug,
-        slug: docFilename.replace('.mdx', ''),
+        slug: slug,
         label: parsedDoc.data.label,
         order: parsedDoc.data.order,
         description: parsedDoc.data.desc || '',
         keywords: parsedDoc.data.keywords || '',
         headings: await getHeadings(parsedDoc.content),
+        path: `${topicSlug}/${slug}`,
         id: '',
         updatedAt: '',
         createdAt: '',
@@ -127,7 +130,7 @@ const syncDocs: PayloadHandler = async (req, res) => {
           collection: 'docs',
           data: doc,
           where: {
-            id: { equals: existingDocs.docs[0]._id },
+            id: { equals: existingDocs.docs[0].id },
           },
         })
       } else if (existingDocs.totalDocs === 0) {

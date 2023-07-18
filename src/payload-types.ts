@@ -2128,6 +2128,7 @@ export interface CommunityHelp {
   introDescription?: string;
   slug?: string;
   omit?: boolean;
+  relatedDocs?: string[] | Doc[];
   updatedAt: string;
   createdAt: string;
 }
@@ -2146,6 +2147,7 @@ export interface Doc {
     | boolean
     | null;
   content?: string;
+  path?: string;
   topic?: string;
   slug?: string;
   label?: string;

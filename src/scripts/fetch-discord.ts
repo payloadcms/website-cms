@@ -55,6 +55,7 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
     stale: '1052600637898096710',
     noindex: '1110285350028460052',
     payloadTeam: '1100551774043127851',
+    helpful: '1129005928553922603',
   }
 
   client.once(Events.ClientReady, async c => {
@@ -106,16 +107,17 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
         return null
       }
 
-      // Filter out all threads that are not marked as unanswered
-      if (info.appliedTags.includes(tagMap.unanswered) || info.appliedTags.includes(tagMap.stale)) {
+      // Filter out all threads that are not marked as answered or helpful
+      if (
+        !info.appliedTags.includes(tagMap.helpful) ||
+        !info.appliedTags.includes(tagMap.answered)
+      ) {
         return null
       }
 
-      const omit = info.appliedTags.includes(tagMap.noindex)
-
       let messages = await info.messages.fetch({ limit: 100 })
 
-      if (info.messageCount > 100) {
+      if (info.messageCount && info.messageCount > 100) {
         let lastMessage = messages.last()?.id
 
         while (true) {
@@ -149,7 +151,6 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
 
         return acc
       }, [])
-
       return {
         info: {
           name: info.name,
@@ -179,11 +180,9 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
         }),
         messageCount: info.messageCount,
         slug: slugify(info.name),
-        omit,
       }
     })
     console.log('\n')
-
     await Promise.all(
       formattedThreads.map(async (thread, i) => {
         if (thread) {
@@ -195,7 +194,7 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
             depth: 0,
           })
 
-          const threadExists = // @ts-expect-error
+          const threadExists =
             existingThread.docs[0]?.communityHelpJSON?.info?.id === thread?.info?.id
 
           if (threadExists) {
@@ -206,7 +205,6 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
                 title: thread?.info?.name,
                 communityHelpJSON: thread,
                 slug: thread?.slug,
-                omit: thread?.omit,
               },
               depth: 0,
             })
@@ -219,7 +217,6 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
                 discordID: thread?.info?.id,
                 communityHelpJSON: thread,
                 slug: thread?.slug,
-                omit: thread?.omit,
               },
             })
           }
