@@ -1,0 +1,12 @@
+@import '~payload/scss';
+
+.sync-docs-button {
+	@extend %btn-reset;
+	border-top: 1px solid var(--theme-elevation-100);
+	padding-top: base(0.75);
+	cursor: pointer;
+
+	&:disabled {
+		cursor: not-allowed;
+	}
+}

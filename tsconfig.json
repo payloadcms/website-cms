@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "paths": {
-      "payload/generated-types": ["./src/payload-types.ts"]
+      "payload/generated-types": [
+        "./src/payload-types.ts"
+      ]
     },
     "target": "es5",
     "lib": [
@@ -23,6 +25,7 @@
     "src/scripts/migrateVersions.ts",
     "src/scripts/fetch-discord.ts",
     "src/scripts/fetch-github.ts",
+    "src/scripts/syncDocs.ts",
   ],
   "exclude": [
     "node_modules",

@@ -9,15 +9,18 @@ import { buildConfig } from 'payload/config'
 import { Announcements } from './collections/Announcements'
 import { CaseStudies } from './collections/CaseStudies'
 import { CommunityHelp } from './collections/CommunityHelp'
+import { Docs } from './collections/Docs'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { ReusableContent } from './collections/ReusableContent'
 import { Users } from './collections/Users'
+import SyncDocsButton from './components/SyncDocsButton'
 import richText from './fields/richText'
 import { Footer } from './globals/Footer'
 import { MainMenu } from './globals/MainMenu'
 import { TopBar } from './globals/TopBar'
+import syncDocs from './scripts/syncDocs'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -34,11 +37,19 @@ export default buildConfig({
     Announcements,
     CaseStudies,
     CommunityHelp,
+    Docs,
     Media,
     Pages,
     Posts,
     ReusableContent,
     Users,
+  ],
+  endpoints: [
+    {
+      path: '/sync/docs',
+      method: 'get',
+      handler: syncDocs,
+    },
   ],
   globals: [Footer, MainMenu, TopBar],
   graphQL: {
@@ -122,14 +133,14 @@ export default buildConfig({
       collections: ['case-studies', 'pages', 'posts'],
     }),
   ],
-  cors: [process.env.PAYLOAD_PUBLIC_APP_URL, 'https://payloadcms.com'].filter(Boolean),
+  cors: [process.env.PAYLOAD_PUBLIC_APP_URL || '', 'https://payloadcms.com'].filter(Boolean),
   admin: {
     webpack: config => ({
       ...config,
       resolve: {
         ...config.resolve,
         alias: {
-          ...config.resolve.alias,
+          ...config?.resolve?.alias,
           react: path.resolve(__dirname, '../node_modules/react'),
           'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
           'react-router-dom': path.resolve(__dirname, '../node_modules/react-router-dom'),
@@ -141,5 +152,8 @@ export default buildConfig({
         },
       },
     }),
+    components: {
+      afterNavLinks: [SyncDocsButton],
+    },
   },
 })

@@ -19,16 +19,6 @@ export const CommunityHelp: CollectionConfig = {
     update: isAdmin,
     delete: isAdmin,
   },
-  hooks: {
-    afterChange: [
-      ({ operation, doc }) => {
-        if (operation === 'update' && doc?.omit) {
-          const docID = doc.communityHelpType === 'discord' ? doc.discordID : doc.githubID
-          removeFromAlgolia(docID)
-        }
-      },
-    ],
-  },
   fields: [
     {
       name: 'title',
@@ -87,10 +77,10 @@ export const CommunityHelp: CollectionConfig = {
         ],
         afterRead: [
           ({ data }) => {
-            if (data.communityHelpType === 'discord') {
+            if (data?.communityHelpType === 'discord') {
               return extractDescription(data.communityHelpJSON.intro.content)
             }
-            return extractDescription(data.communityHelpJSON.body)
+            return extractDescription(data?.communityHelpJSON.body)
           },
         ],
       },
@@ -105,10 +95,30 @@ export const CommunityHelp: CollectionConfig = {
       },
     },
     {
-      name: 'omit',
-      label: 'Omit from site and search index',
+      name: 'helpful',
       type: 'checkbox',
-      index: true,
+      admin: {
+        position: 'sidebar',
+      },
+      hooks: {
+        afterChange: [
+          ({ previousValue, value, siblingData }) => {
+            if (previousValue === true && value === false) {
+              const docID =
+                siblingData.communityHelpType === 'discord'
+                  ? siblingData.discordID
+                  : siblingData.githubID
+              removeFromAlgolia(docID)
+            }
+          },
+        ],
+      },
+    },
+    {
+      name: 'relatedDocs',
+      type: 'relationship',
+      relationTo: 'docs',
+      hasMany: true,
       admin: {
         position: 'sidebar',
       },
