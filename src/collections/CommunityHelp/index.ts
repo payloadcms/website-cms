@@ -108,6 +108,13 @@ export const CommunityHelp: CollectionConfig = {
       },
     },
     {
+      name: 'helpful',
+      type: 'checkbox',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'relatedDocs',
       type: 'relationship',
       relationTo: 'docs',

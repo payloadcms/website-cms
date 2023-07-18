@@ -53,9 +53,7 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
     answered: '1034538089546264577',
     unanswered: '1043188477002526750',
     stale: '1052600637898096710',
-    noindex: '1110285350028460052',
     payloadTeam: '1100551774043127851',
-    helpful: '1129005928553922603',
   }
 
   client.once(Events.ClientReady, async c => {
@@ -107,11 +105,8 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
         return null
       }
 
-      // Filter out all threads that are not marked as answered or helpful
-      if (
-        !info.appliedTags.includes(tagMap.helpful) ||
-        !info.appliedTags.includes(tagMap.answered)
-      ) {
+      // Filter out all threads that are not marked as answered
+      if (!info.appliedTags.includes(tagMap.answered)) {
         return null
       }
 

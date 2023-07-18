@@ -4708,7 +4708,7 @@ type CommunityHelp {
   communityHelpJSON: JSON!
   introDescription: String
   slug: String
-  omit: Boolean
+  helpful: Boolean
   relatedDocs: [Doc!]
   updatedAt: DateTime
   createdAt: DateTime
@@ -4756,7 +4756,7 @@ input CommunityHelp_where {
   discordID: CommunityHelp_discordID_operator
   communityHelpJSON: CommunityHelp_communityHelpJSON_operator
   slug: CommunityHelp_slug_operator
-  omit: CommunityHelp_omit_operator
+  helpful: CommunityHelp_helpful_operator
   relatedDocs: CommunityHelp_relatedDocs_operator
   updatedAt: CommunityHelp_updatedAt_operator
   createdAt: CommunityHelp_createdAt_operator
@@ -4830,7 +4830,7 @@ input CommunityHelp_slug_operator {
   exists: Boolean
 }
 
-input CommunityHelp_omit_operator {
+input CommunityHelp_helpful_operator {
   equals: Boolean
   not_equals: Boolean
   exists: Boolean
@@ -4885,7 +4885,7 @@ input CommunityHelp_where_or {
   discordID: CommunityHelp_discordID_operator
   communityHelpJSON: CommunityHelp_communityHelpJSON_operator
   slug: CommunityHelp_slug_operator
-  omit: CommunityHelp_omit_operator
+  helpful: CommunityHelp_helpful_operator
   relatedDocs: CommunityHelp_relatedDocs_operator
   updatedAt: CommunityHelp_updatedAt_operator
   createdAt: CommunityHelp_createdAt_operator
@@ -4899,7 +4899,7 @@ input CommunityHelp_where_and {
   discordID: CommunityHelp_discordID_operator
   communityHelpJSON: CommunityHelp_communityHelpJSON_operator
   slug: CommunityHelp_slug_operator
-  omit: CommunityHelp_omit_operator
+  helpful: CommunityHelp_helpful_operator
   relatedDocs: CommunityHelp_relatedDocs_operator
   updatedAt: CommunityHelp_updatedAt_operator
   createdAt: CommunityHelp_createdAt_operator
@@ -4921,7 +4921,7 @@ type CommunityHelpDocAccessFields {
   discordID: CommunityHelpDocAccessFields_discordID
   communityHelpJSON: CommunityHelpDocAccessFields_communityHelpJSON
   slug: CommunityHelpDocAccessFields_slug
-  omit: CommunityHelpDocAccessFields_omit
+  helpful: CommunityHelpDocAccessFields_helpful
   relatedDocs: CommunityHelpDocAccessFields_relatedDocs
   updatedAt: CommunityHelpDocAccessFields_updatedAt
   createdAt: CommunityHelpDocAccessFields_createdAt
@@ -5065,26 +5065,26 @@ type CommunityHelpDocAccessFields_slug_Delete {
   permission: Boolean!
 }
 
-type CommunityHelpDocAccessFields_omit {
-  create: CommunityHelpDocAccessFields_omit_Create
-  read: CommunityHelpDocAccessFields_omit_Read
-  update: CommunityHelpDocAccessFields_omit_Update
-  delete: CommunityHelpDocAccessFields_omit_Delete
+type CommunityHelpDocAccessFields_helpful {
+  create: CommunityHelpDocAccessFields_helpful_Create
+  read: CommunityHelpDocAccessFields_helpful_Read
+  update: CommunityHelpDocAccessFields_helpful_Update
+  delete: CommunityHelpDocAccessFields_helpful_Delete
 }
 
-type CommunityHelpDocAccessFields_omit_Create {
+type CommunityHelpDocAccessFields_helpful_Create {
   permission: Boolean!
 }
 
-type CommunityHelpDocAccessFields_omit_Read {
+type CommunityHelpDocAccessFields_helpful_Read {
   permission: Boolean!
 }
 
-type CommunityHelpDocAccessFields_omit_Update {
+type CommunityHelpDocAccessFields_helpful_Update {
   permission: Boolean!
 }
 
-type CommunityHelpDocAccessFields_omit_Delete {
+type CommunityHelpDocAccessFields_helpful_Delete {
   permission: Boolean!
 }
 
@@ -14517,7 +14517,7 @@ type CommunityHelpFields {
   discordID: CommunityHelpFields_discordID
   communityHelpJSON: CommunityHelpFields_communityHelpJSON
   slug: CommunityHelpFields_slug
-  omit: CommunityHelpFields_omit
+  helpful: CommunityHelpFields_helpful
   relatedDocs: CommunityHelpFields_relatedDocs
   updatedAt: CommunityHelpFields_updatedAt
   createdAt: CommunityHelpFields_createdAt
@@ -14661,26 +14661,26 @@ type CommunityHelpFields_slug_Delete {
   permission: Boolean!
 }
 
-type CommunityHelpFields_omit {
-  create: CommunityHelpFields_omit_Create
-  read: CommunityHelpFields_omit_Read
-  update: CommunityHelpFields_omit_Update
-  delete: CommunityHelpFields_omit_Delete
+type CommunityHelpFields_helpful {
+  create: CommunityHelpFields_helpful_Create
+  read: CommunityHelpFields_helpful_Read
+  update: CommunityHelpFields_helpful_Update
+  delete: CommunityHelpFields_helpful_Delete
 }
 
-type CommunityHelpFields_omit_Create {
+type CommunityHelpFields_helpful_Create {
   permission: Boolean!
 }
 
-type CommunityHelpFields_omit_Read {
+type CommunityHelpFields_helpful_Read {
   permission: Boolean!
 }
 
-type CommunityHelpFields_omit_Update {
+type CommunityHelpFields_helpful_Update {
   permission: Boolean!
 }
 
-type CommunityHelpFields_omit_Delete {
+type CommunityHelpFields_helpful_Delete {
   permission: Boolean!
 }
 
@@ -19591,7 +19591,7 @@ input mutationCommunityHelpInput {
   communityHelpJSON: JSON!
   introDescription: String
   slug: String
-  omit: Boolean
+  helpful: Boolean
   relatedDocs: [String]
   updatedAt: String
   createdAt: String
@@ -19605,7 +19605,7 @@ input mutationCommunityHelpUpdateInput {
   communityHelpJSON: JSON
   introDescription: String
   slug: String
-  omit: Boolean
+  helpful: Boolean
   relatedDocs: [String]
   updatedAt: String
   createdAt: String

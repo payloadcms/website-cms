@@ -2127,7 +2127,7 @@ export interface CommunityHelp {
     | null;
   introDescription?: string;
   slug?: string;
-  omit?: boolean;
+  helpful?: boolean;
   relatedDocs?: string[] | Doc[];
   updatedAt: string;
   createdAt: string;

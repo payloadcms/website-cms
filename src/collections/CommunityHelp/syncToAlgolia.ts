@@ -55,7 +55,11 @@ export const syncToAlgolia = async (): Promise<void> => {
   const githubDocs: GithubDoc[] = []
 
   docs.forEach(doc => {
-    const { communityHelpJSON, discordID, githubID } = doc
+    const { communityHelpJSON, discordID, githubID, helpful } = doc
+
+    if (!helpful) {
+      return null
+    }
 
     if (discordID) {
       const { info, intro, slug, messageCount, messages } = communityHelpJSON as any
@@ -110,7 +114,7 @@ export const syncToAlgolia = async (): Promise<void> => {
 
   const records = [...discordDocs, ...githubDocs]
 
-  // await index.saveObjects(records).wait()
+  await index.saveObjects(records).wait()
 }
 
 const schedule = '0 1 * * *' // 1am
