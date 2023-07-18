@@ -78,8 +78,7 @@ const syncDocs: PayloadHandler = async (req, res) => {
 
   try {
     if (!process.env.GITHUB_ACCESS_TOKEN) {
-      console.log('No GitHub access token found - skipping docs retrieval') // eslint-disable-line no-console
-      process.exit(0)
+      return res.status(400).json({ success: false, message: 'No GitHub access token found' })
     }
 
     const fetchDoc = async (topicSlug: string, docFilename: string): Promise<Doc> => {
@@ -166,8 +165,7 @@ const syncDocs: PayloadHandler = async (req, res) => {
 
     return res.status(200).json({ success: true })
   } catch (err: unknown) {
-    payload.logger.error(err)
-    return res.status(500).json({ success: false })
+    return res.status(400).json({ success: false, message: `${err}` })
   }
 }
 

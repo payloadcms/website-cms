@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useConfig } from 'payload/components/utilities'
+import resetPassword from 'payload/dist/auth/operations/resetPassword'
 
 import './index.scss'
 
@@ -13,14 +14,15 @@ const SyncDocsButton: React.FC = () => {
   } = useConfig()
 
   const syncDocs = async () => {
-    try {
-      setIsSyncing(true)
-      const response = await fetch(`${api}/sync/docs`)
-    } catch (err) {
-      toast.error(`Documentation sync failed: ${err}`, { autoClose: 3000 })
-    } finally {
-      setIsSyncing(false)
+    setIsSyncing(true)
+    const res = await fetch(`${api}/sync/docs`)
+    if (res.ok) {
       toast.success('Documentation synced successfully', { autoClose: 3000 })
+      setIsSyncing(false)
+    } else {
+      const data = await res.json()
+      toast.error(`Failed to sync documentation: ${data.message}`, { autoClose: 3000 })
+      setIsSyncing(false)
     }
   }
 
