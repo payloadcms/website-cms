@@ -19,19 +19,6 @@ export const CommunityHelp: CollectionConfig = {
     update: isAdmin,
     delete: isAdmin,
   },
-  hooks: {
-    afterDelete: [
-      ({ doc }) => {
-        try {
-          const docID = doc.communityHelpType === 'discord' ? doc.discordID : doc.githubID
-          removeFromAlgolia(docID)
-        } catch (err: unknown) {
-          // eslint-disable-next-line no-console
-          console.error(err)
-        }
-      },
-    ],
-  },
   fields: [
     {
       name: 'title',
@@ -112,6 +99,19 @@ export const CommunityHelp: CollectionConfig = {
       type: 'checkbox',
       admin: {
         position: 'sidebar',
+      },
+      hooks: {
+        afterChange: [
+          ({ previousValue, value, siblingData }) => {
+            if (previousValue === true && value === false) {
+              const docID =
+                siblingData.communityHelpType === 'discord'
+                  ? siblingData.discordID
+                  : siblingData.githubID
+              removeFromAlgolia(docID)
+            }
+          },
+        ],
       },
     },
     {

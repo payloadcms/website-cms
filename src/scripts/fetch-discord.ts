@@ -182,12 +182,12 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
       formattedThreads.map(async (thread, i) => {
         if (thread) {
           // Check if thread exists, if it does update existing thread else add thread to collection
-          const existingThread = await payload.find({
+          const existingThread = (await payload.find({
             collection: 'community-help',
             where: { discordID: { equals: thread.info.id } },
             limit: 1,
             depth: 0,
-          })
+          })) as any
 
           const threadExists =
             existingThread.docs[0]?.communityHelpJSON?.info?.id === thread?.info?.id

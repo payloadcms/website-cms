@@ -5,8 +5,6 @@ import fetch from 'node-fetch'
 import type { PayloadHandler } from 'payload/config'
 
 import type { Doc } from '../payload-types'
-// import remarkGfm from 'remark-gfm'
-// import { serialize } from 'next-mdx-remote/serialize'
 
 dotenv.config()
 
@@ -94,11 +92,6 @@ const syncDocs: PayloadHandler = async (req, res) => {
       const slug = docFilename.replace('.mdx', '')
 
       const doc: Doc = {
-        // content: serialize(parsedDoc.content, {
-        //   mdxOptions: {
-        //     remarkPlugins: [remarkGfm],
-        //   },
-        // }),
         content: parsedDoc.content,
         title: parsedDoc.data.title,
         topic: topicSlug,
