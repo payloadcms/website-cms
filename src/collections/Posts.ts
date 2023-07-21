@@ -61,6 +61,19 @@ export const Posts: CollectionConfig = {
       blocks: [Banner, BlogContent, Code, BlogMarkdown, MediaBlock, ReusableContent],
       required: true,
     },
+    {
+      name: 'relatedPosts',
+      type: 'relationship',
+      relationTo: 'posts',
+      hasMany: true,
+      filterOptions: ({ id }) => {
+        return {
+          id: {
+            not_in: [id],
+          },
+        }
+      },
+    },
     slugField(),
     {
       name: 'authors',
