@@ -930,7 +930,9 @@ type Post {
   image(where: Post_Image_where): Media
   excerpt(depth: Int): JSON
   content: [Post_Content!]!
+  relatedPosts: [Post!]
   slug: String
+  authors: [User!]
   author: User
   publishedOn: DateTime
   meta: Post_Meta
@@ -2637,7 +2639,7 @@ type User {
   roles: [User_roles!]
   updatedAt: DateTime
   createdAt: DateTime
-  email: EmailAddress
+  email: EmailAddress!
   resetPasswordToken: String
   resetPasswordExpiration: DateTime
   salt: String
@@ -9844,7 +9846,9 @@ input Post_where {
   title: Post_title_operator
   image: Post_image_operator
   excerpt: Post_excerpt_operator
+  relatedPosts: Post_relatedPosts_operator
   slug: Post_slug_operator
+  authors: Post_authors_operator
   author: Post_author_operator
   publishedOn: Post_publishedOn_operator
   meta__title: Post_meta__title_operator
@@ -9880,6 +9884,15 @@ input Post_excerpt_operator {
   contains: JSON
 }
 
+input Post_relatedPosts_operator {
+  equals: String
+  not_equals: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
 input Post_slug_operator {
   equals: String
   not_equals: String
@@ -9891,12 +9904,21 @@ input Post_slug_operator {
   exists: Boolean
 }
 
+input Post_authors_operator {
+  equals: String
+  not_equals: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
 input Post_author_operator {
   equals: String
   not_equals: String
   in: [String]
   not_in: [String]
   all: [String]
+  exists: Boolean
 }
 
 input Post_publishedOn_operator {
@@ -9985,7 +10007,9 @@ input Post_where_or {
   title: Post_title_operator
   image: Post_image_operator
   excerpt: Post_excerpt_operator
+  relatedPosts: Post_relatedPosts_operator
   slug: Post_slug_operator
+  authors: Post_authors_operator
   author: Post_author_operator
   publishedOn: Post_publishedOn_operator
   meta__title: Post_meta__title_operator
@@ -10001,7 +10025,9 @@ input Post_where_and {
   title: Post_title_operator
   image: Post_image_operator
   excerpt: Post_excerpt_operator
+  relatedPosts: Post_relatedPosts_operator
   slug: Post_slug_operator
+  authors: Post_authors_operator
   author: Post_author_operator
   publishedOn: Post_publishedOn_operator
   meta__title: Post_meta__title_operator
@@ -10027,7 +10053,9 @@ type PostsDocAccessFields {
   image: PostsDocAccessFields_image
   excerpt: PostsDocAccessFields_excerpt
   content: PostsDocAccessFields_content
+  relatedPosts: PostsDocAccessFields_relatedPosts
   slug: PostsDocAccessFields_slug
+  authors: PostsDocAccessFields_authors
   author: PostsDocAccessFields_author
   publishedOn: PostsDocAccessFields_publishedOn
   meta: PostsDocAccessFields_meta
@@ -10128,6 +10156,29 @@ type PostsDocAccessFields_content_Delete {
   permission: Boolean!
 }
 
+type PostsDocAccessFields_relatedPosts {
+  create: PostsDocAccessFields_relatedPosts_Create
+  read: PostsDocAccessFields_relatedPosts_Read
+  update: PostsDocAccessFields_relatedPosts_Update
+  delete: PostsDocAccessFields_relatedPosts_Delete
+}
+
+type PostsDocAccessFields_relatedPosts_Create {
+  permission: Boolean!
+}
+
+type PostsDocAccessFields_relatedPosts_Read {
+  permission: Boolean!
+}
+
+type PostsDocAccessFields_relatedPosts_Update {
+  permission: Boolean!
+}
+
+type PostsDocAccessFields_relatedPosts_Delete {
+  permission: Boolean!
+}
+
 type PostsDocAccessFields_slug {
   create: PostsDocAccessFields_slug_Create
   read: PostsDocAccessFields_slug_Read
@@ -10148,6 +10199,29 @@ type PostsDocAccessFields_slug_Update {
 }
 
 type PostsDocAccessFields_slug_Delete {
+  permission: Boolean!
+}
+
+type PostsDocAccessFields_authors {
+  create: PostsDocAccessFields_authors_Create
+  read: PostsDocAccessFields_authors_Read
+  update: PostsDocAccessFields_authors_Update
+  delete: PostsDocAccessFields_authors_Delete
+}
+
+type PostsDocAccessFields_authors_Create {
+  permission: Boolean!
+}
+
+type PostsDocAccessFields_authors_Read {
+  permission: Boolean!
+}
+
+type PostsDocAccessFields_authors_Update {
+  permission: Boolean!
+}
+
+type PostsDocAccessFields_authors_Delete {
   permission: Boolean!
 }
 
@@ -10451,7 +10525,9 @@ type PostVersion_Version {
   image(where: PostVersion_Version_Image_where): Media
   excerpt(depth: Int): JSON
   content: [PostVersion_Version_Content!]!
+  relatedPosts: [Post!]
   slug: String
+  authors: [User!]
   author: User
   publishedOn: DateTime
   meta: PostVersion_Version_Meta
@@ -10804,7 +10880,9 @@ input versionsPost_where {
   version__title: versionsPost_version__title_operator
   version__image: versionsPost_version__image_operator
   version__excerpt: versionsPost_version__excerpt_operator
+  version__relatedPosts: versionsPost_version__relatedPosts_operator
   version__slug: versionsPost_version__slug_operator
+  version__authors: versionsPost_version__authors_operator
   version__author: versionsPost_version__author_operator
   version__publishedOn: versionsPost_version__publishedOn_operator
   version__meta__title: versionsPost_version__meta__title_operator
@@ -10851,6 +10929,15 @@ input versionsPost_version__excerpt_operator {
   contains: JSON
 }
 
+input versionsPost_version__relatedPosts_operator {
+  equals: String
+  not_equals: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
 input versionsPost_version__slug_operator {
   equals: String
   not_equals: String
@@ -10862,12 +10949,21 @@ input versionsPost_version__slug_operator {
   exists: Boolean
 }
 
+input versionsPost_version__authors_operator {
+  equals: String
+  not_equals: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
 input versionsPost_version__author_operator {
   equals: String
   not_equals: String
   in: [String]
   not_in: [String]
   all: [String]
+  exists: Boolean
 }
 
 input versionsPost_version__publishedOn_operator {
@@ -10979,7 +11075,9 @@ input versionsPost_where_or {
   version__title: versionsPost_version__title_operator
   version__image: versionsPost_version__image_operator
   version__excerpt: versionsPost_version__excerpt_operator
+  version__relatedPosts: versionsPost_version__relatedPosts_operator
   version__slug: versionsPost_version__slug_operator
+  version__authors: versionsPost_version__authors_operator
   version__author: versionsPost_version__author_operator
   version__publishedOn: versionsPost_version__publishedOn_operator
   version__meta__title: versionsPost_version__meta__title_operator
@@ -10998,7 +11096,9 @@ input versionsPost_where_and {
   version__title: versionsPost_version__title_operator
   version__image: versionsPost_version__image_operator
   version__excerpt: versionsPost_version__excerpt_operator
+  version__relatedPosts: versionsPost_version__relatedPosts_operator
   version__slug: versionsPost_version__slug_operator
+  version__authors: versionsPost_version__authors_operator
   version__author: versionsPost_version__author_operator
   version__publishedOn: versionsPost_version__publishedOn_operator
   version__meta__title: versionsPost_version__meta__title_operator
@@ -11327,7 +11427,6 @@ input User_email_operator {
   in: [EmailAddress]
   not_in: [EmailAddress]
   all: [EmailAddress]
-  exists: Boolean
 }
 
 input User_id_operator {
@@ -16998,7 +17097,9 @@ type PostsFields {
   image: PostsFields_image
   excerpt: PostsFields_excerpt
   content: PostsFields_content
+  relatedPosts: PostsFields_relatedPosts
   slug: PostsFields_slug
+  authors: PostsFields_authors
   author: PostsFields_author
   publishedOn: PostsFields_publishedOn
   meta: PostsFields_meta
@@ -17099,6 +17200,29 @@ type PostsFields_content_Delete {
   permission: Boolean!
 }
 
+type PostsFields_relatedPosts {
+  create: PostsFields_relatedPosts_Create
+  read: PostsFields_relatedPosts_Read
+  update: PostsFields_relatedPosts_Update
+  delete: PostsFields_relatedPosts_Delete
+}
+
+type PostsFields_relatedPosts_Create {
+  permission: Boolean!
+}
+
+type PostsFields_relatedPosts_Read {
+  permission: Boolean!
+}
+
+type PostsFields_relatedPosts_Update {
+  permission: Boolean!
+}
+
+type PostsFields_relatedPosts_Delete {
+  permission: Boolean!
+}
+
 type PostsFields_slug {
   create: PostsFields_slug_Create
   read: PostsFields_slug_Read
@@ -17119,6 +17243,29 @@ type PostsFields_slug_Update {
 }
 
 type PostsFields_slug_Delete {
+  permission: Boolean!
+}
+
+type PostsFields_authors {
+  create: PostsFields_authors_Create
+  read: PostsFields_authors_Read
+  update: PostsFields_authors_Update
+  delete: PostsFields_authors_Delete
+}
+
+type PostsFields_authors_Create {
+  permission: Boolean!
+}
+
+type PostsFields_authors_Read {
+  permission: Boolean!
+}
+
+type PostsFields_authors_Update {
+  permission: Boolean!
+}
+
+type PostsFields_authors_Delete {
   permission: Boolean!
 }
 
@@ -19988,7 +20135,9 @@ input mutationPostInput {
   image: String!
   excerpt: JSON!
   content: JSON
+  relatedPosts: [String]
   slug: String
+  authors: [String]
   author: String
   publishedOn: String!
   meta: mutationPost_MetaInput
@@ -20013,7 +20162,9 @@ input mutationPostUpdateInput {
   image: String
   excerpt: JSON
   content: JSON
+  relatedPosts: [String]
   slug: String
+  authors: [String]
   author: String
   publishedOn: String
   meta: mutationPostUpdate_MetaInput
@@ -20055,7 +20206,7 @@ input mutationUserInput {
   roles: [User_roles_MutationInput]
   updatedAt: String
   createdAt: String
-  email: String
+  email: String!
   resetPasswordToken: String
   resetPasswordExpiration: String
   salt: String

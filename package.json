@@ -36,7 +36,7 @@
     "gray-matter": "^4.0.3",
     "node-cron": "^3.0.2",
     "nodemailer-sendgrid": "^1.0.3",
-    "payload": "^1.9.0"
+    "payload": "^1.11.3"
   },
   "devDependencies": {
     "@payloadcms/eslint-config": "^0.0.1",
