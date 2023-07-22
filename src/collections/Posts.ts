@@ -85,17 +85,6 @@ export const Posts: CollectionConfig = {
         position: 'sidebar',
       },
     },
-    // TODO: remove the `author` field after the migration is complete
-    // The `authors` field (plural) is the correct field to use
-    {
-      name: 'author',
-      type: 'relationship',
-      relationTo: 'users',
-      admin: {
-        position: 'sidebar',
-        description: 'This field is deprecated. Use the "authors" field instead.',
-      },
-    },
     {
       name: 'publishedOn',
       type: 'date',

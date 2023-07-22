@@ -1364,7 +1364,6 @@ export interface Post {
   relatedPosts?: string[] | Post[];
   slug?: string;
   authors: string[] | User[];
-  author?: string | User;
   publishedOn: string;
   meta?: {
     title?: string;

@@ -933,7 +933,6 @@ type Post {
   relatedPosts: [Post!]
   slug: String
   authors: [User!]
-  author: User
   publishedOn: DateTime
   meta: Post_Meta
   updatedAt: DateTime
@@ -9849,7 +9848,6 @@ input Post_where {
   relatedPosts: Post_relatedPosts_operator
   slug: Post_slug_operator
   authors: Post_authors_operator
-  author: Post_author_operator
   publishedOn: Post_publishedOn_operator
   meta__title: Post_meta__title_operator
   meta__description: Post_meta__description_operator
@@ -9910,15 +9908,6 @@ input Post_authors_operator {
   in: [String]
   not_in: [String]
   all: [String]
-}
-
-input Post_author_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
 }
 
 input Post_publishedOn_operator {
@@ -10010,7 +9999,6 @@ input Post_where_or {
   relatedPosts: Post_relatedPosts_operator
   slug: Post_slug_operator
   authors: Post_authors_operator
-  author: Post_author_operator
   publishedOn: Post_publishedOn_operator
   meta__title: Post_meta__title_operator
   meta__description: Post_meta__description_operator
@@ -10028,7 +10016,6 @@ input Post_where_and {
   relatedPosts: Post_relatedPosts_operator
   slug: Post_slug_operator
   authors: Post_authors_operator
-  author: Post_author_operator
   publishedOn: Post_publishedOn_operator
   meta__title: Post_meta__title_operator
   meta__description: Post_meta__description_operator
@@ -10056,7 +10043,6 @@ type PostsDocAccessFields {
   relatedPosts: PostsDocAccessFields_relatedPosts
   slug: PostsDocAccessFields_slug
   authors: PostsDocAccessFields_authors
-  author: PostsDocAccessFields_author
   publishedOn: PostsDocAccessFields_publishedOn
   meta: PostsDocAccessFields_meta
   updatedAt: PostsDocAccessFields_updatedAt
@@ -10222,29 +10208,6 @@ type PostsDocAccessFields_authors_Update {
 }
 
 type PostsDocAccessFields_authors_Delete {
-  permission: Boolean!
-}
-
-type PostsDocAccessFields_author {
-  create: PostsDocAccessFields_author_Create
-  read: PostsDocAccessFields_author_Read
-  update: PostsDocAccessFields_author_Update
-  delete: PostsDocAccessFields_author_Delete
-}
-
-type PostsDocAccessFields_author_Create {
-  permission: Boolean!
-}
-
-type PostsDocAccessFields_author_Read {
-  permission: Boolean!
-}
-
-type PostsDocAccessFields_author_Update {
-  permission: Boolean!
-}
-
-type PostsDocAccessFields_author_Delete {
   permission: Boolean!
 }
 
@@ -10528,7 +10491,6 @@ type PostVersion_Version {
   relatedPosts: [Post!]
   slug: String
   authors: [User!]
-  author: User
   publishedOn: DateTime
   meta: PostVersion_Version_Meta
   updatedAt: DateTime
@@ -10883,7 +10845,6 @@ input versionsPost_where {
   version__relatedPosts: versionsPost_version__relatedPosts_operator
   version__slug: versionsPost_version__slug_operator
   version__authors: versionsPost_version__authors_operator
-  version__author: versionsPost_version__author_operator
   version__publishedOn: versionsPost_version__publishedOn_operator
   version__meta__title: versionsPost_version__meta__title_operator
   version__meta__description: versionsPost_version__meta__description_operator
@@ -10955,15 +10916,6 @@ input versionsPost_version__authors_operator {
   in: [String]
   not_in: [String]
   all: [String]
-}
-
-input versionsPost_version__author_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
 }
 
 input versionsPost_version__publishedOn_operator {
@@ -11078,7 +11030,6 @@ input versionsPost_where_or {
   version__relatedPosts: versionsPost_version__relatedPosts_operator
   version__slug: versionsPost_version__slug_operator
   version__authors: versionsPost_version__authors_operator
-  version__author: versionsPost_version__author_operator
   version__publishedOn: versionsPost_version__publishedOn_operator
   version__meta__title: versionsPost_version__meta__title_operator
   version__meta__description: versionsPost_version__meta__description_operator
@@ -11099,7 +11050,6 @@ input versionsPost_where_and {
   version__relatedPosts: versionsPost_version__relatedPosts_operator
   version__slug: versionsPost_version__slug_operator
   version__authors: versionsPost_version__authors_operator
-  version__author: versionsPost_version__author_operator
   version__publishedOn: versionsPost_version__publishedOn_operator
   version__meta__title: versionsPost_version__meta__title_operator
   version__meta__description: versionsPost_version__meta__description_operator
@@ -17100,7 +17050,6 @@ type PostsFields {
   relatedPosts: PostsFields_relatedPosts
   slug: PostsFields_slug
   authors: PostsFields_authors
-  author: PostsFields_author
   publishedOn: PostsFields_publishedOn
   meta: PostsFields_meta
   updatedAt: PostsFields_updatedAt
@@ -17266,29 +17215,6 @@ type PostsFields_authors_Update {
 }
 
 type PostsFields_authors_Delete {
-  permission: Boolean!
-}
-
-type PostsFields_author {
-  create: PostsFields_author_Create
-  read: PostsFields_author_Read
-  update: PostsFields_author_Update
-  delete: PostsFields_author_Delete
-}
-
-type PostsFields_author_Create {
-  permission: Boolean!
-}
-
-type PostsFields_author_Read {
-  permission: Boolean!
-}
-
-type PostsFields_author_Update {
-  permission: Boolean!
-}
-
-type PostsFields_author_Delete {
   permission: Boolean!
 }
 
@@ -20138,7 +20064,6 @@ input mutationPostInput {
   relatedPosts: [String]
   slug: String
   authors: [String]
-  author: String
   publishedOn: String!
   meta: mutationPost_MetaInput
   updatedAt: String
@@ -20165,7 +20090,6 @@ input mutationPostUpdateInput {
   relatedPosts: [String]
   slug: String
   authors: [String]
-  author: String
   publishedOn: String
   meta: mutationPostUpdate_MetaInput
   updatedAt: String
