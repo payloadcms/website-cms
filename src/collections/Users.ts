@@ -33,7 +33,11 @@ export const Users: CollectionConfig = {
     },
     {
       name: 'twitter',
+      label: 'Twitter Handle',
       type: 'text',
+      admin: {
+        description: 'Example: `payloadcms`',
+      },
     },
     {
       name: 'photo',
