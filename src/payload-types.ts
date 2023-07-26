@@ -2091,6 +2091,7 @@ export interface Form {
     [k: string]: unknown;
   }[];
   hubSpotFormID?: string;
+  enableGDPR?: boolean;
   updatedAt: string;
   createdAt: string;
 }
