@@ -127,8 +127,13 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
         }
       }
 
-      // Filter out messages from bots:
-      messages = messages.filter(m => !m.author.bot)
+      // Filter out messages from bots, apart from the first message
+      // The first message can be from a bot, in case the thread was created by a bot
+      // (e.g. by the bot moving a message over to a thread)
+      let counter = 0
+      messages = messages.filter(m => {
+        return !m.author.bot || counter++ === 0
+      })
 
       const [intro, ...combinedResponses] = messages.reverse().reduce((acc: Message[], message) => {
         const prevMessage = acc[acc.length - 1]
