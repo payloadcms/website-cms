@@ -127,6 +127,9 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
         }
       }
 
+      // Filter out messages from bots:
+      messages = messages.filter(m => !m.author.bot)
+
       const [intro, ...combinedResponses] = messages.reverse().reduce((acc: Message[], message) => {
         const prevMessage = acc[acc.length - 1]
         let newAuthor = true
