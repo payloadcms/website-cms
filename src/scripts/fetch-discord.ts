@@ -6,6 +6,8 @@ import { ChannelType, Client, Events, GatewayIntentBits } from 'discord.js'
 import { toHTML } from 'discord-markdown'
 import type { Payload } from 'payload'
 
+import sanitizeSlug from '../utilities/sanitizeSlug'
+
 // eslint-disable-next-line
 require('dotenv').config()
 
@@ -23,23 +25,6 @@ async function mapAsync(
   callbackfn: (value: any, index: number, array: any[]) => Promise<any>,
 ): Promise<any[]> {
   return Promise.all(arr.map(callbackfn))
-}
-
-function slugify(string: string): string {
-  const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
-  const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
-  const p = new RegExp(a.split('').join('|'), 'g')
-
-  return string
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, '-') // Replace spaces with -
-    .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
-    .replace(/&/g, '-and-') // Replace & with 'and'
-    .replace(/[^\w\-]+/g, '') // Remove all non-word characters
-    .replace(/\-\-+/g, '-') // Replace multiple - with single -
-    .replace(/^-+/, '') // Trim - from start of text
-    .replace(/-+$/, '') // Trim - from end of text
 }
 
 export async function fetchDiscordThreads(payload: Payload): Promise<void> {
@@ -182,7 +167,7 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
           }
         }),
         messageCount: info.messageCount,
-        slug: slugify(info.name),
+        slug: sanitizeSlug(info.name),
       }
     })
     console.log('\n')
