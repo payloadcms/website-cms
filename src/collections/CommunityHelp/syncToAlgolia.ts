@@ -44,6 +44,7 @@ interface GithubDoc {
   helpful: boolean
 }
 export const syncToAlgolia = async (): Promise<void> => {
+  // eslint-disable-next-line no-console
   console.log('RUNNING')
   await fetchDiscordThreads(payload)
   await fetchGithubDiscussions(payload)
