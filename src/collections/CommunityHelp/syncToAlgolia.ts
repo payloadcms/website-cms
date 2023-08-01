@@ -27,6 +27,7 @@ interface DiscordDoc {
   messages: unknown[]
   messageCount: number
   slug: string
+  helpful: boolean
 }
 
 interface GithubDoc {
@@ -40,6 +41,7 @@ interface GithubDoc {
   comments: unknown[]
   messageCount: number
   slug: string
+  helpful: boolean
 }
 export const syncToAlgolia = async (): Promise<void> => {
   console.log('RUNNING')
@@ -57,10 +59,6 @@ export const syncToAlgolia = async (): Promise<void> => {
   docs.forEach(doc => {
     const { communityHelpJSON, discordID, githubID, helpful } = doc
 
-    if (!helpful) {
-      return null
-    }
-
     if (discordID) {
       const { info, intro, slug, messageCount, messages } = communityHelpJSON as any
       discordDocs.push({
@@ -77,6 +75,7 @@ export const syncToAlgolia = async (): Promise<void> => {
         }),
         messageCount: messageCount,
         slug,
+        helpful,
       })
     }
 
@@ -94,6 +93,7 @@ export const syncToAlgolia = async (): Promise<void> => {
         upvotes,
         author: author.name,
         slug,
+        helpful,
         comments: (comments || []).map(comment => {
           const replies = comment.replies?.map(reply => {
             return {

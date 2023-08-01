@@ -8,9 +8,20 @@ const client = algoliasearch(appID, apiKey)
 
 const index = client.initIndex(indexName)
 
-export const removeFromAlgolia = async (id: string): Promise<void> => {
-  await index.deleteObject(id).then(() => {
-    // eslint-disable-next-line no-console
-    console.log('Deleted objectID ' + id + ' from Algolia')
-  })
+// Keeps helpful flags in sync with Algolia
+export const updateAlgolia = async (id: string, helpful: boolean): Promise<void> => {
+  await index
+    .partialUpdateObject(
+      {
+        objectID: id,
+        helpful: helpful,
+      },
+      {
+        createIfNotExists: false,
+      },
+    )
+    .then(() => {
+      // eslint-disable-next-line no-console
+      console.log('Updated objectID ' + id + ' in Algolia')
+    })
 }

@@ -103,12 +103,12 @@ export const CommunityHelp: CollectionConfig = {
       hooks: {
         afterChange: [
           ({ previousValue, value, siblingData }) => {
-            if (previousValue === true && value === false) {
+            if (previousValue !== value) {
               const docID =
                 siblingData.communityHelpType === 'discord'
                   ? siblingData.discordID
                   : siblingData.githubID
-              removeFromAlgolia(docID)
+              removeFromAlgolia(docID, value)
             }
           },
         ],

@@ -2,28 +2,13 @@
 import fetch from 'node-fetch'
 import type { Payload } from 'payload'
 
+import sanitizeSlug from '../utilities/sanitizeSlug'
+
 // eslint-disable-next-line
 require('dotenv').config()
 
 const headers = {
   Authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
-}
-
-function slugify(string: string): string {
-  const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
-  const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
-  const p = new RegExp(a.split('').join('|'), 'g')
-
-  return string
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, '-') // Replace spaces with -
-    .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
-    .replace(/&/g, '-and-') // Replace & with 'and'
-    .replace(/[^\w\-]+/g, '') // Remove all non-word characters
-    .replace(/\-\-+/g, '-') // Replace multiple - with single -
-    .replace(/^-+/, '') // Trim - from start of text
-    .replace(/-+$/, '') // Trim - from end of text
 }
 
 export async function fetchGithubDiscussions(payload: Payload): Promise<void> {
@@ -217,7 +202,7 @@ export async function fetchGithubDiscussions(payload: Payload): Promise<void> {
         body: discussion.bodyHTML,
         url: discussion.url,
         id: String(discussion.number),
-        slug: slugify(discussion.title),
+        slug: sanitizeSlug(discussion.title),
         createdAt: discussion.createdAt,
         upvotes: discussion.upvoteCount,
         commentTotal: discussion.comments.totalCount,
