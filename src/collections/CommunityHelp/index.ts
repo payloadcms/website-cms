@@ -108,7 +108,7 @@ export const CommunityHelp: CollectionConfig = {
                 siblingData.communityHelpType === 'discord'
                   ? siblingData.discordID
                   : siblingData.githubID
-              updateAlgolia(docID, value)
+              if (docID) updateAlgolia(docID, value)
             }
           },
         ],
