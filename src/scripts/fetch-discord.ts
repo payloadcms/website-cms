@@ -112,33 +112,27 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
         }
       }
 
-      // Filter out messages from bots, apart from the first message
-      // The first message can be from a bot, in case the thread was created by a bot
-      // (e.g. by the bot moving a message over to a thread)
-      let counter = 0
-      messages = messages.filter(m => {
-        return !m.author.bot || counter++ === 0
-      })
+      const [intro, ...combinedResponses] = messages
+        .filter(message => !message.author.bot || message.content)
+        .reverse()
+        .reduce((acc: Message[], message) => {
+          const prevMessage = acc[acc?.length - 1]
+          let newAuthor = true
 
-      const [intro, ...combinedResponses] = messages.reverse().reduce((acc: Message[], message) => {
-        const prevMessage = acc[acc.length - 1]
-        let newAuthor = true
-
-        if (prevMessage) {
-          // should combine with prev message - same author
-          if (prevMessage.author.id === message.author.id) {
-            prevMessage.content += `\n \n ${message.content}`
-            prevMessage.attachments = prevMessage.attachments.concat(message.attachments)
-            newAuthor = false
+          if (prevMessage) {
+            // should combine with prev message - same author
+            if (prevMessage.author.id === message.author.id) {
+              prevMessage.content += `\n \n ${message.content}`
+              prevMessage.attachments = prevMessage.attachments.concat(message.attachments)
+              newAuthor = false
+            }
           }
-        }
 
-        if (newAuthor) {
-          acc.push(message)
-        }
-
-        return acc
-      }, [])
+          if (newAuthor) {
+            acc.push(message)
+          }
+          return acc
+        }, [])
       return {
         info: {
           name: info.name,
@@ -166,7 +160,7 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
             createdAtDate: createdTimestamp,
           }
         }),
-        messageCount: info.messageCount,
+        messageCount: combinedResponses ? combinedResponses?.length : info.messageCount,
         slug: sanitizeSlug(info.name),
       }
     })
