@@ -113,7 +113,11 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
       }
 
       const [intro, ...combinedResponses] = messages
-        .filter(message => !message.author.bot || message.content)
+        .filter(
+          message =>
+            !message.author.bot ||
+            (message.author.bot && message.content && message.position === 0),
+        )
         .reverse()
         .reduce((acc: Message[], message) => {
           const prevMessage = acc[acc?.length - 1]
