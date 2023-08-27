@@ -22,7 +22,7 @@ import richText from '../fields/richText'
 import largeBody from '../fields/richText/largeBody'
 import { slugField } from '../fields/slug'
 import { formatPreviewURL } from '../utilities/formatPreviewURL'
-import { regeneratePage } from '../utilities/regeneratePage'
+import { revalidatePage } from '../utilities/revalidatePage'
 
 export const CaseStudies: CollectionConfig = {
   slug: 'case-studies',
@@ -43,7 +43,7 @@ export const CaseStudies: CollectionConfig = {
   hooks: {
     afterChange: [
       ({ req: { payload }, doc }) => {
-        regeneratePage({
+        revalidatePage({
           payload,
           collection: 'case-studies',
           doc,
