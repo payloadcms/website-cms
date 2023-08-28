@@ -11,7 +11,7 @@ import { ReusableContent } from '../blocks/ReusableContent'
 import richText from '../fields/richText'
 import { slugField } from '../fields/slug'
 import { formatPreviewURL } from '../utilities/formatPreviewURL'
-import { regeneratePage } from '../utilities/regeneratePage'
+import { revalidatePage } from '../utilities/revalidatePage'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -32,7 +32,7 @@ export const Posts: CollectionConfig = {
   hooks: {
     afterChange: [
       ({ req: { payload }, doc }) => {
-        regeneratePage({
+        revalidatePage({
           payload,
           collection: 'posts',
           doc,

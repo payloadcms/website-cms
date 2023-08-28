@@ -5,7 +5,20 @@ import { isAdminOrSelf, isAdminOrSelfFieldLevel } from '../access/isAdminOrSelf'
 
 export const Users: CollectionConfig = {
   slug: 'users',
-  auth: true,
+  auth: {
+    tokenExpiration: 28800, // 8 hours
+    cookies: {
+      sameSite:
+        process.env.NODE_ENV === 'production' && !process.env.DISABLE_SECURE_COOKIE
+          ? 'none'
+          : undefined,
+      secure:
+        process.env.NODE_ENV === 'production' && !process.env.DISABLE_SECURE_COOKIE
+          ? true
+          : undefined,
+      domain: process.env.COOKIE_DOMAIN,
+    },
+  },
   admin: {
     useAsTitle: 'email',
   },

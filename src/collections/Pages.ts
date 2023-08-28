@@ -23,7 +23,7 @@ import { fullTitle } from '../fields/fullTitle'
 import { hero } from '../fields/hero'
 import { slugField } from '../fields/slug'
 import { formatPreviewURL } from '../utilities/formatPreviewURL'
-import { regeneratePage } from '../utilities/regeneratePage'
+import { revalidatePage } from '../utilities/revalidatePage'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -45,7 +45,7 @@ export const Pages: CollectionConfig = {
   hooks: {
     afterChange: [
       ({ req: { payload }, doc }) => {
-        regeneratePage({
+        revalidatePage({
           payload,
           collection: 'pages',
           doc,
