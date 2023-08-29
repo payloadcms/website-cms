@@ -5,6 +5,7 @@ import fetch from 'node-fetch'
 import type { PayloadHandler } from 'payload/config'
 
 import type { Doc } from '../payload-types'
+import sanitizeSlug from '../utilities/sanitizeSlug'
 
 dotenv.config()
 
@@ -13,23 +14,6 @@ const decodeBase64 = (
 ) => {
   const buff = Buffer.from(string, 'base64')
   return buff.toString('utf8')
-}
-
-function slugify(string: { toString: () => string }) {
-  const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
-  const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
-  const p = new RegExp(a.split('').join('|'), 'g')
-
-  return string
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, '-') // Replace spaces with -
-    .replace(p, (c: string) => b.charAt(a.indexOf(c))) // Replace special characters
-    .replace(/&/g, '-and-') // Replace & with 'and'
-    .replace(/[^\w\-]+/g, '') // Remove all non-word characters
-    .replace(/\-\-+/g, '-') // Replace multiple - with single -
-    .replace(/^-+/, '') // Trim - from start of text
-    .replace(/-+$/, '') // Trim - from end of text
 }
 
 const githubAPI = 'https://api.github.com/repos/payloadcms/payload'
@@ -69,7 +53,7 @@ function getHeadings(source: string) {
   return headingLines.map((raw: string) => {
     const text = raw.replace(/^###*\s/, '')
     const level = raw.slice(0, 3) === '###' ? 3 : 2
-    return { text, level, id: slugify(text) }
+    return { text, level, id: sanitizeSlug(text) }
   })
 }
 

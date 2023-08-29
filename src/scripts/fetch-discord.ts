@@ -6,6 +6,8 @@ import { ChannelType, Client, Events, GatewayIntentBits } from 'discord.js'
 import { toHTML } from 'discord-markdown'
 import type { Payload } from 'payload'
 
+import sanitizeSlug from '../utilities/sanitizeSlug'
+
 // eslint-disable-next-line
 require('dotenv').config()
 
@@ -23,23 +25,6 @@ async function mapAsync(
   callbackfn: (value: any, index: number, array: any[]) => Promise<any>,
 ): Promise<any[]> {
   return Promise.all(arr.map(callbackfn))
-}
-
-function slugify(string: string): string {
-  const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
-  const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
-  const p = new RegExp(a.split('').join('|'), 'g')
-
-  return string
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, '-') // Replace spaces with -
-    .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
-    .replace(/&/g, '-and-') // Replace & with 'and'
-    .replace(/[^\w\-]+/g, '') // Remove all non-word characters
-    .replace(/\-\-+/g, '-') // Replace multiple - with single -
-    .replace(/^-+/, '') // Trim - from start of text
-    .replace(/-+$/, '') // Trim - from end of text
 }
 
 export async function fetchDiscordThreads(payload: Payload): Promise<void> {
@@ -127,25 +112,31 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
         }
       }
 
-      const [intro, ...combinedResponses] = messages.reverse().reduce((acc: Message[], message) => {
-        const prevMessage = acc[acc.length - 1]
-        let newAuthor = true
+      const [intro, ...combinedResponses] = messages
+        .filter(
+          message =>
+            !message.author.bot ||
+            (message.author.bot && message.content && message.position === 0),
+        )
+        .reverse()
+        .reduce((acc: Message[], message) => {
+          const prevMessage = acc[acc?.length - 1]
+          let newAuthor = true
 
-        if (prevMessage) {
-          // should combine with prev message - same author
-          if (prevMessage.author.id === message.author.id) {
-            prevMessage.content += `\n \n ${message.content}`
-            prevMessage.attachments = prevMessage.attachments.concat(message.attachments)
-            newAuthor = false
+          if (prevMessage) {
+            // should combine with prev message - same author
+            if (prevMessage.author.id === message.author.id) {
+              prevMessage.content += `\n \n ${message.content}`
+              prevMessage.attachments = prevMessage.attachments.concat(message.attachments)
+              newAuthor = false
+            }
           }
-        }
 
-        if (newAuthor) {
-          acc.push(message)
-        }
-
-        return acc
-      }, [])
+          if (newAuthor) {
+            acc.push(message)
+          }
+          return acc
+        }, [])
       return {
         info: {
           name: info.name,
@@ -173,8 +164,8 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
             createdAtDate: createdTimestamp,
           }
         }),
-        messageCount: info.messageCount,
-        slug: slugify(info.name),
+        messageCount: combinedResponses ? combinedResponses?.length : info.messageCount,
+        slug: sanitizeSlug(info.name),
       }
     })
     console.log('\n')

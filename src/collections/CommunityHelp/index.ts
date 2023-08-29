@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload/types'
 
 import { isAdmin } from '../../access/isAdmin'
 import { extractDescription } from './extract-description'
-import { removeFromAlgolia } from './removeFromAlgolia'
+import { updateAlgolia } from './updateAlgolia'
 
 export const CommunityHelp: CollectionConfig = {
   slug: 'community-help',
@@ -103,12 +103,12 @@ export const CommunityHelp: CollectionConfig = {
       hooks: {
         afterChange: [
           ({ previousValue, value, siblingData }) => {
-            if (previousValue === true && value === false) {
+            if (previousValue !== value) {
               const docID =
                 siblingData.communityHelpType === 'discord'
                   ? siblingData.discordID
                   : siblingData.githubID
-              removeFromAlgolia(docID)
+              if (docID) updateAlgolia(docID, value)
             }
           },
         ],
