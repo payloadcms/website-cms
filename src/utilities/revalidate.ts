@@ -13,17 +13,19 @@ export const revalidate = async (args: {
 
   try {
     const res = await fetch(
-      `${process.env.PAYLOAD_PUBLIC_SERVER_URL}/api/revalidate?secret=${process.env.REVALIDATION_KEY}&collection=${collection}&slug=${slug}`,
+      `${process.env.PAYLOAD_PUBLIC_APP_URL}/api/revalidate?secret=${process.env.REVALIDATION_KEY}&collection=${collection}&slug=${slug}`,
     )
 
     if (res.ok) {
       payload.logger.info(`Revalidated page '${slug}' in collection '${collection}'`)
     } else {
-      payload.logger.error(`Error revalidating page '${slug}' in collection '${collection}'`)
+      payload.logger.error(
+        `Error revalidating page '${slug}' in collection '${collection}': ${res}`,
+      )
     }
   } catch (err: unknown) {
     payload.logger.error(
-      `Error hitting revalidate route for page '${slug}' in collection '${collection}'`,
+      `Error hitting revalidate route for page '${slug}' in collection '${collection}': ${err}`,
     )
   }
 }
