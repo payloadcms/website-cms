@@ -619,7 +619,7 @@ export interface Page {
   title: string;
   fullTitle?: string;
   hero: {
-    type: 'default' | 'contentMedia' | 'form' | 'home' | 'livestream';
+    type: 'default' | 'contentMedia' | 'form' | 'home' | 'livestream' | 'centeredCarousel';
     livestream?: {
       id?: string;
       date: string;
@@ -633,6 +633,10 @@ export interface Page {
         image?: string | Media;
         id?: string;
       }[];
+    };
+    commandLine?: {
+      command: string;
+      appearance?: 'default' | 'minimal';
     };
     richText?: {
       [k: string]: unknown;
@@ -714,6 +718,17 @@ export interface Page {
       id?: string;
     }[];
     form?: string | Form;
+    logoGroup?: {
+      label?: string;
+      logos?: {
+        logo: string | Media;
+        id?: string;
+      }[];
+    };
+    carousel?: {
+      image: string | Media;
+      id?: string;
+    }[];
   };
   layout: (
     | {
@@ -1274,6 +1289,36 @@ export interface Page {
         id?: string;
         blockName?: string;
         blockType: 'stickyHighlights';
+      }
+    | {
+        content?: {
+          [k: string]: unknown;
+        }[];
+        tabs?: {
+          label: string;
+          content?: {
+            [k: string]: unknown;
+          }[];
+          Examples?: (
+            | {
+                route?: string;
+                code: string;
+                id?: string;
+                blockName?: string;
+                blockType: 'CodeExampleBlock';
+              }
+            | {
+                media: string | Media;
+                id?: string;
+                blockName?: string;
+                blockType: 'MediaExampleBlock';
+              }
+          )[];
+          id?: string;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'exampleTabs';
       }
   )[];
   slug?: string;
