@@ -9,6 +9,7 @@ import { CaseStudyCards } from '../blocks/CaseStudyCards'
 import { CodeFeature } from '../blocks/CodeFeature'
 import { Content } from '../blocks/Content'
 import { ContentGrid } from '../blocks/ContentGrid'
+import { ExampleTabs } from '../blocks/ExampleTabs'
 import { Form } from '../blocks/Form'
 import { HoverHighlights } from '../blocks/HoverHighlights'
 import { LinkGrid } from '../blocks/LinkGrid'
@@ -92,6 +93,7 @@ export const Pages: CollectionConfig = {
                 Slider,
                 Steps,
                 StickyHighlights,
+                ExampleTabs,
               ],
             },
           ],
