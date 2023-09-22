@@ -1585,7 +1585,6 @@ type ExampleTabsBlock_Tabs {
 union ExampleTabsBlock_Tabs_Examples = CodeExampleBlock | MediaExampleBlock
 
 type CodeExampleBlock {
-  route: String
   code: String!
   id: String
   blockName: String

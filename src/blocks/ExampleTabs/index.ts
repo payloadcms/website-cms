@@ -9,10 +9,6 @@ const CodeExampleBlock: Block = {
   },
   fields: [
     {
-      name: 'route',
-      type: 'text',
-    },
-    {
       name: 'code',
       type: 'code',
       required: true,
