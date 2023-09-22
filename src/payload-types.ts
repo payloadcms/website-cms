@@ -635,8 +635,7 @@ export interface Page {
       }[];
     };
     commandLine?: {
-      command: string;
-      appearance?: 'default' | 'minimal';
+      command?: string;
     };
     richText?: {
       [k: string]: unknown;
@@ -1290,36 +1289,7 @@ export interface Page {
         blockName?: string;
         blockType: 'stickyHighlights';
       }
-    | {
-        content?: {
-          [k: string]: unknown;
-        }[];
-        tabs?: {
-          label: string;
-          content?: {
-            [k: string]: unknown;
-          }[];
-          Examples?: (
-            | {
-                route?: string;
-                code: string;
-                id?: string;
-                blockName?: string;
-                blockType: 'CodeExampleBlock';
-              }
-            | {
-                media: string | Media;
-                id?: string;
-                blockName?: string;
-                blockType: 'MediaExampleBlock';
-              }
-          )[];
-          id?: string;
-        }[];
-        id?: string;
-        blockName?: string;
-        blockType: 'exampleTabs';
-      }
+    | ExampleTabsBlock
   )[];
   slug?: string;
   meta?: {
@@ -1651,6 +1621,7 @@ export interface ReusableContent {
         blockName?: string;
         blockType: 'contentGrid';
       }
+    | ExampleTabsBlock
     | {
         formFields: {
           container?: boolean;
@@ -2016,6 +1987,35 @@ export interface ReusableContent {
   )[];
   updatedAt: string;
   createdAt: string;
+}
+export interface ExampleTabsBlock {
+  content?: {
+    [k: string]: unknown;
+  }[];
+  tabs: {
+    label: string;
+    content?: {
+      [k: string]: unknown;
+    }[];
+    examples: (CodeExampleBlock | MediaExampleBlock)[];
+    id?: string;
+  }[];
+  id?: string;
+  blockName?: string;
+  blockType: 'exampleTabs';
+}
+export interface CodeExampleBlock {
+  route?: string;
+  code: string;
+  id?: string;
+  blockName?: string;
+  blockType: 'CodeExampleBlock';
+}
+export interface MediaExampleBlock {
+  media: string | Media;
+  id?: string;
+  blockName?: string;
+  blockType: 'MediaExampleBlock';
 }
 export interface Form {
   id: string;

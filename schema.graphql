@@ -898,12 +898,6 @@ input Page_Hero_Livestream_Guests_Image_where_and {
 
 type Page_Hero_CommandLine {
   command: String
-  appearance: Page_Hero_CommandLine_appearance
-}
-
-enum Page_Hero_CommandLine_appearance {
-  default
-  minimal
 }
 
 type Page_Hero_Links {
@@ -1365,7 +1359,7 @@ type ReusableContent {
   createdAt: DateTime
 }
 
-union ReusableContent_Layout = Banner | BlogContent | BlogMarkdown | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | Code | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | Slider | Steps | StickyHighlights
+union ReusableContent_Layout = Banner | BlogContent | BlogMarkdown | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | Code | CodeFeature | Content | ContentGrid | ExampleTabsBlock | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | Slider | Steps | StickyHighlights
 
 type CardGrid {
   cardGridFields: CardGrid_CardGridFields
@@ -1571,6 +1565,194 @@ type ContentGrid_ContentGridFields {
 type ContentGrid_ContentGridFields_Cells {
   content(depth: Int): JSON
   id: String
+}
+
+type ExampleTabsBlock {
+  content(depth: Int): JSON
+  tabs: [ExampleTabsBlock_Tabs!]!
+  id: String
+  blockName: String
+  blockType: String
+}
+
+type ExampleTabsBlock_Tabs {
+  label: String!
+  content(depth: Int): JSON
+  examples: [ExampleTabsBlock_Tabs_Examples!]!
+  id: String
+}
+
+union ExampleTabsBlock_Tabs_Examples = CodeExampleBlock | MediaExampleBlock
+
+type CodeExampleBlock {
+  route: String
+  code: String!
+  id: String
+  blockName: String
+  blockType: String
+}
+
+type MediaExampleBlock {
+  media(where: MediaExampleBlock_Media_where): Media!
+  id: String
+  blockName: String
+  blockType: String
+}
+
+input MediaExampleBlock_Media_where {
+  alt: MediaExampleBlock_Media_alt_operator
+  darkModeFallback: MediaExampleBlock_Media_darkModeFallback_operator
+  updatedAt: MediaExampleBlock_Media_updatedAt_operator
+  createdAt: MediaExampleBlock_Media_createdAt_operator
+  url: MediaExampleBlock_Media_url_operator
+  filename: MediaExampleBlock_Media_filename_operator
+  mimeType: MediaExampleBlock_Media_mimeType_operator
+  filesize: MediaExampleBlock_Media_filesize_operator
+  width: MediaExampleBlock_Media_width_operator
+  height: MediaExampleBlock_Media_height_operator
+  id: MediaExampleBlock_Media_id_operator
+  OR: [MediaExampleBlock_Media_where_or]
+  AND: [MediaExampleBlock_Media_where_and]
+}
+
+input MediaExampleBlock_Media_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input MediaExampleBlock_Media_darkModeFallback_operator {
+  equals: String
+  not_equals: String
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_where_or {
+  alt: MediaExampleBlock_Media_alt_operator
+  darkModeFallback: MediaExampleBlock_Media_darkModeFallback_operator
+  updatedAt: MediaExampleBlock_Media_updatedAt_operator
+  createdAt: MediaExampleBlock_Media_createdAt_operator
+  url: MediaExampleBlock_Media_url_operator
+  filename: MediaExampleBlock_Media_filename_operator
+  mimeType: MediaExampleBlock_Media_mimeType_operator
+  filesize: MediaExampleBlock_Media_filesize_operator
+  width: MediaExampleBlock_Media_width_operator
+  height: MediaExampleBlock_Media_height_operator
+  id: MediaExampleBlock_Media_id_operator
+}
+
+input MediaExampleBlock_Media_where_and {
+  alt: MediaExampleBlock_Media_alt_operator
+  darkModeFallback: MediaExampleBlock_Media_darkModeFallback_operator
+  updatedAt: MediaExampleBlock_Media_updatedAt_operator
+  createdAt: MediaExampleBlock_Media_createdAt_operator
+  url: MediaExampleBlock_Media_url_operator
+  filename: MediaExampleBlock_Media_filename_operator
+  mimeType: MediaExampleBlock_Media_mimeType_operator
+  filesize: MediaExampleBlock_Media_filesize_operator
+  width: MediaExampleBlock_Media_width_operator
+  height: MediaExampleBlock_Media_height_operator
+  id: MediaExampleBlock_Media_id_operator
 }
 
 type FormBlock {
@@ -3557,195 +3739,7 @@ input Page_Hero_Carousel_Image_where_and {
   id: Page_Hero_Carousel_Image_id_operator
 }
 
-union Page_Layout = Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights | ExampleTabs
-
-type ExampleTabs {
-  content(depth: Int): JSON
-  tabs: [ExampleTabs_Tabs!]
-  id: String
-  blockName: String
-  blockType: String
-}
-
-type ExampleTabs_Tabs {
-  label: String
-  content(depth: Int): JSON
-  Examples: [ExampleTabs_Tabs_Examples!]
-  id: String
-}
-
-union ExampleTabs_Tabs_Examples = CodeExampleBlock | MediaExampleBlock
-
-type CodeExampleBlock {
-  route: String
-  code: String
-  id: String
-  blockName: String
-  blockType: String
-}
-
-type MediaExampleBlock {
-  media(where: MediaExampleBlock_Media_where): Media
-  id: String
-  blockName: String
-  blockType: String
-}
-
-input MediaExampleBlock_Media_where {
-  alt: MediaExampleBlock_Media_alt_operator
-  darkModeFallback: MediaExampleBlock_Media_darkModeFallback_operator
-  updatedAt: MediaExampleBlock_Media_updatedAt_operator
-  createdAt: MediaExampleBlock_Media_createdAt_operator
-  url: MediaExampleBlock_Media_url_operator
-  filename: MediaExampleBlock_Media_filename_operator
-  mimeType: MediaExampleBlock_Media_mimeType_operator
-  filesize: MediaExampleBlock_Media_filesize_operator
-  width: MediaExampleBlock_Media_width_operator
-  height: MediaExampleBlock_Media_height_operator
-  id: MediaExampleBlock_Media_id_operator
-  OR: [MediaExampleBlock_Media_where_or]
-  AND: [MediaExampleBlock_Media_where_and]
-}
-
-input MediaExampleBlock_Media_alt_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-}
-
-input MediaExampleBlock_Media_darkModeFallback_operator {
-  equals: String
-  not_equals: String
-  exists: Boolean
-}
-
-input MediaExampleBlock_Media_updatedAt_operator {
-  equals: DateTime
-  not_equals: DateTime
-  greater_than_equal: DateTime
-  greater_than: DateTime
-  less_than_equal: DateTime
-  less_than: DateTime
-  like: DateTime
-  exists: Boolean
-}
-
-input MediaExampleBlock_Media_createdAt_operator {
-  equals: DateTime
-  not_equals: DateTime
-  greater_than_equal: DateTime
-  greater_than: DateTime
-  less_than_equal: DateTime
-  less_than: DateTime
-  like: DateTime
-  exists: Boolean
-}
-
-input MediaExampleBlock_Media_url_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
-}
-
-input MediaExampleBlock_Media_filename_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
-}
-
-input MediaExampleBlock_Media_mimeType_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
-}
-
-input MediaExampleBlock_Media_filesize_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-  exists: Boolean
-}
-
-input MediaExampleBlock_Media_width_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-  exists: Boolean
-}
-
-input MediaExampleBlock_Media_height_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-  exists: Boolean
-}
-
-input MediaExampleBlock_Media_id_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
-}
-
-input MediaExampleBlock_Media_where_or {
-  alt: MediaExampleBlock_Media_alt_operator
-  darkModeFallback: MediaExampleBlock_Media_darkModeFallback_operator
-  updatedAt: MediaExampleBlock_Media_updatedAt_operator
-  createdAt: MediaExampleBlock_Media_createdAt_operator
-  url: MediaExampleBlock_Media_url_operator
-  filename: MediaExampleBlock_Media_filename_operator
-  mimeType: MediaExampleBlock_Media_mimeType_operator
-  filesize: MediaExampleBlock_Media_filesize_operator
-  width: MediaExampleBlock_Media_width_operator
-  height: MediaExampleBlock_Media_height_operator
-  id: MediaExampleBlock_Media_id_operator
-}
-
-input MediaExampleBlock_Media_where_and {
-  alt: MediaExampleBlock_Media_alt_operator
-  darkModeFallback: MediaExampleBlock_Media_darkModeFallback_operator
-  updatedAt: MediaExampleBlock_Media_updatedAt_operator
-  createdAt: MediaExampleBlock_Media_createdAt_operator
-  url: MediaExampleBlock_Media_url_operator
-  filename: MediaExampleBlock_Media_filename_operator
-  mimeType: MediaExampleBlock_Media_mimeType_operator
-  filesize: MediaExampleBlock_Media_filesize_operator
-  width: MediaExampleBlock_Media_width_operator
-  height: MediaExampleBlock_Media_height_operator
-  id: MediaExampleBlock_Media_id_operator
-}
+union Page_Layout = Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights | ExampleTabsBlock
 
 type Page_Meta {
   title: String
@@ -6693,7 +6687,6 @@ input Page_where {
   hero__livestream__guests__image: Page_hero__livestream__guests__image_operator
   hero__livestream__guests__id: Page_hero__livestream__guests__id_operator
   hero__commandLine__command: Page_hero__commandLine__command_operator
-  hero__commandLine__appearance: Page_hero__commandLine__appearance_operator
   hero__richText: Page_hero__richText_operator
   hero__sidebarContent: Page_hero__sidebarContent_operator
   hero__links__link__type: Page_hero__links__link__type_operator
@@ -6862,20 +6855,7 @@ input Page_hero__commandLine__command_operator {
   in: [String]
   not_in: [String]
   all: [String]
-}
-
-input Page_hero__commandLine__appearance_operator {
-  equals: Page_hero__commandLine__appearance_Input
-  not_equals: Page_hero__commandLine__appearance_Input
-  in: [Page_hero__commandLine__appearance_Input]
-  not_in: [Page_hero__commandLine__appearance_Input]
-  all: [Page_hero__commandLine__appearance_Input]
   exists: Boolean
-}
-
-enum Page_hero__commandLine__appearance_Input {
-  default
-  minimal
 }
 
 input Page_hero__richText_operator {
@@ -7334,7 +7314,6 @@ input Page_where_or {
   hero__livestream__guests__image: Page_hero__livestream__guests__image_operator
   hero__livestream__guests__id: Page_hero__livestream__guests__id_operator
   hero__commandLine__command: Page_hero__commandLine__command_operator
-  hero__commandLine__appearance: Page_hero__commandLine__appearance_operator
   hero__richText: Page_hero__richText_operator
   hero__sidebarContent: Page_hero__sidebarContent_operator
   hero__links__link__type: Page_hero__links__link__type_operator
@@ -7394,7 +7373,6 @@ input Page_where_and {
   hero__livestream__guests__image: Page_hero__livestream__guests__image_operator
   hero__livestream__guests__id: Page_hero__livestream__guests__id_operator
   hero__commandLine__command: Page_hero__commandLine__command_operator
-  hero__commandLine__appearance: Page_hero__commandLine__appearance_operator
   hero__richText: Page_hero__richText_operator
   hero__sidebarContent: Page_hero__sidebarContent_operator
   hero__links__link__type: Page_hero__links__link__type_operator
@@ -7846,7 +7824,6 @@ type PagesDocAccessFields_hero_commandLine_Delete {
 
 type PagesDocAccessFields_hero_commandLine_Fields {
   command: PagesDocAccessFields_hero_commandLine_command
-  appearance: PagesDocAccessFields_hero_commandLine_appearance
 }
 
 type PagesDocAccessFields_hero_commandLine_command {
@@ -7869,29 +7846,6 @@ type PagesDocAccessFields_hero_commandLine_command_Update {
 }
 
 type PagesDocAccessFields_hero_commandLine_command_Delete {
-  permission: Boolean!
-}
-
-type PagesDocAccessFields_hero_commandLine_appearance {
-  create: PagesDocAccessFields_hero_commandLine_appearance_Create
-  read: PagesDocAccessFields_hero_commandLine_appearance_Read
-  update: PagesDocAccessFields_hero_commandLine_appearance_Update
-  delete: PagesDocAccessFields_hero_commandLine_appearance_Delete
-}
-
-type PagesDocAccessFields_hero_commandLine_appearance_Create {
-  permission: Boolean!
-}
-
-type PagesDocAccessFields_hero_commandLine_appearance_Read {
-  permission: Boolean!
-}
-
-type PagesDocAccessFields_hero_commandLine_appearance_Update {
-  permission: Boolean!
-}
-
-type PagesDocAccessFields_hero_commandLine_appearance_Delete {
   permission: Boolean!
 }
 
@@ -9562,12 +9516,6 @@ input PageVersion_Version_Hero_Livestream_Guests_Image_where_and {
 
 type PageVersion_Version_Hero_CommandLine {
   command: String
-  appearance: PageVersion_Version_Hero_CommandLine_appearance
-}
-
-enum PageVersion_Version_Hero_CommandLine_appearance {
-  default
-  minimal
 }
 
 type PageVersion_Version_Hero_Links {
@@ -10164,7 +10112,7 @@ input PageVersion_Version_Hero_Carousel_Image_where_and {
   id: PageVersion_Version_Hero_Carousel_Image_id_operator
 }
 
-union PageVersion_Version_Layout = Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights | ExampleTabs
+union PageVersion_Version_Layout = Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights | ExampleTabsBlock
 
 type PageVersion_Version_Meta {
   title: String
@@ -10368,7 +10316,6 @@ input versionsPage_where {
   version__hero__livestream__guests__image: versionsPage_version__hero__livestream__guests__image_operator
   version__hero__livestream__guests__id: versionsPage_version__hero__livestream__guests__id_operator
   version__hero__commandLine__command: versionsPage_version__hero__commandLine__command_operator
-  version__hero__commandLine__appearance: versionsPage_version__hero__commandLine__appearance_operator
   version__hero__richText: versionsPage_version__hero__richText_operator
   version__hero__sidebarContent: versionsPage_version__hero__sidebarContent_operator
   version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
@@ -10548,20 +10495,7 @@ input versionsPage_version__hero__commandLine__command_operator {
   in: [String]
   not_in: [String]
   all: [String]
-}
-
-input versionsPage_version__hero__commandLine__appearance_operator {
-  equals: versionsPage_version__hero__commandLine__appearance_Input
-  not_equals: versionsPage_version__hero__commandLine__appearance_Input
-  in: [versionsPage_version__hero__commandLine__appearance_Input]
-  not_in: [versionsPage_version__hero__commandLine__appearance_Input]
-  all: [versionsPage_version__hero__commandLine__appearance_Input]
   exists: Boolean
-}
-
-enum versionsPage_version__hero__commandLine__appearance_Input {
-  default
-  minimal
 }
 
 input versionsPage_version__hero__richText_operator {
@@ -11043,7 +10977,6 @@ input versionsPage_where_or {
   version__hero__livestream__guests__image: versionsPage_version__hero__livestream__guests__image_operator
   version__hero__livestream__guests__id: versionsPage_version__hero__livestream__guests__id_operator
   version__hero__commandLine__command: versionsPage_version__hero__commandLine__command_operator
-  version__hero__commandLine__appearance: versionsPage_version__hero__commandLine__appearance_operator
   version__hero__richText: versionsPage_version__hero__richText_operator
   version__hero__sidebarContent: versionsPage_version__hero__sidebarContent_operator
   version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
@@ -11106,7 +11039,6 @@ input versionsPage_where_and {
   version__hero__livestream__guests__image: versionsPage_version__hero__livestream__guests__image_operator
   version__hero__livestream__guests__id: versionsPage_version__hero__livestream__guests__id_operator
   version__hero__commandLine__command: versionsPage_version__hero__commandLine__command_operator
-  version__hero__commandLine__appearance: versionsPage_version__hero__commandLine__appearance_operator
   version__hero__richText: versionsPage_version__hero__richText_operator
   version__hero__sidebarContent: versionsPage_version__hero__sidebarContent_operator
   version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
@@ -17145,7 +17077,6 @@ type PagesFields_hero_commandLine_Delete {
 
 type PagesFields_hero_commandLine_Fields {
   command: PagesFields_hero_commandLine_command
-  appearance: PagesFields_hero_commandLine_appearance
 }
 
 type PagesFields_hero_commandLine_command {
@@ -17168,29 +17099,6 @@ type PagesFields_hero_commandLine_command_Update {
 }
 
 type PagesFields_hero_commandLine_command_Delete {
-  permission: Boolean!
-}
-
-type PagesFields_hero_commandLine_appearance {
-  create: PagesFields_hero_commandLine_appearance_Create
-  read: PagesFields_hero_commandLine_appearance_Read
-  update: PagesFields_hero_commandLine_appearance_Update
-  delete: PagesFields_hero_commandLine_appearance_Delete
-}
-
-type PagesFields_hero_commandLine_appearance_Create {
-  permission: Boolean!
-}
-
-type PagesFields_hero_commandLine_appearance_Read {
-  permission: Boolean!
-}
-
-type PagesFields_hero_commandLine_appearance_Update {
-  permission: Boolean!
-}
-
-type PagesFields_hero_commandLine_appearance_Delete {
   permission: Boolean!
 }
 
@@ -21403,13 +21311,7 @@ input mutationPage_Hero_Livestream_GuestsInput {
 }
 
 input mutationPage_Hero_CommandLineInput {
-  command: String!
-  appearance: Page_Hero_CommandLine_appearance_MutationInput
-}
-
-enum Page_Hero_CommandLine_appearance_MutationInput {
-  default
-  minimal
+  command: String
 }
 
 input mutationPage_Hero_LinksInput {
@@ -21590,13 +21492,7 @@ input mutationPageUpdate_Hero_Livestream_GuestsInput {
 }
 
 input mutationPageUpdate_Hero_CommandLineInput {
-  command: String!
-  appearance: PageUpdate_Hero_CommandLine_appearance_MutationInput
-}
-
-enum PageUpdate_Hero_CommandLine_appearance_MutationInput {
-  default
-  minimal
+  command: String
 }
 
 input mutationPageUpdate_Hero_LinksInput {

@@ -2,6 +2,7 @@ import type { Block } from 'payload/types'
 
 const CodeExampleBlock: Block = {
   slug: 'CodeExampleBlock',
+  interfaceName: 'CodeExampleBlock',
   labels: {
     singular: 'Code Example',
     plural: 'Code Examples',
@@ -21,6 +22,7 @@ const CodeExampleBlock: Block = {
 
 const MediaExampleBlock: Block = {
   slug: 'MediaExampleBlock',
+  interfaceName: 'MediaExampleBlock',
   labels: {
     singular: 'Media Example',
     plural: 'Media Examples',
@@ -41,6 +43,7 @@ export const ExampleTabs: Block = {
     singular: 'Example Tabs',
     plural: 'Example Tabs',
   },
+  interfaceName: 'ExampleTabsBlock',
   fields: [
     {
       name: 'content',
@@ -50,6 +53,7 @@ export const ExampleTabs: Block = {
       name: 'tabs',
       type: 'array',
       minRows: 1,
+      required: true,
       fields: [
         {
           name: 'label',
@@ -61,8 +65,11 @@ export const ExampleTabs: Block = {
           type: 'richText',
         },
         {
-          name: 'Examples',
+          name: 'examples',
           type: 'blocks',
+          minRows: 1,
+          maxRows: 2,
+          required: true,
           blocks: [CodeExampleBlock, MediaExampleBlock],
         },
       ],
