@@ -703,7 +703,7 @@ type Page {
 type Page_Hero {
   type: Page_Hero_type
   livestream: Page_Hero_Livestream
-  commandLine: Page_Hero_CommandLine
+  commandLine: String
   richText(depth: Int): JSON
   sidebarContent(depth: Int): JSON
   links: [Page_Hero_Links!]
@@ -894,10 +894,6 @@ input Page_Hero_Livestream_Guests_Image_where_and {
   width: Page_Hero_Livestream_Guests_Image_width_operator
   height: Page_Hero_Livestream_Guests_Image_height_operator
   id: Page_Hero_Livestream_Guests_Image_id_operator
-}
-
-type Page_Hero_CommandLine {
-  command: String
 }
 
 type Page_Hero_Links {
@@ -6685,7 +6681,7 @@ input Page_where {
   hero__livestream__guests__link: Page_hero__livestream__guests__link_operator
   hero__livestream__guests__image: Page_hero__livestream__guests__image_operator
   hero__livestream__guests__id: Page_hero__livestream__guests__id_operator
-  hero__commandLine__command: Page_hero__commandLine__command_operator
+  hero__commandLine: Page_hero__commandLine_operator
   hero__richText: Page_hero__richText_operator
   hero__sidebarContent: Page_hero__sidebarContent_operator
   hero__links__link__type: Page_hero__links__link__type_operator
@@ -6846,7 +6842,7 @@ input Page_hero__livestream__guests__id_operator {
   exists: Boolean
 }
 
-input Page_hero__commandLine__command_operator {
+input Page_hero__commandLine_operator {
   equals: String
   not_equals: String
   like: String
@@ -7312,7 +7308,7 @@ input Page_where_or {
   hero__livestream__guests__link: Page_hero__livestream__guests__link_operator
   hero__livestream__guests__image: Page_hero__livestream__guests__image_operator
   hero__livestream__guests__id: Page_hero__livestream__guests__id_operator
-  hero__commandLine__command: Page_hero__commandLine__command_operator
+  hero__commandLine: Page_hero__commandLine_operator
   hero__richText: Page_hero__richText_operator
   hero__sidebarContent: Page_hero__sidebarContent_operator
   hero__links__link__type: Page_hero__links__link__type_operator
@@ -7371,7 +7367,7 @@ input Page_where_and {
   hero__livestream__guests__link: Page_hero__livestream__guests__link_operator
   hero__livestream__guests__image: Page_hero__livestream__guests__image_operator
   hero__livestream__guests__id: Page_hero__livestream__guests__id_operator
-  hero__commandLine__command: Page_hero__commandLine__command_operator
+  hero__commandLine: Page_hero__commandLine_operator
   hero__richText: Page_hero__richText_operator
   hero__sidebarContent: Page_hero__sidebarContent_operator
   hero__links__link__type: Page_hero__links__link__type_operator
@@ -7802,7 +7798,6 @@ type PagesDocAccessFields_hero_commandLine {
   read: PagesDocAccessFields_hero_commandLine_Read
   update: PagesDocAccessFields_hero_commandLine_Update
   delete: PagesDocAccessFields_hero_commandLine_Delete
-  fields: PagesDocAccessFields_hero_commandLine_Fields
 }
 
 type PagesDocAccessFields_hero_commandLine_Create {
@@ -7818,33 +7813,6 @@ type PagesDocAccessFields_hero_commandLine_Update {
 }
 
 type PagesDocAccessFields_hero_commandLine_Delete {
-  permission: Boolean!
-}
-
-type PagesDocAccessFields_hero_commandLine_Fields {
-  command: PagesDocAccessFields_hero_commandLine_command
-}
-
-type PagesDocAccessFields_hero_commandLine_command {
-  create: PagesDocAccessFields_hero_commandLine_command_Create
-  read: PagesDocAccessFields_hero_commandLine_command_Read
-  update: PagesDocAccessFields_hero_commandLine_command_Update
-  delete: PagesDocAccessFields_hero_commandLine_command_Delete
-}
-
-type PagesDocAccessFields_hero_commandLine_command_Create {
-  permission: Boolean!
-}
-
-type PagesDocAccessFields_hero_commandLine_command_Read {
-  permission: Boolean!
-}
-
-type PagesDocAccessFields_hero_commandLine_command_Update {
-  permission: Boolean!
-}
-
-type PagesDocAccessFields_hero_commandLine_command_Delete {
   permission: Boolean!
 }
 
@@ -9320,7 +9288,7 @@ type PageVersion_Version {
 type PageVersion_Version_Hero {
   type: PageVersion_Version_Hero_type
   livestream: PageVersion_Version_Hero_Livestream
-  commandLine: PageVersion_Version_Hero_CommandLine
+  commandLine: String
   richText(depth: Int): JSON
   sidebarContent(depth: Int): JSON
   links: [PageVersion_Version_Hero_Links!]
@@ -9511,10 +9479,6 @@ input PageVersion_Version_Hero_Livestream_Guests_Image_where_and {
   width: PageVersion_Version_Hero_Livestream_Guests_Image_width_operator
   height: PageVersion_Version_Hero_Livestream_Guests_Image_height_operator
   id: PageVersion_Version_Hero_Livestream_Guests_Image_id_operator
-}
-
-type PageVersion_Version_Hero_CommandLine {
-  command: String
 }
 
 type PageVersion_Version_Hero_Links {
@@ -10314,7 +10278,7 @@ input versionsPage_where {
   version__hero__livestream__guests__link: versionsPage_version__hero__livestream__guests__link_operator
   version__hero__livestream__guests__image: versionsPage_version__hero__livestream__guests__image_operator
   version__hero__livestream__guests__id: versionsPage_version__hero__livestream__guests__id_operator
-  version__hero__commandLine__command: versionsPage_version__hero__commandLine__command_operator
+  version__hero__commandLine: versionsPage_version__hero__commandLine_operator
   version__hero__richText: versionsPage_version__hero__richText_operator
   version__hero__sidebarContent: versionsPage_version__hero__sidebarContent_operator
   version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
@@ -10486,7 +10450,7 @@ input versionsPage_version__hero__livestream__guests__id_operator {
   exists: Boolean
 }
 
-input versionsPage_version__hero__commandLine__command_operator {
+input versionsPage_version__hero__commandLine_operator {
   equals: String
   not_equals: String
   like: String
@@ -10975,7 +10939,7 @@ input versionsPage_where_or {
   version__hero__livestream__guests__link: versionsPage_version__hero__livestream__guests__link_operator
   version__hero__livestream__guests__image: versionsPage_version__hero__livestream__guests__image_operator
   version__hero__livestream__guests__id: versionsPage_version__hero__livestream__guests__id_operator
-  version__hero__commandLine__command: versionsPage_version__hero__commandLine__command_operator
+  version__hero__commandLine: versionsPage_version__hero__commandLine_operator
   version__hero__richText: versionsPage_version__hero__richText_operator
   version__hero__sidebarContent: versionsPage_version__hero__sidebarContent_operator
   version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
@@ -11037,7 +11001,7 @@ input versionsPage_where_and {
   version__hero__livestream__guests__link: versionsPage_version__hero__livestream__guests__link_operator
   version__hero__livestream__guests__image: versionsPage_version__hero__livestream__guests__image_operator
   version__hero__livestream__guests__id: versionsPage_version__hero__livestream__guests__id_operator
-  version__hero__commandLine__command: versionsPage_version__hero__commandLine__command_operator
+  version__hero__commandLine: versionsPage_version__hero__commandLine_operator
   version__hero__richText: versionsPage_version__hero__richText_operator
   version__hero__sidebarContent: versionsPage_version__hero__sidebarContent_operator
   version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
@@ -17055,7 +17019,6 @@ type PagesFields_hero_commandLine {
   read: PagesFields_hero_commandLine_Read
   update: PagesFields_hero_commandLine_Update
   delete: PagesFields_hero_commandLine_Delete
-  fields: PagesFields_hero_commandLine_Fields
 }
 
 type PagesFields_hero_commandLine_Create {
@@ -17071,33 +17034,6 @@ type PagesFields_hero_commandLine_Update {
 }
 
 type PagesFields_hero_commandLine_Delete {
-  permission: Boolean!
-}
-
-type PagesFields_hero_commandLine_Fields {
-  command: PagesFields_hero_commandLine_command
-}
-
-type PagesFields_hero_commandLine_command {
-  create: PagesFields_hero_commandLine_command_Create
-  read: PagesFields_hero_commandLine_command_Read
-  update: PagesFields_hero_commandLine_command_Update
-  delete: PagesFields_hero_commandLine_command_Delete
-}
-
-type PagesFields_hero_commandLine_command_Create {
-  permission: Boolean!
-}
-
-type PagesFields_hero_commandLine_command_Read {
-  permission: Boolean!
-}
-
-type PagesFields_hero_commandLine_command_Update {
-  permission: Boolean!
-}
-
-type PagesFields_hero_commandLine_command_Delete {
   permission: Boolean!
 }
 
@@ -21272,7 +21208,7 @@ input mutationPageInput {
 input mutationPage_HeroInput {
   type: Page_Hero_type_MutationInput!
   livestream: mutationPage_Hero_LivestreamInput
-  commandLine: mutationPage_Hero_CommandLineInput
+  commandLine: String
   richText: JSON
   sidebarContent: JSON
   links: [mutationPage_Hero_LinksInput]
@@ -21307,10 +21243,6 @@ input mutationPage_Hero_Livestream_GuestsInput {
   link: String
   image: String
   id: String
-}
-
-input mutationPage_Hero_CommandLineInput {
-  command: String
 }
 
 input mutationPage_Hero_LinksInput {
@@ -21453,7 +21385,7 @@ input mutationPageUpdateInput {
 input mutationPageUpdate_HeroInput {
   type: PageUpdate_Hero_type_MutationInput!
   livestream: mutationPageUpdate_Hero_LivestreamInput
-  commandLine: mutationPageUpdate_Hero_CommandLineInput
+  commandLine: String
   richText: JSON
   sidebarContent: JSON
   links: [mutationPageUpdate_Hero_LinksInput]
@@ -21488,10 +21420,6 @@ input mutationPageUpdate_Hero_Livestream_GuestsInput {
   link: String
   image: String
   id: String
-}
-
-input mutationPageUpdate_Hero_CommandLineInput {
-  command: String
 }
 
 input mutationPageUpdate_Hero_LinksInput {

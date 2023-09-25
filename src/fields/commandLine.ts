@@ -2,18 +2,11 @@ import type { Field } from 'payload/types'
 
 const commandLine: Field = {
   name: 'commandLine',
-  type: 'group',
+  type: 'text',
   admin: {
-    hideGutter: true,
     condition: (_, { type }) => type === 'centeredCarousel',
   },
-  fields: [
-    {
-      name: 'command',
-      type: 'text',
-      label: 'Command',
-    },
-  ],
+  label: 'Command Line',
 }
 
 export default commandLine
