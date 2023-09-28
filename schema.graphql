@@ -703,6 +703,7 @@ type Page {
 type Page_Hero {
   type: Page_Hero_type
   livestream: Page_Hero_Livestream
+  commandLine: String
   richText(depth: Int): JSON
   sidebarContent(depth: Int): JSON
   links: [Page_Hero_Links!]
@@ -711,6 +712,8 @@ type Page_Hero {
   media(where: Page_Hero_Media_where): Media
   adjectives: [Page_Hero_Adjectives!]
   form: Form
+  logoGroup: Page_Hero_LogoGroup
+  carousel: [Page_Hero_Carousel!]
 }
 
 enum Page_Hero_type {
@@ -719,6 +722,7 @@ enum Page_Hero_type {
   form
   home
   livestream
+  centeredCarousel
 }
 
 type Page_Hero_Livestream {
@@ -1351,7 +1355,7 @@ type ReusableContent {
   createdAt: DateTime
 }
 
-union ReusableContent_Layout = Banner | BlogContent | BlogMarkdown | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | Code | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | Slider | Steps | StickyHighlights
+union ReusableContent_Layout = Banner | BlogContent | BlogMarkdown | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | Code | CodeFeature | Content | ContentGrid | ExampleTabsBlock | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | Slider | Steps | StickyHighlights
 
 type CardGrid {
   cardGridFields: CardGrid_CardGridFields
@@ -1557,6 +1561,193 @@ type ContentGrid_ContentGridFields {
 type ContentGrid_ContentGridFields_Cells {
   content(depth: Int): JSON
   id: String
+}
+
+type ExampleTabsBlock {
+  content(depth: Int): JSON
+  tabs: [ExampleTabsBlock_Tabs!]!
+  id: String
+  blockName: String
+  blockType: String
+}
+
+type ExampleTabsBlock_Tabs {
+  label: String!
+  content(depth: Int): JSON
+  examples: [ExampleTabsBlock_Tabs_Examples!]!
+  id: String
+}
+
+union ExampleTabsBlock_Tabs_Examples = CodeExampleBlock | MediaExampleBlock
+
+type CodeExampleBlock {
+  code: String!
+  id: String
+  blockName: String
+  blockType: String
+}
+
+type MediaExampleBlock {
+  media(where: MediaExampleBlock_Media_where): Media!
+  id: String
+  blockName: String
+  blockType: String
+}
+
+input MediaExampleBlock_Media_where {
+  alt: MediaExampleBlock_Media_alt_operator
+  darkModeFallback: MediaExampleBlock_Media_darkModeFallback_operator
+  updatedAt: MediaExampleBlock_Media_updatedAt_operator
+  createdAt: MediaExampleBlock_Media_createdAt_operator
+  url: MediaExampleBlock_Media_url_operator
+  filename: MediaExampleBlock_Media_filename_operator
+  mimeType: MediaExampleBlock_Media_mimeType_operator
+  filesize: MediaExampleBlock_Media_filesize_operator
+  width: MediaExampleBlock_Media_width_operator
+  height: MediaExampleBlock_Media_height_operator
+  id: MediaExampleBlock_Media_id_operator
+  OR: [MediaExampleBlock_Media_where_or]
+  AND: [MediaExampleBlock_Media_where_and]
+}
+
+input MediaExampleBlock_Media_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input MediaExampleBlock_Media_darkModeFallback_operator {
+  equals: String
+  not_equals: String
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input MediaExampleBlock_Media_where_or {
+  alt: MediaExampleBlock_Media_alt_operator
+  darkModeFallback: MediaExampleBlock_Media_darkModeFallback_operator
+  updatedAt: MediaExampleBlock_Media_updatedAt_operator
+  createdAt: MediaExampleBlock_Media_createdAt_operator
+  url: MediaExampleBlock_Media_url_operator
+  filename: MediaExampleBlock_Media_filename_operator
+  mimeType: MediaExampleBlock_Media_mimeType_operator
+  filesize: MediaExampleBlock_Media_filesize_operator
+  width: MediaExampleBlock_Media_width_operator
+  height: MediaExampleBlock_Media_height_operator
+  id: MediaExampleBlock_Media_id_operator
+}
+
+input MediaExampleBlock_Media_where_and {
+  alt: MediaExampleBlock_Media_alt_operator
+  darkModeFallback: MediaExampleBlock_Media_darkModeFallback_operator
+  updatedAt: MediaExampleBlock_Media_updatedAt_operator
+  createdAt: MediaExampleBlock_Media_createdAt_operator
+  url: MediaExampleBlock_Media_url_operator
+  filename: MediaExampleBlock_Media_filename_operator
+  mimeType: MediaExampleBlock_Media_mimeType_operator
+  filesize: MediaExampleBlock_Media_filesize_operator
+  width: MediaExampleBlock_Media_width_operator
+  height: MediaExampleBlock_Media_height_operator
+  id: MediaExampleBlock_Media_id_operator
 }
 
 type FormBlock {
@@ -3216,7 +3407,334 @@ type Page_Hero_Adjectives {
   id: String
 }
 
-union Page_Layout = Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights
+type Page_Hero_LogoGroup {
+  label: String
+  logos: [Page_Hero_LogoGroup_Logos!]
+}
+
+type Page_Hero_LogoGroup_Logos {
+  logo(where: Page_Hero_LogoGroup_Logos_Logo_where): Media
+  id: String
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_where {
+  alt: Page_Hero_LogoGroup_Logos_Logo_alt_operator
+  darkModeFallback: Page_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator
+  updatedAt: Page_Hero_LogoGroup_Logos_Logo_updatedAt_operator
+  createdAt: Page_Hero_LogoGroup_Logos_Logo_createdAt_operator
+  url: Page_Hero_LogoGroup_Logos_Logo_url_operator
+  filename: Page_Hero_LogoGroup_Logos_Logo_filename_operator
+  mimeType: Page_Hero_LogoGroup_Logos_Logo_mimeType_operator
+  filesize: Page_Hero_LogoGroup_Logos_Logo_filesize_operator
+  width: Page_Hero_LogoGroup_Logos_Logo_width_operator
+  height: Page_Hero_LogoGroup_Logos_Logo_height_operator
+  id: Page_Hero_LogoGroup_Logos_Logo_id_operator
+  OR: [Page_Hero_LogoGroup_Logos_Logo_where_or]
+  AND: [Page_Hero_LogoGroup_Logos_Logo_where_and]
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator {
+  equals: String
+  not_equals: String
+  exists: Boolean
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_where_or {
+  alt: Page_Hero_LogoGroup_Logos_Logo_alt_operator
+  darkModeFallback: Page_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator
+  updatedAt: Page_Hero_LogoGroup_Logos_Logo_updatedAt_operator
+  createdAt: Page_Hero_LogoGroup_Logos_Logo_createdAt_operator
+  url: Page_Hero_LogoGroup_Logos_Logo_url_operator
+  filename: Page_Hero_LogoGroup_Logos_Logo_filename_operator
+  mimeType: Page_Hero_LogoGroup_Logos_Logo_mimeType_operator
+  filesize: Page_Hero_LogoGroup_Logos_Logo_filesize_operator
+  width: Page_Hero_LogoGroup_Logos_Logo_width_operator
+  height: Page_Hero_LogoGroup_Logos_Logo_height_operator
+  id: Page_Hero_LogoGroup_Logos_Logo_id_operator
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_where_and {
+  alt: Page_Hero_LogoGroup_Logos_Logo_alt_operator
+  darkModeFallback: Page_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator
+  updatedAt: Page_Hero_LogoGroup_Logos_Logo_updatedAt_operator
+  createdAt: Page_Hero_LogoGroup_Logos_Logo_createdAt_operator
+  url: Page_Hero_LogoGroup_Logos_Logo_url_operator
+  filename: Page_Hero_LogoGroup_Logos_Logo_filename_operator
+  mimeType: Page_Hero_LogoGroup_Logos_Logo_mimeType_operator
+  filesize: Page_Hero_LogoGroup_Logos_Logo_filesize_operator
+  width: Page_Hero_LogoGroup_Logos_Logo_width_operator
+  height: Page_Hero_LogoGroup_Logos_Logo_height_operator
+  id: Page_Hero_LogoGroup_Logos_Logo_id_operator
+}
+
+type Page_Hero_Carousel {
+  image(where: Page_Hero_Carousel_Image_where): Media
+  id: String
+}
+
+input Page_Hero_Carousel_Image_where {
+  alt: Page_Hero_Carousel_Image_alt_operator
+  darkModeFallback: Page_Hero_Carousel_Image_darkModeFallback_operator
+  updatedAt: Page_Hero_Carousel_Image_updatedAt_operator
+  createdAt: Page_Hero_Carousel_Image_createdAt_operator
+  url: Page_Hero_Carousel_Image_url_operator
+  filename: Page_Hero_Carousel_Image_filename_operator
+  mimeType: Page_Hero_Carousel_Image_mimeType_operator
+  filesize: Page_Hero_Carousel_Image_filesize_operator
+  width: Page_Hero_Carousel_Image_width_operator
+  height: Page_Hero_Carousel_Image_height_operator
+  id: Page_Hero_Carousel_Image_id_operator
+  OR: [Page_Hero_Carousel_Image_where_or]
+  AND: [Page_Hero_Carousel_Image_where_and]
+}
+
+input Page_Hero_Carousel_Image_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Page_Hero_Carousel_Image_darkModeFallback_operator {
+  equals: String
+  not_equals: String
+  exists: Boolean
+}
+
+input Page_Hero_Carousel_Image_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Page_Hero_Carousel_Image_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Page_Hero_Carousel_Image_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_Hero_Carousel_Image_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_Hero_Carousel_Image_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_Hero_Carousel_Image_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Page_Hero_Carousel_Image_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Page_Hero_Carousel_Image_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Page_Hero_Carousel_Image_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_Hero_Carousel_Image_where_or {
+  alt: Page_Hero_Carousel_Image_alt_operator
+  darkModeFallback: Page_Hero_Carousel_Image_darkModeFallback_operator
+  updatedAt: Page_Hero_Carousel_Image_updatedAt_operator
+  createdAt: Page_Hero_Carousel_Image_createdAt_operator
+  url: Page_Hero_Carousel_Image_url_operator
+  filename: Page_Hero_Carousel_Image_filename_operator
+  mimeType: Page_Hero_Carousel_Image_mimeType_operator
+  filesize: Page_Hero_Carousel_Image_filesize_operator
+  width: Page_Hero_Carousel_Image_width_operator
+  height: Page_Hero_Carousel_Image_height_operator
+  id: Page_Hero_Carousel_Image_id_operator
+}
+
+input Page_Hero_Carousel_Image_where_and {
+  alt: Page_Hero_Carousel_Image_alt_operator
+  darkModeFallback: Page_Hero_Carousel_Image_darkModeFallback_operator
+  updatedAt: Page_Hero_Carousel_Image_updatedAt_operator
+  createdAt: Page_Hero_Carousel_Image_createdAt_operator
+  url: Page_Hero_Carousel_Image_url_operator
+  filename: Page_Hero_Carousel_Image_filename_operator
+  mimeType: Page_Hero_Carousel_Image_mimeType_operator
+  filesize: Page_Hero_Carousel_Image_filesize_operator
+  width: Page_Hero_Carousel_Image_width_operator
+  height: Page_Hero_Carousel_Image_height_operator
+  id: Page_Hero_Carousel_Image_id_operator
+}
+
+union Page_Layout = Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights | ExampleTabsBlock
 
 type Page_Meta {
   title: String
@@ -6163,6 +6681,7 @@ input Page_where {
   hero__livestream__guests__link: Page_hero__livestream__guests__link_operator
   hero__livestream__guests__image: Page_hero__livestream__guests__image_operator
   hero__livestream__guests__id: Page_hero__livestream__guests__id_operator
+  hero__commandLine: Page_hero__commandLine_operator
   hero__richText: Page_hero__richText_operator
   hero__sidebarContent: Page_hero__sidebarContent_operator
   hero__links__link__type: Page_hero__links__link__type_operator
@@ -6189,6 +6708,11 @@ input Page_where {
   hero__adjectives__adjective: Page_hero__adjectives__adjective_operator
   hero__adjectives__id: Page_hero__adjectives__id_operator
   hero__form: Page_hero__form_operator
+  hero__logoGroup__label: Page_hero__logoGroup__label_operator
+  hero__logoGroup__logos__logo: Page_hero__logoGroup__logos__logo_operator
+  hero__logoGroup__logos__id: Page_hero__logoGroup__logos__id_operator
+  hero__carousel__image: Page_hero__carousel__image_operator
+  hero__carousel__id: Page_hero__carousel__id_operator
   slug: Page_slug_operator
   meta__title: Page_meta__title_operator
   meta__description: Page_meta__description_operator
@@ -6241,6 +6765,7 @@ enum Page_hero__type_Input {
   form
   home
   livestream
+  centeredCarousel
 }
 
 input Page_hero__livestream__id_operator {
@@ -6307,6 +6832,17 @@ input Page_hero__livestream__guests__image_operator {
 }
 
 input Page_hero__livestream__guests__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_hero__commandLine_operator {
   equals: String
   not_equals: String
   like: String
@@ -6583,6 +7119,49 @@ input Page_hero__form_operator {
   exists: Boolean
 }
 
+input Page_hero__logoGroup__label_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_hero__logoGroup__logos__logo_operator {
+  equals: String
+  not_equals: String
+}
+
+input Page_hero__logoGroup__logos__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_hero__carousel__image_operator {
+  equals: String
+  not_equals: String
+}
+
+input Page_hero__carousel__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
 input Page_slug_operator {
   equals: String
   not_equals: String
@@ -6729,6 +7308,7 @@ input Page_where_or {
   hero__livestream__guests__link: Page_hero__livestream__guests__link_operator
   hero__livestream__guests__image: Page_hero__livestream__guests__image_operator
   hero__livestream__guests__id: Page_hero__livestream__guests__id_operator
+  hero__commandLine: Page_hero__commandLine_operator
   hero__richText: Page_hero__richText_operator
   hero__sidebarContent: Page_hero__sidebarContent_operator
   hero__links__link__type: Page_hero__links__link__type_operator
@@ -6755,6 +7335,11 @@ input Page_where_or {
   hero__adjectives__adjective: Page_hero__adjectives__adjective_operator
   hero__adjectives__id: Page_hero__adjectives__id_operator
   hero__form: Page_hero__form_operator
+  hero__logoGroup__label: Page_hero__logoGroup__label_operator
+  hero__logoGroup__logos__logo: Page_hero__logoGroup__logos__logo_operator
+  hero__logoGroup__logos__id: Page_hero__logoGroup__logos__id_operator
+  hero__carousel__image: Page_hero__carousel__image_operator
+  hero__carousel__id: Page_hero__carousel__id_operator
   slug: Page_slug_operator
   meta__title: Page_meta__title_operator
   meta__description: Page_meta__description_operator
@@ -6782,6 +7367,7 @@ input Page_where_and {
   hero__livestream__guests__link: Page_hero__livestream__guests__link_operator
   hero__livestream__guests__image: Page_hero__livestream__guests__image_operator
   hero__livestream__guests__id: Page_hero__livestream__guests__id_operator
+  hero__commandLine: Page_hero__commandLine_operator
   hero__richText: Page_hero__richText_operator
   hero__sidebarContent: Page_hero__sidebarContent_operator
   hero__links__link__type: Page_hero__links__link__type_operator
@@ -6808,6 +7394,11 @@ input Page_where_and {
   hero__adjectives__adjective: Page_hero__adjectives__adjective_operator
   hero__adjectives__id: Page_hero__adjectives__id_operator
   hero__form: Page_hero__form_operator
+  hero__logoGroup__label: Page_hero__logoGroup__label_operator
+  hero__logoGroup__logos__logo: Page_hero__logoGroup__logos__logo_operator
+  hero__logoGroup__logos__id: Page_hero__logoGroup__logos__id_operator
+  hero__carousel__image: Page_hero__carousel__image_operator
+  hero__carousel__id: Page_hero__carousel__id_operator
   slug: Page_slug_operator
   meta__title: Page_meta__title_operator
   meta__description: Page_meta__description_operator
@@ -6919,6 +7510,7 @@ type PagesDocAccessFields_hero_Delete {
 type PagesDocAccessFields_hero_Fields {
   type: PagesDocAccessFields_hero_type
   livestream: PagesDocAccessFields_hero_livestream
+  commandLine: PagesDocAccessFields_hero_commandLine
   richText: PagesDocAccessFields_hero_richText
   sidebarContent: PagesDocAccessFields_hero_sidebarContent
   links: PagesDocAccessFields_hero_links
@@ -6927,6 +7519,8 @@ type PagesDocAccessFields_hero_Fields {
   media: PagesDocAccessFields_hero_media
   adjectives: PagesDocAccessFields_hero_adjectives
   form: PagesDocAccessFields_hero_form
+  logoGroup: PagesDocAccessFields_hero_logoGroup
+  carousel: PagesDocAccessFields_hero_carousel
 }
 
 type PagesDocAccessFields_hero_type {
@@ -7196,6 +7790,29 @@ type PagesDocAccessFields_hero_livestream_guests_id_Update {
 }
 
 type PagesDocAccessFields_hero_livestream_guests_id_Delete {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_commandLine {
+  create: PagesDocAccessFields_hero_commandLine_Create
+  read: PagesDocAccessFields_hero_commandLine_Read
+  update: PagesDocAccessFields_hero_commandLine_Update
+  delete: PagesDocAccessFields_hero_commandLine_Delete
+}
+
+type PagesDocAccessFields_hero_commandLine_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_commandLine_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_commandLine_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_commandLine_Delete {
   permission: Boolean!
 }
 
@@ -8011,6 +8628,208 @@ type PagesDocAccessFields_hero_form_Delete {
   permission: Boolean!
 }
 
+type PagesDocAccessFields_hero_logoGroup {
+  create: PagesDocAccessFields_hero_logoGroup_Create
+  read: PagesDocAccessFields_hero_logoGroup_Read
+  update: PagesDocAccessFields_hero_logoGroup_Update
+  delete: PagesDocAccessFields_hero_logoGroup_Delete
+  fields: PagesDocAccessFields_hero_logoGroup_Fields
+}
+
+type PagesDocAccessFields_hero_logoGroup_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_Delete {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_Fields {
+  label: PagesDocAccessFields_hero_logoGroup_label
+  logos: PagesDocAccessFields_hero_logoGroup_logos
+}
+
+type PagesDocAccessFields_hero_logoGroup_label {
+  create: PagesDocAccessFields_hero_logoGroup_label_Create
+  read: PagesDocAccessFields_hero_logoGroup_label_Read
+  update: PagesDocAccessFields_hero_logoGroup_label_Update
+  delete: PagesDocAccessFields_hero_logoGroup_label_Delete
+}
+
+type PagesDocAccessFields_hero_logoGroup_label_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_label_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_label_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_label_Delete {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos {
+  create: PagesDocAccessFields_hero_logoGroup_logos_Create
+  read: PagesDocAccessFields_hero_logoGroup_logos_Read
+  update: PagesDocAccessFields_hero_logoGroup_logos_Update
+  delete: PagesDocAccessFields_hero_logoGroup_logos_Delete
+  fields: PagesDocAccessFields_hero_logoGroup_logos_Fields
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_Delete {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_Fields {
+  logo: PagesDocAccessFields_hero_logoGroup_logos_logo
+  id: PagesDocAccessFields_hero_logoGroup_logos_id
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_logo {
+  create: PagesDocAccessFields_hero_logoGroup_logos_logo_Create
+  read: PagesDocAccessFields_hero_logoGroup_logos_logo_Read
+  update: PagesDocAccessFields_hero_logoGroup_logos_logo_Update
+  delete: PagesDocAccessFields_hero_logoGroup_logos_logo_Delete
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_logo_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_logo_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_logo_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_logo_Delete {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_id {
+  create: PagesDocAccessFields_hero_logoGroup_logos_id_Create
+  read: PagesDocAccessFields_hero_logoGroup_logos_id_Read
+  update: PagesDocAccessFields_hero_logoGroup_logos_id_Update
+  delete: PagesDocAccessFields_hero_logoGroup_logos_id_Delete
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_id_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_id_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_id_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_logoGroup_logos_id_Delete {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_carousel {
+  create: PagesDocAccessFields_hero_carousel_Create
+  read: PagesDocAccessFields_hero_carousel_Read
+  update: PagesDocAccessFields_hero_carousel_Update
+  delete: PagesDocAccessFields_hero_carousel_Delete
+  fields: PagesDocAccessFields_hero_carousel_Fields
+}
+
+type PagesDocAccessFields_hero_carousel_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_carousel_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_carousel_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_carousel_Delete {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_carousel_Fields {
+  image: PagesDocAccessFields_hero_carousel_image
+  id: PagesDocAccessFields_hero_carousel_id
+}
+
+type PagesDocAccessFields_hero_carousel_image {
+  create: PagesDocAccessFields_hero_carousel_image_Create
+  read: PagesDocAccessFields_hero_carousel_image_Read
+  update: PagesDocAccessFields_hero_carousel_image_Update
+  delete: PagesDocAccessFields_hero_carousel_image_Delete
+}
+
+type PagesDocAccessFields_hero_carousel_image_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_carousel_image_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_carousel_image_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_carousel_image_Delete {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_carousel_id {
+  create: PagesDocAccessFields_hero_carousel_id_Create
+  read: PagesDocAccessFields_hero_carousel_id_Read
+  update: PagesDocAccessFields_hero_carousel_id_Update
+  delete: PagesDocAccessFields_hero_carousel_id_Delete
+}
+
+type PagesDocAccessFields_hero_carousel_id_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_carousel_id_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_carousel_id_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_carousel_id_Delete {
+  permission: Boolean!
+}
+
 type PagesDocAccessFields_layout {
   create: PagesDocAccessFields_layout_Create
   read: PagesDocAccessFields_layout_Read
@@ -8469,6 +9288,7 @@ type PageVersion_Version {
 type PageVersion_Version_Hero {
   type: PageVersion_Version_Hero_type
   livestream: PageVersion_Version_Hero_Livestream
+  commandLine: String
   richText(depth: Int): JSON
   sidebarContent(depth: Int): JSON
   links: [PageVersion_Version_Hero_Links!]
@@ -8477,6 +9297,8 @@ type PageVersion_Version_Hero {
   media(where: PageVersion_Version_Hero_Media_where): Media
   adjectives: [PageVersion_Version_Hero_Adjectives!]
   form: Form
+  logoGroup: PageVersion_Version_Hero_LogoGroup
+  carousel: [PageVersion_Version_Hero_Carousel!]
 }
 
 enum PageVersion_Version_Hero_type {
@@ -8485,6 +9307,7 @@ enum PageVersion_Version_Hero_type {
   form
   home
   livestream
+  centeredCarousel
 }
 
 type PageVersion_Version_Hero_Livestream {
@@ -8925,7 +9748,334 @@ type PageVersion_Version_Hero_Adjectives {
   id: String
 }
 
-union PageVersion_Version_Layout = Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights
+type PageVersion_Version_Hero_LogoGroup {
+  label: String
+  logos: [PageVersion_Version_Hero_LogoGroup_Logos!]
+}
+
+type PageVersion_Version_Hero_LogoGroup_Logos {
+  logo(where: PageVersion_Version_Hero_LogoGroup_Logos_Logo_where): Media
+  id: String
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_where {
+  alt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_alt_operator
+  darkModeFallback: PageVersion_Version_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_updatedAt_operator
+  createdAt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_createdAt_operator
+  url: PageVersion_Version_Hero_LogoGroup_Logos_Logo_url_operator
+  filename: PageVersion_Version_Hero_LogoGroup_Logos_Logo_filename_operator
+  mimeType: PageVersion_Version_Hero_LogoGroup_Logos_Logo_mimeType_operator
+  filesize: PageVersion_Version_Hero_LogoGroup_Logos_Logo_filesize_operator
+  width: PageVersion_Version_Hero_LogoGroup_Logos_Logo_width_operator
+  height: PageVersion_Version_Hero_LogoGroup_Logos_Logo_height_operator
+  id: PageVersion_Version_Hero_LogoGroup_Logos_Logo_id_operator
+  OR: [PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_or]
+  AND: [PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_and]
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator {
+  equals: String
+  not_equals: String
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_or {
+  alt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_alt_operator
+  darkModeFallback: PageVersion_Version_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_updatedAt_operator
+  createdAt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_createdAt_operator
+  url: PageVersion_Version_Hero_LogoGroup_Logos_Logo_url_operator
+  filename: PageVersion_Version_Hero_LogoGroup_Logos_Logo_filename_operator
+  mimeType: PageVersion_Version_Hero_LogoGroup_Logos_Logo_mimeType_operator
+  filesize: PageVersion_Version_Hero_LogoGroup_Logos_Logo_filesize_operator
+  width: PageVersion_Version_Hero_LogoGroup_Logos_Logo_width_operator
+  height: PageVersion_Version_Hero_LogoGroup_Logos_Logo_height_operator
+  id: PageVersion_Version_Hero_LogoGroup_Logos_Logo_id_operator
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_and {
+  alt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_alt_operator
+  darkModeFallback: PageVersion_Version_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_updatedAt_operator
+  createdAt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_createdAt_operator
+  url: PageVersion_Version_Hero_LogoGroup_Logos_Logo_url_operator
+  filename: PageVersion_Version_Hero_LogoGroup_Logos_Logo_filename_operator
+  mimeType: PageVersion_Version_Hero_LogoGroup_Logos_Logo_mimeType_operator
+  filesize: PageVersion_Version_Hero_LogoGroup_Logos_Logo_filesize_operator
+  width: PageVersion_Version_Hero_LogoGroup_Logos_Logo_width_operator
+  height: PageVersion_Version_Hero_LogoGroup_Logos_Logo_height_operator
+  id: PageVersion_Version_Hero_LogoGroup_Logos_Logo_id_operator
+}
+
+type PageVersion_Version_Hero_Carousel {
+  image(where: PageVersion_Version_Hero_Carousel_Image_where): Media
+  id: String
+}
+
+input PageVersion_Version_Hero_Carousel_Image_where {
+  alt: PageVersion_Version_Hero_Carousel_Image_alt_operator
+  darkModeFallback: PageVersion_Version_Hero_Carousel_Image_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Hero_Carousel_Image_updatedAt_operator
+  createdAt: PageVersion_Version_Hero_Carousel_Image_createdAt_operator
+  url: PageVersion_Version_Hero_Carousel_Image_url_operator
+  filename: PageVersion_Version_Hero_Carousel_Image_filename_operator
+  mimeType: PageVersion_Version_Hero_Carousel_Image_mimeType_operator
+  filesize: PageVersion_Version_Hero_Carousel_Image_filesize_operator
+  width: PageVersion_Version_Hero_Carousel_Image_width_operator
+  height: PageVersion_Version_Hero_Carousel_Image_height_operator
+  id: PageVersion_Version_Hero_Carousel_Image_id_operator
+  OR: [PageVersion_Version_Hero_Carousel_Image_where_or]
+  AND: [PageVersion_Version_Hero_Carousel_Image_where_and]
+}
+
+input PageVersion_Version_Hero_Carousel_Image_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input PageVersion_Version_Hero_Carousel_Image_darkModeFallback_operator {
+  equals: String
+  not_equals: String
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Carousel_Image_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Carousel_Image_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Carousel_Image_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Carousel_Image_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Carousel_Image_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Carousel_Image_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Carousel_Image_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Carousel_Image_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Carousel_Image_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Carousel_Image_where_or {
+  alt: PageVersion_Version_Hero_Carousel_Image_alt_operator
+  darkModeFallback: PageVersion_Version_Hero_Carousel_Image_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Hero_Carousel_Image_updatedAt_operator
+  createdAt: PageVersion_Version_Hero_Carousel_Image_createdAt_operator
+  url: PageVersion_Version_Hero_Carousel_Image_url_operator
+  filename: PageVersion_Version_Hero_Carousel_Image_filename_operator
+  mimeType: PageVersion_Version_Hero_Carousel_Image_mimeType_operator
+  filesize: PageVersion_Version_Hero_Carousel_Image_filesize_operator
+  width: PageVersion_Version_Hero_Carousel_Image_width_operator
+  height: PageVersion_Version_Hero_Carousel_Image_height_operator
+  id: PageVersion_Version_Hero_Carousel_Image_id_operator
+}
+
+input PageVersion_Version_Hero_Carousel_Image_where_and {
+  alt: PageVersion_Version_Hero_Carousel_Image_alt_operator
+  darkModeFallback: PageVersion_Version_Hero_Carousel_Image_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Hero_Carousel_Image_updatedAt_operator
+  createdAt: PageVersion_Version_Hero_Carousel_Image_createdAt_operator
+  url: PageVersion_Version_Hero_Carousel_Image_url_operator
+  filename: PageVersion_Version_Hero_Carousel_Image_filename_operator
+  mimeType: PageVersion_Version_Hero_Carousel_Image_mimeType_operator
+  filesize: PageVersion_Version_Hero_Carousel_Image_filesize_operator
+  width: PageVersion_Version_Hero_Carousel_Image_width_operator
+  height: PageVersion_Version_Hero_Carousel_Image_height_operator
+  id: PageVersion_Version_Hero_Carousel_Image_id_operator
+}
+
+union PageVersion_Version_Layout = Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights | ExampleTabsBlock
 
 type PageVersion_Version_Meta {
   title: String
@@ -9128,6 +10278,7 @@ input versionsPage_where {
   version__hero__livestream__guests__link: versionsPage_version__hero__livestream__guests__link_operator
   version__hero__livestream__guests__image: versionsPage_version__hero__livestream__guests__image_operator
   version__hero__livestream__guests__id: versionsPage_version__hero__livestream__guests__id_operator
+  version__hero__commandLine: versionsPage_version__hero__commandLine_operator
   version__hero__richText: versionsPage_version__hero__richText_operator
   version__hero__sidebarContent: versionsPage_version__hero__sidebarContent_operator
   version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
@@ -9154,6 +10305,11 @@ input versionsPage_where {
   version__hero__adjectives__adjective: versionsPage_version__hero__adjectives__adjective_operator
   version__hero__adjectives__id: versionsPage_version__hero__adjectives__id_operator
   version__hero__form: versionsPage_version__hero__form_operator
+  version__hero__logoGroup__label: versionsPage_version__hero__logoGroup__label_operator
+  version__hero__logoGroup__logos__logo: versionsPage_version__hero__logoGroup__logos__logo_operator
+  version__hero__logoGroup__logos__id: versionsPage_version__hero__logoGroup__logos__id_operator
+  version__hero__carousel__image: versionsPage_version__hero__carousel__image_operator
+  version__hero__carousel__id: versionsPage_version__hero__carousel__id_operator
   version__slug: versionsPage_version__slug_operator
   version__meta__title: versionsPage_version__meta__title_operator
   version__meta__description: versionsPage_version__meta__description_operator
@@ -9217,6 +10373,7 @@ enum versionsPage_version__hero__type_Input {
   form
   home
   livestream
+  centeredCarousel
 }
 
 input versionsPage_version__hero__livestream__id_operator {
@@ -9283,6 +10440,17 @@ input versionsPage_version__hero__livestream__guests__image_operator {
 }
 
 input versionsPage_version__hero__livestream__guests__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsPage_version__hero__commandLine_operator {
   equals: String
   not_equals: String
   like: String
@@ -9559,6 +10727,49 @@ input versionsPage_version__hero__form_operator {
   exists: Boolean
 }
 
+input versionsPage_version__hero__logoGroup__label_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsPage_version__hero__logoGroup__logos__logo_operator {
+  equals: String
+  not_equals: String
+}
+
+input versionsPage_version__hero__logoGroup__logos__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsPage_version__hero__carousel__image_operator {
+  equals: String
+  not_equals: String
+}
+
+input versionsPage_version__hero__carousel__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
 input versionsPage_version__slug_operator {
   equals: String
   not_equals: String
@@ -9728,6 +10939,7 @@ input versionsPage_where_or {
   version__hero__livestream__guests__link: versionsPage_version__hero__livestream__guests__link_operator
   version__hero__livestream__guests__image: versionsPage_version__hero__livestream__guests__image_operator
   version__hero__livestream__guests__id: versionsPage_version__hero__livestream__guests__id_operator
+  version__hero__commandLine: versionsPage_version__hero__commandLine_operator
   version__hero__richText: versionsPage_version__hero__richText_operator
   version__hero__sidebarContent: versionsPage_version__hero__sidebarContent_operator
   version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
@@ -9754,6 +10966,11 @@ input versionsPage_where_or {
   version__hero__adjectives__adjective: versionsPage_version__hero__adjectives__adjective_operator
   version__hero__adjectives__id: versionsPage_version__hero__adjectives__id_operator
   version__hero__form: versionsPage_version__hero__form_operator
+  version__hero__logoGroup__label: versionsPage_version__hero__logoGroup__label_operator
+  version__hero__logoGroup__logos__logo: versionsPage_version__hero__logoGroup__logos__logo_operator
+  version__hero__logoGroup__logos__id: versionsPage_version__hero__logoGroup__logos__id_operator
+  version__hero__carousel__image: versionsPage_version__hero__carousel__image_operator
+  version__hero__carousel__id: versionsPage_version__hero__carousel__id_operator
   version__slug: versionsPage_version__slug_operator
   version__meta__title: versionsPage_version__meta__title_operator
   version__meta__description: versionsPage_version__meta__description_operator
@@ -9784,6 +11001,7 @@ input versionsPage_where_and {
   version__hero__livestream__guests__link: versionsPage_version__hero__livestream__guests__link_operator
   version__hero__livestream__guests__image: versionsPage_version__hero__livestream__guests__image_operator
   version__hero__livestream__guests__id: versionsPage_version__hero__livestream__guests__id_operator
+  version__hero__commandLine: versionsPage_version__hero__commandLine_operator
   version__hero__richText: versionsPage_version__hero__richText_operator
   version__hero__sidebarContent: versionsPage_version__hero__sidebarContent_operator
   version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
@@ -9810,6 +11028,11 @@ input versionsPage_where_and {
   version__hero__adjectives__adjective: versionsPage_version__hero__adjectives__adjective_operator
   version__hero__adjectives__id: versionsPage_version__hero__adjectives__id_operator
   version__hero__form: versionsPage_version__hero__form_operator
+  version__hero__logoGroup__label: versionsPage_version__hero__logoGroup__label_operator
+  version__hero__logoGroup__logos__logo: versionsPage_version__hero__logoGroup__logos__logo_operator
+  version__hero__logoGroup__logos__id: versionsPage_version__hero__logoGroup__logos__id_operator
+  version__hero__carousel__image: versionsPage_version__hero__carousel__image_operator
+  version__hero__carousel__id: versionsPage_version__hero__carousel__id_operator
   version__slug: versionsPage_version__slug_operator
   version__meta__title: versionsPage_version__meta__title_operator
   version__meta__description: versionsPage_version__meta__description_operator
@@ -15508,6 +16731,7 @@ type PagesFields_hero_Delete {
 type PagesFields_hero_Fields {
   type: PagesFields_hero_type
   livestream: PagesFields_hero_livestream
+  commandLine: PagesFields_hero_commandLine
   richText: PagesFields_hero_richText
   sidebarContent: PagesFields_hero_sidebarContent
   links: PagesFields_hero_links
@@ -15516,6 +16740,8 @@ type PagesFields_hero_Fields {
   media: PagesFields_hero_media
   adjectives: PagesFields_hero_adjectives
   form: PagesFields_hero_form
+  logoGroup: PagesFields_hero_logoGroup
+  carousel: PagesFields_hero_carousel
 }
 
 type PagesFields_hero_type {
@@ -15785,6 +17011,29 @@ type PagesFields_hero_livestream_guests_id_Update {
 }
 
 type PagesFields_hero_livestream_guests_id_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_commandLine {
+  create: PagesFields_hero_commandLine_Create
+  read: PagesFields_hero_commandLine_Read
+  update: PagesFields_hero_commandLine_Update
+  delete: PagesFields_hero_commandLine_Delete
+}
+
+type PagesFields_hero_commandLine_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_commandLine_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_commandLine_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_commandLine_Delete {
   permission: Boolean!
 }
 
@@ -16597,6 +17846,208 @@ type PagesFields_hero_form_Update {
 }
 
 type PagesFields_hero_form_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup {
+  create: PagesFields_hero_logoGroup_Create
+  read: PagesFields_hero_logoGroup_Read
+  update: PagesFields_hero_logoGroup_Update
+  delete: PagesFields_hero_logoGroup_Delete
+  fields: PagesFields_hero_logoGroup_Fields
+}
+
+type PagesFields_hero_logoGroup_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_Fields {
+  label: PagesFields_hero_logoGroup_label
+  logos: PagesFields_hero_logoGroup_logos
+}
+
+type PagesFields_hero_logoGroup_label {
+  create: PagesFields_hero_logoGroup_label_Create
+  read: PagesFields_hero_logoGroup_label_Read
+  update: PagesFields_hero_logoGroup_label_Update
+  delete: PagesFields_hero_logoGroup_label_Delete
+}
+
+type PagesFields_hero_logoGroup_label_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_label_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_label_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_label_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_logos {
+  create: PagesFields_hero_logoGroup_logos_Create
+  read: PagesFields_hero_logoGroup_logos_Read
+  update: PagesFields_hero_logoGroup_logos_Update
+  delete: PagesFields_hero_logoGroup_logos_Delete
+  fields: PagesFields_hero_logoGroup_logos_Fields
+}
+
+type PagesFields_hero_logoGroup_logos_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_logos_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_logos_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_logos_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_logos_Fields {
+  logo: PagesFields_hero_logoGroup_logos_logo
+  id: PagesFields_hero_logoGroup_logos_id
+}
+
+type PagesFields_hero_logoGroup_logos_logo {
+  create: PagesFields_hero_logoGroup_logos_logo_Create
+  read: PagesFields_hero_logoGroup_logos_logo_Read
+  update: PagesFields_hero_logoGroup_logos_logo_Update
+  delete: PagesFields_hero_logoGroup_logos_logo_Delete
+}
+
+type PagesFields_hero_logoGroup_logos_logo_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_logos_logo_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_logos_logo_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_logos_logo_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_logos_id {
+  create: PagesFields_hero_logoGroup_logos_id_Create
+  read: PagesFields_hero_logoGroup_logos_id_Read
+  update: PagesFields_hero_logoGroup_logos_id_Update
+  delete: PagesFields_hero_logoGroup_logos_id_Delete
+}
+
+type PagesFields_hero_logoGroup_logos_id_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_logos_id_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_logos_id_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_logoGroup_logos_id_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_carousel {
+  create: PagesFields_hero_carousel_Create
+  read: PagesFields_hero_carousel_Read
+  update: PagesFields_hero_carousel_Update
+  delete: PagesFields_hero_carousel_Delete
+  fields: PagesFields_hero_carousel_Fields
+}
+
+type PagesFields_hero_carousel_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_carousel_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_carousel_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_carousel_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_carousel_Fields {
+  image: PagesFields_hero_carousel_image
+  id: PagesFields_hero_carousel_id
+}
+
+type PagesFields_hero_carousel_image {
+  create: PagesFields_hero_carousel_image_Create
+  read: PagesFields_hero_carousel_image_Read
+  update: PagesFields_hero_carousel_image_Update
+  delete: PagesFields_hero_carousel_image_Delete
+}
+
+type PagesFields_hero_carousel_image_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_carousel_image_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_carousel_image_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_carousel_image_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_carousel_id {
+  create: PagesFields_hero_carousel_id_Create
+  read: PagesFields_hero_carousel_id_Read
+  update: PagesFields_hero_carousel_id_Update
+  delete: PagesFields_hero_carousel_id_Delete
+}
+
+type PagesFields_hero_carousel_id_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_carousel_id_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_carousel_id_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_carousel_id_Delete {
   permission: Boolean!
 }
 
@@ -19757,6 +21208,7 @@ input mutationPageInput {
 input mutationPage_HeroInput {
   type: Page_Hero_type_MutationInput!
   livestream: mutationPage_Hero_LivestreamInput
+  commandLine: String
   richText: JSON
   sidebarContent: JSON
   links: [mutationPage_Hero_LinksInput]
@@ -19765,6 +21217,8 @@ input mutationPage_HeroInput {
   media: String
   adjectives: [mutationPage_Hero_AdjectivesInput]
   form: String
+  logoGroup: mutationPage_Hero_LogoGroupInput
+  carousel: [mutationPage_Hero_CarouselInput]
 }
 
 enum Page_Hero_type_MutationInput {
@@ -19773,6 +21227,7 @@ enum Page_Hero_type_MutationInput {
   form
   home
   livestream
+  centeredCarousel
 }
 
 input mutationPage_Hero_LivestreamInput {
@@ -19880,6 +21335,21 @@ input mutationPage_Hero_AdjectivesInput {
   id: String
 }
 
+input mutationPage_Hero_LogoGroupInput {
+  label: String
+  logos: [mutationPage_Hero_LogoGroup_LogosInput]
+}
+
+input mutationPage_Hero_LogoGroup_LogosInput {
+  logo: String!
+  id: String
+}
+
+input mutationPage_Hero_CarouselInput {
+  image: String!
+  id: String
+}
+
 input mutationPage_MetaInput {
   title: String
   description: String
@@ -19915,6 +21385,7 @@ input mutationPageUpdateInput {
 input mutationPageUpdate_HeroInput {
   type: PageUpdate_Hero_type_MutationInput!
   livestream: mutationPageUpdate_Hero_LivestreamInput
+  commandLine: String
   richText: JSON
   sidebarContent: JSON
   links: [mutationPageUpdate_Hero_LinksInput]
@@ -19923,6 +21394,8 @@ input mutationPageUpdate_HeroInput {
   media: String
   adjectives: [mutationPageUpdate_Hero_AdjectivesInput]
   form: String
+  logoGroup: mutationPageUpdate_Hero_LogoGroupInput
+  carousel: [mutationPageUpdate_Hero_CarouselInput]
 }
 
 enum PageUpdate_Hero_type_MutationInput {
@@ -19931,6 +21404,7 @@ enum PageUpdate_Hero_type_MutationInput {
   form
   home
   livestream
+  centeredCarousel
 }
 
 input mutationPageUpdate_Hero_LivestreamInput {
@@ -20035,6 +21509,21 @@ enum PageUpdate_Hero_Buttons_Link_appearance_MutationInput {
 
 input mutationPageUpdate_Hero_AdjectivesInput {
   adjective: String!
+  id: String
+}
+
+input mutationPageUpdate_Hero_LogoGroupInput {
+  label: String
+  logos: [mutationPageUpdate_Hero_LogoGroup_LogosInput]
+}
+
+input mutationPageUpdate_Hero_LogoGroup_LogosInput {
+  logo: String!
+  id: String
+}
+
+input mutationPageUpdate_Hero_CarouselInput {
+  image: String!
   id: String
 }
 

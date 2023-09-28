@@ -1,7 +1,10 @@
 import type { Field } from 'payload/types'
 
+import carousel from './carousel'
+import commandLine from './commandLine'
 import linkGroup from './linkGroup'
 import livestreamFields from './livestreamFields'
+import logoGroup from './logoGroup'
 import label from './richText/label'
 import largeBody from './richText/largeBody'
 
@@ -37,9 +40,14 @@ export const hero: Field = {
           label: 'Livestream',
           value: 'livestream',
         },
+        {
+          label: 'Centered Carousel',
+          value: 'centeredCarousel',
+        },
       ],
     },
     livestreamFields,
+    commandLine,
     {
       name: 'richText',
       type: 'richText',
@@ -61,7 +69,8 @@ export const hero: Field = {
     linkGroup({
       overrides: {
         admin: {
-          condition: (_, { type } = {}) => ['contentMedia', 'default', 'livestream'].includes(type),
+          condition: (_, { type } = {}) =>
+            ['contentMedia', 'default', 'livestream', 'centeredCarousel'].includes(type),
         },
       },
     }),
@@ -120,5 +129,7 @@ export const hero: Field = {
         condition: (_, { type }) => type === 'form',
       },
     },
+    logoGroup,
+    carousel,
   ],
 }
