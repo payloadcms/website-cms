@@ -18,28 +18,6 @@ const decodeBase64 = (
 
 const githubAPI = 'https://api.github.com/repos/payloadcms/payload'
 
-const topicOrder = [
-  'Getting-Started',
-  'Configuration',
-  'Fields',
-  'Admin',
-  'Access-Control',
-  'Hooks',
-  'Authentication',
-  'Versions',
-  'Upload',
-  'GraphQL',
-  'REST-API',
-  'Local-API',
-  'Queries',
-  'Production',
-  'Email',
-  'TypeScript',
-  'Plugins',
-  'Integrations',
-  'Cloud',
-]
-
 const headers = {
   Accept: 'application/vnd.github.v3+json.html',
   Authorization: `token ${process.env.GITHUB_ACCESS_TOKEN}`,
@@ -59,6 +37,7 @@ function getHeadings(source: string) {
 
 const syncDocs: PayloadHandler = async (req, res) => {
   const { payload } = req
+  let topics
 
   try {
     if (!process.env.GITHUB_ACCESS_TOKEN) {
@@ -127,8 +106,14 @@ const syncDocs: PayloadHandler = async (req, res) => {
       }
     }
 
+    const getTopics = await fetch(`${githubAPI}/contents/docs`, {
+      headers,
+    }).then(response => response.json())
+
+    topics = getTopics.map(({ name }) => name)
+
     const allDocs = await Promise.all(
-      topicOrder.map(async unsanitizedTopicSlug => {
+      topics.map(async unsanitizedTopicSlug => {
         const topicSlug = unsanitizedTopicSlug.toLowerCase()
 
         const docs = await fetch(`${githubAPI}/contents/docs/${topicSlug}`, {
