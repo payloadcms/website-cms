@@ -9,7 +9,6 @@ const start = async (): Promise<void> => {
   // Initialize Payload
   await payload.init({
     secret: process.env.PAYLOAD_SECRET,
-    mongoURL: process.env.MONGODB_URI,
     local: true,
   })
 

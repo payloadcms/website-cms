@@ -11,7 +11,6 @@ const { PAYLOAD_SECRET, MONGODB_URI } = process.env
 const populateCommunityHelp = async (): Promise<void> => {
   const payloadInstance = await payload.init({
     secret: PAYLOAD_SECRET,
-    mongoURL: MONGODB_URI,
     local: true,
   })
 

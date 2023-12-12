@@ -1,4 +1,4 @@
-import type { RichTextCustomElement } from 'payload/types'
+import { RichTextCustomElement } from "@payloadcms/richtext-slate"
 
 const withVideo: RichTextCustomElement['plugins'][0] = incomingEditor => {
   const editor = incomingEditor
