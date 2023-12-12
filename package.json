@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.192.0",
+    "@payloadcms/bundler-webpack": "^1.0.5",
     "@payloadcms/db-mongodb": "^1.1.0",
     "@payloadcms/plugin-cloud-storage": "^1.0.12",
     "@payloadcms/plugin-form-builder": "^1.0.13",

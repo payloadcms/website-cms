@@ -1,3 +1,4 @@
+import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import formBuilder from '@payloadcms/plugin-form-builder'
 import nestedDocs from '@payloadcms/plugin-nested-docs'
@@ -143,6 +144,7 @@ export default buildConfig({
   ],
   cors: [process.env.PAYLOAD_PUBLIC_APP_URL || '', 'https://payloadcms.com'].filter(Boolean),
   admin: {
+    bundler: webpackBundler(),
     webpack: config => ({
       ...config,
       resolve: {
