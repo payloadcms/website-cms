@@ -1,18 +1,21 @@
+import { webpackBundler } from '@payloadcms/bundler-webpack'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import formBuilder from '@payloadcms/plugin-form-builder'
 import nestedDocs from '@payloadcms/plugin-nested-docs'
 import redirects from '@payloadcms/plugin-redirects'
 import seo from '@payloadcms/plugin-seo'
+import { slateEditor } from '@payloadcms/richtext-slate'
 import dotenv from 'dotenv'
 import path from 'path'
 import { buildConfig } from 'payload/config'
 
-import { Posts } from './collections/Posts'
 import { Announcements } from './collections/Announcements'
 import { CaseStudies } from './collections/CaseStudies'
 import { CommunityHelp } from './collections/CommunityHelp'
 import { Docs } from './collections/Docs'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
+import { Posts } from './collections/Posts'
 import { ReusableContent } from './collections/ReusableContent'
 import { Users } from './collections/Users'
 import SyncDocsButton from './components/SyncDocsButton'
@@ -58,6 +61,10 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
+  editor: slateEditor({}),
+  db: mongooseAdapter({
+    url: process.env.DATABASE_URI,
+  }),
   plugins: [
     formBuilder({
       formOverrides: {
@@ -65,9 +72,11 @@ export default buildConfig({
           richText({
             name: 'leader',
             label: 'Leader Text',
-            admin: {
-              elements: [],
-            },
+            editor: slateEditor({
+              admin: {
+                elements: [],
+              },
+            }),
           }),
           {
             name: 'hubSpotFormID',
@@ -135,6 +144,7 @@ export default buildConfig({
   ],
   cors: [process.env.PAYLOAD_PUBLIC_APP_URL || '', 'https://payloadcms.com'].filter(Boolean),
   admin: {
+    bundler: webpackBundler(),
     webpack: config => ({
       ...config,
       resolve: {

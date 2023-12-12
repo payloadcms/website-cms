@@ -1,3 +1,4 @@
+import { slateEditor } from '@payloadcms/richtext-slate'
 import type { Field } from 'payload/types'
 
 import carousel from './carousel'
@@ -52,19 +53,27 @@ export const hero: Field = {
       name: 'richText',
       type: 'richText',
       admin: {
-        elements: ['h1', largeBody, 'ul', label],
-        leaves: ['underline'],
         condition: (_, { type }) => type !== 'livestream',
       },
+      editor: slateEditor({
+        admin: {
+          elements: ['h1', largeBody, 'ul', label],
+          leaves: ['underline'],
+        },
+      }),
     },
     {
       name: 'sidebarContent',
       type: 'richText',
       admin: {
-        elements: ['link'],
-        leaves: ['underline'],
-        condition: (_, { type } = {}) => type === 'default',
+        condition: (_, { type }) => type !== 'livestream',
       },
+      editor: slateEditor({
+        admin: {
+          elements: ['link'],
+          leaves: ['underline'],
+        },
+      }),
     },
     linkGroup({
       overrides: {
