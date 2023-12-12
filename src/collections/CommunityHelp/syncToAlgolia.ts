@@ -4,6 +4,7 @@ import payload from 'payload'
 
 import { fetchDiscordThreads } from '../../scripts/fetch-discord'
 import { fetchGithubDiscussions } from '../../scripts/fetch-github'
+import { CommunityHelp } from 'payload/generated-types'
 
 const appID = process.env.ALGOLIA_CH_ID || ''
 const apiKey = process.env.ALGOLIA_API_KEY || ''
@@ -57,7 +58,7 @@ export const syncToAlgolia = async (): Promise<void> => {
   const discordDocs: DiscordDoc[] = []
   const githubDocs: GithubDoc[] = []
 
-  docs.forEach(doc => {
+  docs.forEach((doc) => {
     const { communityHelpJSON, discordID, githubID, helpful } = doc
 
     if (discordID) {
