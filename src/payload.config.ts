@@ -71,7 +71,11 @@ export default buildConfig({
           richText({
             name: 'leader',
             label: 'Leader Text',
-            elements: [],
+            editor: slateEditor({
+              admin: {
+                elements: [],
+              },
+            }),
           }),
           {
             name: 'hubSpotFormID',
