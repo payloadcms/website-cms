@@ -17,6 +17,7 @@
     "generate:graphQLSchema": "PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:graphQLSchema",
     "lint": "eslint src",
     "lint:fix": "eslint --fix --ext .ts,.tsx src",
+    "payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload",
     "populate-ch": "ts-node src/scripts/populate-community-help.ts"
   },
   "dependencies": {
