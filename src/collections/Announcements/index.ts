@@ -1,3 +1,4 @@
+import { slateEditor } from '@payloadcms/richtext-slate'
 import type { CollectionConfig } from 'payload/types'
 
 import { isAdmin } from '../../access/isAdmin'
@@ -20,10 +21,12 @@ export const Announcements: CollectionConfig = {
       name: 'content',
       type: 'richText',
       required: true,
-      admin: {
-        elements: ['link'],
-        leaves: ['bold', 'italic', 'underline'],
-      },
+      editor: slateEditor({
+        admin: {
+          elements: ['link'],
+          leaves: ['bold', 'italic', 'underline'],
+        },
+      }),
     },
   ],
 }

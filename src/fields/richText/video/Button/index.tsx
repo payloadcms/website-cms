@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import { Modal, useModal } from '@faceless-ui/modal'
+import { ElementButton } from '@payloadcms/richtext-slate'
 import { Button, MinimalTemplate, X } from 'payload/components'
 import { Form, Select, Submit, Text } from 'payload/components/forms'
-import { ElementButton } from 'payload/components/rich-text'
 import { Transforms } from 'slate'
 import { ReactEditor, useSlate } from 'slate-react'
 
@@ -60,7 +60,7 @@ const VideoButton: React.FC<{ path: string }> = ({ path }) => {
       toggleModal(modalSlug)
       setRenderModal(false)
     },
-    [editor, toggleModal],
+    [editor, toggleModal, modalSlug],
   )
 
   useEffect(() => {

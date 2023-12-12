@@ -1,5 +1,5 @@
 import React from 'react'
-import { ElementButton } from 'payload/components/rich-text'
+import { ElementButton } from '@payloadcms/richtext-slate'
 
 import Icon from '../Icon'
 

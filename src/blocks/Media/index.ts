@@ -1,3 +1,4 @@
+import { slateEditor } from '@payloadcms/richtext-slate'
 import type { Block } from 'payload/types'
 
 import { blockFields } from '../../fields/blockFields'
@@ -32,9 +33,11 @@ export const MediaBlock: Block = {
         {
           name: 'caption',
           type: 'richText',
-          admin: {
-            elements: ['link'],
-          },
+          editor: slateEditor({
+            admin: {
+              elements: ['link'],
+            },
+          }),
         },
       ],
     }),

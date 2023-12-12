@@ -1,6 +1,6 @@
 import React from 'react'
-import { ElementButton } from 'payload/components/rich-text'
-import { injectVoidElement } from 'payload/dist/admin/components/forms/field-types/RichText/elements/injectVoid'
+import { ElementButton } from '@payloadcms/richtext-slate'
+import { injectVoidElement } from '@payloadcms/richtext-slate/dist/field/elements/injectVoid'
 import { ReactEditor, useSlate } from 'slate-react'
 
 import Icon from '../Icon'

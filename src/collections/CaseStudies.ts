@@ -1,3 +1,4 @@
+import { slateEditor } from '@payloadcms/richtext-slate'
 import type { CollectionConfig } from 'payload/types'
 
 import { isAdmin } from '../access/isAdmin'
@@ -59,10 +60,12 @@ export const CaseStudies: CollectionConfig = {
     },
     richText({
       name: 'introContent',
-      admin: {
-        elements: ['h1', largeBody],
-        leaves: ['underline'],
-      },
+      editor: slateEditor({
+        admin: {
+          elements: ['h1', largeBody],
+          leaves: ['underline'],
+        },
+      }),
     }),
     {
       name: 'featuredImage',

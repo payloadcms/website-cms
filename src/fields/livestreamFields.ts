@@ -1,3 +1,4 @@
+import { slateEditor } from '@payloadcms/richtext-slate'
 import type { Field } from 'payload/types'
 
 import label from './richText/label'
@@ -44,10 +45,12 @@ const livestreamFields: Field = {
     {
       name: 'richText',
       type: 'richText',
-      admin: {
-        elements: ['h1', largeBody, label, 'upload'],
-        leaves: ['bold', 'underline'],
-      },
+      editor: slateEditor({
+        admin: {
+          elements: ['h1', largeBody, label, 'upload'],
+          leaves: ['bold', 'underline'],
+        },
+      }),
     },
     {
       name: 'guests',
