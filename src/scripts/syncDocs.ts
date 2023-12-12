@@ -83,7 +83,7 @@ const syncDocs: PayloadHandler = async (req, res) => {
       if (existingDocs.totalDocs === 1) {
         await payload.update({
           collection: 'docs',
-          data: doc as Partial<Doc>,
+          data: doc,
           where: {
             id: { equals: existingDocs.docs[0].id },
           },
@@ -91,7 +91,7 @@ const syncDocs: PayloadHandler = async (req, res) => {
       } else if (existingDocs.totalDocs === 0) {
         await payload.create({
           collection: 'docs',
-          data: doc as Partial<Doc>,
+          data: doc,
         })
       } else if (existingDocs.totalDocs > 1) {
         payload.logger.error(
