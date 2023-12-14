@@ -20,14 +20,13 @@ type RichText = (
 ) => RichTextField
 
 const richText: RichText = (
-  overrides,
+  overrides = {},
   additions = {
     elements: [],
     leaves: [],
   },
 ): RichTextField => {
   const overridesToMerge = overrides ? { ...overrides } : {}
-  delete overridesToMerge?.admin
 
   return deepMerge<RichTextField, Partial<RichTextField>>(
     {

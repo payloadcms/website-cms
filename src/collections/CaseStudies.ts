@@ -60,12 +60,9 @@ export const CaseStudies: CollectionConfig = {
     },
     richText({
       name: 'introContent',
-      editor: slateEditor({
-        admin: {
-          elements: ['h1', largeBody],
-          leaves: ['underline'],
-        },
-      }),
+    }, {
+      elements: ['h1', largeBody],
+      leaves: ['underline'],
     }),
     {
       name: 'featuredImage',

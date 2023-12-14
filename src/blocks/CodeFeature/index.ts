@@ -19,10 +19,8 @@ export const CodeFeature: Block = {
           type: 'text',
           required: true,
         },
-        richText({
-          admin: {
-            elements: ['ul', 'ol', 'link'],
-          },
+        richText(undefined, {
+          elements: ['ul', 'ol', 'link'],
         }),
         {
           name: 'enableLink',
