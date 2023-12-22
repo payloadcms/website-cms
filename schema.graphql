@@ -1,55 +1,57 @@
 type Query {
   Announcement(id: String!, draft: Boolean): Announcement
-  Announcements(where: Announcement_where, draft: Boolean, page: Int, limit: Int, sort: String): Announcements
+  Announcements(draft: Boolean, where: Announcement_where, limit: Int, page: Int, sort: String): Announcements
   docAccessAnnouncement(id: String!): announcementsDocAccess
   CaseStudy(id: String!, draft: Boolean): CaseStudy
-  CaseStudies(where: CaseStudy_where, draft: Boolean, page: Int, limit: Int, sort: String): CaseStudies
+  CaseStudies(draft: Boolean, where: CaseStudy_where, limit: Int, page: Int, sort: String): CaseStudies
   docAccessCaseStudy(id: String!): case_studiesDocAccess
   versionCaseStudy(id: String): CaseStudyVersion
-  versionsCaseStudies(where: versionsCaseStudy_where, page: Int, limit: Int, sort: String): versionsCaseStudies
+  versionsCaseStudies(where: versionsCaseStudy_where, limit: Int, page: Int, sort: String): versionsCaseStudies
   CommunityHelp(id: String!, draft: Boolean): CommunityHelp
-  CommunityHelps(where: CommunityHelp_where, draft: Boolean, page: Int, limit: Int, sort: String): CommunityHelps
+  CommunityHelps(draft: Boolean, where: CommunityHelp_where, limit: Int, page: Int, sort: String): CommunityHelps
   docAccessCommunityHelp(id: String!): community_helpDocAccess
   Doc(id: String!, draft: Boolean): Doc
-  Docs(where: Doc_where, draft: Boolean, page: Int, limit: Int, sort: String): Docs
+  Docs(draft: Boolean, where: Doc_where, limit: Int, page: Int, sort: String): Docs
   docAccessDoc(id: String!): docsDocAccess
   Media(id: String!, draft: Boolean): Media
-  allMedia(where: Media_where, draft: Boolean, page: Int, limit: Int, sort: String): allMedia
+  allMedia(draft: Boolean, where: Media_where, limit: Int, page: Int, sort: String): allMedia
   docAccessMedia(id: String!): mediaDocAccess
   Page(id: String!, draft: Boolean): Page
-  Pages(where: Page_where, draft: Boolean, page: Int, limit: Int, sort: String): Pages
+  Pages(draft: Boolean, where: Page_where, limit: Int, page: Int, sort: String): Pages
   docAccessPage(id: String!): pagesDocAccess
   versionPage(id: String): PageVersion
-  versionsPages(where: versionsPage_where, page: Int, limit: Int, sort: String): versionsPages
+  versionsPages(where: versionsPage_where, limit: Int, page: Int, sort: String): versionsPages
   Post(id: String!, draft: Boolean): Post
-  Posts(where: Post_where, draft: Boolean, page: Int, limit: Int, sort: String): Posts
+  Posts(draft: Boolean, where: Post_where, limit: Int, page: Int, sort: String): Posts
   docAccessPost(id: String!): postsDocAccess
   versionPost(id: String): PostVersion
-  versionsPosts(where: versionsPost_where, page: Int, limit: Int, sort: String): versionsPosts
+  versionsPosts(where: versionsPost_where, limit: Int, page: Int, sort: String): versionsPosts
   ReusableContent(id: String!, draft: Boolean): ReusableContent
-  ReusableContents(where: ReusableContent_where, draft: Boolean, page: Int, limit: Int, sort: String): ReusableContents
+  ReusableContents(draft: Boolean, where: ReusableContent_where, limit: Int, page: Int, sort: String): ReusableContents
   docAccessReusableContent(id: String!): reusable_contentDocAccess
   User(id: String!, draft: Boolean): User
-  Users(where: User_where, draft: Boolean, page: Int, limit: Int, sort: String): Users
+  Users(draft: Boolean, where: User_where, limit: Int, page: Int, sort: String): Users
   docAccessUser(id: String!): usersDocAccess
   meUser: usersMe
   initializedUser: Boolean
   Form(id: String!, draft: Boolean): Form
-  Forms(where: Form_where, draft: Boolean, page: Int, limit: Int, sort: String): Forms
+  Forms(draft: Boolean, where: Form_where, limit: Int, page: Int, sort: String): Forms
   docAccessForm(id: String!): formsDocAccess
   FormSubmission(id: String!, draft: Boolean): FormSubmission
-  FormSubmissions(where: FormSubmission_where, draft: Boolean, page: Int, limit: Int, sort: String): FormSubmissions
+  FormSubmissions(draft: Boolean, where: FormSubmission_where, limit: Int, page: Int, sort: String): FormSubmissions
   docAccessFormSubmission(id: String!): form_submissionsDocAccess
   Redirect(id: String!, draft: Boolean): Redirect
-  Redirects(where: Redirect_where, draft: Boolean, page: Int, limit: Int, sort: String): Redirects
+  Redirects(draft: Boolean, where: Redirect_where, limit: Int, page: Int, sort: String): Redirects
   docAccessRedirect(id: String!): redirectsDocAccess
+  PayloadPreference(id: String!, draft: Boolean): PayloadPreference
+  PayloadPreferences(draft: Boolean, where: PayloadPreference_where, limit: Int, page: Int, sort: String): PayloadPreferences
+  docAccessPayloadPreference(id: String!): payload_preferencesDocAccess
   Footer(draft: Boolean): Footer
   docAccessFooter: footerDocAccess
   MainMenu(draft: Boolean): MainMenu
   docAccessMainMenu: main_menuDocAccess
   TopBar(draft: Boolean): TopBar
   docAccessTopBar: top_barDocAccess
-  Preference(key: String): Preference
   Access: Access
 }
 
@@ -73,16 +75,16 @@ scalar DateTime
 
 type Announcements {
   docs: [Announcement]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input Announcement_where {
@@ -91,8 +93,8 @@ input Announcement_where {
   updatedAt: Announcement_updatedAt_operator
   createdAt: Announcement_createdAt_operator
   id: Announcement_id_operator
-  OR: [Announcement_where_or]
   AND: [Announcement_where_and]
+  OR: [Announcement_where_or]
 }
 
 input Announcement_name_operator {
@@ -146,20 +148,24 @@ input Announcement_id_operator {
   exists: Boolean
 }
 
-input Announcement_where_or {
-  name: Announcement_name_operator
-  content: Announcement_content_operator
-  updatedAt: Announcement_updatedAt_operator
-  createdAt: Announcement_createdAt_operator
-  id: Announcement_id_operator
-}
-
 input Announcement_where_and {
   name: Announcement_name_operator
   content: Announcement_content_operator
   updatedAt: Announcement_updatedAt_operator
   createdAt: Announcement_createdAt_operator
   id: Announcement_id_operator
+  AND: [Announcement_where_and]
+  OR: [Announcement_where_or]
+}
+
+input Announcement_where_or {
+  name: Announcement_name_operator
+  content: Announcement_content_operator
+  updatedAt: Announcement_updatedAt_operator
+  createdAt: Announcement_createdAt_operator
+  id: Announcement_id_operator
+  AND: [Announcement_where_and]
+  OR: [Announcement_where_or]
 }
 
 type announcementsDocAccess {
@@ -334,8 +340,8 @@ input Media_DarkModeFallback_where {
   width: Media_DarkModeFallback_width_operator
   height: Media_DarkModeFallback_height_operator
   id: Media_DarkModeFallback_id_operator
-  OR: [Media_DarkModeFallback_where_or]
   AND: [Media_DarkModeFallback_where_and]
+  OR: [Media_DarkModeFallback_where_or]
 }
 
 input Media_DarkModeFallback_alt_operator {
@@ -450,20 +456,6 @@ input Media_DarkModeFallback_id_operator {
   exists: Boolean
 }
 
-input Media_DarkModeFallback_where_or {
-  alt: Media_DarkModeFallback_alt_operator
-  darkModeFallback: Media_DarkModeFallback_darkModeFallback_operator
-  updatedAt: Media_DarkModeFallback_updatedAt_operator
-  createdAt: Media_DarkModeFallback_createdAt_operator
-  url: Media_DarkModeFallback_url_operator
-  filename: Media_DarkModeFallback_filename_operator
-  mimeType: Media_DarkModeFallback_mimeType_operator
-  filesize: Media_DarkModeFallback_filesize_operator
-  width: Media_DarkModeFallback_width_operator
-  height: Media_DarkModeFallback_height_operator
-  id: Media_DarkModeFallback_id_operator
-}
-
 input Media_DarkModeFallback_where_and {
   alt: Media_DarkModeFallback_alt_operator
   darkModeFallback: Media_DarkModeFallback_darkModeFallback_operator
@@ -476,6 +468,24 @@ input Media_DarkModeFallback_where_and {
   width: Media_DarkModeFallback_width_operator
   height: Media_DarkModeFallback_height_operator
   id: Media_DarkModeFallback_id_operator
+  AND: [Media_DarkModeFallback_where_and]
+  OR: [Media_DarkModeFallback_where_or]
+}
+
+input Media_DarkModeFallback_where_or {
+  alt: Media_DarkModeFallback_alt_operator
+  darkModeFallback: Media_DarkModeFallback_darkModeFallback_operator
+  updatedAt: Media_DarkModeFallback_updatedAt_operator
+  createdAt: Media_DarkModeFallback_createdAt_operator
+  url: Media_DarkModeFallback_url_operator
+  filename: Media_DarkModeFallback_filename_operator
+  mimeType: Media_DarkModeFallback_mimeType_operator
+  filesize: Media_DarkModeFallback_filesize_operator
+  width: Media_DarkModeFallback_width_operator
+  height: Media_DarkModeFallback_height_operator
+  id: Media_DarkModeFallback_id_operator
+  AND: [Media_DarkModeFallback_where_and]
+  OR: [Media_DarkModeFallback_where_or]
 }
 
 input CaseStudy_FeaturedImage_where {
@@ -490,8 +500,8 @@ input CaseStudy_FeaturedImage_where {
   width: CaseStudy_FeaturedImage_width_operator
   height: CaseStudy_FeaturedImage_height_operator
   id: CaseStudy_FeaturedImage_id_operator
-  OR: [CaseStudy_FeaturedImage_where_or]
   AND: [CaseStudy_FeaturedImage_where_and]
+  OR: [CaseStudy_FeaturedImage_where_or]
 }
 
 input CaseStudy_FeaturedImage_alt_operator {
@@ -606,20 +616,6 @@ input CaseStudy_FeaturedImage_id_operator {
   exists: Boolean
 }
 
-input CaseStudy_FeaturedImage_where_or {
-  alt: CaseStudy_FeaturedImage_alt_operator
-  darkModeFallback: CaseStudy_FeaturedImage_darkModeFallback_operator
-  updatedAt: CaseStudy_FeaturedImage_updatedAt_operator
-  createdAt: CaseStudy_FeaturedImage_createdAt_operator
-  url: CaseStudy_FeaturedImage_url_operator
-  filename: CaseStudy_FeaturedImage_filename_operator
-  mimeType: CaseStudy_FeaturedImage_mimeType_operator
-  filesize: CaseStudy_FeaturedImage_filesize_operator
-  width: CaseStudy_FeaturedImage_width_operator
-  height: CaseStudy_FeaturedImage_height_operator
-  id: CaseStudy_FeaturedImage_id_operator
-}
-
 input CaseStudy_FeaturedImage_where_and {
   alt: CaseStudy_FeaturedImage_alt_operator
   darkModeFallback: CaseStudy_FeaturedImage_darkModeFallback_operator
@@ -632,6 +628,24 @@ input CaseStudy_FeaturedImage_where_and {
   width: CaseStudy_FeaturedImage_width_operator
   height: CaseStudy_FeaturedImage_height_operator
   id: CaseStudy_FeaturedImage_id_operator
+  AND: [CaseStudy_FeaturedImage_where_and]
+  OR: [CaseStudy_FeaturedImage_where_or]
+}
+
+input CaseStudy_FeaturedImage_where_or {
+  alt: CaseStudy_FeaturedImage_alt_operator
+  darkModeFallback: CaseStudy_FeaturedImage_darkModeFallback_operator
+  updatedAt: CaseStudy_FeaturedImage_updatedAt_operator
+  createdAt: CaseStudy_FeaturedImage_createdAt_operator
+  url: CaseStudy_FeaturedImage_url_operator
+  filename: CaseStudy_FeaturedImage_filename_operator
+  mimeType: CaseStudy_FeaturedImage_mimeType_operator
+  filesize: CaseStudy_FeaturedImage_filesize_operator
+  width: CaseStudy_FeaturedImage_width_operator
+  height: CaseStudy_FeaturedImage_height_operator
+  id: CaseStudy_FeaturedImage_id_operator
+  AND: [CaseStudy_FeaturedImage_where_and]
+  OR: [CaseStudy_FeaturedImage_where_or]
 }
 
 union CaseStudy_Layout = Cta | CardGrid | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights
@@ -710,6 +724,7 @@ type Page_Hero {
   actions: [Page_Hero_Actions!]
   buttons: [Page_Hero_Buttons!]
   media(where: Page_Hero_Media_where): Media
+  mediaWidth: Page_Hero_mediaWidth
   adjectives: [Page_Hero_Adjectives!]
   form: Form
   logoGroup: Page_Hero_LogoGroup
@@ -752,8 +767,8 @@ input Page_Hero_Livestream_Guests_Image_where {
   width: Page_Hero_Livestream_Guests_Image_width_operator
   height: Page_Hero_Livestream_Guests_Image_height_operator
   id: Page_Hero_Livestream_Guests_Image_id_operator
-  OR: [Page_Hero_Livestream_Guests_Image_where_or]
   AND: [Page_Hero_Livestream_Guests_Image_where_and]
+  OR: [Page_Hero_Livestream_Guests_Image_where_or]
 }
 
 input Page_Hero_Livestream_Guests_Image_alt_operator {
@@ -868,20 +883,6 @@ input Page_Hero_Livestream_Guests_Image_id_operator {
   exists: Boolean
 }
 
-input Page_Hero_Livestream_Guests_Image_where_or {
-  alt: Page_Hero_Livestream_Guests_Image_alt_operator
-  darkModeFallback: Page_Hero_Livestream_Guests_Image_darkModeFallback_operator
-  updatedAt: Page_Hero_Livestream_Guests_Image_updatedAt_operator
-  createdAt: Page_Hero_Livestream_Guests_Image_createdAt_operator
-  url: Page_Hero_Livestream_Guests_Image_url_operator
-  filename: Page_Hero_Livestream_Guests_Image_filename_operator
-  mimeType: Page_Hero_Livestream_Guests_Image_mimeType_operator
-  filesize: Page_Hero_Livestream_Guests_Image_filesize_operator
-  width: Page_Hero_Livestream_Guests_Image_width_operator
-  height: Page_Hero_Livestream_Guests_Image_height_operator
-  id: Page_Hero_Livestream_Guests_Image_id_operator
-}
-
 input Page_Hero_Livestream_Guests_Image_where_and {
   alt: Page_Hero_Livestream_Guests_Image_alt_operator
   darkModeFallback: Page_Hero_Livestream_Guests_Image_darkModeFallback_operator
@@ -894,6 +895,24 @@ input Page_Hero_Livestream_Guests_Image_where_and {
   width: Page_Hero_Livestream_Guests_Image_width_operator
   height: Page_Hero_Livestream_Guests_Image_height_operator
   id: Page_Hero_Livestream_Guests_Image_id_operator
+  AND: [Page_Hero_Livestream_Guests_Image_where_and]
+  OR: [Page_Hero_Livestream_Guests_Image_where_or]
+}
+
+input Page_Hero_Livestream_Guests_Image_where_or {
+  alt: Page_Hero_Livestream_Guests_Image_alt_operator
+  darkModeFallback: Page_Hero_Livestream_Guests_Image_darkModeFallback_operator
+  updatedAt: Page_Hero_Livestream_Guests_Image_updatedAt_operator
+  createdAt: Page_Hero_Livestream_Guests_Image_createdAt_operator
+  url: Page_Hero_Livestream_Guests_Image_url_operator
+  filename: Page_Hero_Livestream_Guests_Image_filename_operator
+  mimeType: Page_Hero_Livestream_Guests_Image_mimeType_operator
+  filesize: Page_Hero_Livestream_Guests_Image_filesize_operator
+  width: Page_Hero_Livestream_Guests_Image_width_operator
+  height: Page_Hero_Livestream_Guests_Image_height_operator
+  id: Page_Hero_Livestream_Guests_Image_id_operator
+  AND: [Page_Hero_Livestream_Guests_Image_where_and]
+  OR: [Page_Hero_Livestream_Guests_Image_where_or]
 }
 
 type Page_Hero_Links {
@@ -956,8 +975,8 @@ input Post_Image_where {
   width: Post_Image_width_operator
   height: Post_Image_height_operator
   id: Post_Image_id_operator
-  OR: [Post_Image_where_or]
   AND: [Post_Image_where_and]
+  OR: [Post_Image_where_or]
 }
 
 input Post_Image_alt_operator {
@@ -1072,20 +1091,6 @@ input Post_Image_id_operator {
   exists: Boolean
 }
 
-input Post_Image_where_or {
-  alt: Post_Image_alt_operator
-  darkModeFallback: Post_Image_darkModeFallback_operator
-  updatedAt: Post_Image_updatedAt_operator
-  createdAt: Post_Image_createdAt_operator
-  url: Post_Image_url_operator
-  filename: Post_Image_filename_operator
-  mimeType: Post_Image_mimeType_operator
-  filesize: Post_Image_filesize_operator
-  width: Post_Image_width_operator
-  height: Post_Image_height_operator
-  id: Post_Image_id_operator
-}
-
 input Post_Image_where_and {
   alt: Post_Image_alt_operator
   darkModeFallback: Post_Image_darkModeFallback_operator
@@ -1098,6 +1103,24 @@ input Post_Image_where_and {
   width: Post_Image_width_operator
   height: Post_Image_height_operator
   id: Post_Image_id_operator
+  AND: [Post_Image_where_and]
+  OR: [Post_Image_where_or]
+}
+
+input Post_Image_where_or {
+  alt: Post_Image_alt_operator
+  darkModeFallback: Post_Image_darkModeFallback_operator
+  updatedAt: Post_Image_updatedAt_operator
+  createdAt: Post_Image_createdAt_operator
+  url: Post_Image_url_operator
+  filename: Post_Image_filename_operator
+  mimeType: Post_Image_mimeType_operator
+  filesize: Post_Image_filesize_operator
+  width: Post_Image_width_operator
+  height: Post_Image_height_operator
+  id: Post_Image_id_operator
+  AND: [Post_Image_where_and]
+  OR: [Post_Image_where_or]
 }
 
 union Post_Content = Banner | BlogContent | Code | BlogMarkdown | MediaBlock | ReusableContentBlock
@@ -1192,8 +1215,8 @@ input MediaBlock_MediaBlockFields_Media_where {
   width: MediaBlock_MediaBlockFields_Media_width_operator
   height: MediaBlock_MediaBlockFields_Media_height_operator
   id: MediaBlock_MediaBlockFields_Media_id_operator
-  OR: [MediaBlock_MediaBlockFields_Media_where_or]
   AND: [MediaBlock_MediaBlockFields_Media_where_and]
+  OR: [MediaBlock_MediaBlockFields_Media_where_or]
 }
 
 input MediaBlock_MediaBlockFields_Media_alt_operator {
@@ -1308,20 +1331,6 @@ input MediaBlock_MediaBlockFields_Media_id_operator {
   exists: Boolean
 }
 
-input MediaBlock_MediaBlockFields_Media_where_or {
-  alt: MediaBlock_MediaBlockFields_Media_alt_operator
-  darkModeFallback: MediaBlock_MediaBlockFields_Media_darkModeFallback_operator
-  updatedAt: MediaBlock_MediaBlockFields_Media_updatedAt_operator
-  createdAt: MediaBlock_MediaBlockFields_Media_createdAt_operator
-  url: MediaBlock_MediaBlockFields_Media_url_operator
-  filename: MediaBlock_MediaBlockFields_Media_filename_operator
-  mimeType: MediaBlock_MediaBlockFields_Media_mimeType_operator
-  filesize: MediaBlock_MediaBlockFields_Media_filesize_operator
-  width: MediaBlock_MediaBlockFields_Media_width_operator
-  height: MediaBlock_MediaBlockFields_Media_height_operator
-  id: MediaBlock_MediaBlockFields_Media_id_operator
-}
-
 input MediaBlock_MediaBlockFields_Media_where_and {
   alt: MediaBlock_MediaBlockFields_Media_alt_operator
   darkModeFallback: MediaBlock_MediaBlockFields_Media_darkModeFallback_operator
@@ -1334,6 +1343,24 @@ input MediaBlock_MediaBlockFields_Media_where_and {
   width: MediaBlock_MediaBlockFields_Media_width_operator
   height: MediaBlock_MediaBlockFields_Media_height_operator
   id: MediaBlock_MediaBlockFields_Media_id_operator
+  AND: [MediaBlock_MediaBlockFields_Media_where_and]
+  OR: [MediaBlock_MediaBlockFields_Media_where_or]
+}
+
+input MediaBlock_MediaBlockFields_Media_where_or {
+  alt: MediaBlock_MediaBlockFields_Media_alt_operator
+  darkModeFallback: MediaBlock_MediaBlockFields_Media_darkModeFallback_operator
+  updatedAt: MediaBlock_MediaBlockFields_Media_updatedAt_operator
+  createdAt: MediaBlock_MediaBlockFields_Media_createdAt_operator
+  url: MediaBlock_MediaBlockFields_Media_url_operator
+  filename: MediaBlock_MediaBlockFields_Media_filename_operator
+  mimeType: MediaBlock_MediaBlockFields_Media_mimeType_operator
+  filesize: MediaBlock_MediaBlockFields_Media_filesize_operator
+  width: MediaBlock_MediaBlockFields_Media_width_operator
+  height: MediaBlock_MediaBlockFields_Media_height_operator
+  id: MediaBlock_MediaBlockFields_Media_id_operator
+  AND: [MediaBlock_MediaBlockFields_Media_where_and]
+  OR: [MediaBlock_MediaBlockFields_Media_where_or]
 }
 
 type ReusableContentBlock {
@@ -1606,8 +1633,8 @@ input MediaExampleBlock_Media_where {
   width: MediaExampleBlock_Media_width_operator
   height: MediaExampleBlock_Media_height_operator
   id: MediaExampleBlock_Media_id_operator
-  OR: [MediaExampleBlock_Media_where_or]
   AND: [MediaExampleBlock_Media_where_and]
+  OR: [MediaExampleBlock_Media_where_or]
 }
 
 input MediaExampleBlock_Media_alt_operator {
@@ -1722,20 +1749,6 @@ input MediaExampleBlock_Media_id_operator {
   exists: Boolean
 }
 
-input MediaExampleBlock_Media_where_or {
-  alt: MediaExampleBlock_Media_alt_operator
-  darkModeFallback: MediaExampleBlock_Media_darkModeFallback_operator
-  updatedAt: MediaExampleBlock_Media_updatedAt_operator
-  createdAt: MediaExampleBlock_Media_createdAt_operator
-  url: MediaExampleBlock_Media_url_operator
-  filename: MediaExampleBlock_Media_filename_operator
-  mimeType: MediaExampleBlock_Media_mimeType_operator
-  filesize: MediaExampleBlock_Media_filesize_operator
-  width: MediaExampleBlock_Media_width_operator
-  height: MediaExampleBlock_Media_height_operator
-  id: MediaExampleBlock_Media_id_operator
-}
-
 input MediaExampleBlock_Media_where_and {
   alt: MediaExampleBlock_Media_alt_operator
   darkModeFallback: MediaExampleBlock_Media_darkModeFallback_operator
@@ -1748,6 +1761,24 @@ input MediaExampleBlock_Media_where_and {
   width: MediaExampleBlock_Media_width_operator
   height: MediaExampleBlock_Media_height_operator
   id: MediaExampleBlock_Media_id_operator
+  AND: [MediaExampleBlock_Media_where_and]
+  OR: [MediaExampleBlock_Media_where_or]
+}
+
+input MediaExampleBlock_Media_where_or {
+  alt: MediaExampleBlock_Media_alt_operator
+  darkModeFallback: MediaExampleBlock_Media_darkModeFallback_operator
+  updatedAt: MediaExampleBlock_Media_updatedAt_operator
+  createdAt: MediaExampleBlock_Media_createdAt_operator
+  url: MediaExampleBlock_Media_url_operator
+  filename: MediaExampleBlock_Media_filename_operator
+  mimeType: MediaExampleBlock_Media_mimeType_operator
+  filesize: MediaExampleBlock_Media_filesize_operator
+  width: MediaExampleBlock_Media_width_operator
+  height: MediaExampleBlock_Media_height_operator
+  id: MediaExampleBlock_Media_id_operator
+  AND: [MediaExampleBlock_Media_where_and]
+  OR: [MediaExampleBlock_Media_where_or]
 }
 
 type FormBlock {
@@ -1933,8 +1964,8 @@ input HoverHighlights_HoverHighlightsFields_Highlights_Media_where {
   width: HoverHighlights_HoverHighlightsFields_Highlights_Media_width_operator
   height: HoverHighlights_HoverHighlightsFields_Highlights_Media_height_operator
   id: HoverHighlights_HoverHighlightsFields_Highlights_Media_id_operator
-  OR: [HoverHighlights_HoverHighlightsFields_Highlights_Media_where_or]
   AND: [HoverHighlights_HoverHighlightsFields_Highlights_Media_where_and]
+  OR: [HoverHighlights_HoverHighlightsFields_Highlights_Media_where_or]
 }
 
 input HoverHighlights_HoverHighlightsFields_Highlights_Media_alt_operator {
@@ -2049,20 +2080,6 @@ input HoverHighlights_HoverHighlightsFields_Highlights_Media_id_operator {
   exists: Boolean
 }
 
-input HoverHighlights_HoverHighlightsFields_Highlights_Media_where_or {
-  alt: HoverHighlights_HoverHighlightsFields_Highlights_Media_alt_operator
-  darkModeFallback: HoverHighlights_HoverHighlightsFields_Highlights_Media_darkModeFallback_operator
-  updatedAt: HoverHighlights_HoverHighlightsFields_Highlights_Media_updatedAt_operator
-  createdAt: HoverHighlights_HoverHighlightsFields_Highlights_Media_createdAt_operator
-  url: HoverHighlights_HoverHighlightsFields_Highlights_Media_url_operator
-  filename: HoverHighlights_HoverHighlightsFields_Highlights_Media_filename_operator
-  mimeType: HoverHighlights_HoverHighlightsFields_Highlights_Media_mimeType_operator
-  filesize: HoverHighlights_HoverHighlightsFields_Highlights_Media_filesize_operator
-  width: HoverHighlights_HoverHighlightsFields_Highlights_Media_width_operator
-  height: HoverHighlights_HoverHighlightsFields_Highlights_Media_height_operator
-  id: HoverHighlights_HoverHighlightsFields_Highlights_Media_id_operator
-}
-
 input HoverHighlights_HoverHighlightsFields_Highlights_Media_where_and {
   alt: HoverHighlights_HoverHighlightsFields_Highlights_Media_alt_operator
   darkModeFallback: HoverHighlights_HoverHighlightsFields_Highlights_Media_darkModeFallback_operator
@@ -2075,6 +2092,24 @@ input HoverHighlights_HoverHighlightsFields_Highlights_Media_where_and {
   width: HoverHighlights_HoverHighlightsFields_Highlights_Media_width_operator
   height: HoverHighlights_HoverHighlightsFields_Highlights_Media_height_operator
   id: HoverHighlights_HoverHighlightsFields_Highlights_Media_id_operator
+  AND: [HoverHighlights_HoverHighlightsFields_Highlights_Media_where_and]
+  OR: [HoverHighlights_HoverHighlightsFields_Highlights_Media_where_or]
+}
+
+input HoverHighlights_HoverHighlightsFields_Highlights_Media_where_or {
+  alt: HoverHighlights_HoverHighlightsFields_Highlights_Media_alt_operator
+  darkModeFallback: HoverHighlights_HoverHighlightsFields_Highlights_Media_darkModeFallback_operator
+  updatedAt: HoverHighlights_HoverHighlightsFields_Highlights_Media_updatedAt_operator
+  createdAt: HoverHighlights_HoverHighlightsFields_Highlights_Media_createdAt_operator
+  url: HoverHighlights_HoverHighlightsFields_Highlights_Media_url_operator
+  filename: HoverHighlights_HoverHighlightsFields_Highlights_Media_filename_operator
+  mimeType: HoverHighlights_HoverHighlightsFields_Highlights_Media_mimeType_operator
+  filesize: HoverHighlights_HoverHighlightsFields_Highlights_Media_filesize_operator
+  width: HoverHighlights_HoverHighlightsFields_Highlights_Media_width_operator
+  height: HoverHighlights_HoverHighlightsFields_Highlights_Media_height_operator
+  id: HoverHighlights_HoverHighlightsFields_Highlights_Media_id_operator
+  AND: [HoverHighlights_HoverHighlightsFields_Highlights_Media_where_and]
+  OR: [HoverHighlights_HoverHighlightsFields_Highlights_Media_where_or]
 }
 
 type HoverHighlights_HoverHighlightsFields_Highlights_Link {
@@ -2203,8 +2238,8 @@ input MediaContent_MediaContentFields_Media_where {
   width: MediaContent_MediaContentFields_Media_width_operator
   height: MediaContent_MediaContentFields_Media_height_operator
   id: MediaContent_MediaContentFields_Media_id_operator
-  OR: [MediaContent_MediaContentFields_Media_where_or]
   AND: [MediaContent_MediaContentFields_Media_where_and]
+  OR: [MediaContent_MediaContentFields_Media_where_or]
 }
 
 input MediaContent_MediaContentFields_Media_alt_operator {
@@ -2319,20 +2354,6 @@ input MediaContent_MediaContentFields_Media_id_operator {
   exists: Boolean
 }
 
-input MediaContent_MediaContentFields_Media_where_or {
-  alt: MediaContent_MediaContentFields_Media_alt_operator
-  darkModeFallback: MediaContent_MediaContentFields_Media_darkModeFallback_operator
-  updatedAt: MediaContent_MediaContentFields_Media_updatedAt_operator
-  createdAt: MediaContent_MediaContentFields_Media_createdAt_operator
-  url: MediaContent_MediaContentFields_Media_url_operator
-  filename: MediaContent_MediaContentFields_Media_filename_operator
-  mimeType: MediaContent_MediaContentFields_Media_mimeType_operator
-  filesize: MediaContent_MediaContentFields_Media_filesize_operator
-  width: MediaContent_MediaContentFields_Media_width_operator
-  height: MediaContent_MediaContentFields_Media_height_operator
-  id: MediaContent_MediaContentFields_Media_id_operator
-}
-
 input MediaContent_MediaContentFields_Media_where_and {
   alt: MediaContent_MediaContentFields_Media_alt_operator
   darkModeFallback: MediaContent_MediaContentFields_Media_darkModeFallback_operator
@@ -2345,6 +2366,24 @@ input MediaContent_MediaContentFields_Media_where_and {
   width: MediaContent_MediaContentFields_Media_width_operator
   height: MediaContent_MediaContentFields_Media_height_operator
   id: MediaContent_MediaContentFields_Media_id_operator
+  AND: [MediaContent_MediaContentFields_Media_where_and]
+  OR: [MediaContent_MediaContentFields_Media_where_or]
+}
+
+input MediaContent_MediaContentFields_Media_where_or {
+  alt: MediaContent_MediaContentFields_Media_alt_operator
+  darkModeFallback: MediaContent_MediaContentFields_Media_darkModeFallback_operator
+  updatedAt: MediaContent_MediaContentFields_Media_updatedAt_operator
+  createdAt: MediaContent_MediaContentFields_Media_createdAt_operator
+  url: MediaContent_MediaContentFields_Media_url_operator
+  filename: MediaContent_MediaContentFields_Media_filename_operator
+  mimeType: MediaContent_MediaContentFields_Media_mimeType_operator
+  filesize: MediaContent_MediaContentFields_Media_filesize_operator
+  width: MediaContent_MediaContentFields_Media_width_operator
+  height: MediaContent_MediaContentFields_Media_height_operator
+  id: MediaContent_MediaContentFields_Media_id_operator
+  AND: [MediaContent_MediaContentFields_Media_where_and]
+  OR: [MediaContent_MediaContentFields_Media_where_or]
 }
 
 type Pricing {
@@ -2444,8 +2483,8 @@ input Slider_SliderFields_ImageSlides_Image_where {
   width: Slider_SliderFields_ImageSlides_Image_width_operator
   height: Slider_SliderFields_ImageSlides_Image_height_operator
   id: Slider_SliderFields_ImageSlides_Image_id_operator
-  OR: [Slider_SliderFields_ImageSlides_Image_where_or]
   AND: [Slider_SliderFields_ImageSlides_Image_where_and]
+  OR: [Slider_SliderFields_ImageSlides_Image_where_or]
 }
 
 input Slider_SliderFields_ImageSlides_Image_alt_operator {
@@ -2560,20 +2599,6 @@ input Slider_SliderFields_ImageSlides_Image_id_operator {
   exists: Boolean
 }
 
-input Slider_SliderFields_ImageSlides_Image_where_or {
-  alt: Slider_SliderFields_ImageSlides_Image_alt_operator
-  darkModeFallback: Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator
-  updatedAt: Slider_SliderFields_ImageSlides_Image_updatedAt_operator
-  createdAt: Slider_SliderFields_ImageSlides_Image_createdAt_operator
-  url: Slider_SliderFields_ImageSlides_Image_url_operator
-  filename: Slider_SliderFields_ImageSlides_Image_filename_operator
-  mimeType: Slider_SliderFields_ImageSlides_Image_mimeType_operator
-  filesize: Slider_SliderFields_ImageSlides_Image_filesize_operator
-  width: Slider_SliderFields_ImageSlides_Image_width_operator
-  height: Slider_SliderFields_ImageSlides_Image_height_operator
-  id: Slider_SliderFields_ImageSlides_Image_id_operator
-}
-
 input Slider_SliderFields_ImageSlides_Image_where_and {
   alt: Slider_SliderFields_ImageSlides_Image_alt_operator
   darkModeFallback: Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator
@@ -2586,6 +2611,24 @@ input Slider_SliderFields_ImageSlides_Image_where_and {
   width: Slider_SliderFields_ImageSlides_Image_width_operator
   height: Slider_SliderFields_ImageSlides_Image_height_operator
   id: Slider_SliderFields_ImageSlides_Image_id_operator
+  AND: [Slider_SliderFields_ImageSlides_Image_where_and]
+  OR: [Slider_SliderFields_ImageSlides_Image_where_or]
+}
+
+input Slider_SliderFields_ImageSlides_Image_where_or {
+  alt: Slider_SliderFields_ImageSlides_Image_alt_operator
+  darkModeFallback: Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator
+  updatedAt: Slider_SliderFields_ImageSlides_Image_updatedAt_operator
+  createdAt: Slider_SliderFields_ImageSlides_Image_createdAt_operator
+  url: Slider_SliderFields_ImageSlides_Image_url_operator
+  filename: Slider_SliderFields_ImageSlides_Image_filename_operator
+  mimeType: Slider_SliderFields_ImageSlides_Image_mimeType_operator
+  filesize: Slider_SliderFields_ImageSlides_Image_filesize_operator
+  width: Slider_SliderFields_ImageSlides_Image_width_operator
+  height: Slider_SliderFields_ImageSlides_Image_height_operator
+  id: Slider_SliderFields_ImageSlides_Image_id_operator
+  AND: [Slider_SliderFields_ImageSlides_Image_where_and]
+  OR: [Slider_SliderFields_ImageSlides_Image_where_or]
 }
 
 type Slider_SliderFields_QuoteSlides {
@@ -2676,8 +2719,8 @@ input StickyHighlights_StickyHighlightsFields_Highlights_Media_where {
   width: StickyHighlights_StickyHighlightsFields_Highlights_Media_width_operator
   height: StickyHighlights_StickyHighlightsFields_Highlights_Media_height_operator
   id: StickyHighlights_StickyHighlightsFields_Highlights_Media_id_operator
-  OR: [StickyHighlights_StickyHighlightsFields_Highlights_Media_where_or]
   AND: [StickyHighlights_StickyHighlightsFields_Highlights_Media_where_and]
+  OR: [StickyHighlights_StickyHighlightsFields_Highlights_Media_where_or]
 }
 
 input StickyHighlights_StickyHighlightsFields_Highlights_Media_alt_operator {
@@ -2792,20 +2835,6 @@ input StickyHighlights_StickyHighlightsFields_Highlights_Media_id_operator {
   exists: Boolean
 }
 
-input StickyHighlights_StickyHighlightsFields_Highlights_Media_where_or {
-  alt: StickyHighlights_StickyHighlightsFields_Highlights_Media_alt_operator
-  darkModeFallback: StickyHighlights_StickyHighlightsFields_Highlights_Media_darkModeFallback_operator
-  updatedAt: StickyHighlights_StickyHighlightsFields_Highlights_Media_updatedAt_operator
-  createdAt: StickyHighlights_StickyHighlightsFields_Highlights_Media_createdAt_operator
-  url: StickyHighlights_StickyHighlightsFields_Highlights_Media_url_operator
-  filename: StickyHighlights_StickyHighlightsFields_Highlights_Media_filename_operator
-  mimeType: StickyHighlights_StickyHighlightsFields_Highlights_Media_mimeType_operator
-  filesize: StickyHighlights_StickyHighlightsFields_Highlights_Media_filesize_operator
-  width: StickyHighlights_StickyHighlightsFields_Highlights_Media_width_operator
-  height: StickyHighlights_StickyHighlightsFields_Highlights_Media_height_operator
-  id: StickyHighlights_StickyHighlightsFields_Highlights_Media_id_operator
-}
-
 input StickyHighlights_StickyHighlightsFields_Highlights_Media_where_and {
   alt: StickyHighlights_StickyHighlightsFields_Highlights_Media_alt_operator
   darkModeFallback: StickyHighlights_StickyHighlightsFields_Highlights_Media_darkModeFallback_operator
@@ -2818,6 +2847,24 @@ input StickyHighlights_StickyHighlightsFields_Highlights_Media_where_and {
   width: StickyHighlights_StickyHighlightsFields_Highlights_Media_width_operator
   height: StickyHighlights_StickyHighlightsFields_Highlights_Media_height_operator
   id: StickyHighlights_StickyHighlightsFields_Highlights_Media_id_operator
+  AND: [StickyHighlights_StickyHighlightsFields_Highlights_Media_where_and]
+  OR: [StickyHighlights_StickyHighlightsFields_Highlights_Media_where_or]
+}
+
+input StickyHighlights_StickyHighlightsFields_Highlights_Media_where_or {
+  alt: StickyHighlights_StickyHighlightsFields_Highlights_Media_alt_operator
+  darkModeFallback: StickyHighlights_StickyHighlightsFields_Highlights_Media_darkModeFallback_operator
+  updatedAt: StickyHighlights_StickyHighlightsFields_Highlights_Media_updatedAt_operator
+  createdAt: StickyHighlights_StickyHighlightsFields_Highlights_Media_createdAt_operator
+  url: StickyHighlights_StickyHighlightsFields_Highlights_Media_url_operator
+  filename: StickyHighlights_StickyHighlightsFields_Highlights_Media_filename_operator
+  mimeType: StickyHighlights_StickyHighlightsFields_Highlights_Media_mimeType_operator
+  filesize: StickyHighlights_StickyHighlightsFields_Highlights_Media_filesize_operator
+  width: StickyHighlights_StickyHighlightsFields_Highlights_Media_width_operator
+  height: StickyHighlights_StickyHighlightsFields_Highlights_Media_height_operator
+  id: StickyHighlights_StickyHighlightsFields_Highlights_Media_id_operator
+  AND: [StickyHighlights_StickyHighlightsFields_Highlights_Media_where_and]
+  OR: [StickyHighlights_StickyHighlightsFields_Highlights_Media_where_or]
 }
 
 type User {
@@ -2851,8 +2898,8 @@ input User_Photo_where {
   width: User_Photo_width_operator
   height: User_Photo_height_operator
   id: User_Photo_id_operator
-  OR: [User_Photo_where_or]
   AND: [User_Photo_where_and]
+  OR: [User_Photo_where_or]
 }
 
 input User_Photo_alt_operator {
@@ -2967,20 +3014,6 @@ input User_Photo_id_operator {
   exists: Boolean
 }
 
-input User_Photo_where_or {
-  alt: User_Photo_alt_operator
-  darkModeFallback: User_Photo_darkModeFallback_operator
-  updatedAt: User_Photo_updatedAt_operator
-  createdAt: User_Photo_createdAt_operator
-  url: User_Photo_url_operator
-  filename: User_Photo_filename_operator
-  mimeType: User_Photo_mimeType_operator
-  filesize: User_Photo_filesize_operator
-  width: User_Photo_width_operator
-  height: User_Photo_height_operator
-  id: User_Photo_id_operator
-}
-
 input User_Photo_where_and {
   alt: User_Photo_alt_operator
   darkModeFallback: User_Photo_darkModeFallback_operator
@@ -2993,6 +3026,24 @@ input User_Photo_where_and {
   width: User_Photo_width_operator
   height: User_Photo_height_operator
   id: User_Photo_id_operator
+  AND: [User_Photo_where_and]
+  OR: [User_Photo_where_or]
+}
+
+input User_Photo_where_or {
+  alt: User_Photo_alt_operator
+  darkModeFallback: User_Photo_darkModeFallback_operator
+  updatedAt: User_Photo_updatedAt_operator
+  createdAt: User_Photo_createdAt_operator
+  url: User_Photo_url_operator
+  filename: User_Photo_filename_operator
+  mimeType: User_Photo_mimeType_operator
+  filesize: User_Photo_filesize_operator
+  width: User_Photo_width_operator
+  height: User_Photo_height_operator
+  id: User_Photo_id_operator
+  AND: [User_Photo_where_and]
+  OR: [User_Photo_where_or]
 }
 
 enum User_roles {
@@ -3023,8 +3074,8 @@ input Post_Meta_Image_where {
   width: Post_Meta_Image_width_operator
   height: Post_Meta_Image_height_operator
   id: Post_Meta_Image_id_operator
-  OR: [Post_Meta_Image_where_or]
   AND: [Post_Meta_Image_where_and]
+  OR: [Post_Meta_Image_where_or]
 }
 
 input Post_Meta_Image_alt_operator {
@@ -3139,20 +3190,6 @@ input Post_Meta_Image_id_operator {
   exists: Boolean
 }
 
-input Post_Meta_Image_where_or {
-  alt: Post_Meta_Image_alt_operator
-  darkModeFallback: Post_Meta_Image_darkModeFallback_operator
-  updatedAt: Post_Meta_Image_updatedAt_operator
-  createdAt: Post_Meta_Image_createdAt_operator
-  url: Post_Meta_Image_url_operator
-  filename: Post_Meta_Image_filename_operator
-  mimeType: Post_Meta_Image_mimeType_operator
-  filesize: Post_Meta_Image_filesize_operator
-  width: Post_Meta_Image_width_operator
-  height: Post_Meta_Image_height_operator
-  id: Post_Meta_Image_id_operator
-}
-
 input Post_Meta_Image_where_and {
   alt: Post_Meta_Image_alt_operator
   darkModeFallback: Post_Meta_Image_darkModeFallback_operator
@@ -3165,6 +3202,24 @@ input Post_Meta_Image_where_and {
   width: Post_Meta_Image_width_operator
   height: Post_Meta_Image_height_operator
   id: Post_Meta_Image_id_operator
+  AND: [Post_Meta_Image_where_and]
+  OR: [Post_Meta_Image_where_or]
+}
+
+input Post_Meta_Image_where_or {
+  alt: Post_Meta_Image_alt_operator
+  darkModeFallback: Post_Meta_Image_darkModeFallback_operator
+  updatedAt: Post_Meta_Image_updatedAt_operator
+  createdAt: Post_Meta_Image_createdAt_operator
+  url: Post_Meta_Image_url_operator
+  filename: Post_Meta_Image_filename_operator
+  mimeType: Post_Meta_Image_mimeType_operator
+  filesize: Post_Meta_Image_filesize_operator
+  width: Post_Meta_Image_width_operator
+  height: Post_Meta_Image_height_operator
+  id: Post_Meta_Image_id_operator
+  AND: [Post_Meta_Image_where_and]
+  OR: [Post_Meta_Image_where_or]
 }
 
 enum Post__status {
@@ -3258,8 +3313,8 @@ input Page_Hero_Media_where {
   width: Page_Hero_Media_width_operator
   height: Page_Hero_Media_height_operator
   id: Page_Hero_Media_id_operator
-  OR: [Page_Hero_Media_where_or]
   AND: [Page_Hero_Media_where_and]
+  OR: [Page_Hero_Media_where_or]
 }
 
 input Page_Hero_Media_alt_operator {
@@ -3374,20 +3429,6 @@ input Page_Hero_Media_id_operator {
   exists: Boolean
 }
 
-input Page_Hero_Media_where_or {
-  alt: Page_Hero_Media_alt_operator
-  darkModeFallback: Page_Hero_Media_darkModeFallback_operator
-  updatedAt: Page_Hero_Media_updatedAt_operator
-  createdAt: Page_Hero_Media_createdAt_operator
-  url: Page_Hero_Media_url_operator
-  filename: Page_Hero_Media_filename_operator
-  mimeType: Page_Hero_Media_mimeType_operator
-  filesize: Page_Hero_Media_filesize_operator
-  width: Page_Hero_Media_width_operator
-  height: Page_Hero_Media_height_operator
-  id: Page_Hero_Media_id_operator
-}
-
 input Page_Hero_Media_where_and {
   alt: Page_Hero_Media_alt_operator
   darkModeFallback: Page_Hero_Media_darkModeFallback_operator
@@ -3400,6 +3441,29 @@ input Page_Hero_Media_where_and {
   width: Page_Hero_Media_width_operator
   height: Page_Hero_Media_height_operator
   id: Page_Hero_Media_id_operator
+  AND: [Page_Hero_Media_where_and]
+  OR: [Page_Hero_Media_where_or]
+}
+
+input Page_Hero_Media_where_or {
+  alt: Page_Hero_Media_alt_operator
+  darkModeFallback: Page_Hero_Media_darkModeFallback_operator
+  updatedAt: Page_Hero_Media_updatedAt_operator
+  createdAt: Page_Hero_Media_createdAt_operator
+  url: Page_Hero_Media_url_operator
+  filename: Page_Hero_Media_filename_operator
+  mimeType: Page_Hero_Media_mimeType_operator
+  filesize: Page_Hero_Media_filesize_operator
+  width: Page_Hero_Media_width_operator
+  height: Page_Hero_Media_height_operator
+  id: Page_Hero_Media_id_operator
+  AND: [Page_Hero_Media_where_and]
+  OR: [Page_Hero_Media_where_or]
+}
+
+enum Page_Hero_mediaWidth {
+  normal
+  wide
 }
 
 type Page_Hero_Adjectives {
@@ -3429,8 +3493,8 @@ input Page_Hero_LogoGroup_Logos_Logo_where {
   width: Page_Hero_LogoGroup_Logos_Logo_width_operator
   height: Page_Hero_LogoGroup_Logos_Logo_height_operator
   id: Page_Hero_LogoGroup_Logos_Logo_id_operator
-  OR: [Page_Hero_LogoGroup_Logos_Logo_where_or]
   AND: [Page_Hero_LogoGroup_Logos_Logo_where_and]
+  OR: [Page_Hero_LogoGroup_Logos_Logo_where_or]
 }
 
 input Page_Hero_LogoGroup_Logos_Logo_alt_operator {
@@ -3545,20 +3609,6 @@ input Page_Hero_LogoGroup_Logos_Logo_id_operator {
   exists: Boolean
 }
 
-input Page_Hero_LogoGroup_Logos_Logo_where_or {
-  alt: Page_Hero_LogoGroup_Logos_Logo_alt_operator
-  darkModeFallback: Page_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator
-  updatedAt: Page_Hero_LogoGroup_Logos_Logo_updatedAt_operator
-  createdAt: Page_Hero_LogoGroup_Logos_Logo_createdAt_operator
-  url: Page_Hero_LogoGroup_Logos_Logo_url_operator
-  filename: Page_Hero_LogoGroup_Logos_Logo_filename_operator
-  mimeType: Page_Hero_LogoGroup_Logos_Logo_mimeType_operator
-  filesize: Page_Hero_LogoGroup_Logos_Logo_filesize_operator
-  width: Page_Hero_LogoGroup_Logos_Logo_width_operator
-  height: Page_Hero_LogoGroup_Logos_Logo_height_operator
-  id: Page_Hero_LogoGroup_Logos_Logo_id_operator
-}
-
 input Page_Hero_LogoGroup_Logos_Logo_where_and {
   alt: Page_Hero_LogoGroup_Logos_Logo_alt_operator
   darkModeFallback: Page_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator
@@ -3571,6 +3621,24 @@ input Page_Hero_LogoGroup_Logos_Logo_where_and {
   width: Page_Hero_LogoGroup_Logos_Logo_width_operator
   height: Page_Hero_LogoGroup_Logos_Logo_height_operator
   id: Page_Hero_LogoGroup_Logos_Logo_id_operator
+  AND: [Page_Hero_LogoGroup_Logos_Logo_where_and]
+  OR: [Page_Hero_LogoGroup_Logos_Logo_where_or]
+}
+
+input Page_Hero_LogoGroup_Logos_Logo_where_or {
+  alt: Page_Hero_LogoGroup_Logos_Logo_alt_operator
+  darkModeFallback: Page_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator
+  updatedAt: Page_Hero_LogoGroup_Logos_Logo_updatedAt_operator
+  createdAt: Page_Hero_LogoGroup_Logos_Logo_createdAt_operator
+  url: Page_Hero_LogoGroup_Logos_Logo_url_operator
+  filename: Page_Hero_LogoGroup_Logos_Logo_filename_operator
+  mimeType: Page_Hero_LogoGroup_Logos_Logo_mimeType_operator
+  filesize: Page_Hero_LogoGroup_Logos_Logo_filesize_operator
+  width: Page_Hero_LogoGroup_Logos_Logo_width_operator
+  height: Page_Hero_LogoGroup_Logos_Logo_height_operator
+  id: Page_Hero_LogoGroup_Logos_Logo_id_operator
+  AND: [Page_Hero_LogoGroup_Logos_Logo_where_and]
+  OR: [Page_Hero_LogoGroup_Logos_Logo_where_or]
 }
 
 type Page_Hero_Carousel {
@@ -3590,8 +3658,8 @@ input Page_Hero_Carousel_Image_where {
   width: Page_Hero_Carousel_Image_width_operator
   height: Page_Hero_Carousel_Image_height_operator
   id: Page_Hero_Carousel_Image_id_operator
-  OR: [Page_Hero_Carousel_Image_where_or]
   AND: [Page_Hero_Carousel_Image_where_and]
+  OR: [Page_Hero_Carousel_Image_where_or]
 }
 
 input Page_Hero_Carousel_Image_alt_operator {
@@ -3706,20 +3774,6 @@ input Page_Hero_Carousel_Image_id_operator {
   exists: Boolean
 }
 
-input Page_Hero_Carousel_Image_where_or {
-  alt: Page_Hero_Carousel_Image_alt_operator
-  darkModeFallback: Page_Hero_Carousel_Image_darkModeFallback_operator
-  updatedAt: Page_Hero_Carousel_Image_updatedAt_operator
-  createdAt: Page_Hero_Carousel_Image_createdAt_operator
-  url: Page_Hero_Carousel_Image_url_operator
-  filename: Page_Hero_Carousel_Image_filename_operator
-  mimeType: Page_Hero_Carousel_Image_mimeType_operator
-  filesize: Page_Hero_Carousel_Image_filesize_operator
-  width: Page_Hero_Carousel_Image_width_operator
-  height: Page_Hero_Carousel_Image_height_operator
-  id: Page_Hero_Carousel_Image_id_operator
-}
-
 input Page_Hero_Carousel_Image_where_and {
   alt: Page_Hero_Carousel_Image_alt_operator
   darkModeFallback: Page_Hero_Carousel_Image_darkModeFallback_operator
@@ -3732,6 +3786,24 @@ input Page_Hero_Carousel_Image_where_and {
   width: Page_Hero_Carousel_Image_width_operator
   height: Page_Hero_Carousel_Image_height_operator
   id: Page_Hero_Carousel_Image_id_operator
+  AND: [Page_Hero_Carousel_Image_where_and]
+  OR: [Page_Hero_Carousel_Image_where_or]
+}
+
+input Page_Hero_Carousel_Image_where_or {
+  alt: Page_Hero_Carousel_Image_alt_operator
+  darkModeFallback: Page_Hero_Carousel_Image_darkModeFallback_operator
+  updatedAt: Page_Hero_Carousel_Image_updatedAt_operator
+  createdAt: Page_Hero_Carousel_Image_createdAt_operator
+  url: Page_Hero_Carousel_Image_url_operator
+  filename: Page_Hero_Carousel_Image_filename_operator
+  mimeType: Page_Hero_Carousel_Image_mimeType_operator
+  filesize: Page_Hero_Carousel_Image_filesize_operator
+  width: Page_Hero_Carousel_Image_width_operator
+  height: Page_Hero_Carousel_Image_height_operator
+  id: Page_Hero_Carousel_Image_id_operator
+  AND: [Page_Hero_Carousel_Image_where_and]
+  OR: [Page_Hero_Carousel_Image_where_or]
 }
 
 union Page_Layout = Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights | ExampleTabsBlock
@@ -3754,8 +3826,8 @@ input Page_Meta_Image_where {
   width: Page_Meta_Image_width_operator
   height: Page_Meta_Image_height_operator
   id: Page_Meta_Image_id_operator
-  OR: [Page_Meta_Image_where_or]
   AND: [Page_Meta_Image_where_and]
+  OR: [Page_Meta_Image_where_or]
 }
 
 input Page_Meta_Image_alt_operator {
@@ -3870,20 +3942,6 @@ input Page_Meta_Image_id_operator {
   exists: Boolean
 }
 
-input Page_Meta_Image_where_or {
-  alt: Page_Meta_Image_alt_operator
-  darkModeFallback: Page_Meta_Image_darkModeFallback_operator
-  updatedAt: Page_Meta_Image_updatedAt_operator
-  createdAt: Page_Meta_Image_createdAt_operator
-  url: Page_Meta_Image_url_operator
-  filename: Page_Meta_Image_filename_operator
-  mimeType: Page_Meta_Image_mimeType_operator
-  filesize: Page_Meta_Image_filesize_operator
-  width: Page_Meta_Image_width_operator
-  height: Page_Meta_Image_height_operator
-  id: Page_Meta_Image_id_operator
-}
-
 input Page_Meta_Image_where_and {
   alt: Page_Meta_Image_alt_operator
   darkModeFallback: Page_Meta_Image_darkModeFallback_operator
@@ -3896,6 +3954,24 @@ input Page_Meta_Image_where_and {
   width: Page_Meta_Image_width_operator
   height: Page_Meta_Image_height_operator
   id: Page_Meta_Image_id_operator
+  AND: [Page_Meta_Image_where_and]
+  OR: [Page_Meta_Image_where_or]
+}
+
+input Page_Meta_Image_where_or {
+  alt: Page_Meta_Image_alt_operator
+  darkModeFallback: Page_Meta_Image_darkModeFallback_operator
+  updatedAt: Page_Meta_Image_updatedAt_operator
+  createdAt: Page_Meta_Image_createdAt_operator
+  url: Page_Meta_Image_url_operator
+  filename: Page_Meta_Image_filename_operator
+  mimeType: Page_Meta_Image_mimeType_operator
+  filesize: Page_Meta_Image_filesize_operator
+  width: Page_Meta_Image_width_operator
+  height: Page_Meta_Image_height_operator
+  id: Page_Meta_Image_id_operator
+  AND: [Page_Meta_Image_where_and]
+  OR: [Page_Meta_Image_where_or]
 }
 
 type Page_Breadcrumbs {
@@ -3928,8 +4004,8 @@ input CaseStudy_Meta_Image_where {
   width: CaseStudy_Meta_Image_width_operator
   height: CaseStudy_Meta_Image_height_operator
   id: CaseStudy_Meta_Image_id_operator
-  OR: [CaseStudy_Meta_Image_where_or]
   AND: [CaseStudy_Meta_Image_where_and]
+  OR: [CaseStudy_Meta_Image_where_or]
 }
 
 input CaseStudy_Meta_Image_alt_operator {
@@ -4044,20 +4120,6 @@ input CaseStudy_Meta_Image_id_operator {
   exists: Boolean
 }
 
-input CaseStudy_Meta_Image_where_or {
-  alt: CaseStudy_Meta_Image_alt_operator
-  darkModeFallback: CaseStudy_Meta_Image_darkModeFallback_operator
-  updatedAt: CaseStudy_Meta_Image_updatedAt_operator
-  createdAt: CaseStudy_Meta_Image_createdAt_operator
-  url: CaseStudy_Meta_Image_url_operator
-  filename: CaseStudy_Meta_Image_filename_operator
-  mimeType: CaseStudy_Meta_Image_mimeType_operator
-  filesize: CaseStudy_Meta_Image_filesize_operator
-  width: CaseStudy_Meta_Image_width_operator
-  height: CaseStudy_Meta_Image_height_operator
-  id: CaseStudy_Meta_Image_id_operator
-}
-
 input CaseStudy_Meta_Image_where_and {
   alt: CaseStudy_Meta_Image_alt_operator
   darkModeFallback: CaseStudy_Meta_Image_darkModeFallback_operator
@@ -4070,6 +4132,24 @@ input CaseStudy_Meta_Image_where_and {
   width: CaseStudy_Meta_Image_width_operator
   height: CaseStudy_Meta_Image_height_operator
   id: CaseStudy_Meta_Image_id_operator
+  AND: [CaseStudy_Meta_Image_where_and]
+  OR: [CaseStudy_Meta_Image_where_or]
+}
+
+input CaseStudy_Meta_Image_where_or {
+  alt: CaseStudy_Meta_Image_alt_operator
+  darkModeFallback: CaseStudy_Meta_Image_darkModeFallback_operator
+  updatedAt: CaseStudy_Meta_Image_updatedAt_operator
+  createdAt: CaseStudy_Meta_Image_createdAt_operator
+  url: CaseStudy_Meta_Image_url_operator
+  filename: CaseStudy_Meta_Image_filename_operator
+  mimeType: CaseStudy_Meta_Image_mimeType_operator
+  filesize: CaseStudy_Meta_Image_filesize_operator
+  width: CaseStudy_Meta_Image_width_operator
+  height: CaseStudy_Meta_Image_height_operator
+  id: CaseStudy_Meta_Image_id_operator
+  AND: [CaseStudy_Meta_Image_where_and]
+  OR: [CaseStudy_Meta_Image_where_or]
 }
 
 enum CaseStudy__status {
@@ -4079,16 +4159,16 @@ enum CaseStudy__status {
 
 type CaseStudies {
   docs: [CaseStudy]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input CaseStudy_where {
@@ -4104,8 +4184,8 @@ input CaseStudy_where {
   createdAt: CaseStudy_createdAt_operator
   _status: CaseStudy__status_operator
   id: CaseStudy_id_operator
-  OR: [CaseStudy_where_or]
   AND: [CaseStudy_where_and]
+  OR: [CaseStudy_where_or]
 }
 
 input CaseStudy_title_operator {
@@ -4224,21 +4304,6 @@ input CaseStudy_id_operator {
   exists: Boolean
 }
 
-input CaseStudy_where_or {
-  title: CaseStudy_title_operator
-  introContent: CaseStudy_introContent_operator
-  featuredImage: CaseStudy_featuredImage_operator
-  slug: CaseStudy_slug_operator
-  url: CaseStudy_url_operator
-  meta__title: CaseStudy_meta__title_operator
-  meta__description: CaseStudy_meta__description_operator
-  meta__image: CaseStudy_meta__image_operator
-  updatedAt: CaseStudy_updatedAt_operator
-  createdAt: CaseStudy_createdAt_operator
-  _status: CaseStudy__status_operator
-  id: CaseStudy_id_operator
-}
-
 input CaseStudy_where_and {
   title: CaseStudy_title_operator
   introContent: CaseStudy_introContent_operator
@@ -4252,6 +4317,25 @@ input CaseStudy_where_and {
   createdAt: CaseStudy_createdAt_operator
   _status: CaseStudy__status_operator
   id: CaseStudy_id_operator
+  AND: [CaseStudy_where_and]
+  OR: [CaseStudy_where_or]
+}
+
+input CaseStudy_where_or {
+  title: CaseStudy_title_operator
+  introContent: CaseStudy_introContent_operator
+  featuredImage: CaseStudy_featuredImage_operator
+  slug: CaseStudy_slug_operator
+  url: CaseStudy_url_operator
+  meta__title: CaseStudy_meta__title_operator
+  meta__description: CaseStudy_meta__description_operator
+  meta__image: CaseStudy_meta__image_operator
+  updatedAt: CaseStudy_updatedAt_operator
+  createdAt: CaseStudy_createdAt_operator
+  _status: CaseStudy__status_operator
+  id: CaseStudy_id_operator
+  AND: [CaseStudy_where_and]
+  OR: [CaseStudy_where_or]
 }
 
 type case_studiesDocAccess {
@@ -4660,6 +4744,7 @@ type CaseStudyVersion {
   version: CaseStudyVersion_Version
   createdAt: DateTime
   updatedAt: DateTime
+  latest: Boolean
   id: String
 }
 
@@ -4688,8 +4773,8 @@ input CaseStudyVersion_Version_FeaturedImage_where {
   width: CaseStudyVersion_Version_FeaturedImage_width_operator
   height: CaseStudyVersion_Version_FeaturedImage_height_operator
   id: CaseStudyVersion_Version_FeaturedImage_id_operator
-  OR: [CaseStudyVersion_Version_FeaturedImage_where_or]
   AND: [CaseStudyVersion_Version_FeaturedImage_where_and]
+  OR: [CaseStudyVersion_Version_FeaturedImage_where_or]
 }
 
 input CaseStudyVersion_Version_FeaturedImage_alt_operator {
@@ -4804,20 +4889,6 @@ input CaseStudyVersion_Version_FeaturedImage_id_operator {
   exists: Boolean
 }
 
-input CaseStudyVersion_Version_FeaturedImage_where_or {
-  alt: CaseStudyVersion_Version_FeaturedImage_alt_operator
-  darkModeFallback: CaseStudyVersion_Version_FeaturedImage_darkModeFallback_operator
-  updatedAt: CaseStudyVersion_Version_FeaturedImage_updatedAt_operator
-  createdAt: CaseStudyVersion_Version_FeaturedImage_createdAt_operator
-  url: CaseStudyVersion_Version_FeaturedImage_url_operator
-  filename: CaseStudyVersion_Version_FeaturedImage_filename_operator
-  mimeType: CaseStudyVersion_Version_FeaturedImage_mimeType_operator
-  filesize: CaseStudyVersion_Version_FeaturedImage_filesize_operator
-  width: CaseStudyVersion_Version_FeaturedImage_width_operator
-  height: CaseStudyVersion_Version_FeaturedImage_height_operator
-  id: CaseStudyVersion_Version_FeaturedImage_id_operator
-}
-
 input CaseStudyVersion_Version_FeaturedImage_where_and {
   alt: CaseStudyVersion_Version_FeaturedImage_alt_operator
   darkModeFallback: CaseStudyVersion_Version_FeaturedImage_darkModeFallback_operator
@@ -4830,6 +4901,24 @@ input CaseStudyVersion_Version_FeaturedImage_where_and {
   width: CaseStudyVersion_Version_FeaturedImage_width_operator
   height: CaseStudyVersion_Version_FeaturedImage_height_operator
   id: CaseStudyVersion_Version_FeaturedImage_id_operator
+  AND: [CaseStudyVersion_Version_FeaturedImage_where_and]
+  OR: [CaseStudyVersion_Version_FeaturedImage_where_or]
+}
+
+input CaseStudyVersion_Version_FeaturedImage_where_or {
+  alt: CaseStudyVersion_Version_FeaturedImage_alt_operator
+  darkModeFallback: CaseStudyVersion_Version_FeaturedImage_darkModeFallback_operator
+  updatedAt: CaseStudyVersion_Version_FeaturedImage_updatedAt_operator
+  createdAt: CaseStudyVersion_Version_FeaturedImage_createdAt_operator
+  url: CaseStudyVersion_Version_FeaturedImage_url_operator
+  filename: CaseStudyVersion_Version_FeaturedImage_filename_operator
+  mimeType: CaseStudyVersion_Version_FeaturedImage_mimeType_operator
+  filesize: CaseStudyVersion_Version_FeaturedImage_filesize_operator
+  width: CaseStudyVersion_Version_FeaturedImage_width_operator
+  height: CaseStudyVersion_Version_FeaturedImage_height_operator
+  id: CaseStudyVersion_Version_FeaturedImage_id_operator
+  AND: [CaseStudyVersion_Version_FeaturedImage_where_and]
+  OR: [CaseStudyVersion_Version_FeaturedImage_where_or]
 }
 
 union CaseStudyVersion_Version_Layout = Cta | CardGrid | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights
@@ -4852,8 +4941,8 @@ input CaseStudyVersion_Version_Meta_Image_where {
   width: CaseStudyVersion_Version_Meta_Image_width_operator
   height: CaseStudyVersion_Version_Meta_Image_height_operator
   id: CaseStudyVersion_Version_Meta_Image_id_operator
-  OR: [CaseStudyVersion_Version_Meta_Image_where_or]
   AND: [CaseStudyVersion_Version_Meta_Image_where_and]
+  OR: [CaseStudyVersion_Version_Meta_Image_where_or]
 }
 
 input CaseStudyVersion_Version_Meta_Image_alt_operator {
@@ -4968,20 +5057,6 @@ input CaseStudyVersion_Version_Meta_Image_id_operator {
   exists: Boolean
 }
 
-input CaseStudyVersion_Version_Meta_Image_where_or {
-  alt: CaseStudyVersion_Version_Meta_Image_alt_operator
-  darkModeFallback: CaseStudyVersion_Version_Meta_Image_darkModeFallback_operator
-  updatedAt: CaseStudyVersion_Version_Meta_Image_updatedAt_operator
-  createdAt: CaseStudyVersion_Version_Meta_Image_createdAt_operator
-  url: CaseStudyVersion_Version_Meta_Image_url_operator
-  filename: CaseStudyVersion_Version_Meta_Image_filename_operator
-  mimeType: CaseStudyVersion_Version_Meta_Image_mimeType_operator
-  filesize: CaseStudyVersion_Version_Meta_Image_filesize_operator
-  width: CaseStudyVersion_Version_Meta_Image_width_operator
-  height: CaseStudyVersion_Version_Meta_Image_height_operator
-  id: CaseStudyVersion_Version_Meta_Image_id_operator
-}
-
 input CaseStudyVersion_Version_Meta_Image_where_and {
   alt: CaseStudyVersion_Version_Meta_Image_alt_operator
   darkModeFallback: CaseStudyVersion_Version_Meta_Image_darkModeFallback_operator
@@ -4994,6 +5069,24 @@ input CaseStudyVersion_Version_Meta_Image_where_and {
   width: CaseStudyVersion_Version_Meta_Image_width_operator
   height: CaseStudyVersion_Version_Meta_Image_height_operator
   id: CaseStudyVersion_Version_Meta_Image_id_operator
+  AND: [CaseStudyVersion_Version_Meta_Image_where_and]
+  OR: [CaseStudyVersion_Version_Meta_Image_where_or]
+}
+
+input CaseStudyVersion_Version_Meta_Image_where_or {
+  alt: CaseStudyVersion_Version_Meta_Image_alt_operator
+  darkModeFallback: CaseStudyVersion_Version_Meta_Image_darkModeFallback_operator
+  updatedAt: CaseStudyVersion_Version_Meta_Image_updatedAt_operator
+  createdAt: CaseStudyVersion_Version_Meta_Image_createdAt_operator
+  url: CaseStudyVersion_Version_Meta_Image_url_operator
+  filename: CaseStudyVersion_Version_Meta_Image_filename_operator
+  mimeType: CaseStudyVersion_Version_Meta_Image_mimeType_operator
+  filesize: CaseStudyVersion_Version_Meta_Image_filesize_operator
+  width: CaseStudyVersion_Version_Meta_Image_width_operator
+  height: CaseStudyVersion_Version_Meta_Image_height_operator
+  id: CaseStudyVersion_Version_Meta_Image_id_operator
+  AND: [CaseStudyVersion_Version_Meta_Image_where_and]
+  OR: [CaseStudyVersion_Version_Meta_Image_where_or]
 }
 
 enum CaseStudyVersion_Version__status {
@@ -5003,16 +5096,16 @@ enum CaseStudyVersion_Version__status {
 
 type versionsCaseStudies {
   docs: [CaseStudyVersion]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input versionsCaseStudy_where {
@@ -5030,17 +5123,18 @@ input versionsCaseStudy_where {
   version___status: versionsCaseStudy_version___status_operator
   createdAt: versionsCaseStudy_createdAt_operator
   updatedAt: versionsCaseStudy_updatedAt_operator
+  latest: versionsCaseStudy_latest_operator
   id: versionsCaseStudy_id_operator
-  OR: [versionsCaseStudy_where_or]
   AND: [versionsCaseStudy_where_and]
+  OR: [versionsCaseStudy_where_or]
 }
 
 input versionsCaseStudy_parent_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
   exists: Boolean
 }
 
@@ -5171,6 +5265,12 @@ input versionsCaseStudy_updatedAt_operator {
   exists: Boolean
 }
 
+input versionsCaseStudy_latest_operator {
+  equals: Boolean
+  not_equals: Boolean
+  exists: Boolean
+}
+
 input versionsCaseStudy_id_operator {
   equals: String
   not_equals: String
@@ -5180,24 +5280,6 @@ input versionsCaseStudy_id_operator {
   not_in: [String]
   all: [String]
   exists: Boolean
-}
-
-input versionsCaseStudy_where_or {
-  parent: versionsCaseStudy_parent_operator
-  version__title: versionsCaseStudy_version__title_operator
-  version__introContent: versionsCaseStudy_version__introContent_operator
-  version__featuredImage: versionsCaseStudy_version__featuredImage_operator
-  version__slug: versionsCaseStudy_version__slug_operator
-  version__url: versionsCaseStudy_version__url_operator
-  version__meta__title: versionsCaseStudy_version__meta__title_operator
-  version__meta__description: versionsCaseStudy_version__meta__description_operator
-  version__meta__image: versionsCaseStudy_version__meta__image_operator
-  version__updatedAt: versionsCaseStudy_version__updatedAt_operator
-  version__createdAt: versionsCaseStudy_version__createdAt_operator
-  version___status: versionsCaseStudy_version___status_operator
-  createdAt: versionsCaseStudy_createdAt_operator
-  updatedAt: versionsCaseStudy_updatedAt_operator
-  id: versionsCaseStudy_id_operator
 }
 
 input versionsCaseStudy_where_and {
@@ -5215,7 +5297,31 @@ input versionsCaseStudy_where_and {
   version___status: versionsCaseStudy_version___status_operator
   createdAt: versionsCaseStudy_createdAt_operator
   updatedAt: versionsCaseStudy_updatedAt_operator
+  latest: versionsCaseStudy_latest_operator
   id: versionsCaseStudy_id_operator
+  AND: [versionsCaseStudy_where_and]
+  OR: [versionsCaseStudy_where_or]
+}
+
+input versionsCaseStudy_where_or {
+  parent: versionsCaseStudy_parent_operator
+  version__title: versionsCaseStudy_version__title_operator
+  version__introContent: versionsCaseStudy_version__introContent_operator
+  version__featuredImage: versionsCaseStudy_version__featuredImage_operator
+  version__slug: versionsCaseStudy_version__slug_operator
+  version__url: versionsCaseStudy_version__url_operator
+  version__meta__title: versionsCaseStudy_version__meta__title_operator
+  version__meta__description: versionsCaseStudy_version__meta__description_operator
+  version__meta__image: versionsCaseStudy_version__meta__image_operator
+  version__updatedAt: versionsCaseStudy_version__updatedAt_operator
+  version__createdAt: versionsCaseStudy_version__createdAt_operator
+  version___status: versionsCaseStudy_version___status_operator
+  createdAt: versionsCaseStudy_createdAt_operator
+  updatedAt: versionsCaseStudy_updatedAt_operator
+  latest: versionsCaseStudy_latest_operator
+  id: versionsCaseStudy_id_operator
+  AND: [versionsCaseStudy_where_and]
+  OR: [versionsCaseStudy_where_or]
 }
 
 type CommunityHelp {
@@ -5256,16 +5362,16 @@ type Doc {
 
 type CommunityHelps {
   docs: [CommunityHelp]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input CommunityHelp_where {
@@ -5280,8 +5386,8 @@ input CommunityHelp_where {
   updatedAt: CommunityHelp_updatedAt_operator
   createdAt: CommunityHelp_createdAt_operator
   id: CommunityHelp_id_operator
-  OR: [CommunityHelp_where_or]
   AND: [CommunityHelp_where_and]
+  OR: [CommunityHelp_where_or]
 }
 
 input CommunityHelp_title_operator {
@@ -5298,9 +5404,8 @@ input CommunityHelp_title_operator {
 input CommunityHelp_communityHelpType_operator {
   equals: CommunityHelp_communityHelpType_Input
   not_equals: CommunityHelp_communityHelpType_Input
-  in: [CommunityHelp_communityHelpType_Input]
-  not_in: [CommunityHelp_communityHelpType_Input]
-  all: [CommunityHelp_communityHelpType_Input]
+  like: CommunityHelp_communityHelpType_Input
+  contains: CommunityHelp_communityHelpType_Input
   exists: Boolean
 }
 
@@ -5336,6 +5441,8 @@ input CommunityHelp_communityHelpJSON_operator {
   not_equals: JSON
   like: JSON
   contains: JSON
+  within: JSON
+  intersects: JSON
 }
 
 input CommunityHelp_slug_operator {
@@ -5356,11 +5463,11 @@ input CommunityHelp_helpful_operator {
 }
 
 input CommunityHelp_relatedDocs_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
   exists: Boolean
 }
 
@@ -5397,20 +5504,6 @@ input CommunityHelp_id_operator {
   exists: Boolean
 }
 
-input CommunityHelp_where_or {
-  title: CommunityHelp_title_operator
-  communityHelpType: CommunityHelp_communityHelpType_operator
-  githubID: CommunityHelp_githubID_operator
-  discordID: CommunityHelp_discordID_operator
-  communityHelpJSON: CommunityHelp_communityHelpJSON_operator
-  slug: CommunityHelp_slug_operator
-  helpful: CommunityHelp_helpful_operator
-  relatedDocs: CommunityHelp_relatedDocs_operator
-  updatedAt: CommunityHelp_updatedAt_operator
-  createdAt: CommunityHelp_createdAt_operator
-  id: CommunityHelp_id_operator
-}
-
 input CommunityHelp_where_and {
   title: CommunityHelp_title_operator
   communityHelpType: CommunityHelp_communityHelpType_operator
@@ -5423,6 +5516,24 @@ input CommunityHelp_where_and {
   updatedAt: CommunityHelp_updatedAt_operator
   createdAt: CommunityHelp_createdAt_operator
   id: CommunityHelp_id_operator
+  AND: [CommunityHelp_where_and]
+  OR: [CommunityHelp_where_or]
+}
+
+input CommunityHelp_where_or {
+  title: CommunityHelp_title_operator
+  communityHelpType: CommunityHelp_communityHelpType_operator
+  githubID: CommunityHelp_githubID_operator
+  discordID: CommunityHelp_discordID_operator
+  communityHelpJSON: CommunityHelp_communityHelpJSON_operator
+  slug: CommunityHelp_slug_operator
+  helpful: CommunityHelp_helpful_operator
+  relatedDocs: CommunityHelp_relatedDocs_operator
+  updatedAt: CommunityHelp_updatedAt_operator
+  createdAt: CommunityHelp_createdAt_operator
+  id: CommunityHelp_id_operator
+  AND: [CommunityHelp_where_and]
+  OR: [CommunityHelp_where_or]
 }
 
 type community_helpDocAccess {
@@ -5698,16 +5809,16 @@ type CommunityHelpDeleteDocAccess {
 
 type Docs {
   docs: [Doc]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input Doc_where {
@@ -5724,8 +5835,8 @@ input Doc_where {
   updatedAt: Doc_updatedAt_operator
   createdAt: Doc_createdAt_operator
   id: Doc_id_operator
-  OR: [Doc_where_or]
   AND: [Doc_where_and]
+  OR: [Doc_where_or]
 }
 
 input Doc_title_operator {
@@ -5765,6 +5876,8 @@ input Doc_headings_operator {
   not_equals: JSON
   like: JSON
   contains: JSON
+  within: JSON
+  intersects: JSON
   exists: Boolean
 }
 
@@ -5863,22 +5976,6 @@ input Doc_id_operator {
   exists: Boolean
 }
 
-input Doc_where_or {
-  title: Doc_title_operator
-  description: Doc_description_operator
-  keywords: Doc_keywords_operator
-  headings: Doc_headings_operator
-  content: Doc_content_operator
-  path: Doc_path_operator
-  topic: Doc_topic_operator
-  slug: Doc_slug_operator
-  label: Doc_label_operator
-  order: Doc_order_operator
-  updatedAt: Doc_updatedAt_operator
-  createdAt: Doc_createdAt_operator
-  id: Doc_id_operator
-}
-
 input Doc_where_and {
   title: Doc_title_operator
   description: Doc_description_operator
@@ -5893,6 +5990,26 @@ input Doc_where_and {
   updatedAt: Doc_updatedAt_operator
   createdAt: Doc_createdAt_operator
   id: Doc_id_operator
+  AND: [Doc_where_and]
+  OR: [Doc_where_or]
+}
+
+input Doc_where_or {
+  title: Doc_title_operator
+  description: Doc_description_operator
+  keywords: Doc_keywords_operator
+  headings: Doc_headings_operator
+  content: Doc_content_operator
+  path: Doc_path_operator
+  topic: Doc_topic_operator
+  slug: Doc_slug_operator
+  label: Doc_label_operator
+  order: Doc_order_operator
+  updatedAt: Doc_updatedAt_operator
+  createdAt: Doc_createdAt_operator
+  id: Doc_id_operator
+  AND: [Doc_where_and]
+  OR: [Doc_where_or]
 }
 
 type docsDocAccess {
@@ -6216,16 +6333,16 @@ type DocsDeleteDocAccess {
 
 type allMedia {
   docs: [Media]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input Media_where {
@@ -6240,8 +6357,8 @@ input Media_where {
   width: Media_width_operator
   height: Media_height_operator
   id: Media_id_operator
-  OR: [Media_where_or]
   AND: [Media_where_and]
+  OR: [Media_where_or]
 }
 
 input Media_alt_operator {
@@ -6356,20 +6473,6 @@ input Media_id_operator {
   exists: Boolean
 }
 
-input Media_where_or {
-  alt: Media_alt_operator
-  darkModeFallback: Media_darkModeFallback_operator
-  updatedAt: Media_updatedAt_operator
-  createdAt: Media_createdAt_operator
-  url: Media_url_operator
-  filename: Media_filename_operator
-  mimeType: Media_mimeType_operator
-  filesize: Media_filesize_operator
-  width: Media_width_operator
-  height: Media_height_operator
-  id: Media_id_operator
-}
-
 input Media_where_and {
   alt: Media_alt_operator
   darkModeFallback: Media_darkModeFallback_operator
@@ -6382,6 +6485,24 @@ input Media_where_and {
   width: Media_width_operator
   height: Media_height_operator
   id: Media_id_operator
+  AND: [Media_where_and]
+  OR: [Media_where_or]
+}
+
+input Media_where_or {
+  alt: Media_alt_operator
+  darkModeFallback: Media_darkModeFallback_operator
+  updatedAt: Media_updatedAt_operator
+  createdAt: Media_createdAt_operator
+  url: Media_url_operator
+  filename: Media_filename_operator
+  mimeType: Media_mimeType_operator
+  filesize: Media_filesize_operator
+  width: Media_width_operator
+  height: Media_height_operator
+  id: Media_id_operator
+  AND: [Media_where_and]
+  OR: [Media_where_or]
 }
 
 type mediaDocAccess {
@@ -6657,16 +6778,16 @@ type MediaDeleteDocAccess {
 
 type Pages {
   docs: [Page]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input Page_where {
@@ -6705,6 +6826,7 @@ input Page_where {
   hero__buttons__link__appearance: Page_hero__buttons__link__appearance_operator
   hero__buttons__id: Page_hero__buttons__id_operator
   hero__media: Page_hero__media_operator
+  hero__mediaWidth: Page_hero__mediaWidth_operator
   hero__adjectives__adjective: Page_hero__adjectives__adjective_operator
   hero__adjectives__id: Page_hero__adjectives__id_operator
   hero__form: Page_hero__form_operator
@@ -6726,8 +6848,8 @@ input Page_where {
   createdAt: Page_createdAt_operator
   _status: Page__status_operator
   id: Page_id_operator
-  OR: [Page_where_or]
   AND: [Page_where_and]
+  OR: [Page_where_or]
 }
 
 input Page_title_operator {
@@ -6872,9 +6994,8 @@ input Page_hero__sidebarContent_operator {
 input Page_hero__links__link__type_operator {
   equals: Page_hero__links__link__type_Input
   not_equals: Page_hero__links__link__type_Input
-  in: [Page_hero__links__link__type_Input]
-  not_in: [Page_hero__links__link__type_Input]
-  all: [Page_hero__links__link__type_Input]
+  like: Page_hero__links__link__type_Input
+  contains: Page_hero__links__link__type_Input
   exists: Boolean
 }
 
@@ -6891,7 +7012,7 @@ input Page_hero__links__link__newTab_operator {
 
 input Page_hero__links__link__reference_Relation {
   relationTo: Page_hero__links__link__reference_Relation_RelationTo
-  value: String
+  value: JSON
 }
 
 enum Page_hero__links__link__reference_Relation_RelationTo {
@@ -6949,9 +7070,8 @@ input Page_hero__links__id_operator {
 input Page_hero__actions__link__type_operator {
   equals: Page_hero__actions__link__type_Input
   not_equals: Page_hero__actions__link__type_Input
-  in: [Page_hero__actions__link__type_Input]
-  not_in: [Page_hero__actions__link__type_Input]
-  all: [Page_hero__actions__link__type_Input]
+  like: Page_hero__actions__link__type_Input
+  contains: Page_hero__actions__link__type_Input
   exists: Boolean
 }
 
@@ -6968,7 +7088,7 @@ input Page_hero__actions__link__newTab_operator {
 
 input Page_hero__actions__link__reference_Relation {
   relationTo: Page_hero__actions__link__reference_Relation_RelationTo
-  value: String
+  value: JSON
 }
 
 enum Page_hero__actions__link__reference_Relation_RelationTo {
@@ -7011,9 +7131,8 @@ input Page_hero__actions__id_operator {
 input Page_hero__buttons__link__type_operator {
   equals: Page_hero__buttons__link__type_Input
   not_equals: Page_hero__buttons__link__type_Input
-  in: [Page_hero__buttons__link__type_Input]
-  not_in: [Page_hero__buttons__link__type_Input]
-  all: [Page_hero__buttons__link__type_Input]
+  like: Page_hero__buttons__link__type_Input
+  contains: Page_hero__buttons__link__type_Input
   exists: Boolean
 }
 
@@ -7030,7 +7149,7 @@ input Page_hero__buttons__link__newTab_operator {
 
 input Page_hero__buttons__link__reference_Relation {
   relationTo: Page_hero__buttons__link__reference_Relation_RelationTo
-  value: String
+  value: JSON
 }
 
 enum Page_hero__buttons__link__reference_Relation_RelationTo {
@@ -7089,6 +7208,19 @@ input Page_hero__media_operator {
   not_equals: String
 }
 
+input Page_hero__mediaWidth_operator {
+  equals: Page_hero__mediaWidth_Input
+  not_equals: Page_hero__mediaWidth_Input
+  in: [Page_hero__mediaWidth_Input]
+  not_in: [Page_hero__mediaWidth_Input]
+  all: [Page_hero__mediaWidth_Input]
+}
+
+enum Page_hero__mediaWidth_Input {
+  normal
+  wide
+}
+
 input Page_hero__adjectives__adjective_operator {
   equals: String
   not_equals: String
@@ -7111,11 +7243,11 @@ input Page_hero__adjectives__id_operator {
 }
 
 input Page_hero__form_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
   exists: Boolean
 }
 
@@ -7199,20 +7331,20 @@ input Page_meta__image_operator {
 }
 
 input Page_parent_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
   exists: Boolean
 }
 
 input Page_breadcrumbs__doc_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
   exists: Boolean
 }
 
@@ -7296,65 +7428,6 @@ input Page_id_operator {
   exists: Boolean
 }
 
-input Page_where_or {
-  title: Page_title_operator
-  fullTitle: Page_fullTitle_operator
-  hero__type: Page_hero__type_operator
-  hero__livestream__id: Page_hero__livestream__id_operator
-  hero__livestream__date: Page_hero__livestream__date_operator
-  hero__livestream__hideBreadcrumbs: Page_hero__livestream__hideBreadcrumbs_operator
-  hero__livestream__richText: Page_hero__livestream__richText_operator
-  hero__livestream__guests__name: Page_hero__livestream__guests__name_operator
-  hero__livestream__guests__link: Page_hero__livestream__guests__link_operator
-  hero__livestream__guests__image: Page_hero__livestream__guests__image_operator
-  hero__livestream__guests__id: Page_hero__livestream__guests__id_operator
-  hero__commandLine: Page_hero__commandLine_operator
-  hero__richText: Page_hero__richText_operator
-  hero__sidebarContent: Page_hero__sidebarContent_operator
-  hero__links__link__type: Page_hero__links__link__type_operator
-  hero__links__link__newTab: Page_hero__links__link__newTab_operator
-  hero__links__link__reference: Page_hero__links__link__reference_Relation
-  hero__links__link__url: Page_hero__links__link__url_operator
-  hero__links__link__label: Page_hero__links__link__label_operator
-  hero__links__link__appearance: Page_hero__links__link__appearance_operator
-  hero__links__id: Page_hero__links__id_operator
-  hero__actions__link__type: Page_hero__actions__link__type_operator
-  hero__actions__link__newTab: Page_hero__actions__link__newTab_operator
-  hero__actions__link__reference: Page_hero__actions__link__reference_Relation
-  hero__actions__link__url: Page_hero__actions__link__url_operator
-  hero__actions__link__label: Page_hero__actions__link__label_operator
-  hero__actions__id: Page_hero__actions__id_operator
-  hero__buttons__link__type: Page_hero__buttons__link__type_operator
-  hero__buttons__link__newTab: Page_hero__buttons__link__newTab_operator
-  hero__buttons__link__reference: Page_hero__buttons__link__reference_Relation
-  hero__buttons__link__url: Page_hero__buttons__link__url_operator
-  hero__buttons__link__label: Page_hero__buttons__link__label_operator
-  hero__buttons__link__appearance: Page_hero__buttons__link__appearance_operator
-  hero__buttons__id: Page_hero__buttons__id_operator
-  hero__media: Page_hero__media_operator
-  hero__adjectives__adjective: Page_hero__adjectives__adjective_operator
-  hero__adjectives__id: Page_hero__adjectives__id_operator
-  hero__form: Page_hero__form_operator
-  hero__logoGroup__label: Page_hero__logoGroup__label_operator
-  hero__logoGroup__logos__logo: Page_hero__logoGroup__logos__logo_operator
-  hero__logoGroup__logos__id: Page_hero__logoGroup__logos__id_operator
-  hero__carousel__image: Page_hero__carousel__image_operator
-  hero__carousel__id: Page_hero__carousel__id_operator
-  slug: Page_slug_operator
-  meta__title: Page_meta__title_operator
-  meta__description: Page_meta__description_operator
-  meta__image: Page_meta__image_operator
-  parent: Page_parent_operator
-  breadcrumbs__doc: Page_breadcrumbs__doc_operator
-  breadcrumbs__url: Page_breadcrumbs__url_operator
-  breadcrumbs__label: Page_breadcrumbs__label_operator
-  breadcrumbs__id: Page_breadcrumbs__id_operator
-  updatedAt: Page_updatedAt_operator
-  createdAt: Page_createdAt_operator
-  _status: Page__status_operator
-  id: Page_id_operator
-}
-
 input Page_where_and {
   title: Page_title_operator
   fullTitle: Page_fullTitle_operator
@@ -7391,6 +7464,7 @@ input Page_where_and {
   hero__buttons__link__appearance: Page_hero__buttons__link__appearance_operator
   hero__buttons__id: Page_hero__buttons__id_operator
   hero__media: Page_hero__media_operator
+  hero__mediaWidth: Page_hero__mediaWidth_operator
   hero__adjectives__adjective: Page_hero__adjectives__adjective_operator
   hero__adjectives__id: Page_hero__adjectives__id_operator
   hero__form: Page_hero__form_operator
@@ -7412,6 +7486,70 @@ input Page_where_and {
   createdAt: Page_createdAt_operator
   _status: Page__status_operator
   id: Page_id_operator
+  AND: [Page_where_and]
+  OR: [Page_where_or]
+}
+
+input Page_where_or {
+  title: Page_title_operator
+  fullTitle: Page_fullTitle_operator
+  hero__type: Page_hero__type_operator
+  hero__livestream__id: Page_hero__livestream__id_operator
+  hero__livestream__date: Page_hero__livestream__date_operator
+  hero__livestream__hideBreadcrumbs: Page_hero__livestream__hideBreadcrumbs_operator
+  hero__livestream__richText: Page_hero__livestream__richText_operator
+  hero__livestream__guests__name: Page_hero__livestream__guests__name_operator
+  hero__livestream__guests__link: Page_hero__livestream__guests__link_operator
+  hero__livestream__guests__image: Page_hero__livestream__guests__image_operator
+  hero__livestream__guests__id: Page_hero__livestream__guests__id_operator
+  hero__commandLine: Page_hero__commandLine_operator
+  hero__richText: Page_hero__richText_operator
+  hero__sidebarContent: Page_hero__sidebarContent_operator
+  hero__links__link__type: Page_hero__links__link__type_operator
+  hero__links__link__newTab: Page_hero__links__link__newTab_operator
+  hero__links__link__reference: Page_hero__links__link__reference_Relation
+  hero__links__link__url: Page_hero__links__link__url_operator
+  hero__links__link__label: Page_hero__links__link__label_operator
+  hero__links__link__appearance: Page_hero__links__link__appearance_operator
+  hero__links__id: Page_hero__links__id_operator
+  hero__actions__link__type: Page_hero__actions__link__type_operator
+  hero__actions__link__newTab: Page_hero__actions__link__newTab_operator
+  hero__actions__link__reference: Page_hero__actions__link__reference_Relation
+  hero__actions__link__url: Page_hero__actions__link__url_operator
+  hero__actions__link__label: Page_hero__actions__link__label_operator
+  hero__actions__id: Page_hero__actions__id_operator
+  hero__buttons__link__type: Page_hero__buttons__link__type_operator
+  hero__buttons__link__newTab: Page_hero__buttons__link__newTab_operator
+  hero__buttons__link__reference: Page_hero__buttons__link__reference_Relation
+  hero__buttons__link__url: Page_hero__buttons__link__url_operator
+  hero__buttons__link__label: Page_hero__buttons__link__label_operator
+  hero__buttons__link__appearance: Page_hero__buttons__link__appearance_operator
+  hero__buttons__id: Page_hero__buttons__id_operator
+  hero__media: Page_hero__media_operator
+  hero__mediaWidth: Page_hero__mediaWidth_operator
+  hero__adjectives__adjective: Page_hero__adjectives__adjective_operator
+  hero__adjectives__id: Page_hero__adjectives__id_operator
+  hero__form: Page_hero__form_operator
+  hero__logoGroup__label: Page_hero__logoGroup__label_operator
+  hero__logoGroup__logos__logo: Page_hero__logoGroup__logos__logo_operator
+  hero__logoGroup__logos__id: Page_hero__logoGroup__logos__id_operator
+  hero__carousel__image: Page_hero__carousel__image_operator
+  hero__carousel__id: Page_hero__carousel__id_operator
+  slug: Page_slug_operator
+  meta__title: Page_meta__title_operator
+  meta__description: Page_meta__description_operator
+  meta__image: Page_meta__image_operator
+  parent: Page_parent_operator
+  breadcrumbs__doc: Page_breadcrumbs__doc_operator
+  breadcrumbs__url: Page_breadcrumbs__url_operator
+  breadcrumbs__label: Page_breadcrumbs__label_operator
+  breadcrumbs__id: Page_breadcrumbs__id_operator
+  updatedAt: Page_updatedAt_operator
+  createdAt: Page_createdAt_operator
+  _status: Page__status_operator
+  id: Page_id_operator
+  AND: [Page_where_and]
+  OR: [Page_where_or]
 }
 
 type pagesDocAccess {
@@ -7517,6 +7655,7 @@ type PagesDocAccessFields_hero_Fields {
   actions: PagesDocAccessFields_hero_actions
   buttons: PagesDocAccessFields_hero_buttons
   media: PagesDocAccessFields_hero_media
+  mediaWidth: PagesDocAccessFields_hero_mediaWidth
   adjectives: PagesDocAccessFields_hero_adjectives
   form: PagesDocAccessFields_hero_form
   logoGroup: PagesDocAccessFields_hero_logoGroup
@@ -8530,6 +8669,29 @@ type PagesDocAccessFields_hero_media_Delete {
   permission: Boolean!
 }
 
+type PagesDocAccessFields_hero_mediaWidth {
+  create: PagesDocAccessFields_hero_mediaWidth_Create
+  read: PagesDocAccessFields_hero_mediaWidth_Read
+  update: PagesDocAccessFields_hero_mediaWidth_Update
+  delete: PagesDocAccessFields_hero_mediaWidth_Delete
+}
+
+type PagesDocAccessFields_hero_mediaWidth_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_mediaWidth_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_mediaWidth_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_mediaWidth_Delete {
+  permission: Boolean!
+}
+
 type PagesDocAccessFields_hero_adjectives {
   create: PagesDocAccessFields_hero_adjectives_Create
   read: PagesDocAccessFields_hero_adjectives_Read
@@ -9268,6 +9430,7 @@ type PageVersion {
   version: PageVersion_Version
   createdAt: DateTime
   updatedAt: DateTime
+  latest: Boolean
   id: String
 }
 
@@ -9295,6 +9458,7 @@ type PageVersion_Version_Hero {
   actions: [PageVersion_Version_Hero_Actions!]
   buttons: [PageVersion_Version_Hero_Buttons!]
   media(where: PageVersion_Version_Hero_Media_where): Media
+  mediaWidth: PageVersion_Version_Hero_mediaWidth
   adjectives: [PageVersion_Version_Hero_Adjectives!]
   form: Form
   logoGroup: PageVersion_Version_Hero_LogoGroup
@@ -9337,8 +9501,8 @@ input PageVersion_Version_Hero_Livestream_Guests_Image_where {
   width: PageVersion_Version_Hero_Livestream_Guests_Image_width_operator
   height: PageVersion_Version_Hero_Livestream_Guests_Image_height_operator
   id: PageVersion_Version_Hero_Livestream_Guests_Image_id_operator
-  OR: [PageVersion_Version_Hero_Livestream_Guests_Image_where_or]
   AND: [PageVersion_Version_Hero_Livestream_Guests_Image_where_and]
+  OR: [PageVersion_Version_Hero_Livestream_Guests_Image_where_or]
 }
 
 input PageVersion_Version_Hero_Livestream_Guests_Image_alt_operator {
@@ -9453,20 +9617,6 @@ input PageVersion_Version_Hero_Livestream_Guests_Image_id_operator {
   exists: Boolean
 }
 
-input PageVersion_Version_Hero_Livestream_Guests_Image_where_or {
-  alt: PageVersion_Version_Hero_Livestream_Guests_Image_alt_operator
-  darkModeFallback: PageVersion_Version_Hero_Livestream_Guests_Image_darkModeFallback_operator
-  updatedAt: PageVersion_Version_Hero_Livestream_Guests_Image_updatedAt_operator
-  createdAt: PageVersion_Version_Hero_Livestream_Guests_Image_createdAt_operator
-  url: PageVersion_Version_Hero_Livestream_Guests_Image_url_operator
-  filename: PageVersion_Version_Hero_Livestream_Guests_Image_filename_operator
-  mimeType: PageVersion_Version_Hero_Livestream_Guests_Image_mimeType_operator
-  filesize: PageVersion_Version_Hero_Livestream_Guests_Image_filesize_operator
-  width: PageVersion_Version_Hero_Livestream_Guests_Image_width_operator
-  height: PageVersion_Version_Hero_Livestream_Guests_Image_height_operator
-  id: PageVersion_Version_Hero_Livestream_Guests_Image_id_operator
-}
-
 input PageVersion_Version_Hero_Livestream_Guests_Image_where_and {
   alt: PageVersion_Version_Hero_Livestream_Guests_Image_alt_operator
   darkModeFallback: PageVersion_Version_Hero_Livestream_Guests_Image_darkModeFallback_operator
@@ -9479,6 +9629,24 @@ input PageVersion_Version_Hero_Livestream_Guests_Image_where_and {
   width: PageVersion_Version_Hero_Livestream_Guests_Image_width_operator
   height: PageVersion_Version_Hero_Livestream_Guests_Image_height_operator
   id: PageVersion_Version_Hero_Livestream_Guests_Image_id_operator
+  AND: [PageVersion_Version_Hero_Livestream_Guests_Image_where_and]
+  OR: [PageVersion_Version_Hero_Livestream_Guests_Image_where_or]
+}
+
+input PageVersion_Version_Hero_Livestream_Guests_Image_where_or {
+  alt: PageVersion_Version_Hero_Livestream_Guests_Image_alt_operator
+  darkModeFallback: PageVersion_Version_Hero_Livestream_Guests_Image_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Hero_Livestream_Guests_Image_updatedAt_operator
+  createdAt: PageVersion_Version_Hero_Livestream_Guests_Image_createdAt_operator
+  url: PageVersion_Version_Hero_Livestream_Guests_Image_url_operator
+  filename: PageVersion_Version_Hero_Livestream_Guests_Image_filename_operator
+  mimeType: PageVersion_Version_Hero_Livestream_Guests_Image_mimeType_operator
+  filesize: PageVersion_Version_Hero_Livestream_Guests_Image_filesize_operator
+  width: PageVersion_Version_Hero_Livestream_Guests_Image_width_operator
+  height: PageVersion_Version_Hero_Livestream_Guests_Image_height_operator
+  id: PageVersion_Version_Hero_Livestream_Guests_Image_id_operator
+  AND: [PageVersion_Version_Hero_Livestream_Guests_Image_where_and]
+  OR: [PageVersion_Version_Hero_Livestream_Guests_Image_where_or]
 }
 
 type PageVersion_Version_Hero_Links {
@@ -9599,8 +9767,8 @@ input PageVersion_Version_Hero_Media_where {
   width: PageVersion_Version_Hero_Media_width_operator
   height: PageVersion_Version_Hero_Media_height_operator
   id: PageVersion_Version_Hero_Media_id_operator
-  OR: [PageVersion_Version_Hero_Media_where_or]
   AND: [PageVersion_Version_Hero_Media_where_and]
+  OR: [PageVersion_Version_Hero_Media_where_or]
 }
 
 input PageVersion_Version_Hero_Media_alt_operator {
@@ -9715,20 +9883,6 @@ input PageVersion_Version_Hero_Media_id_operator {
   exists: Boolean
 }
 
-input PageVersion_Version_Hero_Media_where_or {
-  alt: PageVersion_Version_Hero_Media_alt_operator
-  darkModeFallback: PageVersion_Version_Hero_Media_darkModeFallback_operator
-  updatedAt: PageVersion_Version_Hero_Media_updatedAt_operator
-  createdAt: PageVersion_Version_Hero_Media_createdAt_operator
-  url: PageVersion_Version_Hero_Media_url_operator
-  filename: PageVersion_Version_Hero_Media_filename_operator
-  mimeType: PageVersion_Version_Hero_Media_mimeType_operator
-  filesize: PageVersion_Version_Hero_Media_filesize_operator
-  width: PageVersion_Version_Hero_Media_width_operator
-  height: PageVersion_Version_Hero_Media_height_operator
-  id: PageVersion_Version_Hero_Media_id_operator
-}
-
 input PageVersion_Version_Hero_Media_where_and {
   alt: PageVersion_Version_Hero_Media_alt_operator
   darkModeFallback: PageVersion_Version_Hero_Media_darkModeFallback_operator
@@ -9741,6 +9895,29 @@ input PageVersion_Version_Hero_Media_where_and {
   width: PageVersion_Version_Hero_Media_width_operator
   height: PageVersion_Version_Hero_Media_height_operator
   id: PageVersion_Version_Hero_Media_id_operator
+  AND: [PageVersion_Version_Hero_Media_where_and]
+  OR: [PageVersion_Version_Hero_Media_where_or]
+}
+
+input PageVersion_Version_Hero_Media_where_or {
+  alt: PageVersion_Version_Hero_Media_alt_operator
+  darkModeFallback: PageVersion_Version_Hero_Media_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Hero_Media_updatedAt_operator
+  createdAt: PageVersion_Version_Hero_Media_createdAt_operator
+  url: PageVersion_Version_Hero_Media_url_operator
+  filename: PageVersion_Version_Hero_Media_filename_operator
+  mimeType: PageVersion_Version_Hero_Media_mimeType_operator
+  filesize: PageVersion_Version_Hero_Media_filesize_operator
+  width: PageVersion_Version_Hero_Media_width_operator
+  height: PageVersion_Version_Hero_Media_height_operator
+  id: PageVersion_Version_Hero_Media_id_operator
+  AND: [PageVersion_Version_Hero_Media_where_and]
+  OR: [PageVersion_Version_Hero_Media_where_or]
+}
+
+enum PageVersion_Version_Hero_mediaWidth {
+  normal
+  wide
 }
 
 type PageVersion_Version_Hero_Adjectives {
@@ -9770,8 +9947,8 @@ input PageVersion_Version_Hero_LogoGroup_Logos_Logo_where {
   width: PageVersion_Version_Hero_LogoGroup_Logos_Logo_width_operator
   height: PageVersion_Version_Hero_LogoGroup_Logos_Logo_height_operator
   id: PageVersion_Version_Hero_LogoGroup_Logos_Logo_id_operator
-  OR: [PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_or]
   AND: [PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_and]
+  OR: [PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_or]
 }
 
 input PageVersion_Version_Hero_LogoGroup_Logos_Logo_alt_operator {
@@ -9886,20 +10063,6 @@ input PageVersion_Version_Hero_LogoGroup_Logos_Logo_id_operator {
   exists: Boolean
 }
 
-input PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_or {
-  alt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_alt_operator
-  darkModeFallback: PageVersion_Version_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator
-  updatedAt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_updatedAt_operator
-  createdAt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_createdAt_operator
-  url: PageVersion_Version_Hero_LogoGroup_Logos_Logo_url_operator
-  filename: PageVersion_Version_Hero_LogoGroup_Logos_Logo_filename_operator
-  mimeType: PageVersion_Version_Hero_LogoGroup_Logos_Logo_mimeType_operator
-  filesize: PageVersion_Version_Hero_LogoGroup_Logos_Logo_filesize_operator
-  width: PageVersion_Version_Hero_LogoGroup_Logos_Logo_width_operator
-  height: PageVersion_Version_Hero_LogoGroup_Logos_Logo_height_operator
-  id: PageVersion_Version_Hero_LogoGroup_Logos_Logo_id_operator
-}
-
 input PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_and {
   alt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_alt_operator
   darkModeFallback: PageVersion_Version_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator
@@ -9912,6 +10075,24 @@ input PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_and {
   width: PageVersion_Version_Hero_LogoGroup_Logos_Logo_width_operator
   height: PageVersion_Version_Hero_LogoGroup_Logos_Logo_height_operator
   id: PageVersion_Version_Hero_LogoGroup_Logos_Logo_id_operator
+  AND: [PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_and]
+  OR: [PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_or]
+}
+
+input PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_or {
+  alt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_alt_operator
+  darkModeFallback: PageVersion_Version_Hero_LogoGroup_Logos_Logo_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_updatedAt_operator
+  createdAt: PageVersion_Version_Hero_LogoGroup_Logos_Logo_createdAt_operator
+  url: PageVersion_Version_Hero_LogoGroup_Logos_Logo_url_operator
+  filename: PageVersion_Version_Hero_LogoGroup_Logos_Logo_filename_operator
+  mimeType: PageVersion_Version_Hero_LogoGroup_Logos_Logo_mimeType_operator
+  filesize: PageVersion_Version_Hero_LogoGroup_Logos_Logo_filesize_operator
+  width: PageVersion_Version_Hero_LogoGroup_Logos_Logo_width_operator
+  height: PageVersion_Version_Hero_LogoGroup_Logos_Logo_height_operator
+  id: PageVersion_Version_Hero_LogoGroup_Logos_Logo_id_operator
+  AND: [PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_and]
+  OR: [PageVersion_Version_Hero_LogoGroup_Logos_Logo_where_or]
 }
 
 type PageVersion_Version_Hero_Carousel {
@@ -9931,8 +10112,8 @@ input PageVersion_Version_Hero_Carousel_Image_where {
   width: PageVersion_Version_Hero_Carousel_Image_width_operator
   height: PageVersion_Version_Hero_Carousel_Image_height_operator
   id: PageVersion_Version_Hero_Carousel_Image_id_operator
-  OR: [PageVersion_Version_Hero_Carousel_Image_where_or]
   AND: [PageVersion_Version_Hero_Carousel_Image_where_and]
+  OR: [PageVersion_Version_Hero_Carousel_Image_where_or]
 }
 
 input PageVersion_Version_Hero_Carousel_Image_alt_operator {
@@ -10047,20 +10228,6 @@ input PageVersion_Version_Hero_Carousel_Image_id_operator {
   exists: Boolean
 }
 
-input PageVersion_Version_Hero_Carousel_Image_where_or {
-  alt: PageVersion_Version_Hero_Carousel_Image_alt_operator
-  darkModeFallback: PageVersion_Version_Hero_Carousel_Image_darkModeFallback_operator
-  updatedAt: PageVersion_Version_Hero_Carousel_Image_updatedAt_operator
-  createdAt: PageVersion_Version_Hero_Carousel_Image_createdAt_operator
-  url: PageVersion_Version_Hero_Carousel_Image_url_operator
-  filename: PageVersion_Version_Hero_Carousel_Image_filename_operator
-  mimeType: PageVersion_Version_Hero_Carousel_Image_mimeType_operator
-  filesize: PageVersion_Version_Hero_Carousel_Image_filesize_operator
-  width: PageVersion_Version_Hero_Carousel_Image_width_operator
-  height: PageVersion_Version_Hero_Carousel_Image_height_operator
-  id: PageVersion_Version_Hero_Carousel_Image_id_operator
-}
-
 input PageVersion_Version_Hero_Carousel_Image_where_and {
   alt: PageVersion_Version_Hero_Carousel_Image_alt_operator
   darkModeFallback: PageVersion_Version_Hero_Carousel_Image_darkModeFallback_operator
@@ -10073,6 +10240,24 @@ input PageVersion_Version_Hero_Carousel_Image_where_and {
   width: PageVersion_Version_Hero_Carousel_Image_width_operator
   height: PageVersion_Version_Hero_Carousel_Image_height_operator
   id: PageVersion_Version_Hero_Carousel_Image_id_operator
+  AND: [PageVersion_Version_Hero_Carousel_Image_where_and]
+  OR: [PageVersion_Version_Hero_Carousel_Image_where_or]
+}
+
+input PageVersion_Version_Hero_Carousel_Image_where_or {
+  alt: PageVersion_Version_Hero_Carousel_Image_alt_operator
+  darkModeFallback: PageVersion_Version_Hero_Carousel_Image_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Hero_Carousel_Image_updatedAt_operator
+  createdAt: PageVersion_Version_Hero_Carousel_Image_createdAt_operator
+  url: PageVersion_Version_Hero_Carousel_Image_url_operator
+  filename: PageVersion_Version_Hero_Carousel_Image_filename_operator
+  mimeType: PageVersion_Version_Hero_Carousel_Image_mimeType_operator
+  filesize: PageVersion_Version_Hero_Carousel_Image_filesize_operator
+  width: PageVersion_Version_Hero_Carousel_Image_width_operator
+  height: PageVersion_Version_Hero_Carousel_Image_height_operator
+  id: PageVersion_Version_Hero_Carousel_Image_id_operator
+  AND: [PageVersion_Version_Hero_Carousel_Image_where_and]
+  OR: [PageVersion_Version_Hero_Carousel_Image_where_or]
 }
 
 union PageVersion_Version_Layout = Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights | ExampleTabsBlock
@@ -10095,8 +10280,8 @@ input PageVersion_Version_Meta_Image_where {
   width: PageVersion_Version_Meta_Image_width_operator
   height: PageVersion_Version_Meta_Image_height_operator
   id: PageVersion_Version_Meta_Image_id_operator
-  OR: [PageVersion_Version_Meta_Image_where_or]
   AND: [PageVersion_Version_Meta_Image_where_and]
+  OR: [PageVersion_Version_Meta_Image_where_or]
 }
 
 input PageVersion_Version_Meta_Image_alt_operator {
@@ -10211,20 +10396,6 @@ input PageVersion_Version_Meta_Image_id_operator {
   exists: Boolean
 }
 
-input PageVersion_Version_Meta_Image_where_or {
-  alt: PageVersion_Version_Meta_Image_alt_operator
-  darkModeFallback: PageVersion_Version_Meta_Image_darkModeFallback_operator
-  updatedAt: PageVersion_Version_Meta_Image_updatedAt_operator
-  createdAt: PageVersion_Version_Meta_Image_createdAt_operator
-  url: PageVersion_Version_Meta_Image_url_operator
-  filename: PageVersion_Version_Meta_Image_filename_operator
-  mimeType: PageVersion_Version_Meta_Image_mimeType_operator
-  filesize: PageVersion_Version_Meta_Image_filesize_operator
-  width: PageVersion_Version_Meta_Image_width_operator
-  height: PageVersion_Version_Meta_Image_height_operator
-  id: PageVersion_Version_Meta_Image_id_operator
-}
-
 input PageVersion_Version_Meta_Image_where_and {
   alt: PageVersion_Version_Meta_Image_alt_operator
   darkModeFallback: PageVersion_Version_Meta_Image_darkModeFallback_operator
@@ -10237,6 +10408,24 @@ input PageVersion_Version_Meta_Image_where_and {
   width: PageVersion_Version_Meta_Image_width_operator
   height: PageVersion_Version_Meta_Image_height_operator
   id: PageVersion_Version_Meta_Image_id_operator
+  AND: [PageVersion_Version_Meta_Image_where_and]
+  OR: [PageVersion_Version_Meta_Image_where_or]
+}
+
+input PageVersion_Version_Meta_Image_where_or {
+  alt: PageVersion_Version_Meta_Image_alt_operator
+  darkModeFallback: PageVersion_Version_Meta_Image_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Meta_Image_updatedAt_operator
+  createdAt: PageVersion_Version_Meta_Image_createdAt_operator
+  url: PageVersion_Version_Meta_Image_url_operator
+  filename: PageVersion_Version_Meta_Image_filename_operator
+  mimeType: PageVersion_Version_Meta_Image_mimeType_operator
+  filesize: PageVersion_Version_Meta_Image_filesize_operator
+  width: PageVersion_Version_Meta_Image_width_operator
+  height: PageVersion_Version_Meta_Image_height_operator
+  id: PageVersion_Version_Meta_Image_id_operator
+  AND: [PageVersion_Version_Meta_Image_where_and]
+  OR: [PageVersion_Version_Meta_Image_where_or]
 }
 
 type PageVersion_Version_Breadcrumbs {
@@ -10253,16 +10442,16 @@ enum PageVersion_Version__status {
 
 type versionsPages {
   docs: [PageVersion]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input versionsPage_where {
@@ -10302,6 +10491,7 @@ input versionsPage_where {
   version__hero__buttons__link__appearance: versionsPage_version__hero__buttons__link__appearance_operator
   version__hero__buttons__id: versionsPage_version__hero__buttons__id_operator
   version__hero__media: versionsPage_version__hero__media_operator
+  version__hero__mediaWidth: versionsPage_version__hero__mediaWidth_operator
   version__hero__adjectives__adjective: versionsPage_version__hero__adjectives__adjective_operator
   version__hero__adjectives__id: versionsPage_version__hero__adjectives__id_operator
   version__hero__form: versionsPage_version__hero__form_operator
@@ -10324,17 +10514,18 @@ input versionsPage_where {
   version___status: versionsPage_version___status_operator
   createdAt: versionsPage_createdAt_operator
   updatedAt: versionsPage_updatedAt_operator
+  latest: versionsPage_latest_operator
   id: versionsPage_id_operator
-  OR: [versionsPage_where_or]
   AND: [versionsPage_where_and]
+  OR: [versionsPage_where_or]
 }
 
 input versionsPage_parent_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
   exists: Boolean
 }
 
@@ -10480,9 +10671,8 @@ input versionsPage_version__hero__sidebarContent_operator {
 input versionsPage_version__hero__links__link__type_operator {
   equals: versionsPage_version__hero__links__link__type_Input
   not_equals: versionsPage_version__hero__links__link__type_Input
-  in: [versionsPage_version__hero__links__link__type_Input]
-  not_in: [versionsPage_version__hero__links__link__type_Input]
-  all: [versionsPage_version__hero__links__link__type_Input]
+  like: versionsPage_version__hero__links__link__type_Input
+  contains: versionsPage_version__hero__links__link__type_Input
   exists: Boolean
 }
 
@@ -10499,7 +10689,7 @@ input versionsPage_version__hero__links__link__newTab_operator {
 
 input versionsPage_version__hero__links__link__reference_Relation {
   relationTo: versionsPage_version__hero__links__link__reference_Relation_RelationTo
-  value: String
+  value: JSON
 }
 
 enum versionsPage_version__hero__links__link__reference_Relation_RelationTo {
@@ -10557,9 +10747,8 @@ input versionsPage_version__hero__links__id_operator {
 input versionsPage_version__hero__actions__link__type_operator {
   equals: versionsPage_version__hero__actions__link__type_Input
   not_equals: versionsPage_version__hero__actions__link__type_Input
-  in: [versionsPage_version__hero__actions__link__type_Input]
-  not_in: [versionsPage_version__hero__actions__link__type_Input]
-  all: [versionsPage_version__hero__actions__link__type_Input]
+  like: versionsPage_version__hero__actions__link__type_Input
+  contains: versionsPage_version__hero__actions__link__type_Input
   exists: Boolean
 }
 
@@ -10576,7 +10765,7 @@ input versionsPage_version__hero__actions__link__newTab_operator {
 
 input versionsPage_version__hero__actions__link__reference_Relation {
   relationTo: versionsPage_version__hero__actions__link__reference_Relation_RelationTo
-  value: String
+  value: JSON
 }
 
 enum versionsPage_version__hero__actions__link__reference_Relation_RelationTo {
@@ -10619,9 +10808,8 @@ input versionsPage_version__hero__actions__id_operator {
 input versionsPage_version__hero__buttons__link__type_operator {
   equals: versionsPage_version__hero__buttons__link__type_Input
   not_equals: versionsPage_version__hero__buttons__link__type_Input
-  in: [versionsPage_version__hero__buttons__link__type_Input]
-  not_in: [versionsPage_version__hero__buttons__link__type_Input]
-  all: [versionsPage_version__hero__buttons__link__type_Input]
+  like: versionsPage_version__hero__buttons__link__type_Input
+  contains: versionsPage_version__hero__buttons__link__type_Input
   exists: Boolean
 }
 
@@ -10638,7 +10826,7 @@ input versionsPage_version__hero__buttons__link__newTab_operator {
 
 input versionsPage_version__hero__buttons__link__reference_Relation {
   relationTo: versionsPage_version__hero__buttons__link__reference_Relation_RelationTo
-  value: String
+  value: JSON
 }
 
 enum versionsPage_version__hero__buttons__link__reference_Relation_RelationTo {
@@ -10697,6 +10885,19 @@ input versionsPage_version__hero__media_operator {
   not_equals: String
 }
 
+input versionsPage_version__hero__mediaWidth_operator {
+  equals: versionsPage_version__hero__mediaWidth_Input
+  not_equals: versionsPage_version__hero__mediaWidth_Input
+  in: [versionsPage_version__hero__mediaWidth_Input]
+  not_in: [versionsPage_version__hero__mediaWidth_Input]
+  all: [versionsPage_version__hero__mediaWidth_Input]
+}
+
+enum versionsPage_version__hero__mediaWidth_Input {
+  normal
+  wide
+}
+
 input versionsPage_version__hero__adjectives__adjective_operator {
   equals: String
   not_equals: String
@@ -10719,11 +10920,11 @@ input versionsPage_version__hero__adjectives__id_operator {
 }
 
 input versionsPage_version__hero__form_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
   exists: Boolean
 }
 
@@ -10807,20 +11008,20 @@ input versionsPage_version__meta__image_operator {
 }
 
 input versionsPage_version__parent_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
   exists: Boolean
 }
 
 input versionsPage_version__breadcrumbs__doc_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
   exists: Boolean
 }
 
@@ -10915,6 +11116,12 @@ input versionsPage_updatedAt_operator {
   exists: Boolean
 }
 
+input versionsPage_latest_operator {
+  equals: Boolean
+  not_equals: Boolean
+  exists: Boolean
+}
+
 input versionsPage_id_operator {
   equals: String
   not_equals: String
@@ -10924,68 +11131,6 @@ input versionsPage_id_operator {
   not_in: [String]
   all: [String]
   exists: Boolean
-}
-
-input versionsPage_where_or {
-  parent: versionsPage_parent_operator
-  version__title: versionsPage_version__title_operator
-  version__fullTitle: versionsPage_version__fullTitle_operator
-  version__hero__type: versionsPage_version__hero__type_operator
-  version__hero__livestream__id: versionsPage_version__hero__livestream__id_operator
-  version__hero__livestream__date: versionsPage_version__hero__livestream__date_operator
-  version__hero__livestream__hideBreadcrumbs: versionsPage_version__hero__livestream__hideBreadcrumbs_operator
-  version__hero__livestream__richText: versionsPage_version__hero__livestream__richText_operator
-  version__hero__livestream__guests__name: versionsPage_version__hero__livestream__guests__name_operator
-  version__hero__livestream__guests__link: versionsPage_version__hero__livestream__guests__link_operator
-  version__hero__livestream__guests__image: versionsPage_version__hero__livestream__guests__image_operator
-  version__hero__livestream__guests__id: versionsPage_version__hero__livestream__guests__id_operator
-  version__hero__commandLine: versionsPage_version__hero__commandLine_operator
-  version__hero__richText: versionsPage_version__hero__richText_operator
-  version__hero__sidebarContent: versionsPage_version__hero__sidebarContent_operator
-  version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
-  version__hero__links__link__newTab: versionsPage_version__hero__links__link__newTab_operator
-  version__hero__links__link__reference: versionsPage_version__hero__links__link__reference_Relation
-  version__hero__links__link__url: versionsPage_version__hero__links__link__url_operator
-  version__hero__links__link__label: versionsPage_version__hero__links__link__label_operator
-  version__hero__links__link__appearance: versionsPage_version__hero__links__link__appearance_operator
-  version__hero__links__id: versionsPage_version__hero__links__id_operator
-  version__hero__actions__link__type: versionsPage_version__hero__actions__link__type_operator
-  version__hero__actions__link__newTab: versionsPage_version__hero__actions__link__newTab_operator
-  version__hero__actions__link__reference: versionsPage_version__hero__actions__link__reference_Relation
-  version__hero__actions__link__url: versionsPage_version__hero__actions__link__url_operator
-  version__hero__actions__link__label: versionsPage_version__hero__actions__link__label_operator
-  version__hero__actions__id: versionsPage_version__hero__actions__id_operator
-  version__hero__buttons__link__type: versionsPage_version__hero__buttons__link__type_operator
-  version__hero__buttons__link__newTab: versionsPage_version__hero__buttons__link__newTab_operator
-  version__hero__buttons__link__reference: versionsPage_version__hero__buttons__link__reference_Relation
-  version__hero__buttons__link__url: versionsPage_version__hero__buttons__link__url_operator
-  version__hero__buttons__link__label: versionsPage_version__hero__buttons__link__label_operator
-  version__hero__buttons__link__appearance: versionsPage_version__hero__buttons__link__appearance_operator
-  version__hero__buttons__id: versionsPage_version__hero__buttons__id_operator
-  version__hero__media: versionsPage_version__hero__media_operator
-  version__hero__adjectives__adjective: versionsPage_version__hero__adjectives__adjective_operator
-  version__hero__adjectives__id: versionsPage_version__hero__adjectives__id_operator
-  version__hero__form: versionsPage_version__hero__form_operator
-  version__hero__logoGroup__label: versionsPage_version__hero__logoGroup__label_operator
-  version__hero__logoGroup__logos__logo: versionsPage_version__hero__logoGroup__logos__logo_operator
-  version__hero__logoGroup__logos__id: versionsPage_version__hero__logoGroup__logos__id_operator
-  version__hero__carousel__image: versionsPage_version__hero__carousel__image_operator
-  version__hero__carousel__id: versionsPage_version__hero__carousel__id_operator
-  version__slug: versionsPage_version__slug_operator
-  version__meta__title: versionsPage_version__meta__title_operator
-  version__meta__description: versionsPage_version__meta__description_operator
-  version__meta__image: versionsPage_version__meta__image_operator
-  version__parent: versionsPage_version__parent_operator
-  version__breadcrumbs__doc: versionsPage_version__breadcrumbs__doc_operator
-  version__breadcrumbs__url: versionsPage_version__breadcrumbs__url_operator
-  version__breadcrumbs__label: versionsPage_version__breadcrumbs__label_operator
-  version__breadcrumbs__id: versionsPage_version__breadcrumbs__id_operator
-  version__updatedAt: versionsPage_version__updatedAt_operator
-  version__createdAt: versionsPage_version__createdAt_operator
-  version___status: versionsPage_version___status_operator
-  createdAt: versionsPage_createdAt_operator
-  updatedAt: versionsPage_updatedAt_operator
-  id: versionsPage_id_operator
 }
 
 input versionsPage_where_and {
@@ -11025,6 +11170,7 @@ input versionsPage_where_and {
   version__hero__buttons__link__appearance: versionsPage_version__hero__buttons__link__appearance_operator
   version__hero__buttons__id: versionsPage_version__hero__buttons__id_operator
   version__hero__media: versionsPage_version__hero__media_operator
+  version__hero__mediaWidth: versionsPage_version__hero__mediaWidth_operator
   version__hero__adjectives__adjective: versionsPage_version__hero__adjectives__adjective_operator
   version__hero__adjectives__id: versionsPage_version__hero__adjectives__id_operator
   version__hero__form: versionsPage_version__hero__form_operator
@@ -11047,21 +11193,90 @@ input versionsPage_where_and {
   version___status: versionsPage_version___status_operator
   createdAt: versionsPage_createdAt_operator
   updatedAt: versionsPage_updatedAt_operator
+  latest: versionsPage_latest_operator
   id: versionsPage_id_operator
+  AND: [versionsPage_where_and]
+  OR: [versionsPage_where_or]
+}
+
+input versionsPage_where_or {
+  parent: versionsPage_parent_operator
+  version__title: versionsPage_version__title_operator
+  version__fullTitle: versionsPage_version__fullTitle_operator
+  version__hero__type: versionsPage_version__hero__type_operator
+  version__hero__livestream__id: versionsPage_version__hero__livestream__id_operator
+  version__hero__livestream__date: versionsPage_version__hero__livestream__date_operator
+  version__hero__livestream__hideBreadcrumbs: versionsPage_version__hero__livestream__hideBreadcrumbs_operator
+  version__hero__livestream__richText: versionsPage_version__hero__livestream__richText_operator
+  version__hero__livestream__guests__name: versionsPage_version__hero__livestream__guests__name_operator
+  version__hero__livestream__guests__link: versionsPage_version__hero__livestream__guests__link_operator
+  version__hero__livestream__guests__image: versionsPage_version__hero__livestream__guests__image_operator
+  version__hero__livestream__guests__id: versionsPage_version__hero__livestream__guests__id_operator
+  version__hero__commandLine: versionsPage_version__hero__commandLine_operator
+  version__hero__richText: versionsPage_version__hero__richText_operator
+  version__hero__sidebarContent: versionsPage_version__hero__sidebarContent_operator
+  version__hero__links__link__type: versionsPage_version__hero__links__link__type_operator
+  version__hero__links__link__newTab: versionsPage_version__hero__links__link__newTab_operator
+  version__hero__links__link__reference: versionsPage_version__hero__links__link__reference_Relation
+  version__hero__links__link__url: versionsPage_version__hero__links__link__url_operator
+  version__hero__links__link__label: versionsPage_version__hero__links__link__label_operator
+  version__hero__links__link__appearance: versionsPage_version__hero__links__link__appearance_operator
+  version__hero__links__id: versionsPage_version__hero__links__id_operator
+  version__hero__actions__link__type: versionsPage_version__hero__actions__link__type_operator
+  version__hero__actions__link__newTab: versionsPage_version__hero__actions__link__newTab_operator
+  version__hero__actions__link__reference: versionsPage_version__hero__actions__link__reference_Relation
+  version__hero__actions__link__url: versionsPage_version__hero__actions__link__url_operator
+  version__hero__actions__link__label: versionsPage_version__hero__actions__link__label_operator
+  version__hero__actions__id: versionsPage_version__hero__actions__id_operator
+  version__hero__buttons__link__type: versionsPage_version__hero__buttons__link__type_operator
+  version__hero__buttons__link__newTab: versionsPage_version__hero__buttons__link__newTab_operator
+  version__hero__buttons__link__reference: versionsPage_version__hero__buttons__link__reference_Relation
+  version__hero__buttons__link__url: versionsPage_version__hero__buttons__link__url_operator
+  version__hero__buttons__link__label: versionsPage_version__hero__buttons__link__label_operator
+  version__hero__buttons__link__appearance: versionsPage_version__hero__buttons__link__appearance_operator
+  version__hero__buttons__id: versionsPage_version__hero__buttons__id_operator
+  version__hero__media: versionsPage_version__hero__media_operator
+  version__hero__mediaWidth: versionsPage_version__hero__mediaWidth_operator
+  version__hero__adjectives__adjective: versionsPage_version__hero__adjectives__adjective_operator
+  version__hero__adjectives__id: versionsPage_version__hero__adjectives__id_operator
+  version__hero__form: versionsPage_version__hero__form_operator
+  version__hero__logoGroup__label: versionsPage_version__hero__logoGroup__label_operator
+  version__hero__logoGroup__logos__logo: versionsPage_version__hero__logoGroup__logos__logo_operator
+  version__hero__logoGroup__logos__id: versionsPage_version__hero__logoGroup__logos__id_operator
+  version__hero__carousel__image: versionsPage_version__hero__carousel__image_operator
+  version__hero__carousel__id: versionsPage_version__hero__carousel__id_operator
+  version__slug: versionsPage_version__slug_operator
+  version__meta__title: versionsPage_version__meta__title_operator
+  version__meta__description: versionsPage_version__meta__description_operator
+  version__meta__image: versionsPage_version__meta__image_operator
+  version__parent: versionsPage_version__parent_operator
+  version__breadcrumbs__doc: versionsPage_version__breadcrumbs__doc_operator
+  version__breadcrumbs__url: versionsPage_version__breadcrumbs__url_operator
+  version__breadcrumbs__label: versionsPage_version__breadcrumbs__label_operator
+  version__breadcrumbs__id: versionsPage_version__breadcrumbs__id_operator
+  version__updatedAt: versionsPage_version__updatedAt_operator
+  version__createdAt: versionsPage_version__createdAt_operator
+  version___status: versionsPage_version___status_operator
+  createdAt: versionsPage_createdAt_operator
+  updatedAt: versionsPage_updatedAt_operator
+  latest: versionsPage_latest_operator
+  id: versionsPage_id_operator
+  AND: [versionsPage_where_and]
+  OR: [versionsPage_where_or]
 }
 
 type Posts {
   docs: [Post]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input Post_where {
@@ -11079,8 +11294,8 @@ input Post_where {
   createdAt: Post_createdAt_operator
   _status: Post__status_operator
   id: Post_id_operator
-  OR: [Post_where_or]
   AND: [Post_where_and]
+  OR: [Post_where_or]
 }
 
 input Post_title_operator {
@@ -11106,11 +11321,11 @@ input Post_excerpt_operator {
 }
 
 input Post_relatedPosts_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
   exists: Boolean
 }
 
@@ -11126,11 +11341,11 @@ input Post_slug_operator {
 }
 
 input Post_authors_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
 }
 
 input Post_publishedOn_operator {
@@ -11215,23 +11430,6 @@ input Post_id_operator {
   exists: Boolean
 }
 
-input Post_where_or {
-  title: Post_title_operator
-  image: Post_image_operator
-  excerpt: Post_excerpt_operator
-  relatedPosts: Post_relatedPosts_operator
-  slug: Post_slug_operator
-  authors: Post_authors_operator
-  publishedOn: Post_publishedOn_operator
-  meta__title: Post_meta__title_operator
-  meta__description: Post_meta__description_operator
-  meta__image: Post_meta__image_operator
-  updatedAt: Post_updatedAt_operator
-  createdAt: Post_createdAt_operator
-  _status: Post__status_operator
-  id: Post_id_operator
-}
-
 input Post_where_and {
   title: Post_title_operator
   image: Post_image_operator
@@ -11247,6 +11445,27 @@ input Post_where_and {
   createdAt: Post_createdAt_operator
   _status: Post__status_operator
   id: Post_id_operator
+  AND: [Post_where_and]
+  OR: [Post_where_or]
+}
+
+input Post_where_or {
+  title: Post_title_operator
+  image: Post_image_operator
+  excerpt: Post_excerpt_operator
+  relatedPosts: Post_relatedPosts_operator
+  slug: Post_slug_operator
+  authors: Post_authors_operator
+  publishedOn: Post_publishedOn_operator
+  meta__title: Post_meta__title_operator
+  meta__description: Post_meta__description_operator
+  meta__image: Post_meta__image_operator
+  updatedAt: Post_updatedAt_operator
+  createdAt: Post_createdAt_operator
+  _status: Post__status_operator
+  id: Post_id_operator
+  AND: [Post_where_and]
+  OR: [Post_where_or]
 }
 
 type postsDocAccess {
@@ -11703,6 +11922,7 @@ type PostVersion {
   version: PostVersion_Version
   createdAt: DateTime
   updatedAt: DateTime
+  latest: Boolean
   id: String
 }
 
@@ -11733,8 +11953,8 @@ input PostVersion_Version_Image_where {
   width: PostVersion_Version_Image_width_operator
   height: PostVersion_Version_Image_height_operator
   id: PostVersion_Version_Image_id_operator
-  OR: [PostVersion_Version_Image_where_or]
   AND: [PostVersion_Version_Image_where_and]
+  OR: [PostVersion_Version_Image_where_or]
 }
 
 input PostVersion_Version_Image_alt_operator {
@@ -11849,20 +12069,6 @@ input PostVersion_Version_Image_id_operator {
   exists: Boolean
 }
 
-input PostVersion_Version_Image_where_or {
-  alt: PostVersion_Version_Image_alt_operator
-  darkModeFallback: PostVersion_Version_Image_darkModeFallback_operator
-  updatedAt: PostVersion_Version_Image_updatedAt_operator
-  createdAt: PostVersion_Version_Image_createdAt_operator
-  url: PostVersion_Version_Image_url_operator
-  filename: PostVersion_Version_Image_filename_operator
-  mimeType: PostVersion_Version_Image_mimeType_operator
-  filesize: PostVersion_Version_Image_filesize_operator
-  width: PostVersion_Version_Image_width_operator
-  height: PostVersion_Version_Image_height_operator
-  id: PostVersion_Version_Image_id_operator
-}
-
 input PostVersion_Version_Image_where_and {
   alt: PostVersion_Version_Image_alt_operator
   darkModeFallback: PostVersion_Version_Image_darkModeFallback_operator
@@ -11875,6 +12081,24 @@ input PostVersion_Version_Image_where_and {
   width: PostVersion_Version_Image_width_operator
   height: PostVersion_Version_Image_height_operator
   id: PostVersion_Version_Image_id_operator
+  AND: [PostVersion_Version_Image_where_and]
+  OR: [PostVersion_Version_Image_where_or]
+}
+
+input PostVersion_Version_Image_where_or {
+  alt: PostVersion_Version_Image_alt_operator
+  darkModeFallback: PostVersion_Version_Image_darkModeFallback_operator
+  updatedAt: PostVersion_Version_Image_updatedAt_operator
+  createdAt: PostVersion_Version_Image_createdAt_operator
+  url: PostVersion_Version_Image_url_operator
+  filename: PostVersion_Version_Image_filename_operator
+  mimeType: PostVersion_Version_Image_mimeType_operator
+  filesize: PostVersion_Version_Image_filesize_operator
+  width: PostVersion_Version_Image_width_operator
+  height: PostVersion_Version_Image_height_operator
+  id: PostVersion_Version_Image_id_operator
+  AND: [PostVersion_Version_Image_where_and]
+  OR: [PostVersion_Version_Image_where_or]
 }
 
 union PostVersion_Version_Content = Banner | BlogContent | Code | BlogMarkdown | MediaBlock | ReusableContentBlock
@@ -11897,8 +12121,8 @@ input PostVersion_Version_Meta_Image_where {
   width: PostVersion_Version_Meta_Image_width_operator
   height: PostVersion_Version_Meta_Image_height_operator
   id: PostVersion_Version_Meta_Image_id_operator
-  OR: [PostVersion_Version_Meta_Image_where_or]
   AND: [PostVersion_Version_Meta_Image_where_and]
+  OR: [PostVersion_Version_Meta_Image_where_or]
 }
 
 input PostVersion_Version_Meta_Image_alt_operator {
@@ -12013,20 +12237,6 @@ input PostVersion_Version_Meta_Image_id_operator {
   exists: Boolean
 }
 
-input PostVersion_Version_Meta_Image_where_or {
-  alt: PostVersion_Version_Meta_Image_alt_operator
-  darkModeFallback: PostVersion_Version_Meta_Image_darkModeFallback_operator
-  updatedAt: PostVersion_Version_Meta_Image_updatedAt_operator
-  createdAt: PostVersion_Version_Meta_Image_createdAt_operator
-  url: PostVersion_Version_Meta_Image_url_operator
-  filename: PostVersion_Version_Meta_Image_filename_operator
-  mimeType: PostVersion_Version_Meta_Image_mimeType_operator
-  filesize: PostVersion_Version_Meta_Image_filesize_operator
-  width: PostVersion_Version_Meta_Image_width_operator
-  height: PostVersion_Version_Meta_Image_height_operator
-  id: PostVersion_Version_Meta_Image_id_operator
-}
-
 input PostVersion_Version_Meta_Image_where_and {
   alt: PostVersion_Version_Meta_Image_alt_operator
   darkModeFallback: PostVersion_Version_Meta_Image_darkModeFallback_operator
@@ -12039,6 +12249,24 @@ input PostVersion_Version_Meta_Image_where_and {
   width: PostVersion_Version_Meta_Image_width_operator
   height: PostVersion_Version_Meta_Image_height_operator
   id: PostVersion_Version_Meta_Image_id_operator
+  AND: [PostVersion_Version_Meta_Image_where_and]
+  OR: [PostVersion_Version_Meta_Image_where_or]
+}
+
+input PostVersion_Version_Meta_Image_where_or {
+  alt: PostVersion_Version_Meta_Image_alt_operator
+  darkModeFallback: PostVersion_Version_Meta_Image_darkModeFallback_operator
+  updatedAt: PostVersion_Version_Meta_Image_updatedAt_operator
+  createdAt: PostVersion_Version_Meta_Image_createdAt_operator
+  url: PostVersion_Version_Meta_Image_url_operator
+  filename: PostVersion_Version_Meta_Image_filename_operator
+  mimeType: PostVersion_Version_Meta_Image_mimeType_operator
+  filesize: PostVersion_Version_Meta_Image_filesize_operator
+  width: PostVersion_Version_Meta_Image_width_operator
+  height: PostVersion_Version_Meta_Image_height_operator
+  id: PostVersion_Version_Meta_Image_id_operator
+  AND: [PostVersion_Version_Meta_Image_where_and]
+  OR: [PostVersion_Version_Meta_Image_where_or]
 }
 
 enum PostVersion_Version__status {
@@ -12048,16 +12276,16 @@ enum PostVersion_Version__status {
 
 type versionsPosts {
   docs: [PostVersion]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input versionsPost_where {
@@ -12077,17 +12305,18 @@ input versionsPost_where {
   version___status: versionsPost_version___status_operator
   createdAt: versionsPost_createdAt_operator
   updatedAt: versionsPost_updatedAt_operator
+  latest: versionsPost_latest_operator
   id: versionsPost_id_operator
-  OR: [versionsPost_where_or]
   AND: [versionsPost_where_and]
+  OR: [versionsPost_where_or]
 }
 
 input versionsPost_parent_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
   exists: Boolean
 }
 
@@ -12114,11 +12343,11 @@ input versionsPost_version__excerpt_operator {
 }
 
 input versionsPost_version__relatedPosts_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
   exists: Boolean
 }
 
@@ -12134,11 +12363,11 @@ input versionsPost_version__slug_operator {
 }
 
 input versionsPost_version__authors_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
 }
 
 input versionsPost_version__publishedOn_operator {
@@ -12234,6 +12463,12 @@ input versionsPost_updatedAt_operator {
   exists: Boolean
 }
 
+input versionsPost_latest_operator {
+  equals: Boolean
+  not_equals: Boolean
+  exists: Boolean
+}
+
 input versionsPost_id_operator {
   equals: String
   not_equals: String
@@ -12243,26 +12478,6 @@ input versionsPost_id_operator {
   not_in: [String]
   all: [String]
   exists: Boolean
-}
-
-input versionsPost_where_or {
-  parent: versionsPost_parent_operator
-  version__title: versionsPost_version__title_operator
-  version__image: versionsPost_version__image_operator
-  version__excerpt: versionsPost_version__excerpt_operator
-  version__relatedPosts: versionsPost_version__relatedPosts_operator
-  version__slug: versionsPost_version__slug_operator
-  version__authors: versionsPost_version__authors_operator
-  version__publishedOn: versionsPost_version__publishedOn_operator
-  version__meta__title: versionsPost_version__meta__title_operator
-  version__meta__description: versionsPost_version__meta__description_operator
-  version__meta__image: versionsPost_version__meta__image_operator
-  version__updatedAt: versionsPost_version__updatedAt_operator
-  version__createdAt: versionsPost_version__createdAt_operator
-  version___status: versionsPost_version___status_operator
-  createdAt: versionsPost_createdAt_operator
-  updatedAt: versionsPost_updatedAt_operator
-  id: versionsPost_id_operator
 }
 
 input versionsPost_where_and {
@@ -12282,21 +12497,47 @@ input versionsPost_where_and {
   version___status: versionsPost_version___status_operator
   createdAt: versionsPost_createdAt_operator
   updatedAt: versionsPost_updatedAt_operator
+  latest: versionsPost_latest_operator
   id: versionsPost_id_operator
+  AND: [versionsPost_where_and]
+  OR: [versionsPost_where_or]
+}
+
+input versionsPost_where_or {
+  parent: versionsPost_parent_operator
+  version__title: versionsPost_version__title_operator
+  version__image: versionsPost_version__image_operator
+  version__excerpt: versionsPost_version__excerpt_operator
+  version__relatedPosts: versionsPost_version__relatedPosts_operator
+  version__slug: versionsPost_version__slug_operator
+  version__authors: versionsPost_version__authors_operator
+  version__publishedOn: versionsPost_version__publishedOn_operator
+  version__meta__title: versionsPost_version__meta__title_operator
+  version__meta__description: versionsPost_version__meta__description_operator
+  version__meta__image: versionsPost_version__meta__image_operator
+  version__updatedAt: versionsPost_version__updatedAt_operator
+  version__createdAt: versionsPost_version__createdAt_operator
+  version___status: versionsPost_version___status_operator
+  createdAt: versionsPost_createdAt_operator
+  updatedAt: versionsPost_updatedAt_operator
+  latest: versionsPost_latest_operator
+  id: versionsPost_id_operator
+  AND: [versionsPost_where_and]
+  OR: [versionsPost_where_or]
 }
 
 type ReusableContents {
   docs: [ReusableContent]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input ReusableContent_where {
@@ -12304,8 +12545,8 @@ input ReusableContent_where {
   updatedAt: ReusableContent_updatedAt_operator
   createdAt: ReusableContent_createdAt_operator
   id: ReusableContent_id_operator
-  OR: [ReusableContent_where_or]
   AND: [ReusableContent_where_and]
+  OR: [ReusableContent_where_or]
 }
 
 input ReusableContent_title_operator {
@@ -12351,18 +12592,22 @@ input ReusableContent_id_operator {
   exists: Boolean
 }
 
-input ReusableContent_where_or {
-  title: ReusableContent_title_operator
-  updatedAt: ReusableContent_updatedAt_operator
-  createdAt: ReusableContent_createdAt_operator
-  id: ReusableContent_id_operator
-}
-
 input ReusableContent_where_and {
   title: ReusableContent_title_operator
   updatedAt: ReusableContent_updatedAt_operator
   createdAt: ReusableContent_createdAt_operator
   id: ReusableContent_id_operator
+  AND: [ReusableContent_where_and]
+  OR: [ReusableContent_where_or]
+}
+
+input ReusableContent_where_or {
+  title: ReusableContent_title_operator
+  updatedAt: ReusableContent_updatedAt_operator
+  createdAt: ReusableContent_createdAt_operator
+  id: ReusableContent_id_operator
+  AND: [ReusableContent_where_and]
+  OR: [ReusableContent_where_or]
 }
 
 type reusable_contentDocAccess {
@@ -12494,16 +12739,16 @@ type ReusableContentDeleteDocAccess {
 
 type Users {
   docs: [User]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input User_where {
@@ -12516,8 +12761,8 @@ input User_where {
   createdAt: User_createdAt_operator
   email: User_email_operator
   id: User_id_operator
-  OR: [User_where_or]
   AND: [User_where_and]
+  OR: [User_where_or]
 }
 
 input User_firstName_operator {
@@ -12613,18 +12858,6 @@ input User_id_operator {
   exists: Boolean
 }
 
-input User_where_or {
-  firstName: User_firstName_operator
-  lastName: User_lastName_operator
-  twitter: User_twitter_operator
-  photo: User_photo_operator
-  roles: User_roles_operator
-  updatedAt: User_updatedAt_operator
-  createdAt: User_createdAt_operator
-  email: User_email_operator
-  id: User_id_operator
-}
-
 input User_where_and {
   firstName: User_firstName_operator
   lastName: User_lastName_operator
@@ -12635,6 +12868,22 @@ input User_where_and {
   createdAt: User_createdAt_operator
   email: User_email_operator
   id: User_id_operator
+  AND: [User_where_and]
+  OR: [User_where_or]
+}
+
+input User_where_or {
+  firstName: User_firstName_operator
+  lastName: User_lastName_operator
+  twitter: User_twitter_operator
+  photo: User_photo_operator
+  roles: User_roles_operator
+  updatedAt: User_updatedAt_operator
+  createdAt: User_createdAt_operator
+  email: User_email_operator
+  id: User_id_operator
+  AND: [User_where_and]
+  OR: [User_where_or]
 }
 
 type usersDocAccess {
@@ -12891,24 +13140,24 @@ type UsersUnlockDocAccess {
 }
 
 type usersMe {
+  collection: String
+  exp: Int
   token: String
   user: User
-  exp: Int
-  collection: String
 }
 
 type Forms {
   docs: [Form]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input Form_where {
@@ -12930,8 +13179,8 @@ input Form_where {
   updatedAt: Form_updatedAt_operator
   createdAt: Form_createdAt_operator
   id: Form_id_operator
-  OR: [Form_where_or]
   AND: [Form_where_and]
+  OR: [Form_where_or]
 }
 
 input Form_title_operator {
@@ -12958,9 +13207,8 @@ input Form_submitButtonLabel_operator {
 input Form_confirmationType_operator {
   equals: Form_confirmationType_Input
   not_equals: Form_confirmationType_Input
-  in: [Form_confirmationType_Input]
-  not_in: [Form_confirmationType_Input]
-  all: [Form_confirmationType_Input]
+  like: Form_confirmationType_Input
+  contains: Form_confirmationType_Input
   exists: Boolean
 }
 
@@ -13121,27 +13369,6 @@ input Form_id_operator {
   exists: Boolean
 }
 
-input Form_where_or {
-  title: Form_title_operator
-  submitButtonLabel: Form_submitButtonLabel_operator
-  confirmationType: Form_confirmationType_operator
-  confirmationMessage: Form_confirmationMessage_operator
-  redirect__url: Form_redirect__url_operator
-  emails__emailTo: Form_emails__emailTo_operator
-  emails__cc: Form_emails__cc_operator
-  emails__bcc: Form_emails__bcc_operator
-  emails__replyTo: Form_emails__replyTo_operator
-  emails__emailFrom: Form_emails__emailFrom_operator
-  emails__subject: Form_emails__subject_operator
-  emails__message: Form_emails__message_operator
-  emails__id: Form_emails__id_operator
-  leader: Form_leader_operator
-  hubSpotFormID: Form_hubSpotFormID_operator
-  updatedAt: Form_updatedAt_operator
-  createdAt: Form_createdAt_operator
-  id: Form_id_operator
-}
-
 input Form_where_and {
   title: Form_title_operator
   submitButtonLabel: Form_submitButtonLabel_operator
@@ -13161,6 +13388,31 @@ input Form_where_and {
   updatedAt: Form_updatedAt_operator
   createdAt: Form_createdAt_operator
   id: Form_id_operator
+  AND: [Form_where_and]
+  OR: [Form_where_or]
+}
+
+input Form_where_or {
+  title: Form_title_operator
+  submitButtonLabel: Form_submitButtonLabel_operator
+  confirmationType: Form_confirmationType_operator
+  confirmationMessage: Form_confirmationMessage_operator
+  redirect__url: Form_redirect__url_operator
+  emails__emailTo: Form_emails__emailTo_operator
+  emails__cc: Form_emails__cc_operator
+  emails__bcc: Form_emails__bcc_operator
+  emails__replyTo: Form_emails__replyTo_operator
+  emails__emailFrom: Form_emails__emailFrom_operator
+  emails__subject: Form_emails__subject_operator
+  emails__message: Form_emails__message_operator
+  emails__id: Form_emails__id_operator
+  leader: Form_leader_operator
+  hubSpotFormID: Form_hubSpotFormID_operator
+  updatedAt: Form_updatedAt_operator
+  createdAt: Form_createdAt_operator
+  id: Form_id_operator
+  AND: [Form_where_and]
+  OR: [Form_where_or]
 }
 
 type formsDocAccess {
@@ -13698,16 +13950,16 @@ type FormSubmission_SubmissionData {
 
 type FormSubmissions {
   docs: [FormSubmission]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input FormSubmission_where {
@@ -13718,16 +13970,16 @@ input FormSubmission_where {
   updatedAt: FormSubmission_updatedAt_operator
   createdAt: FormSubmission_createdAt_operator
   id: FormSubmission_id_operator
-  OR: [FormSubmission_where_or]
   AND: [FormSubmission_where_and]
+  OR: [FormSubmission_where_or]
 }
 
 input FormSubmission_form_operator {
-  equals: String
-  not_equals: String
-  in: [String]
-  not_in: [String]
-  all: [String]
+  equals: JSON
+  not_equals: JSON
+  in: [JSON]
+  not_in: [JSON]
+  all: [JSON]
 }
 
 input FormSubmission_submissionData__field_operator {
@@ -13794,16 +14046,6 @@ input FormSubmission_id_operator {
   exists: Boolean
 }
 
-input FormSubmission_where_or {
-  form: FormSubmission_form_operator
-  submissionData__field: FormSubmission_submissionData__field_operator
-  submissionData__value: FormSubmission_submissionData__value_operator
-  submissionData__id: FormSubmission_submissionData__id_operator
-  updatedAt: FormSubmission_updatedAt_operator
-  createdAt: FormSubmission_createdAt_operator
-  id: FormSubmission_id_operator
-}
-
 input FormSubmission_where_and {
   form: FormSubmission_form_operator
   submissionData__field: FormSubmission_submissionData__field_operator
@@ -13812,6 +14054,20 @@ input FormSubmission_where_and {
   updatedAt: FormSubmission_updatedAt_operator
   createdAt: FormSubmission_createdAt_operator
   id: FormSubmission_id_operator
+  AND: [FormSubmission_where_and]
+  OR: [FormSubmission_where_or]
+}
+
+input FormSubmission_where_or {
+  form: FormSubmission_form_operator
+  submissionData__field: FormSubmission_submissionData__field_operator
+  submissionData__value: FormSubmission_submissionData__value_operator
+  submissionData__id: FormSubmission_submissionData__id_operator
+  updatedAt: FormSubmission_updatedAt_operator
+  createdAt: FormSubmission_createdAt_operator
+  id: FormSubmission_id_operator
+  AND: [FormSubmission_where_and]
+  OR: [FormSubmission_where_or]
 }
 
 type form_submissionsDocAccess {
@@ -14051,16 +14307,16 @@ union Redirect_To_Reference = CaseStudy | Page | Post
 
 type Redirects {
   docs: [Redirect]
-  totalDocs: Int
-  offset: Int
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
   limit: Int
-  totalPages: Int
+  nextPage: Int
+  offset: Int
   page: Int
   pagingCounter: Int
-  hasPrevPage: Boolean
-  hasNextPage: Boolean
   prevPage: Int
-  nextPage: Int
+  totalDocs: Int
+  totalPages: Int
 }
 
 input Redirect_where {
@@ -14071,8 +14327,8 @@ input Redirect_where {
   updatedAt: Redirect_updatedAt_operator
   createdAt: Redirect_createdAt_operator
   id: Redirect_id_operator
-  OR: [Redirect_where_or]
   AND: [Redirect_where_and]
+  OR: [Redirect_where_or]
 }
 
 input Redirect_from_operator {
@@ -14088,9 +14344,8 @@ input Redirect_from_operator {
 input Redirect_to__type_operator {
   equals: Redirect_to__type_Input
   not_equals: Redirect_to__type_Input
-  in: [Redirect_to__type_Input]
-  not_in: [Redirect_to__type_Input]
-  all: [Redirect_to__type_Input]
+  like: Redirect_to__type_Input
+  contains: Redirect_to__type_Input
   exists: Boolean
 }
 
@@ -14101,7 +14356,7 @@ enum Redirect_to__type_Input {
 
 input Redirect_to__reference_Relation {
   relationTo: Redirect_to__reference_Relation_RelationTo
-  value: String
+  value: JSON
 }
 
 enum Redirect_to__reference_Relation_RelationTo {
@@ -14153,16 +14408,6 @@ input Redirect_id_operator {
   exists: Boolean
 }
 
-input Redirect_where_or {
-  from: Redirect_from_operator
-  to__type: Redirect_to__type_operator
-  to__reference: Redirect_to__reference_Relation
-  to__url: Redirect_to__url_operator
-  updatedAt: Redirect_updatedAt_operator
-  createdAt: Redirect_createdAt_operator
-  id: Redirect_id_operator
-}
-
 input Redirect_where_and {
   from: Redirect_from_operator
   to__type: Redirect_to__type_operator
@@ -14171,6 +14416,20 @@ input Redirect_where_and {
   updatedAt: Redirect_updatedAt_operator
   createdAt: Redirect_createdAt_operator
   id: Redirect_id_operator
+  AND: [Redirect_where_and]
+  OR: [Redirect_where_or]
+}
+
+input Redirect_where_or {
+  from: Redirect_from_operator
+  to__type: Redirect_to__type_operator
+  to__reference: Redirect_to__reference_Relation
+  to__url: Redirect_to__url_operator
+  updatedAt: Redirect_updatedAt_operator
+  createdAt: Redirect_createdAt_operator
+  id: Redirect_id_operator
+  AND: [Redirect_where_and]
+  OR: [Redirect_where_or]
 }
 
 type redirectsDocAccess {
@@ -14372,6 +14631,287 @@ type RedirectsUpdateDocAccess {
 }
 
 type RedirectsDeleteDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadPreference {
+  id: String
+  user: PayloadPreference_User_Relationship!
+  key: String
+  value: JSON
+  updatedAt: DateTime
+  createdAt: DateTime
+}
+
+type PayloadPreference_User_Relationship {
+  relationTo: PayloadPreference_User_RelationTo
+  value: PayloadPreference_User
+}
+
+enum PayloadPreference_User_RelationTo {
+  users
+}
+
+union PayloadPreference_User = User
+
+type PayloadPreferences {
+  docs: [PayloadPreference]
+  hasNextPage: Boolean
+  hasPrevPage: Boolean
+  limit: Int
+  nextPage: Int
+  offset: Int
+  page: Int
+  pagingCounter: Int
+  prevPage: Int
+  totalDocs: Int
+  totalPages: Int
+}
+
+input PayloadPreference_where {
+  user: PayloadPreference_user_Relation
+  key: PayloadPreference_key_operator
+  value: PayloadPreference_value_operator
+  updatedAt: PayloadPreference_updatedAt_operator
+  createdAt: PayloadPreference_createdAt_operator
+  id: PayloadPreference_id_operator
+  AND: [PayloadPreference_where_and]
+  OR: [PayloadPreference_where_or]
+}
+
+input PayloadPreference_user_Relation {
+  relationTo: PayloadPreference_user_Relation_RelationTo
+  value: JSON
+}
+
+enum PayloadPreference_user_Relation_RelationTo {
+  users
+}
+
+input PayloadPreference_key_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PayloadPreference_value_operator {
+  equals: JSON
+  not_equals: JSON
+  like: JSON
+  contains: JSON
+  within: JSON
+  intersects: JSON
+  exists: Boolean
+}
+
+input PayloadPreference_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input PayloadPreference_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input PayloadPreference_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PayloadPreference_where_and {
+  user: PayloadPreference_user_Relation
+  key: PayloadPreference_key_operator
+  value: PayloadPreference_value_operator
+  updatedAt: PayloadPreference_updatedAt_operator
+  createdAt: PayloadPreference_createdAt_operator
+  id: PayloadPreference_id_operator
+  AND: [PayloadPreference_where_and]
+  OR: [PayloadPreference_where_or]
+}
+
+input PayloadPreference_where_or {
+  user: PayloadPreference_user_Relation
+  key: PayloadPreference_key_operator
+  value: PayloadPreference_value_operator
+  updatedAt: PayloadPreference_updatedAt_operator
+  createdAt: PayloadPreference_createdAt_operator
+  id: PayloadPreference_id_operator
+  AND: [PayloadPreference_where_and]
+  OR: [PayloadPreference_where_or]
+}
+
+type payload_preferencesDocAccess {
+  fields: PayloadPreferencesDocAccessFields
+  create: PayloadPreferencesCreateDocAccess
+  read: PayloadPreferencesReadDocAccess
+  update: PayloadPreferencesUpdateDocAccess
+  delete: PayloadPreferencesDeleteDocAccess
+}
+
+type PayloadPreferencesDocAccessFields {
+  user: PayloadPreferencesDocAccessFields_user
+  key: PayloadPreferencesDocAccessFields_key
+  value: PayloadPreferencesDocAccessFields_value
+  updatedAt: PayloadPreferencesDocAccessFields_updatedAt
+  createdAt: PayloadPreferencesDocAccessFields_createdAt
+}
+
+type PayloadPreferencesDocAccessFields_user {
+  create: PayloadPreferencesDocAccessFields_user_Create
+  read: PayloadPreferencesDocAccessFields_user_Read
+  update: PayloadPreferencesDocAccessFields_user_Update
+  delete: PayloadPreferencesDocAccessFields_user_Delete
+}
+
+type PayloadPreferencesDocAccessFields_user_Create {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_user_Read {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_user_Update {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_user_Delete {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_key {
+  create: PayloadPreferencesDocAccessFields_key_Create
+  read: PayloadPreferencesDocAccessFields_key_Read
+  update: PayloadPreferencesDocAccessFields_key_Update
+  delete: PayloadPreferencesDocAccessFields_key_Delete
+}
+
+type PayloadPreferencesDocAccessFields_key_Create {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_key_Read {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_key_Update {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_key_Delete {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_value {
+  create: PayloadPreferencesDocAccessFields_value_Create
+  read: PayloadPreferencesDocAccessFields_value_Read
+  update: PayloadPreferencesDocAccessFields_value_Update
+  delete: PayloadPreferencesDocAccessFields_value_Delete
+}
+
+type PayloadPreferencesDocAccessFields_value_Create {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_value_Read {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_value_Update {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_value_Delete {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_updatedAt {
+  create: PayloadPreferencesDocAccessFields_updatedAt_Create
+  read: PayloadPreferencesDocAccessFields_updatedAt_Read
+  update: PayloadPreferencesDocAccessFields_updatedAt_Update
+  delete: PayloadPreferencesDocAccessFields_updatedAt_Delete
+}
+
+type PayloadPreferencesDocAccessFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_createdAt {
+  create: PayloadPreferencesDocAccessFields_createdAt_Create
+  read: PayloadPreferencesDocAccessFields_createdAt_Read
+  update: PayloadPreferencesDocAccessFields_createdAt_Update
+  delete: PayloadPreferencesDocAccessFields_createdAt_Delete
+}
+
+type PayloadPreferencesDocAccessFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type PayloadPreferencesDocAccessFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type PayloadPreferencesCreateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadPreferencesReadDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadPreferencesUpdateDocAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadPreferencesDeleteDocAccess {
   permission: Boolean!
   where: JSONObject
 }
@@ -15220,13 +15760,6 @@ type TopBarUpdateDocAccess {
   where: JSONObject
 }
 
-type Preference {
-  key: String!
-  value: JSON
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
 type Access {
   canAccessAdmin: Boolean!
   announcements: announcementsAccess
@@ -15241,6 +15774,7 @@ type Access {
   forms: formsAccess
   form_submissions: form_submissionsAccess
   redirects: redirectsAccess
+  payload_preferences: payload_preferencesAccess
   footer: footerAccess
   main_menu: main_menuAccess
   top_bar: top_barAccess
@@ -16738,6 +17272,7 @@ type PagesFields_hero_Fields {
   actions: PagesFields_hero_actions
   buttons: PagesFields_hero_buttons
   media: PagesFields_hero_media
+  mediaWidth: PagesFields_hero_mediaWidth
   adjectives: PagesFields_hero_adjectives
   form: PagesFields_hero_form
   logoGroup: PagesFields_hero_logoGroup
@@ -17748,6 +18283,29 @@ type PagesFields_hero_media_Update {
 }
 
 type PagesFields_hero_media_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_mediaWidth {
+  create: PagesFields_hero_mediaWidth_Create
+  read: PagesFields_hero_mediaWidth_Read
+  update: PagesFields_hero_mediaWidth_Update
+  delete: PagesFields_hero_mediaWidth_Delete
+}
+
+type PagesFields_hero_mediaWidth_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_mediaWidth_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_mediaWidth_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_mediaWidth_Delete {
   permission: Boolean!
 }
 
@@ -20238,6 +20796,157 @@ type RedirectsDeleteAccess {
   where: JSONObject
 }
 
+type payload_preferencesAccess {
+  fields: PayloadPreferencesFields
+  create: PayloadPreferencesCreateAccess
+  read: PayloadPreferencesReadAccess
+  update: PayloadPreferencesUpdateAccess
+  delete: PayloadPreferencesDeleteAccess
+}
+
+type PayloadPreferencesFields {
+  user: PayloadPreferencesFields_user
+  key: PayloadPreferencesFields_key
+  value: PayloadPreferencesFields_value
+  updatedAt: PayloadPreferencesFields_updatedAt
+  createdAt: PayloadPreferencesFields_createdAt
+}
+
+type PayloadPreferencesFields_user {
+  create: PayloadPreferencesFields_user_Create
+  read: PayloadPreferencesFields_user_Read
+  update: PayloadPreferencesFields_user_Update
+  delete: PayloadPreferencesFields_user_Delete
+}
+
+type PayloadPreferencesFields_user_Create {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_user_Read {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_user_Update {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_user_Delete {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_key {
+  create: PayloadPreferencesFields_key_Create
+  read: PayloadPreferencesFields_key_Read
+  update: PayloadPreferencesFields_key_Update
+  delete: PayloadPreferencesFields_key_Delete
+}
+
+type PayloadPreferencesFields_key_Create {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_key_Read {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_key_Update {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_key_Delete {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_value {
+  create: PayloadPreferencesFields_value_Create
+  read: PayloadPreferencesFields_value_Read
+  update: PayloadPreferencesFields_value_Update
+  delete: PayloadPreferencesFields_value_Delete
+}
+
+type PayloadPreferencesFields_value_Create {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_value_Read {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_value_Update {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_value_Delete {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_updatedAt {
+  create: PayloadPreferencesFields_updatedAt_Create
+  read: PayloadPreferencesFields_updatedAt_Read
+  update: PayloadPreferencesFields_updatedAt_Update
+  delete: PayloadPreferencesFields_updatedAt_Delete
+}
+
+type PayloadPreferencesFields_updatedAt_Create {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_updatedAt_Read {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_updatedAt_Update {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_updatedAt_Delete {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_createdAt {
+  create: PayloadPreferencesFields_createdAt_Create
+  read: PayloadPreferencesFields_createdAt_Read
+  update: PayloadPreferencesFields_createdAt_Update
+  delete: PayloadPreferencesFields_createdAt_Delete
+}
+
+type PayloadPreferencesFields_createdAt_Create {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_createdAt_Read {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_createdAt_Update {
+  permission: Boolean!
+}
+
+type PayloadPreferencesFields_createdAt_Delete {
+  permission: Boolean!
+}
+
+type PayloadPreferencesCreateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadPreferencesReadAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadPreferencesUpdateAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
+type PayloadPreferencesDeleteAccess {
+  permission: Boolean!
+  where: JSONObject
+}
+
 type footerAccess {
   fields: FooterFields
   read: FooterReadAccess
@@ -20993,56 +21702,57 @@ type TopBarUpdateAccess {
 
 type Mutation {
   createAnnouncement(data: mutationAnnouncementInput!, draft: Boolean): Announcement
-  updateAnnouncement(id: String!, data: mutationAnnouncementUpdateInput!, draft: Boolean, autosave: Boolean): Announcement
+  updateAnnouncement(id: String!, autosave: Boolean, data: mutationAnnouncementUpdateInput!, draft: Boolean): Announcement
   deleteAnnouncement(id: String!): Announcement
   createCaseStudy(data: mutationCaseStudyInput!, draft: Boolean): CaseStudy
-  updateCaseStudy(id: String!, data: mutationCaseStudyUpdateInput!, draft: Boolean, autosave: Boolean): CaseStudy
+  updateCaseStudy(id: String!, autosave: Boolean, data: mutationCaseStudyUpdateInput!, draft: Boolean): CaseStudy
   deleteCaseStudy(id: String!): CaseStudy
   restoreVersionCaseStudy(id: String): CaseStudy
   createCommunityHelp(data: mutationCommunityHelpInput!, draft: Boolean): CommunityHelp
-  updateCommunityHelp(id: String!, data: mutationCommunityHelpUpdateInput!, draft: Boolean, autosave: Boolean): CommunityHelp
+  updateCommunityHelp(id: String!, autosave: Boolean, data: mutationCommunityHelpUpdateInput!, draft: Boolean): CommunityHelp
   deleteCommunityHelp(id: String!): CommunityHelp
   createDoc(data: mutationDocInput!, draft: Boolean): Doc
-  updateDoc(id: String!, data: mutationDocUpdateInput!, draft: Boolean, autosave: Boolean): Doc
+  updateDoc(id: String!, autosave: Boolean, data: mutationDocUpdateInput!, draft: Boolean): Doc
   deleteDoc(id: String!): Doc
   createMedia(data: mutationMediaInput!, draft: Boolean): Media
-  updateMedia(id: String!, data: mutationMediaUpdateInput!, draft: Boolean, autosave: Boolean): Media
+  updateMedia(id: String!, autosave: Boolean, data: mutationMediaUpdateInput!, draft: Boolean): Media
   deleteMedia(id: String!): Media
   createPage(data: mutationPageInput!, draft: Boolean): Page
-  updatePage(id: String!, data: mutationPageUpdateInput!, draft: Boolean, autosave: Boolean): Page
+  updatePage(id: String!, autosave: Boolean, data: mutationPageUpdateInput!, draft: Boolean): Page
   deletePage(id: String!): Page
   restoreVersionPage(id: String): Page
   createPost(data: mutationPostInput!, draft: Boolean): Post
-  updatePost(id: String!, data: mutationPostUpdateInput!, draft: Boolean, autosave: Boolean): Post
+  updatePost(id: String!, autosave: Boolean, data: mutationPostUpdateInput!, draft: Boolean): Post
   deletePost(id: String!): Post
   restoreVersionPost(id: String): Post
   createReusableContent(data: mutationReusableContentInput!, draft: Boolean): ReusableContent
-  updateReusableContent(id: String!, data: mutationReusableContentUpdateInput!, draft: Boolean, autosave: Boolean): ReusableContent
+  updateReusableContent(id: String!, autosave: Boolean, data: mutationReusableContentUpdateInput!, draft: Boolean): ReusableContent
   deleteReusableContent(id: String!): ReusableContent
   createUser(data: mutationUserInput!, draft: Boolean): User
-  updateUser(id: String!, data: mutationUserUpdateInput!, draft: Boolean, autosave: Boolean): User
+  updateUser(id: String!, autosave: Boolean, data: mutationUserUpdateInput!, draft: Boolean): User
   deleteUser(id: String!): User
   refreshTokenUser(token: String): usersRefreshedUser
   logoutUser: String
   unlockUser(email: String!): Boolean!
   loginUser(email: String, password: String): usersLoginResult
-  forgotPasswordUser(email: String!, disableEmail: Boolean, expiration: Int): Boolean!
-  resetPasswordUser(token: String, password: String): usersResetPassword
+  forgotPasswordUser(disableEmail: Boolean, email: String!, expiration: Int): Boolean!
+  resetPasswordUser(password: String, token: String): usersResetPassword
   verifyEmailUser(token: String): Boolean
   createForm(data: mutationFormInput!, draft: Boolean): Form
-  updateForm(id: String!, data: mutationFormUpdateInput!, draft: Boolean, autosave: Boolean): Form
+  updateForm(id: String!, autosave: Boolean, data: mutationFormUpdateInput!, draft: Boolean): Form
   deleteForm(id: String!): Form
   createFormSubmission(data: mutationFormSubmissionInput!, draft: Boolean): FormSubmission
-  updateFormSubmission(id: String!, data: mutationFormSubmissionUpdateInput!, draft: Boolean, autosave: Boolean): FormSubmission
+  updateFormSubmission(id: String!, autosave: Boolean, data: mutationFormSubmissionUpdateInput!, draft: Boolean): FormSubmission
   deleteFormSubmission(id: String!): FormSubmission
   createRedirect(data: mutationRedirectInput!, draft: Boolean): Redirect
-  updateRedirect(id: String!, data: mutationRedirectUpdateInput!, draft: Boolean, autosave: Boolean): Redirect
+  updateRedirect(id: String!, autosave: Boolean, data: mutationRedirectUpdateInput!, draft: Boolean): Redirect
   deleteRedirect(id: String!): Redirect
+  createPayloadPreference(data: mutationPayloadPreferenceInput!, draft: Boolean): PayloadPreference
+  updatePayloadPreference(id: String!, autosave: Boolean, data: mutationPayloadPreferenceUpdateInput!, draft: Boolean): PayloadPreference
+  deletePayloadPreference(id: String!): PayloadPreference
   updateFooter(data: mutationFooterInput!, draft: Boolean): Footer
   updateMainMenu(data: mutationMainMenuInput!, draft: Boolean): MainMenu
   updateTopBar(data: mutationTopBarInput!, draft: Boolean): TopBar
-  updatePreference(key: String!, value: JSON): Preference
-  deletePreference(key: String!): Preference
 }
 
 input mutationAnnouncementInput {
@@ -21215,6 +21925,7 @@ input mutationPage_HeroInput {
   actions: [mutationPage_Hero_ActionsInput]
   buttons: [mutationPage_Hero_ButtonsInput]
   media: String
+  mediaWidth: Page_Hero_mediaWidth_MutationInput
   adjectives: [mutationPage_Hero_AdjectivesInput]
   form: String
   logoGroup: mutationPage_Hero_LogoGroupInput
@@ -21330,6 +22041,11 @@ enum Page_Hero_Buttons_Link_appearance_MutationInput {
   secondary
 }
 
+enum Page_Hero_mediaWidth_MutationInput {
+  normal
+  wide
+}
+
 input mutationPage_Hero_AdjectivesInput {
   adjective: String!
   id: String
@@ -21392,6 +22108,7 @@ input mutationPageUpdate_HeroInput {
   actions: [mutationPageUpdate_Hero_ActionsInput]
   buttons: [mutationPageUpdate_Hero_ButtonsInput]
   media: String
+  mediaWidth: PageUpdate_Hero_mediaWidth_MutationInput
   adjectives: [mutationPageUpdate_Hero_AdjectivesInput]
   form: String
   logoGroup: mutationPageUpdate_Hero_LogoGroupInput
@@ -21505,6 +22222,11 @@ enum PageUpdate_Hero_Buttons_Link_ReferenceRelationshipInputRelationTo {
 enum PageUpdate_Hero_Buttons_Link_appearance_MutationInput {
   primary
   secondary
+}
+
+enum PageUpdate_Hero_mediaWidth_MutationInput {
+  normal
+  wide
 }
 
 input mutationPageUpdate_Hero_AdjectivesInput {
@@ -21658,9 +22380,9 @@ enum UserUpdate_roles_MutationInput {
 }
 
 type usersRefreshedUser {
-  user: usersJWT
-  refreshedToken: String
   exp: Int
+  refreshedToken: String
+  user: usersJWT
 }
 
 type usersJWT {
@@ -21669,9 +22391,9 @@ type usersJWT {
 }
 
 type usersLoginResult {
+  exp: Int
   token: String
   user: User
-  exp: Int
 }
 
 type usersResetPassword {
@@ -21703,7 +22425,7 @@ input mutationForm_EmailsInput {
   bcc: String
   replyTo: String
   emailFrom: String
-  subject: String
+  subject: String!
   message: JSON
   id: String
 }
@@ -21732,7 +22454,7 @@ input mutationFormUpdate_EmailsInput {
   bcc: String
   replyTo: String
   emailFrom: String
-  subject: String
+  subject: String!
   message: JSON
   id: String
 }
@@ -21809,6 +22531,40 @@ enum RedirectUpdate_To_ReferenceRelationshipInputRelationTo {
   case_studies
   pages
   posts
+}
+
+input mutationPayloadPreferenceInput {
+  user: PayloadPreference_UserRelationshipInput
+  key: String
+  value: JSON
+  updatedAt: String
+  createdAt: String
+}
+
+input PayloadPreference_UserRelationshipInput {
+  relationTo: PayloadPreference_UserRelationshipInputRelationTo
+  value: JSON
+}
+
+enum PayloadPreference_UserRelationshipInputRelationTo {
+  users
+}
+
+input mutationPayloadPreferenceUpdateInput {
+  user: PayloadPreferenceUpdate_UserRelationshipInput
+  key: String
+  value: JSON
+  updatedAt: String
+  createdAt: String
+}
+
+input PayloadPreferenceUpdate_UserRelationshipInput {
+  relationTo: PayloadPreferenceUpdate_UserRelationshipInputRelationTo
+  value: JSON
+}
+
+enum PayloadPreferenceUpdate_UserRelationshipInputRelationTo {
+  users
 }
 
 input mutationFooterInput {
