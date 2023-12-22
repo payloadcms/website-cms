@@ -192,31 +192,39 @@ export interface CaseStudy {
         | {
             contentFields: {
               useLeadingHeader?: boolean | null;
-              leadingHeader: {
-                [k: string]: unknown;
-              }[];
+              leadingHeader?:
+                | {
+                    [k: string]: unknown;
+                  }[]
+                | null;
               layout?: ('oneColumn' | 'twoColumns' | 'twoThirdsOneThird' | 'halfAndHalf' | 'threeColumns') | null;
               columnOne: {
                 [k: string]: unknown;
               }[];
-              columnTwo: {
-                [k: string]: unknown;
-              }[];
-              columnThree: {
-                [k: string]: unknown;
-              }[];
+              columnTwo?:
+                | {
+                    [k: string]: unknown;
+                  }[]
+                | null;
+              columnThree?:
+                | {
+                    [k: string]: unknown;
+                  }[]
+                | null;
             };
             id?: string | null;
             blockName?: string | null;
             blockType: 'content';
           }
         | {
-            contentGridFields: {
+            contentGridFields?: {
               forceDarkBackground?: boolean | null;
               useLeadingHeader?: boolean | null;
-              leadingHeader: {
-                [k: string]: unknown;
-              }[];
+              leadingHeader?:
+                | {
+                    [k: string]: unknown;
+                  }[]
+                | null;
               cells?:
                 | {
                     content: {
@@ -413,9 +421,11 @@ export interface CaseStudy {
         | {
             sliderFields: {
               useLeadingHeader?: boolean | null;
-              leadingHeader: {
-                [k: string]: unknown;
-              }[];
+              leadingHeader?:
+                | {
+                    [k: string]: unknown;
+                  }[]
+                | null;
               sliderType: 'quoteSlider' | 'imageSlider';
               imageSlides?:
                 | {
@@ -481,21 +491,27 @@ export interface CaseStudy {
                       | {
                           contentFields: {
                             useLeadingHeader?: boolean | null;
-                            leadingHeader: {
-                              [k: string]: unknown;
-                            }[];
+                            leadingHeader?:
+                              | {
+                                  [k: string]: unknown;
+                                }[]
+                              | null;
                             layout?:
                               | ('oneColumn' | 'twoColumns' | 'twoThirdsOneThird' | 'halfAndHalf' | 'threeColumns')
                               | null;
                             columnOne: {
                               [k: string]: unknown;
                             }[];
-                            columnTwo: {
-                              [k: string]: unknown;
-                            }[];
-                            columnThree: {
-                              [k: string]: unknown;
-                            }[];
+                            columnTwo?:
+                              | {
+                                  [k: string]: unknown;
+                                }[]
+                              | null;
+                            columnThree?:
+                              | {
+                                  [k: string]: unknown;
+                                }[]
+                              | null;
                           };
                           id?: string | null;
                           blockName?: string | null;
@@ -760,6 +776,7 @@ export interface Page {
         }[]
       | null;
     media?: string | Media | null;
+    mediaWidth?: ('normal' | 'wide') | null;
     adjectives?:
       | {
           adjective: string;
@@ -945,31 +962,39 @@ export interface Page {
     | {
         contentFields: {
           useLeadingHeader?: boolean | null;
-          leadingHeader: {
-            [k: string]: unknown;
-          }[];
+          leadingHeader?:
+            | {
+                [k: string]: unknown;
+              }[]
+            | null;
           layout?: ('oneColumn' | 'twoColumns' | 'twoThirdsOneThird' | 'halfAndHalf' | 'threeColumns') | null;
           columnOne: {
             [k: string]: unknown;
           }[];
-          columnTwo: {
-            [k: string]: unknown;
-          }[];
-          columnThree: {
-            [k: string]: unknown;
-          }[];
+          columnTwo?:
+            | {
+                [k: string]: unknown;
+              }[]
+            | null;
+          columnThree?:
+            | {
+                [k: string]: unknown;
+              }[]
+            | null;
         };
         id?: string | null;
         blockName?: string | null;
         blockType: 'content';
       }
     | {
-        contentGridFields: {
+        contentGridFields?: {
           forceDarkBackground?: boolean | null;
           useLeadingHeader?: boolean | null;
-          leadingHeader: {
-            [k: string]: unknown;
-          }[];
+          leadingHeader?:
+            | {
+                [k: string]: unknown;
+              }[]
+            | null;
           cells?:
             | {
                 content: {
@@ -1166,9 +1191,11 @@ export interface Page {
     | {
         sliderFields: {
           useLeadingHeader?: boolean | null;
-          leadingHeader: {
-            [k: string]: unknown;
-          }[];
+          leadingHeader?:
+            | {
+                [k: string]: unknown;
+              }[]
+            | null;
           sliderType: 'quoteSlider' | 'imageSlider';
           imageSlides?:
             | {
@@ -1234,21 +1261,27 @@ export interface Page {
                   | {
                       contentFields: {
                         useLeadingHeader?: boolean | null;
-                        leadingHeader: {
-                          [k: string]: unknown;
-                        }[];
+                        leadingHeader?:
+                          | {
+                              [k: string]: unknown;
+                            }[]
+                          | null;
                         layout?:
                           | ('oneColumn' | 'twoColumns' | 'twoThirdsOneThird' | 'halfAndHalf' | 'threeColumns')
                           | null;
                         columnOne: {
                           [k: string]: unknown;
                         }[];
-                        columnTwo: {
-                          [k: string]: unknown;
-                        }[];
-                        columnThree: {
-                          [k: string]: unknown;
-                        }[];
+                        columnTwo?:
+                          | {
+                              [k: string]: unknown;
+                            }[]
+                          | null;
+                        columnThree?:
+                          | {
+                              [k: string]: unknown;
+                            }[]
+                          | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -1685,31 +1718,39 @@ export interface ReusableContent {
     | {
         contentFields: {
           useLeadingHeader?: boolean | null;
-          leadingHeader: {
-            [k: string]: unknown;
-          }[];
+          leadingHeader?:
+            | {
+                [k: string]: unknown;
+              }[]
+            | null;
           layout?: ('oneColumn' | 'twoColumns' | 'twoThirdsOneThird' | 'halfAndHalf' | 'threeColumns') | null;
           columnOne: {
             [k: string]: unknown;
           }[];
-          columnTwo: {
-            [k: string]: unknown;
-          }[];
-          columnThree: {
-            [k: string]: unknown;
-          }[];
+          columnTwo?:
+            | {
+                [k: string]: unknown;
+              }[]
+            | null;
+          columnThree?:
+            | {
+                [k: string]: unknown;
+              }[]
+            | null;
         };
         id?: string | null;
         blockName?: string | null;
         blockType: 'content';
       }
     | {
-        contentGridFields: {
+        contentGridFields?: {
           forceDarkBackground?: boolean | null;
           useLeadingHeader?: boolean | null;
-          leadingHeader: {
-            [k: string]: unknown;
-          }[];
+          leadingHeader?:
+            | {
+                [k: string]: unknown;
+              }[]
+            | null;
           cells?:
             | {
                 content: {
@@ -1899,9 +1940,11 @@ export interface ReusableContent {
     | {
         sliderFields: {
           useLeadingHeader?: boolean | null;
-          leadingHeader: {
-            [k: string]: unknown;
-          }[];
+          leadingHeader?:
+            | {
+                [k: string]: unknown;
+              }[]
+            | null;
           sliderType: 'quoteSlider' | 'imageSlider';
           imageSlides?:
             | {
@@ -1967,21 +2010,27 @@ export interface ReusableContent {
                   | {
                       contentFields: {
                         useLeadingHeader?: boolean | null;
-                        leadingHeader: {
-                          [k: string]: unknown;
-                        }[];
+                        leadingHeader?:
+                          | {
+                              [k: string]: unknown;
+                            }[]
+                          | null;
                         layout?:
                           | ('oneColumn' | 'twoColumns' | 'twoThirdsOneThird' | 'halfAndHalf' | 'threeColumns')
                           | null;
                         columnOne: {
                           [k: string]: unknown;
                         }[];
-                        columnTwo: {
-                          [k: string]: unknown;
-                        }[];
-                        columnThree: {
-                          [k: string]: unknown;
-                        }[];
+                        columnTwo?:
+                          | {
+                              [k: string]: unknown;
+                            }[]
+                          | null;
+                        columnThree?:
+                          | {
+                              [k: string]: unknown;
+                            }[]
+                          | null;
                       };
                       id?: string | null;
                       blockName?: string | null;

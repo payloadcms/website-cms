@@ -115,6 +115,25 @@ export const hero: Field = {
       },
     },
     {
+      name: 'mediaWidth',
+      type: 'select',
+      label: 'Media Width',
+      defaultValue: 'normal',
+      options: [
+        {
+          label: 'Normal',
+          value: 'normal',
+        },
+        {
+          label: 'Wide',
+          value: 'wide',
+        },
+      ],
+      admin: {
+        condition: (_, { type } = {}) => ['contentMedia'].includes(type),
+      },
+    },
+    {
       name: 'adjectives',
       type: 'array',
       minRows: 3,
