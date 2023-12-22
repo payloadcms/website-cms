@@ -14,6 +14,12 @@ export const CaseStudyCards: Block = {
       name: 'caseStudyCardFields',
       fields: [
         {
+          name: 'pixels',
+          label: 'Show Pixel Background?',
+          type: 'checkbox',
+          defaultValue: true,
+        },
+        {
           name: 'cards',
           type: 'array',
           fields: [
