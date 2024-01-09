@@ -15,6 +15,10 @@ export const CodeFeature: Block = {
           type: 'checkbox',
         },
         {
+          name: 'disableIndent',
+          type: 'checkbox',
+        },
+        {
           name: 'heading',
           type: 'text',
           required: true,
