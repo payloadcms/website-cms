@@ -6,7 +6,7 @@ import link from '../../fields/link'
 import linkGroup from '../../fields/linkGroup'
 
 export const MediaProgressGallery: Block = {
-  slug: 'MediaProgressGallery',
+  slug: 'mediaProgressGallery',
   fields: [
     blockFields({
       name: 'mediaProgressGalleryFields',

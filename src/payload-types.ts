@@ -1167,7 +1167,7 @@ export interface Page {
         };
         id?: string | null;
         blockName?: string | null;
-        blockType: 'MediaProgressGallery';
+        blockType: 'mediaProgressGallery';
       }
     | {
         mediaContentFields: {
@@ -1989,7 +1989,7 @@ export interface ReusableContent {
         };
         id?: string | null;
         blockName?: string | null;
-        blockType: 'MediaProgressGallery';
+        blockType: 'mediaProgressGallery';
       }
     | {
         mediaContentFields: {
