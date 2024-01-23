@@ -11,36 +11,12 @@ export const MainMenu: GlobalConfig = {
   },
   fields: [
     {
-      admin: {
-        components: {
-          RowLabel: ({ data }) => data.label || '...',
-        },
-      },
-      name: 'tabs',
+      name: 'navItems',
       type: 'array',
       fields: [
-        {
-          name: 'label',
-          required: true,
-          type: 'text',
-        },
-        {
-          admin: {
-            components: {
-              RowLabel: ({ data }) => data.link.label || '...',
-            },
-          },
-          name: 'navItems',
-          fields: [
-            link({
-              overrides: {
-                label: false,
-              },
-              appearances: false,
-            }),
-          ],
-          type: 'array',
-        },
+        link({
+          appearances: false,
+        }),
       ],
     },
   ],

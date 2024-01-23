@@ -25,6 +25,7 @@ import { hero } from '../fields/hero'
 import { slugField } from '../fields/slug'
 import { formatPreviewURL } from '../utilities/formatPreviewURL'
 import { revalidatePage } from '../utilities/revalidatePage'
+import { MediaCarouselBlock } from '../blocks/MediaCarousel'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -87,6 +88,7 @@ export const Pages: CollectionConfig = {
                 HoverHighlights,
                 LinkGrid,
                 MediaBlock,
+                MediaCarouselBlock,
                 MediaContent,
                 Pricing,
                 ReusableContent,

@@ -1108,6 +1108,68 @@ export interface Page {
         blockType: 'mediaBlock';
       }
     | {
+        mediaCarouselBlockFields: {
+          alignment?: ('contentMediaCarousel' | 'mediaCarouselContent') | null;
+          leader?: string | null;
+          title: string;
+          description: {
+            [k: string]: unknown;
+          }[];
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          mediaSlides?:
+            | {
+                image: string | Media;
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaCarouselBlock';
+      }
+    | {
         mediaContentFields: {
           alignment?: ('contentMedia' | 'mediaContent') | null;
           container?: boolean | null;
@@ -1866,6 +1928,68 @@ export interface ReusableContent {
         id?: string | null;
         blockName?: string | null;
         blockType: 'mediaBlock';
+      }
+    | {
+        mediaCarouselBlockFields: {
+          alignment?: ('contentMediaCarousel' | 'mediaCarouselContent') | null;
+          leader?: string | null;
+          title: string;
+          description: {
+            [k: string]: unknown;
+          }[];
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          mediaSlides?:
+            | {
+                image: string | Media;
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaCarouselBlock';
       }
     | {
         mediaContentFields: {
