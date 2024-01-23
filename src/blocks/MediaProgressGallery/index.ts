@@ -5,24 +5,24 @@ import { blockFields } from '../../fields/blockFields'
 import link from '../../fields/link'
 import linkGroup from '../../fields/linkGroup'
 
-export const MediaCarouselBlock: Block = {
-  slug: 'mediaCarouselBlock',
+export const MediaProgressGallery: Block = {
+  slug: 'MediaProgressGallery',
   fields: [
     blockFields({
-      name: 'mediaCarouselBlockFields',
+      name: 'mediaProgressGalleryFields',
       fields: [
         {
           name: 'alignment',
           type: 'select',
-          defaultValue: 'contentMediaCarousel',
+          defaultValue: 'contentMediaGallery',
           options: [
             {
-              label: 'Content + Media Carousel',
-              value: 'contentMediaCarousel',
+              label: 'Content + Media Gallery',
+              value: 'contentMediaGallery',
             },
             {
-              label: 'Media Carousel + Content',
-              value: 'mediaCarouselContent',
+              label: 'Media Gallery + Content',
+              value: 'mediaGalleryContent',
             },
           ],
           admin: {
@@ -59,11 +59,11 @@ export const MediaCarouselBlock: Block = {
           appearances: false,
         }),
         {
-          name: 'mediaSlides',
+          name: 'mediaTabs',
           type: 'array',
           labels: {
-            singular: 'Media slide',
-            plural: 'Media slides',
+            singular: 'Media tab',
+            plural: 'Media tabs',
           },
           fields: [
             {

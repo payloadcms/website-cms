@@ -17,7 +17,7 @@ import { Form } from '../blocks/Form'
 import { HoverHighlights } from '../blocks/HoverHighlights'
 import { LinkGrid } from '../blocks/LinkGrid'
 import { MediaBlock } from '../blocks/Media'
-import { MediaCarouselBlock } from '../blocks/MediaCarousel'
+import { MediaProgressGallery } from '../blocks/MediaProgressGallery'
 import { MediaContent } from '../blocks/MediaContent'
 import { Pricing } from '../blocks/Pricing'
 import { Slider } from '../blocks/Slider'
@@ -67,7 +67,7 @@ export const ReusableContent: CollectionConfig = {
         HoverHighlights,
         LinkGrid,
         MediaBlock,
-        MediaCarouselBlock,
+        MediaProgressGallery,
         MediaContent,
         Pricing,
         Slider,
