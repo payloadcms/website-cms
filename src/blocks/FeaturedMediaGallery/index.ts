@@ -1,15 +1,13 @@
-import { slateEditor } from '@payloadcms/richtext-slate'
 import type { Block } from 'payload/types'
 
 import { blockFields } from '../../fields/blockFields'
-import link from '../../fields/link'
 import linkGroup from '../../fields/linkGroup'
 
-export const MediaProgressGallery: Block = {
-  slug: 'mediaProgressGallery',
+export const FeaturedMediaGallery: Block = {
+  slug: 'featuredMediaGallery',
   fields: [
     blockFields({
-      name: 'mediaProgressGalleryFields',
+      name: 'featuredMediaGalleryFields',
       fields: [
         {
           name: 'alignment',
@@ -59,22 +57,24 @@ export const MediaProgressGallery: Block = {
           appearances: false,
         }),
         {
-          name: 'mediaTabs',
+          name: 'featuredMediaTabs',
           type: 'array',
           labels: {
-            singular: 'Media tab',
-            plural: 'Media tabs',
+            singular: 'Featured media tab',
+            plural: 'Featured media tabs',
           },
           fields: [
+            {
+              name: 'imageLabel',
+              type: 'text',
+              required: true,
+            },
             {
               name: 'image',
               type: 'upload',
               relationTo: 'media',
               required: true,
             },
-            link({
-              appearances: false,
-            }),
           ],
         },
       ],
