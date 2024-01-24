@@ -927,6 +927,24 @@ export interface Page {
         blockType: 'caseStudiesHighlight';
       }
     | {
+        caseStudyParallaxFields?: {
+          cards?:
+            | {
+                tabLabel: string;
+                quote: string;
+                author?: string | null;
+                logo: string | Media;
+                previewImage: string | Media;
+                caseStudy: string | CaseStudy;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'caseStudyParallax';
+      }
+    | {
         codeFeatureFields: {
           disableBlockSpacing?: boolean | null;
           disableIndent?: boolean | null;
@@ -2498,27 +2516,33 @@ export interface Footer {
 }
 export interface MainMenu {
   id: string;
-  navItems?:
+  tabs?:
     | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null)
-            | ({
-                relationTo: 'case-studies';
-                value: string | CaseStudy;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
+        label: string;
+        navItems?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null)
+                  | ({
+                      relationTo: 'case-studies';
+                      value: string | CaseStudy;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
