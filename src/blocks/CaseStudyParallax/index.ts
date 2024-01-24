@@ -17,11 +17,6 @@ export const CaseStudyParallax: Block = {
           type: 'array',
           fields: [
             {
-              name: 'tabLabel',
-              type: 'text',
-              required: true,
-            },
-            {
               name: 'quote',
               type: 'textarea',
               required: true,
@@ -31,22 +26,40 @@ export const CaseStudyParallax: Block = {
               type: 'text',
             },
             {
-              name: 'logo',
-              type: 'upload',
-              relationTo: 'media',
-              required: true,
+              type: 'row',
+              fields: [
+                {
+                  name: 'logo',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+                {
+                  name: 'previewImage',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+              ],
             },
             {
-              name: 'previewImage',
-              type: 'upload',
-              relationTo: 'media',
-              required: true,
-            },
-            {
-              name: 'caseStudy',
-              type: 'relationship',
-              relationTo: 'case-studies',
-              required: true,
+              type: 'row',
+              fields: [
+                {
+                  name: 'tabLabel',
+                  type: 'text',
+                  required: true,
+                  admin: {
+                    description: 'A label for the navigation tab at the bottom of the parallax',
+                  },
+                },
+                {
+                  name: 'caseStudy',
+                  type: 'relationship',
+                  relationTo: 'case-studies',
+                  required: true,
+                },
+              ],
             },
           ],
         },
