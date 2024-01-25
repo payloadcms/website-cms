@@ -15,6 +15,8 @@ export const CaseStudyParallax: Block = {
         {
           name: 'cards',
           type: 'array',
+          minRows: 4,
+          maxRows: 4,
           fields: [
             {
               name: 'quote',
