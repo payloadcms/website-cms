@@ -81,6 +81,9 @@ export const FeaturedMediaGallery: Block = {
         },
         linkGroup({
           appearances: false,
+          overrides: {
+            maxRows: 2,
+          },
         }),
         {
           name: 'featuredMediaTabs',
@@ -89,14 +92,43 @@ export const FeaturedMediaGallery: Block = {
             singular: 'Featured media tab',
             plural: 'Featured media tabs',
           },
+          minRows: 1,
+          maxRows: 4,
           fields: [
             {
-              name: 'imageLabel',
-              type: 'text',
-              required: true,
+              type: 'row',
+              fields: [
+                {
+                  name: 'mediaLabel',
+                  type: 'text',
+                  required: true,
+                  admin: {
+                    width: '50%',
+                  },
+                },
+                {
+                  name: 'mediaAlignment',
+                  type: 'select',
+                  defaultValue: 'center',
+                  options: [
+                    {
+                      label: 'Center',
+                      value: 'center',
+                    },
+                    {
+                      label: 'Fill',
+                      value: 'fill',
+                    },
+                  ],
+                  admin: {
+                    description: 'Choose how to align the media itself.',
+                    width: '50%',
+                  },
+                },
+              ],
             },
             {
-              name: 'image',
+              name: 'media',
               type: 'upload',
               relationTo: 'media',
               required: true,
