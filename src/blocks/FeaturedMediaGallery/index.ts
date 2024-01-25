@@ -10,22 +10,48 @@ export const FeaturedMediaGallery: Block = {
       name: 'featuredMediaGalleryFields',
       fields: [
         {
-          name: 'alignment',
-          type: 'select',
-          defaultValue: 'contentMediaGallery',
-          options: [
+          type: 'row',
+          fields: [
             {
-              label: 'Content + Media Gallery',
-              value: 'contentMediaGallery',
+              name: 'background',
+              label: 'Background Color',
+              type: 'select',
+              defaultValue: 'black',
+              options: [
+                {
+                  label: 'Black',
+                  value: 'black',
+                },
+                {
+                  label: 'Dark',
+                  value: 'dark',
+                },
+              ],
+              admin: {
+                description: 'Select the background color for this block.',
+                width: '50%',
+              },
             },
             {
-              label: 'Media Gallery + Content',
-              value: 'mediaGalleryContent',
+              name: 'alignment',
+              type: 'select',
+              defaultValue: 'contentMediaGallery',
+              options: [
+                {
+                  label: 'Content + Media Gallery',
+                  value: 'contentMediaGallery',
+                },
+                {
+                  label: 'Media Gallery + Content',
+                  value: 'mediaGalleryContent',
+                },
+              ],
+              admin: {
+                description: 'Choose how to align the content for this block.',
+                width: '50%',
+              },
             },
           ],
-          admin: {
-            description: 'Choose how to align the content for this block.',
-          },
         },
         {
           type: 'row',
