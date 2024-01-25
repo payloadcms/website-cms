@@ -13,7 +13,7 @@ export const CaseStudyParallax: Block = {
       name: 'caseStudyParallaxFields',
       fields: [
         {
-          name: 'cards',
+          name: 'items',
           type: 'array',
           minRows: 4,
           maxRows: 4,

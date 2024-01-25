@@ -928,7 +928,7 @@ export interface Page {
       }
     | {
         caseStudyParallaxFields?: {
-          cards?:
+          items?:
             | {
                 quote: string;
                 author?: string | null;
@@ -1696,7 +1696,7 @@ export interface ReusableContent {
       }
     | {
         caseStudyParallaxFields?: {
-          cards?:
+          items?:
             | {
                 quote: string;
                 author?: string | null;
