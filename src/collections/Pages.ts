@@ -6,6 +6,7 @@ import { CallToAction } from '../blocks/CallToAction'
 import { CardGrid } from '../blocks/CardGrid'
 import { CaseStudiesHighlight } from '../blocks/CaseStudiesHighlight'
 import { CaseStudyCards } from '../blocks/CaseStudyCards'
+import { CaseStudyParallax } from '../blocks/CaseStudyParallax'
 import { CodeFeature } from '../blocks/CodeFeature'
 import { Content } from '../blocks/Content'
 import { ContentGrid } from '../blocks/ContentGrid'
@@ -81,6 +82,7 @@ export const Pages: CollectionConfig = {
                 CardGrid,
                 CaseStudyCards,
                 CaseStudiesHighlight,
+                CaseStudyParallax,
                 CodeFeature,
                 Content,
                 ContentGrid,

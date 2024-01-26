@@ -25,6 +25,10 @@ export const MainMenu: GlobalConfig = {
           type: 'text',
         },
         {
+          name: 'description',
+          type: 'textarea',
+        },
+        {
           admin: {
             components: {
               RowLabel: ({ data }) => data.link.label || '...',
@@ -38,6 +42,10 @@ export const MainMenu: GlobalConfig = {
               },
               appearances: false,
             }),
+            {
+              name: 'description',
+              type: 'textarea',
+            },
           ],
           type: 'array',
         },
