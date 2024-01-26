@@ -2537,6 +2537,7 @@ export interface MainMenu {
   tabs?:
     | {
         label: string;
+        description?: string | null;
         navItems?:
           | {
               link: {
@@ -2558,6 +2559,7 @@ export interface MainMenu {
                 url?: string | null;
                 label: string;
               };
+              description?: string | null;
               id?: string | null;
             }[]
           | null;
