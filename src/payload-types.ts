@@ -927,6 +927,24 @@ export interface Page {
         blockType: 'caseStudiesHighlight';
       }
     | {
+        caseStudyParallaxFields?: {
+          items?:
+            | {
+                quote: string;
+                author?: string | null;
+                logo: string | Media;
+                previewImage: string | Media;
+                tabLabel: string;
+                caseStudy: string | CaseStudy;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'caseStudyParallax';
+      }
+    | {
         codeFeatureFields: {
           disableBlockSpacing?: boolean | null;
           disableIndent?: boolean | null;
@@ -1675,6 +1693,24 @@ export interface ReusableContent {
         id?: string | null;
         blockName?: string | null;
         blockType: 'caseStudiesHighlight';
+      }
+    | {
+        caseStudyParallaxFields?: {
+          items?:
+            | {
+                quote: string;
+                author?: string | null;
+                logo: string | Media;
+                previewImage: string | Media;
+                tabLabel: string;
+                caseStudy: string | CaseStudy;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'caseStudyParallax';
       }
     | {
         codeFields: {

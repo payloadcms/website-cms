@@ -8,6 +8,7 @@ import { CallToAction } from '../blocks/CallToAction'
 import { CardGrid } from '../blocks/CardGrid'
 import { CaseStudiesHighlight } from '../blocks/CaseStudiesHighlight'
 import { CaseStudyCards } from '../blocks/CaseStudyCards'
+import { CaseStudyParallax } from '../blocks/CaseStudyParallax'
 import { Code } from '../blocks/Code'
 import { CodeFeature } from '../blocks/CodeFeature'
 import { Content } from '../blocks/Content'
@@ -57,6 +58,7 @@ export const ReusableContent: CollectionConfig = {
         CardGrid,
         CaseStudyCards,
         CaseStudiesHighlight,
+        CaseStudyParallax,
         Code,
         CodeFeature,
         Content,
