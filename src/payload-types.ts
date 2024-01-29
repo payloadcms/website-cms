@@ -778,7 +778,6 @@ export interface Page {
         }[]
       | null;
     media?: string | Media | null;
-    mediaWidth?: ('normal' | 'wide') | null;
     adjectives?:
       | {
           adjective: string;
