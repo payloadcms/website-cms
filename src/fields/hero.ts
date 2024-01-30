@@ -3,7 +3,6 @@ import type { Field } from 'payload/types'
 
 import linkGroup from './linkGroup'
 import livestreamFields from './livestreamFields'
-import logoGroup from './logoGroup'
 import label from './richText/label'
 import largeBody from './richText/largeBody'
 
@@ -119,22 +118,6 @@ export const hero: Field = {
       },
     },
     {
-      name: 'adjectives',
-      type: 'array',
-      minRows: 3,
-      maxRows: 6,
-      fields: [
-        {
-          name: 'adjective',
-          type: 'text',
-          required: true,
-        },
-      ],
-      admin: {
-        condition: (_, { type }) => type === 'home',
-      },
-    },
-    {
       name: 'form',
       type: 'relationship',
       relationTo: 'forms',
@@ -142,6 +125,20 @@ export const hero: Field = {
         condition: (_, { type }) => type === 'form',
       },
     },
-    logoGroup
+    {
+      name: 'logos',
+      type: 'array',
+      fields: [
+        {
+          name: 'logo',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+      ],
+      admin: {
+        condition: (_, { type }) => type === 'home',
+      },
+    },
   ],
 }
