@@ -30,6 +30,10 @@ export const hero: Field = {
           value: 'contentMedia',
         },
         {
+          label: 'Centered Content',
+          value: 'centeredContent',
+        },
+        {
           label: 'Form',
           value: 'form',
         },
@@ -79,7 +83,13 @@ export const hero: Field = {
       overrides: {
         admin: {
           condition: (_, { type } = {}) =>
-            ['contentMedia', 'default', 'livestream', 'centeredCarousel'].includes(type),
+            [
+              'contentMedia',
+              'default',
+              'livestream',
+              'centeredContent',
+              'centeredCarousel',
+            ].includes(type),
         },
       },
     }),
