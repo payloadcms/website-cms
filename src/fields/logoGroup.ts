@@ -5,11 +5,6 @@ const logoGroup: Field = {
   type: 'group',
   fields: [
     {
-      name: 'label',
-      type: 'text',
-      label: 'Label',
-    },
-    {
       name: 'logos',
       type: 'array',
       fields: [
@@ -24,7 +19,7 @@ const logoGroup: Field = {
   ],
   admin: {
     hideGutter: true,
-    condition: (_, { type }) => type === 'centeredCarousel',
+    condition: (_, { type }) => type === 'home',
   },
 }
 
