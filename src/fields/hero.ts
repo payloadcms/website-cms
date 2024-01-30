@@ -67,7 +67,7 @@ export const hero: Field = {
       }),
     },
     {
-      name: 'sidebarContent',
+      name: 'description',
       type: 'richText',
       admin: {
         condition: (_, { type }) => type !== 'livestream',
