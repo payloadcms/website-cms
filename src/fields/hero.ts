@@ -119,22 +119,19 @@ export const hero: Field = {
       },
     },
     {
-      name: 'mediaWidth',
-      type: 'select',
-      label: 'Media Width',
-      defaultValue: 'normal',
-      options: [
+      name: 'adjectives',
+      type: 'array',
+      minRows: 3,
+      maxRows: 6,
+      fields: [
         {
-          label: 'Normal',
-          value: 'normal',
-        },
-        {
-          label: 'Wide',
-          value: 'wide',
+          name: 'adjective',
+          type: 'text',
+          required: true,
         },
       ],
       admin: {
-        condition: (_, { type } = {}) => ['contentMedia'].includes(type),
+        condition: (_, { type }) => type === 'home',
       },
     },
     {
