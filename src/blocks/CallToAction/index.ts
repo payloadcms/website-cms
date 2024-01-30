@@ -15,22 +15,6 @@ export const CallToAction: Block = {
       name: 'ctaFields',
       fields: [
         richText(),
-        {
-          name: 'feature',
-          type: 'select',
-          defaultValue: 'none',
-          required: true,
-          options: [
-            {
-              label: 'None',
-              value: 'none',
-            },
-            {
-              label: 'Create Payload App',
-              value: 'cpa',
-            },
-          ],
-        },
         linkGroup({
           appearances: false,
         }),
