@@ -29,7 +29,7 @@ export const CodeFeature: Block = {
           appearances: false,
         }),
         {
-          name: 'codeBlocks',
+          name: 'codeTabs',
           type: 'array',
           fields: [
             {
@@ -56,8 +56,9 @@ export const CodeFeature: Block = {
                 },
                 {
                   name: 'label',
-                  label: 'Code Label',
+                  label: 'Tab Label',
                   type: 'text',
+                  required: true,
                 },
               ],
             },

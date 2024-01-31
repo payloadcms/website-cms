@@ -183,10 +183,10 @@ export interface CaseStudy {
                     id?: string | null;
                   }[]
                 | null;
-              codeBlocks?:
+              codeTabs?:
                 | {
                     language?: ('none' | 'js' | 'ts') | null;
-                    label?: string | null;
+                    label: string;
                     code: string;
                     id?: string | null;
                   }[]
@@ -490,10 +490,10 @@ export interface CaseStudy {
                                   id?: string | null;
                                 }[]
                               | null;
-                            codeBlocks?:
+                            codeTabs?:
                               | {
                                   language?: ('none' | 'js' | 'ts') | null;
-                                  label?: string | null;
+                                  label: string;
                                   code: string;
                                   id?: string | null;
                                 }[]
@@ -986,10 +986,10 @@ export interface Page {
                 id?: string | null;
               }[]
             | null;
-          codeBlocks?:
+          codeTabs?:
             | {
                 language?: ('none' | 'js' | 'ts') | null;
-                label?: string | null;
+                label: string;
                 code: string;
                 id?: string | null;
               }[]
@@ -1339,10 +1339,10 @@ export interface Page {
                               id?: string | null;
                             }[]
                           | null;
-                        codeBlocks?:
+                        codeTabs?:
                           | {
                               language?: ('none' | 'js' | 'ts') | null;
-                              label?: string | null;
+                              label: string;
                               code: string;
                               id?: string | null;
                             }[]
@@ -1822,10 +1822,10 @@ export interface ReusableContent {
                 id?: string | null;
               }[]
             | null;
-          codeBlocks?:
+          codeTabs?:
             | {
                 language?: ('none' | 'js' | 'ts') | null;
-                label?: string | null;
+                label: string;
                 code: string;
                 id?: string | null;
               }[]
@@ -2168,10 +2168,10 @@ export interface ReusableContent {
                               id?: string | null;
                             }[]
                           | null;
-                        codeBlocks?:
+                        codeTabs?:
                           | {
                               language?: ('none' | 'js' | 'ts') | null;
-                              label?: string | null;
+                              label: string;
                               code: string;
                               id?: string | null;
                             }[]
