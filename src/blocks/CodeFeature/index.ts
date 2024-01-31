@@ -1,7 +1,7 @@
 import type { Block } from 'payload/types'
 
 import { blockFields } from '../../fields/blockFields'
-import link from '../../fields/link'
+import linkGroup from '../../fields/linkGroup'
 import richText from '../../fields/richText'
 
 export const CodeFeature: Block = {
@@ -11,12 +11,11 @@ export const CodeFeature: Block = {
       name: 'codeFeatureFields',
       fields: [
         {
-          name: 'disableBlockSpacing',
+          name: 'forceDarkBackground',
           type: 'checkbox',
-        },
-        {
-          name: 'disableIndent',
-          type: 'checkbox',
+          admin: {
+            description: 'Check this box to force this block to have a dark background.',
+          },
         },
         {
           name: 'heading',
@@ -26,50 +25,48 @@ export const CodeFeature: Block = {
         richText(undefined, {
           elements: ['ul', 'ol', 'link'],
         }),
-        {
-          name: 'enableLink',
-          type: 'checkbox',
-        },
-        link({
-          overrides: {
-            admin: {
-              condition: (_, { enableLink }) => Boolean(enableLink),
-            },
-          },
+        linkGroup({
+          appearances: false,
         }),
         {
-          type: 'row',
+          name: 'codeBlocks',
+          type: 'array',
           fields: [
             {
-              name: 'language',
-              type: 'select',
-              defaultValue: 'none',
-              options: [
+              type: 'row',
+              fields: [
                 {
-                  label: 'None',
-                  value: 'none',
+                  name: 'language',
+                  type: 'select',
+                  defaultValue: 'none',
+                  options: [
+                    {
+                      label: 'None',
+                      value: 'none',
+                    },
+                    {
+                      label: 'JavaScript',
+                      value: 'js',
+                    },
+                    {
+                      label: 'TypeScript',
+                      value: 'ts',
+                    },
+                  ],
                 },
                 {
-                  label: 'JavaScript',
-                  value: 'js',
-                },
-                {
-                  label: 'TypeScript',
-                  value: 'ts',
+                  name: 'label',
+                  label: 'Code Label',
+                  type: 'text',
                 },
               ],
             },
             {
-              name: 'label',
-              label: 'Code Label',
-              type: 'text',
+              name: 'code',
+              type: 'code',
+              required: true,
             },
           ],
-        },
-        {
-          name: 'code',
-          type: 'code',
-          required: true,
         },
       ],
     }),
