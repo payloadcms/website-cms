@@ -672,7 +672,7 @@ export interface Page {
   title: string;
   fullTitle?: string | null;
   hero: {
-    type: 'default' | 'contentMedia' | 'form' | 'home' | 'livestream';
+    type: 'default' | 'contentMedia' | 'centeredContent' | 'form' | 'home' | 'livestream';
     livestream?: {
       id?: string | null;
       date: string;
@@ -725,7 +725,12 @@ export interface Page {
           id?: string | null;
         }[]
       | null;
-    secondaryContent?:
+    secondaryHeading?:
+      | {
+          [k: string]: unknown;
+        }[]
+      | null;
+    secondaryDescription?:
       | {
           [k: string]: unknown;
         }[]

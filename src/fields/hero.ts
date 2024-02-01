@@ -62,7 +62,7 @@ export const hero: Field = {
       name: 'description',
       type: 'richText',
       admin: {
-        condition: (_, { type } = {}) => (type !== 'livestream' && type !== 'home'),
+        condition: (_, { type } = {}) => (type !== 'livestream'),
       },
       editor: slateEditor({
         admin: {
@@ -82,14 +82,27 @@ export const hero: Field = {
       },
     }),
     {
-      name: 'secondaryContent',
+      name: 'secondaryHeading',
       type: 'richText',
       admin: {
         condition: (_, { type }) => type === 'home',
       },
       editor: slateEditor({
         admin: {
-          elements: ['h2', 'h3', largeBody, 'ul', label],
+          elements: ['h1', 'h2', 'h3', largeBody, 'ul', label],
+          leaves: ['underline'],
+        },
+      }),
+    },
+    {
+      name: 'secondaryDescription',
+      type: 'richText',
+      admin: {
+        condition: (_, { type }) => type === 'home',
+      },
+      editor: slateEditor({
+        admin: {
+          elements: ['h2', 'h3', largeBody, 'ul', label, 'link'],
           leaves: ['underline'],
         },
       }),
