@@ -4,6 +4,7 @@ import { isAdmin } from '../access/isAdmin'
 import { Banner } from '../blocks/Banner'
 import { BlogContent } from '../blocks/BlogContent'
 import { BlogMarkdown } from '../blocks/BlogMarkdown'
+import { Callout } from '../blocks/Callout'
 import { CallToAction } from '../blocks/CallToAction'
 import { CardGrid } from '../blocks/CardGrid'
 import { CaseStudiesHighlight } from '../blocks/CaseStudiesHighlight'
@@ -55,6 +56,7 @@ export const ReusableContent: CollectionConfig = {
         Banner,
         BlogContent,
         BlogMarkdown,
+        Callout,
         CallToAction,
         CardGrid,
         CaseStudyCards,
