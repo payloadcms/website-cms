@@ -28,7 +28,7 @@ export const LogoGrid: Block = {
           type: 'array',
           fields: [
             {
-              name: 'logo',
+              name: 'logoMedia',
               type: 'upload',
               relationTo: 'media',
               required: true,

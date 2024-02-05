@@ -152,7 +152,8 @@ export const hero: Field = {
       type: 'array',
       fields: [
         {
-          name: 'logo',
+          name: 'logoMedia',
+          label: 'Media',
           type: 'upload',
           relationTo: 'media',
           required: true,
