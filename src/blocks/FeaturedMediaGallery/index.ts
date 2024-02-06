@@ -99,6 +99,14 @@ export const FeaturedMediaGallery: Block = {
               type: 'row',
               fields: [
                 {
+                  name: 'mediaScanline',
+                  label: 'Media Scanline Background',
+                  type: 'checkbox',
+                  admin: {
+                    description: 'Choose to add a scanline background to media.',
+                  },
+                },
+                {
                   name: 'mediaLabel',
                   type: 'text',
                   required: true,
