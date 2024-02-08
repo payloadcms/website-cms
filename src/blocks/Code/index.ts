@@ -1,6 +1,7 @@
 import type { Block } from 'payload/types'
 
 import { blockFields } from '../../fields/blockFields'
+import codeFeatures from '../../fields/codeFeatures'
 
 export const Code: Block = {
   slug: 'code',
@@ -32,6 +33,7 @@ export const Code: Block = {
           type: 'code',
           required: true,
         },
+        codeFeatures,
       ],
     }),
   ],
