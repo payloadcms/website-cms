@@ -53,7 +53,7 @@ export const hero: Field = {
       },
       editor: slateEditor({
         admin: {
-          elements: ['h1', largeBody, 'ul', label],
+          elements: ['h1', 'h2', 'h3', largeBody, 'ul', label],
           leaves: ['underline'],
         },
       }),
@@ -89,7 +89,7 @@ export const hero: Field = {
       },
       editor: slateEditor({
         admin: {
-          elements: ['h1', 'h2', 'h3', largeBody, 'ul', label],
+          elements: ['h2', 'h3', largeBody, 'ul', label],
           leaves: ['underline'],
         },
       }),
@@ -102,7 +102,7 @@ export const hero: Field = {
       },
       editor: slateEditor({
         admin: {
-          elements: ['h2', 'h3', largeBody, 'ul', label, 'link'],
+          elements: ['link'],
           leaves: ['underline'],
         },
       }),
@@ -137,6 +137,24 @@ export const hero: Field = {
       required: true,
       admin: {
         condition: (_, { type } = {}) => ['contentMedia', 'home'].includes(type),
+      },
+    },
+    {
+      name: 'secondaryMedia',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+      admin: {
+        condition: (_, { type }) => type === 'home',
+      },
+    },
+    {
+      name: 'featureVideo',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+      admin: {
+        condition: (_, { type }) => type === 'home',
       },
     },
     {
