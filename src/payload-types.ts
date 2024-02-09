@@ -769,7 +769,6 @@ export interface Page {
                 } | null);
             url?: string | null;
             label: string;
-            appearance?: ('default' | 'primary' | 'secondary') | null;
           };
           id?: string | null;
         }[]
