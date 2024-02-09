@@ -1,11 +1,8 @@
 import { slateEditor } from '@payloadcms/richtext-slate'
 import type { Field } from 'payload/types'
 
-import carousel from './carousel'
-import commandLine from './commandLine'
 import linkGroup from './linkGroup'
 import livestreamFields from './livestreamFields'
-import logoGroup from './logoGroup'
 import label from './richText/label'
 import largeBody from './richText/largeBody'
 
@@ -45,23 +42,18 @@ export const hero: Field = {
           label: 'Livestream',
           value: 'livestream',
         },
-        {
-          label: 'Centered Carousel',
-          value: 'centeredCarousel',
-        },
       ],
     },
     livestreamFields,
-    commandLine,
     {
       name: 'richText',
       type: 'richText',
       admin: {
-        condition: (_, { type }) => type !== 'livestream',
+        condition: (_, { type } = {}) => type !== 'livestream',
       },
       editor: slateEditor({
         admin: {
-          elements: ['h1', largeBody, 'ul', label],
+          elements: ['h1', 'h2', 'h3', largeBody, 'ul', label],
           leaves: ['underline'],
         },
       }),
@@ -70,7 +62,43 @@ export const hero: Field = {
       name: 'description',
       type: 'richText',
       admin: {
-        condition: (_, { type }) => type !== 'livestream',
+        condition: (_, { type } = {}) => (type !== 'livestream'),
+      },
+      editor: slateEditor({
+        admin: {
+          elements: ['link'],
+          leaves: ['underline'],
+        },
+      }),
+    },
+    linkGroup({
+      appearances: false,
+      overrides: {
+        name: 'primaryButtons',
+        label: 'Primary Buttons',
+        admin: {
+          condition: (_, { type }) => type === 'home',
+        },
+      },
+    }),
+    {
+      name: 'secondaryHeading',
+      type: 'richText',
+      admin: {
+        condition: (_, { type }) => type === 'home',
+      },
+      editor: slateEditor({
+        admin: {
+          elements: ['h2', largeBody, 'ul', label],
+          leaves: ['underline'],
+        },
+      }),
+    },
+    {
+      name: 'secondaryDescription',
+      type: 'richText',
+      admin: {
+        condition: (_, { type }) => type === 'home',
       },
       editor: slateEditor({
         admin: {
@@ -88,7 +116,6 @@ export const hero: Field = {
               'default',
               'livestream',
               'centeredContent',
-              'centeredCarousel',
             ].includes(type),
         },
       },
@@ -96,20 +123,8 @@ export const hero: Field = {
     linkGroup({
       appearances: false,
       overrides: {
-        name: 'actions',
-        label: 'Sidebar Actions',
-        maxRows: 3,
-        admin: {
-          condition: (_, { type }) => type === 'home',
-        },
-      },
-    }),
-    linkGroup({
-      appearances: ['primary', 'secondary'],
-      overrides: {
-        name: 'buttons',
-        label: 'Buttons',
-        maxRows: 2,
+        name: 'secondaryButtons',
+        label: 'Secondary Buttons',
         admin: {
           condition: (_, { type }) => type === 'home',
         },
@@ -125,17 +140,19 @@ export const hero: Field = {
       },
     },
     {
-      name: 'adjectives',
-      type: 'array',
-      minRows: 3,
-      maxRows: 6,
-      fields: [
-        {
-          name: 'adjective',
-          type: 'text',
-          required: true,
-        },
-      ],
+      name: 'secondaryMedia',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+      admin: {
+        condition: (_, { type }) => type === 'home',
+      },
+    },
+    {
+      name: 'featureVideo',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
       admin: {
         condition: (_, { type }) => type === 'home',
       },
@@ -148,7 +165,21 @@ export const hero: Field = {
         condition: (_, { type }) => type === 'form',
       },
     },
-    logoGroup,
-    carousel,
+    {
+      name: 'logos',
+      type: 'array',
+      fields: [
+        {
+          name: 'logoMedia',
+          label: 'Media',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+      ],
+      admin: {
+        condition: (_, { type }) => type === 'home',
+      },
+    },
   ],
 }
