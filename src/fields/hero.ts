@@ -47,6 +47,30 @@ export const hero: Field = {
       ],
     },
     themeField,
+    {
+      type: 'collapsible',
+      label: 'Breadcrumbs Bar',
+      fields: [
+        {
+          type: 'checkbox',
+          name: 'enableBreadcrumbsBar',
+          label: 'Enable Breadcrumbs Bar',
+        },
+        linkGroup({
+          overrides: {
+            name: 'breadcrumbsBarLinks',
+            labels: {
+              singular: 'Link',
+              plural: 'Links',
+            },
+            admin: {
+              condition: (_, { enableBreadcrumbsBar } = {}) => Boolean(enableBreadcrumbsBar),
+            },
+          },
+          appearances: false,
+        }),
+      ],
+    },
     livestreamFields,
     {
       name: 'richText',
