@@ -6,6 +6,8 @@ import livestreamFields from './livestreamFields'
 import label from './richText/label'
 import largeBody from './richText/largeBody'
 
+import { themeField } from './blockFields'
+
 export const hero: Field = {
   name: 'hero',
   label: false,
@@ -44,6 +46,7 @@ export const hero: Field = {
         },
       ],
     },
+    themeField,
     livestreamFields,
     {
       name: 'richText',
