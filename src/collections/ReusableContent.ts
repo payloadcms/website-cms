@@ -17,6 +17,7 @@ import { ExampleTabs } from '../blocks/ExampleTabs'
 import { Form } from '../blocks/Form'
 import { HoverHighlights } from '../blocks/HoverHighlights'
 import { LinkGrid } from '../blocks/LinkGrid'
+import { LogoGrid } from '../blocks/LogoGrid'
 import { MediaBlock } from '../blocks/Media'
 import { FeaturedMediaGallery } from '../blocks/FeaturedMediaGallery'
 import { MediaContent } from '../blocks/MediaContent'
@@ -68,6 +69,7 @@ export const ReusableContent: CollectionConfig = {
         Form,
         HoverHighlights,
         LinkGrid,
+        LogoGrid,
         MediaBlock,
         FeaturedMediaGallery,
         MediaContent,
