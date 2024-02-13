@@ -28,16 +28,17 @@ export const CaseStudyParallax: Block = {
               type: 'text',
             },
             {
-              type: 'row',
+              name: 'logo',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+            },
+            {
+              name: 'images',
+              type: 'array',
               fields: [
                 {
-                  name: 'logo',
-                  type: 'upload',
-                  relationTo: 'media',
-                  required: true,
-                },
-                {
-                  name: 'previewImage',
+                  name: 'image',
                   type: 'upload',
                   relationTo: 'media',
                   required: true,

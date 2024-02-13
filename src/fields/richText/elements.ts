@@ -1,4 +1,3 @@
-
 import { RichTextElement } from '@payloadcms/richtext-slate'
 import br from './br'
 import label from './label'
