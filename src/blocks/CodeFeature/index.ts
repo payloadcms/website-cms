@@ -3,7 +3,7 @@ import type { Block } from 'payload/types'
 import { blockFields } from '../../fields/blockFields'
 import linkGroup from '../../fields/linkGroup'
 import richText from '../../fields/richText'
-import codeFeatures from '../../fields/codeFeatures'
+import codeBlips from '../../fields/codeBlips'
 
 export const CodeFeature: Block = {
   slug: 'codeFeature',
@@ -68,7 +68,7 @@ export const CodeFeature: Block = {
               type: 'code',
               required: true,
             },
-            codeFeatures,
+            codeBlips,
           ],
         },
       ],

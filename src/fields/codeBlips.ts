@@ -1,12 +1,12 @@
 import type { Field } from 'payload/types'
 import richText from './richText'
 
-const codeFeatures: Field = {
-  name: 'codeFeatures',
+const codeBlips: Field = {
+  name: 'codeBlips',
   type: 'array',
   labels: {
-    singular: 'Feature',
-    plural: 'Features',
+    singular: 'Blip',
+    plural: 'Blips',
   },
   fields: [
     {
@@ -14,8 +14,13 @@ const codeFeatures: Field = {
       type: 'number',
       required: true,
     },
+    {
+      name: 'label',
+      type: 'text',
+      required: true,
+    },
     richText({ name: 'feature', required: true }),
   ],
 }
 
-export default codeFeatures
+export default codeBlips

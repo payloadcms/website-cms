@@ -200,9 +200,10 @@ export interface CaseStudy {
                     language?: ('none' | 'js' | 'ts') | null;
                     label: string;
                     code: string;
-                    codeFeatures?:
+                    codeBlips?:
                       | {
                           row: number;
+                          label: string;
                           feature: {
                             [k: string]: unknown;
                           }[];
@@ -556,9 +557,10 @@ export interface CaseStudy {
                                   language?: ('none' | 'js' | 'ts') | null;
                                   label: string;
                                   code: string;
-                                  codeFeatures?:
+                                  codeBlips?:
                                     | {
                                         row: number;
+                                        label: string;
                                         feature: {
                                           [k: string]: unknown;
                                         }[];
@@ -1117,9 +1119,10 @@ export interface Page {
                 language?: ('none' | 'js' | 'ts') | null;
                 label: string;
                 code: string;
-                codeFeatures?:
+                codeBlips?:
                   | {
                       row: number;
+                      label: string;
                       feature: {
                         [k: string]: unknown;
                       }[];
@@ -1562,9 +1565,10 @@ export interface Page {
                               language?: ('none' | 'js' | 'ts') | null;
                               label: string;
                               code: string;
-                              codeFeatures?:
+                              codeBlips?:
                                 | {
                                     row: number;
+                                    label: string;
                                     feature: {
                                       [k: string]: unknown;
                                     }[];
@@ -1807,9 +1811,10 @@ export interface Post {
           };
           language?: ('none' | 'js' | 'ts') | null;
           code: string;
-          codeFeatures?:
+          codeBlips?:
             | {
                 row: number;
+                label: string;
                 feature: {
                   [k: string]: unknown;
                 }[];
@@ -2084,9 +2089,10 @@ export interface ReusableContent {
           };
           language?: ('none' | 'js' | 'ts') | null;
           code: string;
-          codeFeatures?:
+          codeBlips?:
             | {
                 row: number;
+                label: string;
                 feature: {
                   [k: string]: unknown;
                 }[];
@@ -2137,9 +2143,10 @@ export interface ReusableContent {
                 language?: ('none' | 'js' | 'ts') | null;
                 label: string;
                 code: string;
-                codeFeatures?:
+                codeBlips?:
                   | {
                       row: number;
+                      label: string;
                       feature: {
                         [k: string]: unknown;
                       }[];
@@ -2572,9 +2579,10 @@ export interface ReusableContent {
                               language?: ('none' | 'js' | 'ts') | null;
                               label: string;
                               code: string;
-                              codeFeatures?:
+                              codeBlips?:
                                 | {
                                     row: number;
+                                    label: string;
                                     feature: {
                                       [k: string]: unknown;
                                     }[];
