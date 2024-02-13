@@ -3,7 +3,6 @@ import br from './br'
 import label from './label'
 import largeBody from './largeBody'
 import video from './video'
-import splitAnimate from './splitAnimate'
 
 const elements: RichTextElement[] = [
   'h2',
@@ -14,7 +13,6 @@ const elements: RichTextElement[] = [
   'link',
   largeBody,
   label,
-  splitAnimate,
   video,
   br,
   'upload',
