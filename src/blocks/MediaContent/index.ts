@@ -32,17 +32,6 @@ export const MediaContent: Block = {
                 width: '50%',
               },
             },
-            {
-              name: 'container',
-              type: 'checkbox',
-              admin: {
-                description: 'Check this box to render this block with a background container.',
-                width: '50%',
-                style: {
-                  alignSelf: 'flex-end',
-                },
-              },
-            },
           ],
         },
         richText(),
@@ -59,10 +48,16 @@ export const MediaContent: Block = {
           },
         }),
         {
-          name: 'media',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
+          name: 'images',
+          type: 'array',
+          fields: [
+            {
+              name: 'image',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+            },
+          ],
         },
       ],
     }),
