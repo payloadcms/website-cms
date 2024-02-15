@@ -16,13 +16,6 @@ export const Form: Block = {
     blockFields({
       name: 'formFields',
       fields: [
-        {
-          name: 'container',
-          type: 'checkbox',
-          admin: {
-            description: 'Check this box to render this block with a background container.',
-          },
-        },
         richText(),
         {
           name: 'form',
