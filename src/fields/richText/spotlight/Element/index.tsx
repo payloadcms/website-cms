@@ -10,11 +10,11 @@ const SpotlightElement: React.FC<{
   element: any
   children: React.ReactNode
 }> = ({ attributes, children, ...props }) => {
-  console.log('props', props)
+  const Element = props.element.element ?? 'p'
   return (
-    <span {...attributes}>
+    <Element {...attributes}>
       <span className={baseClass}>{children}</span>
-    </span>
+    </Element>
   )
 }
 
