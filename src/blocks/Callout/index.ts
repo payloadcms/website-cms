@@ -10,68 +10,37 @@ export const Callout: Block = {
     blockFields({
       name: 'calloutFields',
       fields: [
-        {
-          type: 'row',
-          fields: [
-            {
-              name: 'style',
-              type: 'select',
-              defaultValue: 'default',
-              options: [
-                {
-                  label: 'Default',
-                  value: 'default',
-                },
-                {
-                  label: 'Quote',
-                  value: 'quote',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          name: 'quote',
-          type: 'textarea',
-          required: true,
-          admin: {
-            condition: (_, { style }) => style === 'quote',
-          },
-        },
-        {
-          name: 'author',
-          type: 'text',
-          admin: {
-            condition: (_, { style }) => style === 'quote',
-          },
-        },
+        richText(),
         {
           name: 'logo',
           type: 'upload',
           relationTo: 'media',
           required: true,
-          admin: {
-            condition: (_, { style }) => style === 'quote',
-          },
         },
-        richText({
-          admin: {
-            condition: (_, { style }) => style === 'default',
-          },
-        }),
-        linkGroup({
-          appearances: false,
-          overrides: {
-            admin: {
-              condition: (_, { style }) => style === 'default',
-            },
-          },
-        }),
         {
-          name: 'media',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
+          type: 'row',
+          fields: [
+            {
+              name: 'author',
+              type: 'text',
+            },
+            {
+              name: 'role',
+              type: 'text',
+            },
+          ],
+        },
+        {
+          name: 'images',
+          type: 'array',
+          fields: [
+            {
+              name: 'image',
+              type: 'upload',
+              relationTo: 'media',
+              required: true,
+            },
+          ],
         },
       ],
     }),
