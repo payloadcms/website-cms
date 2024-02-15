@@ -15,6 +15,7 @@ import { ExampleTabs } from '../blocks/ExampleTabs'
 import { Form } from '../blocks/Form'
 import { HoverHighlights } from '../blocks/HoverHighlights'
 import { LinkGrid } from '../blocks/LinkGrid'
+import { LogoGrid } from '../blocks/LogoGrid'
 import { MediaBlock } from '../blocks/Media'
 import { MediaContent } from '../blocks/MediaContent'
 import { Pricing } from '../blocks/Pricing'
@@ -91,6 +92,7 @@ export const Pages: CollectionConfig = {
                 Form,
                 HoverHighlights,
                 LinkGrid,
+                LogoGrid,
                 MediaBlock,
                 FeaturedMediaGallery,
                 MediaContent,
