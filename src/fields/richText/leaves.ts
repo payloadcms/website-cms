@@ -1,5 +1,5 @@
 import { RichTextLeaf } from '@payloadcms/richtext-slate'
-import hoverHighlight from './hoverHighlight'
-const defaultLeaves: RichTextLeaf[] = ['bold', 'italic', 'underline', 'code', hoverHighlight]
+
+const defaultLeaves: RichTextLeaf[] = ['bold', 'italic', 'underline', 'code']
 
 export default defaultLeaves
