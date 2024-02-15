@@ -3,6 +3,7 @@
 .rich-text-spotlight {
   display: inline-block;
   font-size: 1.25em;
+  min-width: 6rem;
   background-color: var(--theme-elevation-1000);
   background: linear-gradient(to right,  #628699, #DFEDF4, #628699 100%);
   color: var(--theme-elevation-0);
