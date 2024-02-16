@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload/types'
 
 import { isAdmin } from '../access/isAdmin'
 import { publishedOnly } from '../access/publishedOnly'
+import { Callout } from '../blocks/Callout'
 import { CallToAction } from '../blocks/CallToAction'
 import { CardGrid } from '../blocks/CardGrid'
 import { CaseStudiesHighlight } from '../blocks/CaseStudiesHighlight'
@@ -79,6 +80,7 @@ export const Pages: CollectionConfig = {
               type: 'blocks',
               required: true,
               blocks: [
+                Callout,
                 CallToAction,
                 CardGrid,
                 CaseStudyCards,
