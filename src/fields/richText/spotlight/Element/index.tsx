@@ -1,11 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useCallback, useEffect, useState } from 'react'
-import { Modal, useModal } from '@faceless-ui/modal'
+import React from 'react'
 import './index.scss'
-import { MinimalTemplate, Button, X } from 'payload/components'
-import { Form, Select, Submit } from 'payload/components/forms'
-import { ReactEditor, useSlate } from 'slate-react'
-import { Transforms } from 'slate'
 
 const baseClass = 'rich-text-spotlight'
 
