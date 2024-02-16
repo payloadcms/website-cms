@@ -1,11 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { ElementButton } from '@payloadcms/richtext-slate'
 import { Modal, useModal } from '@faceless-ui/modal'
 import { Button, MinimalTemplate, X } from 'payload/components'
 import { ReactEditor, useSlate } from 'slate-react'
 import { Transforms } from 'slate'
-import { Form, Select, Submit, Text } from 'payload/components/forms'
+import { Form, Select, Submit } from 'payload/components/forms'
 import './index.scss'
 
 const baseClass = 'rich-text-spotlight-button'
