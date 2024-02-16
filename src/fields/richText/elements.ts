@@ -3,6 +3,7 @@ import br from './br'
 import label from './label'
 import largeBody from './largeBody'
 import video from './video'
+import spotlight from './spotlight'
 
 const elements: RichTextElement[] = [
   'h2',
@@ -13,6 +14,7 @@ const elements: RichTextElement[] = [
   'link',
   largeBody,
   label,
+  spotlight,
   video,
   br,
   'upload',
