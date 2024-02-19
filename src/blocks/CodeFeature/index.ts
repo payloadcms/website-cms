@@ -32,6 +32,7 @@ export const CodeFeature: Block = {
         {
           name: 'codeTabs',
           type: 'array',
+          minRows: 1,
           fields: [
             {
               type: 'row',
