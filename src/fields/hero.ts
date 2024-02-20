@@ -44,7 +44,18 @@ export const hero: Field = {
           label: 'Livestream',
           value: 'livestream',
         },
+        {
+          label: 'Gradient',
+          value: 'gradient',
+        },
       ],
+    },
+    {
+      type: 'checkbox',
+      name: 'fullBackground',
+      admin: {
+        condition: (_, { type } = {}) => type === 'gradient',
+      },
     },
     themeField,
     {
@@ -80,7 +91,7 @@ export const hero: Field = {
       },
       editor: slateEditor({
         admin: {
-          elements: ['h1', 'h2', 'h3', largeBody, 'ul', label],
+          elements: ['h1', 'h2', 'h3', 'h6', largeBody, 'ul', label],
           leaves: ['underline'],
         },
       }),
@@ -89,7 +100,7 @@ export const hero: Field = {
       name: 'description',
       type: 'richText',
       admin: {
-        condition: (_, { type } = {}) => (type !== 'livestream'),
+        condition: (_, { type } = {}) => type !== 'livestream',
       },
       editor: slateEditor({
         admin: {
@@ -138,12 +149,7 @@ export const hero: Field = {
       overrides: {
         admin: {
           condition: (_, { type } = {}) =>
-            [
-              'contentMedia',
-              'default',
-              'livestream',
-              'centeredContent',
-            ].includes(type),
+            ['contentMedia', 'default', 'livestream', 'centeredContent', 'gradient'].includes(type),
         },
       },
     }),
@@ -157,6 +163,22 @@ export const hero: Field = {
         },
       },
     }),
+    {
+      name: 'images',
+      type: 'array',
+      minRows: 1,
+      admin: {
+        condition: (_, { type } = {}) => ['gradient'].includes(type),
+      },
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+      ],
+    },
     {
       name: 'media',
       type: 'upload',
