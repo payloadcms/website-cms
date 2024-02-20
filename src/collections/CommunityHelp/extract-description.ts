@@ -1,4 +1,6 @@
 export const extractDescription = (string: string): string => {
+  if (!string) return ''
+
   let cleanedString = string.replace(/<\/?[^>]+(>|$)/g, '')
 
   cleanedString = cleanedString.replace(/[^a-zA-Z0-9 ]/g, '')
