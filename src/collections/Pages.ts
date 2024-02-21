@@ -13,6 +13,7 @@ import { Content } from '../blocks/Content'
 import { ContentGrid } from '../blocks/ContentGrid'
 import { ExampleTabs } from '../blocks/ExampleTabs'
 import { Form } from '../blocks/Form'
+import { HoverCards } from '../blocks/HoverCards'
 import { HoverHighlights } from '../blocks/HoverHighlights'
 import { LinkGrid } from '../blocks/LinkGrid'
 import { LogoGrid } from '../blocks/LogoGrid'
@@ -90,6 +91,7 @@ export const Pages: CollectionConfig = {
                 Content,
                 ContentGrid,
                 Form,
+                HoverCards,
                 HoverHighlights,
                 LinkGrid,
                 LogoGrid,
