@@ -26,18 +26,9 @@ export const HoverCards: Block = {
               name: 'description',
               type: 'textarea',
             },
-            {
-              name: 'enableLink',
-              type: 'checkbox',
-            },
             link({
               disableLabel: true,
               appearances: false,
-              overrides: {
-                admin: {
-                  condition: (_, { enableLink }) => enableLink,
-                },
-              },
             }),
           ],
         },
