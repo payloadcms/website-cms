@@ -42,7 +42,7 @@ const insertElement = (editor, { element }) => {
     children: [text],
   }
 
-  const nodes = [spotlight, { type: 'p', children: [{ text: '' }] }]
+  const nodes = [spotlight]
 
   if (editor.blurSelection) {
     Transforms.select(editor, editor.blurSelection)
