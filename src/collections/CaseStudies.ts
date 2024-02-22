@@ -24,6 +24,13 @@ import largeBody from '../fields/richText/largeBody'
 import { slugField } from '../fields/slug'
 import { formatPreviewURL } from '../utilities/formatPreviewURL'
 import { revalidatePage } from '../utilities/revalidatePage'
+import { Callout } from '../blocks/Callout'
+import { CaseStudyCards } from '../blocks/CaseStudyCards'
+import { CaseStudyParallax } from '../blocks/CaseStudyParallax'
+import { ExampleTabs } from '../blocks/ExampleTabs'
+import { FeaturedMediaGallery } from '../blocks/FeaturedMediaGallery'
+import { HoverCards } from '../blocks/HoverCards'
+import { LogoGrid } from '../blocks/LogoGrid'
 
 export const CaseStudies: CollectionConfig = {
   slug: 'case-studies',
@@ -58,12 +65,15 @@ export const CaseStudies: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    richText({
-      name: 'introContent',
-    }, {
-      elements: ['h1', largeBody],
-      leaves: ['underline'],
-    }),
+    richText(
+      {
+        name: 'introContent',
+      },
+      {
+        elements: ['h1', largeBody],
+        leaves: ['underline'],
+      },
+    ),
     {
       name: 'featuredImage',
       type: 'upload',
@@ -74,22 +84,29 @@ export const CaseStudies: CollectionConfig = {
       name: 'layout',
       type: 'blocks',
       blocks: [
+        Callout,
         CallToAction,
         CardGrid,
+        CaseStudyCards,
         CaseStudiesHighlight,
+        CaseStudyParallax,
         CodeFeature,
         Content,
         ContentGrid,
         Form,
+        HoverCards,
         HoverHighlights,
         LinkGrid,
+        LogoGrid,
         MediaBlock,
+        FeaturedMediaGallery,
         MediaContent,
         Pricing,
         ReusableContent,
         Slider,
         Steps,
         StickyHighlights,
+        ExampleTabs,
       ],
     },
     slugField(),
