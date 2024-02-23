@@ -30,6 +30,7 @@ import { slugField } from '../fields/slug'
 import { formatPreviewURL } from '../utilities/formatPreviewURL'
 import { revalidatePage } from '../utilities/revalidatePage'
 import { FeaturedMediaGallery } from '../blocks/FeaturedMediaGallery'
+import { Statement } from '../blocks/Statement'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -101,6 +102,7 @@ export const Pages: CollectionConfig = {
                 Pricing,
                 ReusableContent,
                 Slider,
+                Statement,
                 Steps,
                 StickyHighlights,
                 ExampleTabs,

@@ -31,6 +31,7 @@ import { ExampleTabs } from '../blocks/ExampleTabs'
 import { FeaturedMediaGallery } from '../blocks/FeaturedMediaGallery'
 import { HoverCards } from '../blocks/HoverCards'
 import { LogoGrid } from '../blocks/LogoGrid'
+import { Statement } from '../blocks/Statement'
 
 export const CaseStudies: CollectionConfig = {
   slug: 'case-studies',
@@ -104,6 +105,7 @@ export const CaseStudies: CollectionConfig = {
         Pricing,
         ReusableContent,
         Slider,
+        Statement,
         Steps,
         StickyHighlights,
         ExampleTabs,
