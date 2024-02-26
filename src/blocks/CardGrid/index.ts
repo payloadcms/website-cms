@@ -21,6 +21,11 @@ export const CardGrid: Block = {
           },
         }),
         {
+          name: 'revealDescription',
+          label: 'Reveal Description?',
+          type: 'checkbox',
+        },
+        {
           name: 'cards',
           type: 'array',
           fields: [
