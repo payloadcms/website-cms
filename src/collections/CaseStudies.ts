@@ -32,6 +32,7 @@ import { FeaturedMediaGallery } from '../blocks/FeaturedMediaGallery'
 import { HoverCards } from '../blocks/HoverCards'
 import { LogoGrid } from '../blocks/LogoGrid'
 import { Statement } from '../blocks/Statement'
+import { MediaContentAccordion } from '../blocks/MediaContentAccordion'
 
 export const CaseStudies: CollectionConfig = {
   slug: 'case-studies',
@@ -102,6 +103,7 @@ export const CaseStudies: CollectionConfig = {
         MediaBlock,
         FeaturedMediaGallery,
         MediaContent,
+        MediaContentAccordion,
         Pricing,
         ReusableContent,
         Slider,

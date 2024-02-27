@@ -31,6 +31,7 @@ import { formatPreviewURL } from '../utilities/formatPreviewURL'
 import { revalidatePage } from '../utilities/revalidatePage'
 import { FeaturedMediaGallery } from '../blocks/FeaturedMediaGallery'
 import { Statement } from '../blocks/Statement'
+import { MediaContentAccordion } from '../blocks/MediaContentAccordion'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -99,6 +100,7 @@ export const Pages: CollectionConfig = {
                 MediaBlock,
                 FeaturedMediaGallery,
                 MediaContent,
+                MediaContentAccordion,
                 Pricing,
                 ReusableContent,
                 Slider,

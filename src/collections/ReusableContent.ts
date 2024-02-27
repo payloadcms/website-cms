@@ -28,6 +28,7 @@ import { Slider } from '../blocks/Slider'
 import { Steps } from '../blocks/Steps'
 import { StickyHighlights } from '../blocks/StickyHighlights'
 import { Statement } from '../blocks/Statement'
+import { MediaContentAccordion } from '../blocks/MediaContentAccordion'
 
 export const ReusableContent: CollectionConfig = {
   slug: 'reusable-content',
@@ -78,6 +79,7 @@ export const ReusableContent: CollectionConfig = {
         MediaBlock,
         FeaturedMediaGallery,
         MediaContent,
+        MediaContentAccordion,
         Pricing,
         Slider,
         Statement,
