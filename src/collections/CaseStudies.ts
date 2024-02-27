@@ -76,6 +76,19 @@ export const CaseStudies: CollectionConfig = {
       },
     ),
     {
+      type: 'row',
+      fields: [
+        {
+          name: 'industry',
+          type: 'text',
+        },
+        {
+          name: 'useCase',
+          type: 'text',
+        },
+      ],
+    },
+    {
       name: 'featuredImage',
       type: 'upload',
       relationTo: 'media',
