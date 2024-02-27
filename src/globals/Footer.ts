@@ -17,6 +17,11 @@ export const Footer: GlobalConfig = {
       maxRows: 3,
       fields: [
         {
+          type: 'text',
+          required: true,
+          name: 'label',
+        },
+        {
           name: 'navItems',
           type: 'array',
           fields: [

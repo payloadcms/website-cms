@@ -3562,6 +3562,7 @@ export interface Footer {
   id: string;
   columns?:
     | {
+        label: string;
         navItems?:
           | {
               link: {
