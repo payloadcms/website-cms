@@ -138,6 +138,7 @@ export interface CaseStudy {
                     id?: string | null;
                   }[]
                 | null;
+              revealDescription?: boolean | null;
               cards?:
                 | {
                     title: string;
@@ -1318,6 +1319,7 @@ export interface Page {
                 id?: string | null;
               }[]
             | null;
+          revealDescription?: boolean | null;
           cards?:
             | {
                 title: string;
@@ -2484,6 +2486,7 @@ export interface ReusableContent {
                 id?: string | null;
               }[]
             | null;
+          revealDescription?: boolean | null;
           cards?:
             | {
                 title: string;
