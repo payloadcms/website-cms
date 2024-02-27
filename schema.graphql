@@ -648,7 +648,357 @@ input CaseStudy_FeaturedImage_where_or {
   OR: [CaseStudy_FeaturedImage_where_or]
 }
 
-union CaseStudy_Layout = Cta | CardGrid | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights
+union CaseStudy_Layout = Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | FeaturedMediaGallery | MediaContent | Pricing | ReusableContentBlock | Slider | Statement | Steps | StickyHighlights | ExampleTabsBlock
+
+type Callout {
+  calloutFields: Callout_CalloutFields
+  id: String
+  blockName: String
+  blockType: String
+}
+
+type Callout_CalloutFields {
+  settings: Callout_CalloutFields_Settings
+  richText(depth: Int): JSON
+  logo(where: Callout_CalloutFields_Logo_where): Media
+  author: String
+  role: String
+  images: [Callout_CalloutFields_Images!]
+}
+
+type Callout_CalloutFields_Settings {
+  theme: Callout_CalloutFields_Settings_theme
+}
+
+enum Callout_CalloutFields_Settings_theme {
+  light
+  dark
+}
+
+input Callout_CalloutFields_Logo_where {
+  alt: Callout_CalloutFields_Logo_alt_operator
+  darkModeFallback: Callout_CalloutFields_Logo_darkModeFallback_operator
+  updatedAt: Callout_CalloutFields_Logo_updatedAt_operator
+  createdAt: Callout_CalloutFields_Logo_createdAt_operator
+  url: Callout_CalloutFields_Logo_url_operator
+  filename: Callout_CalloutFields_Logo_filename_operator
+  mimeType: Callout_CalloutFields_Logo_mimeType_operator
+  filesize: Callout_CalloutFields_Logo_filesize_operator
+  width: Callout_CalloutFields_Logo_width_operator
+  height: Callout_CalloutFields_Logo_height_operator
+  id: Callout_CalloutFields_Logo_id_operator
+  AND: [Callout_CalloutFields_Logo_where_and]
+  OR: [Callout_CalloutFields_Logo_where_or]
+}
+
+input Callout_CalloutFields_Logo_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Callout_CalloutFields_Logo_darkModeFallback_operator {
+  equals: String
+  not_equals: String
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Logo_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Logo_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Logo_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Logo_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Logo_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Logo_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Logo_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Logo_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Logo_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Logo_where_and {
+  alt: Callout_CalloutFields_Logo_alt_operator
+  darkModeFallback: Callout_CalloutFields_Logo_darkModeFallback_operator
+  updatedAt: Callout_CalloutFields_Logo_updatedAt_operator
+  createdAt: Callout_CalloutFields_Logo_createdAt_operator
+  url: Callout_CalloutFields_Logo_url_operator
+  filename: Callout_CalloutFields_Logo_filename_operator
+  mimeType: Callout_CalloutFields_Logo_mimeType_operator
+  filesize: Callout_CalloutFields_Logo_filesize_operator
+  width: Callout_CalloutFields_Logo_width_operator
+  height: Callout_CalloutFields_Logo_height_operator
+  id: Callout_CalloutFields_Logo_id_operator
+  AND: [Callout_CalloutFields_Logo_where_and]
+  OR: [Callout_CalloutFields_Logo_where_or]
+}
+
+input Callout_CalloutFields_Logo_where_or {
+  alt: Callout_CalloutFields_Logo_alt_operator
+  darkModeFallback: Callout_CalloutFields_Logo_darkModeFallback_operator
+  updatedAt: Callout_CalloutFields_Logo_updatedAt_operator
+  createdAt: Callout_CalloutFields_Logo_createdAt_operator
+  url: Callout_CalloutFields_Logo_url_operator
+  filename: Callout_CalloutFields_Logo_filename_operator
+  mimeType: Callout_CalloutFields_Logo_mimeType_operator
+  filesize: Callout_CalloutFields_Logo_filesize_operator
+  width: Callout_CalloutFields_Logo_width_operator
+  height: Callout_CalloutFields_Logo_height_operator
+  id: Callout_CalloutFields_Logo_id_operator
+  AND: [Callout_CalloutFields_Logo_where_and]
+  OR: [Callout_CalloutFields_Logo_where_or]
+}
+
+type Callout_CalloutFields_Images {
+  image(where: Callout_CalloutFields_Images_Image_where): Media
+  id: String
+}
+
+input Callout_CalloutFields_Images_Image_where {
+  alt: Callout_CalloutFields_Images_Image_alt_operator
+  darkModeFallback: Callout_CalloutFields_Images_Image_darkModeFallback_operator
+  updatedAt: Callout_CalloutFields_Images_Image_updatedAt_operator
+  createdAt: Callout_CalloutFields_Images_Image_createdAt_operator
+  url: Callout_CalloutFields_Images_Image_url_operator
+  filename: Callout_CalloutFields_Images_Image_filename_operator
+  mimeType: Callout_CalloutFields_Images_Image_mimeType_operator
+  filesize: Callout_CalloutFields_Images_Image_filesize_operator
+  width: Callout_CalloutFields_Images_Image_width_operator
+  height: Callout_CalloutFields_Images_Image_height_operator
+  id: Callout_CalloutFields_Images_Image_id_operator
+  AND: [Callout_CalloutFields_Images_Image_where_and]
+  OR: [Callout_CalloutFields_Images_Image_where_or]
+}
+
+input Callout_CalloutFields_Images_Image_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Callout_CalloutFields_Images_Image_darkModeFallback_operator {
+  equals: String
+  not_equals: String
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Images_Image_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Images_Image_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Images_Image_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Images_Image_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Images_Image_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Images_Image_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Images_Image_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Images_Image_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Images_Image_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Callout_CalloutFields_Images_Image_where_and {
+  alt: Callout_CalloutFields_Images_Image_alt_operator
+  darkModeFallback: Callout_CalloutFields_Images_Image_darkModeFallback_operator
+  updatedAt: Callout_CalloutFields_Images_Image_updatedAt_operator
+  createdAt: Callout_CalloutFields_Images_Image_createdAt_operator
+  url: Callout_CalloutFields_Images_Image_url_operator
+  filename: Callout_CalloutFields_Images_Image_filename_operator
+  mimeType: Callout_CalloutFields_Images_Image_mimeType_operator
+  filesize: Callout_CalloutFields_Images_Image_filesize_operator
+  width: Callout_CalloutFields_Images_Image_width_operator
+  height: Callout_CalloutFields_Images_Image_height_operator
+  id: Callout_CalloutFields_Images_Image_id_operator
+  AND: [Callout_CalloutFields_Images_Image_where_and]
+  OR: [Callout_CalloutFields_Images_Image_where_or]
+}
+
+input Callout_CalloutFields_Images_Image_where_or {
+  alt: Callout_CalloutFields_Images_Image_alt_operator
+  darkModeFallback: Callout_CalloutFields_Images_Image_darkModeFallback_operator
+  updatedAt: Callout_CalloutFields_Images_Image_updatedAt_operator
+  createdAt: Callout_CalloutFields_Images_Image_createdAt_operator
+  url: Callout_CalloutFields_Images_Image_url_operator
+  filename: Callout_CalloutFields_Images_Image_filename_operator
+  mimeType: Callout_CalloutFields_Images_Image_mimeType_operator
+  filesize: Callout_CalloutFields_Images_Image_filesize_operator
+  width: Callout_CalloutFields_Images_Image_width_operator
+  height: Callout_CalloutFields_Images_Image_height_operator
+  id: Callout_CalloutFields_Images_Image_id_operator
+  AND: [Callout_CalloutFields_Images_Image_where_and]
+  OR: [Callout_CalloutFields_Images_Image_where_or]
+}
 
 type Cta {
   ctaFields: Cta_CtaFields
@@ -720,6 +1070,7 @@ type Page {
 
 type Page_Hero {
   type: Page_Hero_type
+  fullBackground: Boolean
   theme: Page_Hero_theme
   enableBreadcrumbsBar: Boolean
   breadcrumbsBarLinks: [Page_Hero_BreadcrumbsBarLinks!]
@@ -731,6 +1082,7 @@ type Page_Hero {
   secondaryDescription(depth: Int): JSON
   links: [Page_Hero_Links!]
   secondaryButtons: [Page_Hero_SecondaryButtons!]
+  images: [Page_Hero_Images!]
   media(where: Page_Hero_Media_where): Media
   secondaryMedia(where: Page_Hero_SecondaryMedia_where): Media
   featureVideo(where: Page_Hero_FeatureVideo_where): Media
@@ -745,6 +1097,7 @@ enum Page_Hero_type {
   form
   home
   livestream
+  gradient
 }
 
 enum Page_Hero_theme {
@@ -1023,6 +1376,7 @@ type Code_CodeFields {
   settings: Code_CodeFields_Settings
   language: Code_CodeFields_language
   code: String
+  codeBlips: [Code_CodeFields_CodeBlips!]
 }
 
 type Code_CodeFields_Settings {
@@ -1038,6 +1392,13 @@ enum Code_CodeFields_language {
   none
   js
   ts
+}
+
+type Code_CodeFields_CodeBlips {
+  row: Float
+  label: String
+  feature(depth: Int): JSON
+  id: String
 }
 
 type BlogMarkdown {
@@ -1278,7 +1639,7 @@ type ReusableContent {
   createdAt: DateTime
 }
 
-union ReusableContent_Layout = Banner | BlogContent | BlogMarkdown | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | Code | CodeFeature | Content | ContentGrid | ExampleTabsBlock | FormBlock | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | FeaturedMediaGallery | MediaContent | Pricing | Slider | Steps | StickyHighlights
+union ReusableContent_Layout = Banner | BlogContent | BlogMarkdown | Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | Code | CodeFeature | Content | ContentGrid | ExampleTabsBlock | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | FeaturedMediaGallery | MediaContent | Pricing | Slider | Statement | Steps | StickyHighlights
 
 type CardGrid {
   cardGridFields: CardGrid_CardGridFields
@@ -1291,6 +1652,7 @@ type CardGrid_CardGridFields {
   settings: CardGrid_CardGridFields_Settings
   richText(depth: Int): JSON
   links: [CardGrid_CardGridFields_Links!]
+  revealDescription: Boolean
   cards: [CardGrid_CardGridFields_Cards!]
 }
 
@@ -1442,7 +1804,7 @@ type CaseStudyParallax_CaseStudyParallaxFields_Items {
   quote: String
   author: String
   logo(where: CaseStudyParallax_CaseStudyParallaxFields_Items_Logo_where): Media
-  previewImage(where: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_where): Media
+  images: [CaseStudyParallax_CaseStudyParallaxFields_Items_Images!]
   tabLabel: String
   caseStudy: CaseStudy
   id: String
@@ -1608,23 +1970,28 @@ input CaseStudyParallax_CaseStudyParallaxFields_Items_Logo_where_or {
   OR: [CaseStudyParallax_CaseStudyParallaxFields_Items_Logo_where_or]
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_where {
-  alt: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_alt_operator
-  darkModeFallback: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_darkModeFallback_operator
-  updatedAt: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_updatedAt_operator
-  createdAt: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_createdAt_operator
-  url: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_url_operator
-  filename: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_filename_operator
-  mimeType: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_mimeType_operator
-  filesize: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_filesize_operator
-  width: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_width_operator
-  height: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_height_operator
-  id: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_id_operator
-  AND: [CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_where_and]
-  OR: [CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_where_or]
+type CaseStudyParallax_CaseStudyParallaxFields_Items_Images {
+  image(where: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_where): Media
+  id: String
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_alt_operator {
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_where {
+  alt: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_alt_operator
+  darkModeFallback: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_darkModeFallback_operator
+  updatedAt: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_updatedAt_operator
+  createdAt: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_createdAt_operator
+  url: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_url_operator
+  filename: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_filename_operator
+  mimeType: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_mimeType_operator
+  filesize: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_filesize_operator
+  width: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_width_operator
+  height: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_height_operator
+  id: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_id_operator
+  AND: [CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_where_and]
+  OR: [CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_where_or]
+}
+
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_alt_operator {
   equals: String
   not_equals: String
   like: String
@@ -1634,13 +2001,13 @@ input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_alt_operator 
   all: [String]
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_darkModeFallback_operator {
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_darkModeFallback_operator {
   equals: String
   not_equals: String
   exists: Boolean
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_updatedAt_operator {
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_updatedAt_operator {
   equals: DateTime
   not_equals: DateTime
   greater_than_equal: DateTime
@@ -1651,7 +2018,7 @@ input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_updatedAt_ope
   exists: Boolean
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_createdAt_operator {
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_createdAt_operator {
   equals: DateTime
   not_equals: DateTime
   greater_than_equal: DateTime
@@ -1662,7 +2029,7 @@ input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_createdAt_ope
   exists: Boolean
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_url_operator {
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_url_operator {
   equals: String
   not_equals: String
   like: String
@@ -1673,7 +2040,7 @@ input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_url_operator 
   exists: Boolean
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_filename_operator {
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_filename_operator {
   equals: String
   not_equals: String
   like: String
@@ -1684,7 +2051,7 @@ input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_filename_oper
   exists: Boolean
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_mimeType_operator {
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_mimeType_operator {
   equals: String
   not_equals: String
   like: String
@@ -1695,7 +2062,7 @@ input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_mimeType_oper
   exists: Boolean
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_filesize_operator {
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_filesize_operator {
   equals: Float
   not_equals: Float
   greater_than_equal: Float
@@ -1705,7 +2072,7 @@ input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_filesize_oper
   exists: Boolean
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_width_operator {
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_width_operator {
   equals: Float
   not_equals: Float
   greater_than_equal: Float
@@ -1715,7 +2082,7 @@ input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_width_operato
   exists: Boolean
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_height_operator {
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_height_operator {
   equals: Float
   not_equals: Float
   greater_than_equal: Float
@@ -1725,7 +2092,7 @@ input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_height_operat
   exists: Boolean
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_id_operator {
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_id_operator {
   equals: String
   not_equals: String
   like: String
@@ -1736,36 +2103,36 @@ input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_id_operator {
   exists: Boolean
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_where_and {
-  alt: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_alt_operator
-  darkModeFallback: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_darkModeFallback_operator
-  updatedAt: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_updatedAt_operator
-  createdAt: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_createdAt_operator
-  url: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_url_operator
-  filename: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_filename_operator
-  mimeType: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_mimeType_operator
-  filesize: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_filesize_operator
-  width: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_width_operator
-  height: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_height_operator
-  id: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_id_operator
-  AND: [CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_where_and]
-  OR: [CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_where_or]
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_where_and {
+  alt: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_alt_operator
+  darkModeFallback: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_darkModeFallback_operator
+  updatedAt: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_updatedAt_operator
+  createdAt: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_createdAt_operator
+  url: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_url_operator
+  filename: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_filename_operator
+  mimeType: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_mimeType_operator
+  filesize: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_filesize_operator
+  width: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_width_operator
+  height: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_height_operator
+  id: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_id_operator
+  AND: [CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_where_and]
+  OR: [CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_where_or]
 }
 
-input CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_where_or {
-  alt: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_alt_operator
-  darkModeFallback: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_darkModeFallback_operator
-  updatedAt: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_updatedAt_operator
-  createdAt: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_createdAt_operator
-  url: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_url_operator
-  filename: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_filename_operator
-  mimeType: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_mimeType_operator
-  filesize: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_filesize_operator
-  width: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_width_operator
-  height: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_height_operator
-  id: CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_id_operator
-  AND: [CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_where_and]
-  OR: [CaseStudyParallax_CaseStudyParallaxFields_Items_PreviewImage_where_or]
+input CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_where_or {
+  alt: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_alt_operator
+  darkModeFallback: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_darkModeFallback_operator
+  updatedAt: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_updatedAt_operator
+  createdAt: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_createdAt_operator
+  url: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_url_operator
+  filename: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_filename_operator
+  mimeType: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_mimeType_operator
+  filesize: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_filesize_operator
+  width: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_width_operator
+  height: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_height_operator
+  id: CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_id_operator
+  AND: [CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_where_and]
+  OR: [CaseStudyParallax_CaseStudyParallaxFields_Items_Images_Image_where_or]
 }
 
 type CodeFeature {
@@ -1828,6 +2195,7 @@ type CodeFeature_CodeFeatureFields_CodeTabs {
   language: CodeFeature_CodeFeatureFields_CodeTabs_language
   label: String
   code: String
+  codeBlips: [CodeFeature_CodeFeatureFields_CodeTabs_CodeBlips!]
   id: String
 }
 
@@ -1835,6 +2203,13 @@ enum CodeFeature_CodeFeatureFields_CodeTabs_language {
   none
   js
   ts
+}
+
+type CodeFeature_CodeFeatureFields_CodeTabs_CodeBlips {
+  row: Float
+  label: String
+  feature(depth: Int): JSON
+  id: String
 }
 
 type Content {
@@ -1880,9 +2255,10 @@ type ContentGrid {
 
 type ContentGrid_ContentGridFields {
   settings: ContentGrid_ContentGridFields_Settings
-  forceDarkBackground: Boolean
-  useLeadingHeader: Boolean
-  leadingHeader(depth: Int): JSON
+  style: ContentGrid_ContentGridFields_style
+  showNumbers: Boolean
+  content(depth: Int): JSON
+  links: [ContentGrid_ContentGridFields_Links!]
   cells: [ContentGrid_ContentGridFields_Cells!]
 }
 
@@ -1894,6 +2270,42 @@ enum ContentGrid_ContentGridFields_Settings_theme {
   light
   dark
 }
+
+enum ContentGrid_ContentGridFields_style {
+  gridBelow
+  sideBySide
+}
+
+type ContentGrid_ContentGridFields_Links {
+  link: ContentGrid_ContentGridFields_Links_Link
+  id: String
+}
+
+type ContentGrid_ContentGridFields_Links_Link {
+  type: ContentGrid_ContentGridFields_Links_Link_type
+  newTab: Boolean
+  reference: ContentGrid_ContentGridFields_Links_Link_Reference_Relationship
+  url: String
+  label: String
+}
+
+enum ContentGrid_ContentGridFields_Links_Link_type {
+  reference
+  custom
+}
+
+type ContentGrid_ContentGridFields_Links_Link_Reference_Relationship {
+  relationTo: ContentGrid_ContentGridFields_Links_Link_Reference_RelationTo
+  value: ContentGrid_ContentGridFields_Links_Link_Reference
+}
+
+enum ContentGrid_ContentGridFields_Links_Link_Reference_RelationTo {
+  pages
+  posts
+  case_studies
+}
+
+union ContentGrid_ContentGridFields_Links_Link_Reference = Page | Post | CaseStudy
 
 type ContentGrid_ContentGridFields_Cells {
   content(depth: Int): JSON
@@ -2100,7 +2512,6 @@ type FormBlock {
 
 type FormBlock_FormFields {
   settings: FormBlock_FormFields_Settings
-  container: Boolean
   richText(depth: Int): JSON
   form: Form
 }
@@ -2123,7 +2534,6 @@ type Form {
   confirmationMessage(depth: Int): JSON
   redirect: Form_Redirect
   emails: [Form_Emails!]
-  leader(depth: Int): JSON!
   hubSpotFormID: String
   updatedAt: DateTime
   createdAt: DateTime
@@ -2249,6 +2659,60 @@ type Form_Emails {
   message(depth: Int): JSON
   id: String
 }
+
+type HoverCards {
+  hoverCardsFields: HoverCards_HoverCardsFields
+  id: String
+  blockName: String
+  blockType: String
+}
+
+type HoverCards_HoverCardsFields {
+  settings: HoverCards_HoverCardsFields_Settings
+  richText(depth: Int): JSON
+  cards: [HoverCards_HoverCardsFields_Cards!]
+}
+
+type HoverCards_HoverCardsFields_Settings {
+  theme: HoverCards_HoverCardsFields_Settings_theme
+}
+
+enum HoverCards_HoverCardsFields_Settings_theme {
+  light
+  dark
+}
+
+type HoverCards_HoverCardsFields_Cards {
+  title: String
+  description: String
+  link: HoverCards_HoverCardsFields_Cards_Link
+  id: String
+}
+
+type HoverCards_HoverCardsFields_Cards_Link {
+  type: HoverCards_HoverCardsFields_Cards_Link_type
+  newTab: Boolean
+  reference: HoverCards_HoverCardsFields_Cards_Link_Reference_Relationship
+  url: String
+}
+
+enum HoverCards_HoverCardsFields_Cards_Link_type {
+  reference
+  custom
+}
+
+type HoverCards_HoverCardsFields_Cards_Link_Reference_Relationship {
+  relationTo: HoverCards_HoverCardsFields_Cards_Link_Reference_RelationTo
+  value: HoverCards_HoverCardsFields_Cards_Link_Reference
+}
+
+enum HoverCards_HoverCardsFields_Cards_Link_Reference_RelationTo {
+  pages
+  posts
+  case_studies
+}
+
+union HoverCards_HoverCardsFields_Cards_Link_Reference = Page | Post | CaseStudy
 
 type HoverHighlights {
   hoverHighlightsFields: HoverHighlights_HoverHighlightsFields
@@ -2985,11 +3449,10 @@ type MediaContent {
 type MediaContent_MediaContentFields {
   settings: MediaContent_MediaContentFields_Settings
   alignment: MediaContent_MediaContentFields_alignment
-  container: Boolean
   richText(depth: Int): JSON
   enableLink: Boolean
   link: MediaContent_MediaContentFields_Link
-  media(where: MediaContent_MediaContentFields_Media_where): Media
+  images: [MediaContent_MediaContentFields_Images!]
 }
 
 type MediaContent_MediaContentFields_Settings {
@@ -3032,23 +3495,28 @@ enum MediaContent_MediaContentFields_Link_Reference_RelationTo {
 
 union MediaContent_MediaContentFields_Link_Reference = Page | Post | CaseStudy
 
-input MediaContent_MediaContentFields_Media_where {
-  alt: MediaContent_MediaContentFields_Media_alt_operator
-  darkModeFallback: MediaContent_MediaContentFields_Media_darkModeFallback_operator
-  updatedAt: MediaContent_MediaContentFields_Media_updatedAt_operator
-  createdAt: MediaContent_MediaContentFields_Media_createdAt_operator
-  url: MediaContent_MediaContentFields_Media_url_operator
-  filename: MediaContent_MediaContentFields_Media_filename_operator
-  mimeType: MediaContent_MediaContentFields_Media_mimeType_operator
-  filesize: MediaContent_MediaContentFields_Media_filesize_operator
-  width: MediaContent_MediaContentFields_Media_width_operator
-  height: MediaContent_MediaContentFields_Media_height_operator
-  id: MediaContent_MediaContentFields_Media_id_operator
-  AND: [MediaContent_MediaContentFields_Media_where_and]
-  OR: [MediaContent_MediaContentFields_Media_where_or]
+type MediaContent_MediaContentFields_Images {
+  image(where: MediaContent_MediaContentFields_Images_Image_where): Media
+  id: String
 }
 
-input MediaContent_MediaContentFields_Media_alt_operator {
+input MediaContent_MediaContentFields_Images_Image_where {
+  alt: MediaContent_MediaContentFields_Images_Image_alt_operator
+  darkModeFallback: MediaContent_MediaContentFields_Images_Image_darkModeFallback_operator
+  updatedAt: MediaContent_MediaContentFields_Images_Image_updatedAt_operator
+  createdAt: MediaContent_MediaContentFields_Images_Image_createdAt_operator
+  url: MediaContent_MediaContentFields_Images_Image_url_operator
+  filename: MediaContent_MediaContentFields_Images_Image_filename_operator
+  mimeType: MediaContent_MediaContentFields_Images_Image_mimeType_operator
+  filesize: MediaContent_MediaContentFields_Images_Image_filesize_operator
+  width: MediaContent_MediaContentFields_Images_Image_width_operator
+  height: MediaContent_MediaContentFields_Images_Image_height_operator
+  id: MediaContent_MediaContentFields_Images_Image_id_operator
+  AND: [MediaContent_MediaContentFields_Images_Image_where_and]
+  OR: [MediaContent_MediaContentFields_Images_Image_where_or]
+}
+
+input MediaContent_MediaContentFields_Images_Image_alt_operator {
   equals: String
   not_equals: String
   like: String
@@ -3058,13 +3526,13 @@ input MediaContent_MediaContentFields_Media_alt_operator {
   all: [String]
 }
 
-input MediaContent_MediaContentFields_Media_darkModeFallback_operator {
+input MediaContent_MediaContentFields_Images_Image_darkModeFallback_operator {
   equals: String
   not_equals: String
   exists: Boolean
 }
 
-input MediaContent_MediaContentFields_Media_updatedAt_operator {
+input MediaContent_MediaContentFields_Images_Image_updatedAt_operator {
   equals: DateTime
   not_equals: DateTime
   greater_than_equal: DateTime
@@ -3075,7 +3543,7 @@ input MediaContent_MediaContentFields_Media_updatedAt_operator {
   exists: Boolean
 }
 
-input MediaContent_MediaContentFields_Media_createdAt_operator {
+input MediaContent_MediaContentFields_Images_Image_createdAt_operator {
   equals: DateTime
   not_equals: DateTime
   greater_than_equal: DateTime
@@ -3086,7 +3554,7 @@ input MediaContent_MediaContentFields_Media_createdAt_operator {
   exists: Boolean
 }
 
-input MediaContent_MediaContentFields_Media_url_operator {
+input MediaContent_MediaContentFields_Images_Image_url_operator {
   equals: String
   not_equals: String
   like: String
@@ -3097,7 +3565,7 @@ input MediaContent_MediaContentFields_Media_url_operator {
   exists: Boolean
 }
 
-input MediaContent_MediaContentFields_Media_filename_operator {
+input MediaContent_MediaContentFields_Images_Image_filename_operator {
   equals: String
   not_equals: String
   like: String
@@ -3108,7 +3576,7 @@ input MediaContent_MediaContentFields_Media_filename_operator {
   exists: Boolean
 }
 
-input MediaContent_MediaContentFields_Media_mimeType_operator {
+input MediaContent_MediaContentFields_Images_Image_mimeType_operator {
   equals: String
   not_equals: String
   like: String
@@ -3119,7 +3587,7 @@ input MediaContent_MediaContentFields_Media_mimeType_operator {
   exists: Boolean
 }
 
-input MediaContent_MediaContentFields_Media_filesize_operator {
+input MediaContent_MediaContentFields_Images_Image_filesize_operator {
   equals: Float
   not_equals: Float
   greater_than_equal: Float
@@ -3129,7 +3597,7 @@ input MediaContent_MediaContentFields_Media_filesize_operator {
   exists: Boolean
 }
 
-input MediaContent_MediaContentFields_Media_width_operator {
+input MediaContent_MediaContentFields_Images_Image_width_operator {
   equals: Float
   not_equals: Float
   greater_than_equal: Float
@@ -3139,7 +3607,7 @@ input MediaContent_MediaContentFields_Media_width_operator {
   exists: Boolean
 }
 
-input MediaContent_MediaContentFields_Media_height_operator {
+input MediaContent_MediaContentFields_Images_Image_height_operator {
   equals: Float
   not_equals: Float
   greater_than_equal: Float
@@ -3149,7 +3617,7 @@ input MediaContent_MediaContentFields_Media_height_operator {
   exists: Boolean
 }
 
-input MediaContent_MediaContentFields_Media_id_operator {
+input MediaContent_MediaContentFields_Images_Image_id_operator {
   equals: String
   not_equals: String
   like: String
@@ -3160,36 +3628,36 @@ input MediaContent_MediaContentFields_Media_id_operator {
   exists: Boolean
 }
 
-input MediaContent_MediaContentFields_Media_where_and {
-  alt: MediaContent_MediaContentFields_Media_alt_operator
-  darkModeFallback: MediaContent_MediaContentFields_Media_darkModeFallback_operator
-  updatedAt: MediaContent_MediaContentFields_Media_updatedAt_operator
-  createdAt: MediaContent_MediaContentFields_Media_createdAt_operator
-  url: MediaContent_MediaContentFields_Media_url_operator
-  filename: MediaContent_MediaContentFields_Media_filename_operator
-  mimeType: MediaContent_MediaContentFields_Media_mimeType_operator
-  filesize: MediaContent_MediaContentFields_Media_filesize_operator
-  width: MediaContent_MediaContentFields_Media_width_operator
-  height: MediaContent_MediaContentFields_Media_height_operator
-  id: MediaContent_MediaContentFields_Media_id_operator
-  AND: [MediaContent_MediaContentFields_Media_where_and]
-  OR: [MediaContent_MediaContentFields_Media_where_or]
+input MediaContent_MediaContentFields_Images_Image_where_and {
+  alt: MediaContent_MediaContentFields_Images_Image_alt_operator
+  darkModeFallback: MediaContent_MediaContentFields_Images_Image_darkModeFallback_operator
+  updatedAt: MediaContent_MediaContentFields_Images_Image_updatedAt_operator
+  createdAt: MediaContent_MediaContentFields_Images_Image_createdAt_operator
+  url: MediaContent_MediaContentFields_Images_Image_url_operator
+  filename: MediaContent_MediaContentFields_Images_Image_filename_operator
+  mimeType: MediaContent_MediaContentFields_Images_Image_mimeType_operator
+  filesize: MediaContent_MediaContentFields_Images_Image_filesize_operator
+  width: MediaContent_MediaContentFields_Images_Image_width_operator
+  height: MediaContent_MediaContentFields_Images_Image_height_operator
+  id: MediaContent_MediaContentFields_Images_Image_id_operator
+  AND: [MediaContent_MediaContentFields_Images_Image_where_and]
+  OR: [MediaContent_MediaContentFields_Images_Image_where_or]
 }
 
-input MediaContent_MediaContentFields_Media_where_or {
-  alt: MediaContent_MediaContentFields_Media_alt_operator
-  darkModeFallback: MediaContent_MediaContentFields_Media_darkModeFallback_operator
-  updatedAt: MediaContent_MediaContentFields_Media_updatedAt_operator
-  createdAt: MediaContent_MediaContentFields_Media_createdAt_operator
-  url: MediaContent_MediaContentFields_Media_url_operator
-  filename: MediaContent_MediaContentFields_Media_filename_operator
-  mimeType: MediaContent_MediaContentFields_Media_mimeType_operator
-  filesize: MediaContent_MediaContentFields_Media_filesize_operator
-  width: MediaContent_MediaContentFields_Media_width_operator
-  height: MediaContent_MediaContentFields_Media_height_operator
-  id: MediaContent_MediaContentFields_Media_id_operator
-  AND: [MediaContent_MediaContentFields_Media_where_and]
-  OR: [MediaContent_MediaContentFields_Media_where_or]
+input MediaContent_MediaContentFields_Images_Image_where_or {
+  alt: MediaContent_MediaContentFields_Images_Image_alt_operator
+  darkModeFallback: MediaContent_MediaContentFields_Images_Image_darkModeFallback_operator
+  updatedAt: MediaContent_MediaContentFields_Images_Image_updatedAt_operator
+  createdAt: MediaContent_MediaContentFields_Images_Image_createdAt_operator
+  url: MediaContent_MediaContentFields_Images_Image_url_operator
+  filename: MediaContent_MediaContentFields_Images_Image_filename_operator
+  mimeType: MediaContent_MediaContentFields_Images_Image_mimeType_operator
+  filesize: MediaContent_MediaContentFields_Images_Image_filesize_operator
+  width: MediaContent_MediaContentFields_Images_Image_width_operator
+  height: MediaContent_MediaContentFields_Images_Image_height_operator
+  id: MediaContent_MediaContentFields_Images_Image_id_operator
+  AND: [MediaContent_MediaContentFields_Images_Image_where_and]
+  OR: [MediaContent_MediaContentFields_Images_Image_where_or]
 }
 
 type Pricing {
@@ -3462,6 +3930,60 @@ type Slider_SliderFields_QuoteSlides {
   quoteDate: DateTime
   id: String
 }
+
+type Statement {
+  statementFields: Statement_StatementFields
+  id: String
+  blockName: String
+  blockType: String
+}
+
+type Statement_StatementFields {
+  settings: Statement_StatementFields_Settings
+  heading: String
+  richText(depth: Int): JSON
+  links: [Statement_StatementFields_Links!]
+}
+
+type Statement_StatementFields_Settings {
+  theme: Statement_StatementFields_Settings_theme
+}
+
+enum Statement_StatementFields_Settings_theme {
+  light
+  dark
+}
+
+type Statement_StatementFields_Links {
+  link: Statement_StatementFields_Links_Link
+  id: String
+}
+
+type Statement_StatementFields_Links_Link {
+  type: Statement_StatementFields_Links_Link_type
+  newTab: Boolean
+  reference: Statement_StatementFields_Links_Link_Reference_Relationship
+  url: String
+  label: String
+}
+
+enum Statement_StatementFields_Links_Link_type {
+  reference
+  custom
+}
+
+type Statement_StatementFields_Links_Link_Reference_Relationship {
+  relationTo: Statement_StatementFields_Links_Link_Reference_RelationTo
+  value: Statement_StatementFields_Links_Link_Reference
+}
+
+enum Statement_StatementFields_Links_Link_Reference_RelationTo {
+  pages
+  posts
+  case_studies
+}
+
+union Statement_StatementFields_Links_Link_Reference = Page | Post | CaseStudy
 
 type Steps {
   stepsFields: Steps_StepsFields
@@ -4348,6 +4870,171 @@ enum Page_Hero_SecondaryButtons_Link_Reference_RelationTo {
 
 union Page_Hero_SecondaryButtons_Link_Reference = Page | Post | CaseStudy
 
+type Page_Hero_Images {
+  image(where: Page_Hero_Images_Image_where): Media
+  id: String
+}
+
+input Page_Hero_Images_Image_where {
+  alt: Page_Hero_Images_Image_alt_operator
+  darkModeFallback: Page_Hero_Images_Image_darkModeFallback_operator
+  updatedAt: Page_Hero_Images_Image_updatedAt_operator
+  createdAt: Page_Hero_Images_Image_createdAt_operator
+  url: Page_Hero_Images_Image_url_operator
+  filename: Page_Hero_Images_Image_filename_operator
+  mimeType: Page_Hero_Images_Image_mimeType_operator
+  filesize: Page_Hero_Images_Image_filesize_operator
+  width: Page_Hero_Images_Image_width_operator
+  height: Page_Hero_Images_Image_height_operator
+  id: Page_Hero_Images_Image_id_operator
+  AND: [Page_Hero_Images_Image_where_and]
+  OR: [Page_Hero_Images_Image_where_or]
+}
+
+input Page_Hero_Images_Image_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Page_Hero_Images_Image_darkModeFallback_operator {
+  equals: String
+  not_equals: String
+  exists: Boolean
+}
+
+input Page_Hero_Images_Image_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Page_Hero_Images_Image_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Page_Hero_Images_Image_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_Hero_Images_Image_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_Hero_Images_Image_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_Hero_Images_Image_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Page_Hero_Images_Image_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Page_Hero_Images_Image_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Page_Hero_Images_Image_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Page_Hero_Images_Image_where_and {
+  alt: Page_Hero_Images_Image_alt_operator
+  darkModeFallback: Page_Hero_Images_Image_darkModeFallback_operator
+  updatedAt: Page_Hero_Images_Image_updatedAt_operator
+  createdAt: Page_Hero_Images_Image_createdAt_operator
+  url: Page_Hero_Images_Image_url_operator
+  filename: Page_Hero_Images_Image_filename_operator
+  mimeType: Page_Hero_Images_Image_mimeType_operator
+  filesize: Page_Hero_Images_Image_filesize_operator
+  width: Page_Hero_Images_Image_width_operator
+  height: Page_Hero_Images_Image_height_operator
+  id: Page_Hero_Images_Image_id_operator
+  AND: [Page_Hero_Images_Image_where_and]
+  OR: [Page_Hero_Images_Image_where_or]
+}
+
+input Page_Hero_Images_Image_where_or {
+  alt: Page_Hero_Images_Image_alt_operator
+  darkModeFallback: Page_Hero_Images_Image_darkModeFallback_operator
+  updatedAt: Page_Hero_Images_Image_updatedAt_operator
+  createdAt: Page_Hero_Images_Image_createdAt_operator
+  url: Page_Hero_Images_Image_url_operator
+  filename: Page_Hero_Images_Image_filename_operator
+  mimeType: Page_Hero_Images_Image_mimeType_operator
+  filesize: Page_Hero_Images_Image_filesize_operator
+  width: Page_Hero_Images_Image_width_operator
+  height: Page_Hero_Images_Image_height_operator
+  id: Page_Hero_Images_Image_id_operator
+  AND: [Page_Hero_Images_Image_where_and]
+  OR: [Page_Hero_Images_Image_where_or]
+}
+
 input Page_Hero_Media_where {
   alt: Page_Hero_Media_alt_operator
   darkModeFallback: Page_Hero_Media_darkModeFallback_operator
@@ -4993,7 +5680,7 @@ input Page_Hero_Logos_LogoMedia_where_or {
   OR: [Page_Hero_Logos_LogoMedia_where_or]
 }
 
-union Page_Layout = Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | FeaturedMediaGallery | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights | ExampleTabsBlock
+union Page_Layout = Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | FeaturedMediaGallery | MediaContent | Pricing | ReusableContentBlock | Slider | Statement | Steps | StickyHighlights | ExampleTabsBlock
 
 type Page_Meta {
   title: String
@@ -6108,7 +6795,7 @@ input CaseStudyVersion_Version_FeaturedImage_where_or {
   OR: [CaseStudyVersion_Version_FeaturedImage_where_or]
 }
 
-union CaseStudyVersion_Version_Layout = Cta | CardGrid | CaseStudiesHighlight | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | MediaBlock | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights
+union CaseStudyVersion_Version_Layout = Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | FeaturedMediaGallery | MediaContent | Pricing | ReusableContentBlock | Slider | Statement | Steps | StickyHighlights | ExampleTabsBlock
 
 type CaseStudyVersion_Version_Meta {
   title: String
@@ -7981,6 +8668,7 @@ input Page_where {
   title: Page_title_operator
   fullTitle: Page_fullTitle_operator
   hero__type: Page_hero__type_operator
+  hero__fullBackground: Page_hero__fullBackground_operator
   hero__theme: Page_hero__theme_operator
   hero__enableBreadcrumbsBar: Page_hero__enableBreadcrumbsBar_operator
   hero__breadcrumbsBarLinks__link__type: Page_hero__breadcrumbsBarLinks__link__type_operator
@@ -8020,6 +8708,8 @@ input Page_where {
   hero__secondaryButtons__link__url: Page_hero__secondaryButtons__link__url_operator
   hero__secondaryButtons__link__label: Page_hero__secondaryButtons__link__label_operator
   hero__secondaryButtons__id: Page_hero__secondaryButtons__id_operator
+  hero__images__image: Page_hero__images__image_operator
+  hero__images__id: Page_hero__images__id_operator
   hero__media: Page_hero__media_operator
   hero__secondaryMedia: Page_hero__secondaryMedia_operator
   hero__featureVideo: Page_hero__featureVideo_operator
@@ -8079,6 +8769,13 @@ enum Page_hero__type_Input {
   form
   home
   livestream
+  gradient
+}
+
+input Page_hero__fullBackground_operator {
+  equals: Boolean
+  not_equals: Boolean
+  exists: Boolean
 }
 
 input Page_hero__theme_operator {
@@ -8466,6 +9163,22 @@ input Page_hero__secondaryButtons__id_operator {
   exists: Boolean
 }
 
+input Page_hero__images__image_operator {
+  equals: String
+  not_equals: String
+}
+
+input Page_hero__images__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
 input Page_hero__media_operator {
   equals: String
   not_equals: String
@@ -8644,6 +9357,7 @@ input Page_where_and {
   title: Page_title_operator
   fullTitle: Page_fullTitle_operator
   hero__type: Page_hero__type_operator
+  hero__fullBackground: Page_hero__fullBackground_operator
   hero__theme: Page_hero__theme_operator
   hero__enableBreadcrumbsBar: Page_hero__enableBreadcrumbsBar_operator
   hero__breadcrumbsBarLinks__link__type: Page_hero__breadcrumbsBarLinks__link__type_operator
@@ -8683,6 +9397,8 @@ input Page_where_and {
   hero__secondaryButtons__link__url: Page_hero__secondaryButtons__link__url_operator
   hero__secondaryButtons__link__label: Page_hero__secondaryButtons__link__label_operator
   hero__secondaryButtons__id: Page_hero__secondaryButtons__id_operator
+  hero__images__image: Page_hero__images__image_operator
+  hero__images__id: Page_hero__images__id_operator
   hero__media: Page_hero__media_operator
   hero__secondaryMedia: Page_hero__secondaryMedia_operator
   hero__featureVideo: Page_hero__featureVideo_operator
@@ -8710,6 +9426,7 @@ input Page_where_or {
   title: Page_title_operator
   fullTitle: Page_fullTitle_operator
   hero__type: Page_hero__type_operator
+  hero__fullBackground: Page_hero__fullBackground_operator
   hero__theme: Page_hero__theme_operator
   hero__enableBreadcrumbsBar: Page_hero__enableBreadcrumbsBar_operator
   hero__breadcrumbsBarLinks__link__type: Page_hero__breadcrumbsBarLinks__link__type_operator
@@ -8749,6 +9466,8 @@ input Page_where_or {
   hero__secondaryButtons__link__url: Page_hero__secondaryButtons__link__url_operator
   hero__secondaryButtons__link__label: Page_hero__secondaryButtons__link__label_operator
   hero__secondaryButtons__id: Page_hero__secondaryButtons__id_operator
+  hero__images__image: Page_hero__images__image_operator
+  hero__images__id: Page_hero__images__id_operator
   hero__media: Page_hero__media_operator
   hero__secondaryMedia: Page_hero__secondaryMedia_operator
   hero__featureVideo: Page_hero__featureVideo_operator
@@ -8867,6 +9586,7 @@ type PagesDocAccessFields_hero_Delete {
 
 type PagesDocAccessFields_hero_Fields {
   type: PagesDocAccessFields_hero_type
+  fullBackground: PagesDocAccessFields_hero_fullBackground
   theme: PagesDocAccessFields_hero_theme
   enableBreadcrumbsBar: PagesDocAccessFields_hero_enableBreadcrumbsBar
   breadcrumbsBarLinks: PagesDocAccessFields_hero_breadcrumbsBarLinks
@@ -8878,6 +9598,7 @@ type PagesDocAccessFields_hero_Fields {
   secondaryDescription: PagesDocAccessFields_hero_secondaryDescription
   links: PagesDocAccessFields_hero_links
   secondaryButtons: PagesDocAccessFields_hero_secondaryButtons
+  images: PagesDocAccessFields_hero_images
   media: PagesDocAccessFields_hero_media
   secondaryMedia: PagesDocAccessFields_hero_secondaryMedia
   featureVideo: PagesDocAccessFields_hero_featureVideo
@@ -8905,6 +9626,29 @@ type PagesDocAccessFields_hero_type_Update {
 }
 
 type PagesDocAccessFields_hero_type_Delete {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_fullBackground {
+  create: PagesDocAccessFields_hero_fullBackground_Create
+  read: PagesDocAccessFields_hero_fullBackground_Read
+  update: PagesDocAccessFields_hero_fullBackground_Update
+  delete: PagesDocAccessFields_hero_fullBackground_Delete
+}
+
+type PagesDocAccessFields_hero_fullBackground_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_fullBackground_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_fullBackground_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_fullBackground_Delete {
   permission: Boolean!
 }
 
@@ -10113,6 +10857,81 @@ type PagesDocAccessFields_hero_secondaryButtons_id_Delete {
   permission: Boolean!
 }
 
+type PagesDocAccessFields_hero_images {
+  create: PagesDocAccessFields_hero_images_Create
+  read: PagesDocAccessFields_hero_images_Read
+  update: PagesDocAccessFields_hero_images_Update
+  delete: PagesDocAccessFields_hero_images_Delete
+  fields: PagesDocAccessFields_hero_images_Fields
+}
+
+type PagesDocAccessFields_hero_images_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_images_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_images_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_images_Delete {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_images_Fields {
+  image: PagesDocAccessFields_hero_images_image
+  id: PagesDocAccessFields_hero_images_id
+}
+
+type PagesDocAccessFields_hero_images_image {
+  create: PagesDocAccessFields_hero_images_image_Create
+  read: PagesDocAccessFields_hero_images_image_Read
+  update: PagesDocAccessFields_hero_images_image_Update
+  delete: PagesDocAccessFields_hero_images_image_Delete
+}
+
+type PagesDocAccessFields_hero_images_image_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_images_image_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_images_image_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_images_image_Delete {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_images_id {
+  create: PagesDocAccessFields_hero_images_id_Create
+  read: PagesDocAccessFields_hero_images_id_Read
+  update: PagesDocAccessFields_hero_images_id_Update
+  delete: PagesDocAccessFields_hero_images_id_Delete
+}
+
+type PagesDocAccessFields_hero_images_id_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_images_id_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_images_id_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_images_id_Delete {
+  permission: Boolean!
+}
+
 type PagesDocAccessFields_hero_media {
   create: PagesDocAccessFields_hero_media_Create
   read: PagesDocAccessFields_hero_media_Read
@@ -10738,6 +11557,7 @@ type PageVersion_Version {
 
 type PageVersion_Version_Hero {
   type: PageVersion_Version_Hero_type
+  fullBackground: Boolean
   theme: PageVersion_Version_Hero_theme
   enableBreadcrumbsBar: Boolean
   breadcrumbsBarLinks: [PageVersion_Version_Hero_BreadcrumbsBarLinks!]
@@ -10749,6 +11569,7 @@ type PageVersion_Version_Hero {
   secondaryDescription(depth: Int): JSON
   links: [PageVersion_Version_Hero_Links!]
   secondaryButtons: [PageVersion_Version_Hero_SecondaryButtons!]
+  images: [PageVersion_Version_Hero_Images!]
   media(where: PageVersion_Version_Hero_Media_where): Media
   secondaryMedia(where: PageVersion_Version_Hero_SecondaryMedia_where): Media
   featureVideo(where: PageVersion_Version_Hero_FeatureVideo_where): Media
@@ -10763,6 +11584,7 @@ enum PageVersion_Version_Hero_type {
   form
   home
   livestream
+  gradient
 }
 
 enum PageVersion_Version_Hero_theme {
@@ -11075,6 +11897,171 @@ enum PageVersion_Version_Hero_SecondaryButtons_Link_Reference_RelationTo {
 }
 
 union PageVersion_Version_Hero_SecondaryButtons_Link_Reference = Page | Post | CaseStudy
+
+type PageVersion_Version_Hero_Images {
+  image(where: PageVersion_Version_Hero_Images_Image_where): Media
+  id: String
+}
+
+input PageVersion_Version_Hero_Images_Image_where {
+  alt: PageVersion_Version_Hero_Images_Image_alt_operator
+  darkModeFallback: PageVersion_Version_Hero_Images_Image_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Hero_Images_Image_updatedAt_operator
+  createdAt: PageVersion_Version_Hero_Images_Image_createdAt_operator
+  url: PageVersion_Version_Hero_Images_Image_url_operator
+  filename: PageVersion_Version_Hero_Images_Image_filename_operator
+  mimeType: PageVersion_Version_Hero_Images_Image_mimeType_operator
+  filesize: PageVersion_Version_Hero_Images_Image_filesize_operator
+  width: PageVersion_Version_Hero_Images_Image_width_operator
+  height: PageVersion_Version_Hero_Images_Image_height_operator
+  id: PageVersion_Version_Hero_Images_Image_id_operator
+  AND: [PageVersion_Version_Hero_Images_Image_where_and]
+  OR: [PageVersion_Version_Hero_Images_Image_where_or]
+}
+
+input PageVersion_Version_Hero_Images_Image_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input PageVersion_Version_Hero_Images_Image_darkModeFallback_operator {
+  equals: String
+  not_equals: String
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Images_Image_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Images_Image_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Images_Image_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Images_Image_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Images_Image_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Images_Image_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Images_Image_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Images_Image_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Images_Image_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input PageVersion_Version_Hero_Images_Image_where_and {
+  alt: PageVersion_Version_Hero_Images_Image_alt_operator
+  darkModeFallback: PageVersion_Version_Hero_Images_Image_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Hero_Images_Image_updatedAt_operator
+  createdAt: PageVersion_Version_Hero_Images_Image_createdAt_operator
+  url: PageVersion_Version_Hero_Images_Image_url_operator
+  filename: PageVersion_Version_Hero_Images_Image_filename_operator
+  mimeType: PageVersion_Version_Hero_Images_Image_mimeType_operator
+  filesize: PageVersion_Version_Hero_Images_Image_filesize_operator
+  width: PageVersion_Version_Hero_Images_Image_width_operator
+  height: PageVersion_Version_Hero_Images_Image_height_operator
+  id: PageVersion_Version_Hero_Images_Image_id_operator
+  AND: [PageVersion_Version_Hero_Images_Image_where_and]
+  OR: [PageVersion_Version_Hero_Images_Image_where_or]
+}
+
+input PageVersion_Version_Hero_Images_Image_where_or {
+  alt: PageVersion_Version_Hero_Images_Image_alt_operator
+  darkModeFallback: PageVersion_Version_Hero_Images_Image_darkModeFallback_operator
+  updatedAt: PageVersion_Version_Hero_Images_Image_updatedAt_operator
+  createdAt: PageVersion_Version_Hero_Images_Image_createdAt_operator
+  url: PageVersion_Version_Hero_Images_Image_url_operator
+  filename: PageVersion_Version_Hero_Images_Image_filename_operator
+  mimeType: PageVersion_Version_Hero_Images_Image_mimeType_operator
+  filesize: PageVersion_Version_Hero_Images_Image_filesize_operator
+  width: PageVersion_Version_Hero_Images_Image_width_operator
+  height: PageVersion_Version_Hero_Images_Image_height_operator
+  id: PageVersion_Version_Hero_Images_Image_id_operator
+  AND: [PageVersion_Version_Hero_Images_Image_where_and]
+  OR: [PageVersion_Version_Hero_Images_Image_where_or]
+}
 
 input PageVersion_Version_Hero_Media_where {
   alt: PageVersion_Version_Hero_Media_alt_operator
@@ -11721,7 +12708,7 @@ input PageVersion_Version_Hero_Logos_LogoMedia_where_or {
   OR: [PageVersion_Version_Hero_Logos_LogoMedia_where_or]
 }
 
-union PageVersion_Version_Layout = Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | FeaturedMediaGallery | MediaContent | Pricing | ReusableContentBlock | Slider | Steps | StickyHighlights | ExampleTabsBlock
+union PageVersion_Version_Layout = Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | FeaturedMediaGallery | MediaContent | Pricing | ReusableContentBlock | Slider | Statement | Steps | StickyHighlights | ExampleTabsBlock
 
 type PageVersion_Version_Meta {
   title: String
@@ -11920,6 +12907,7 @@ input versionsPage_where {
   version__title: versionsPage_version__title_operator
   version__fullTitle: versionsPage_version__fullTitle_operator
   version__hero__type: versionsPage_version__hero__type_operator
+  version__hero__fullBackground: versionsPage_version__hero__fullBackground_operator
   version__hero__theme: versionsPage_version__hero__theme_operator
   version__hero__enableBreadcrumbsBar: versionsPage_version__hero__enableBreadcrumbsBar_operator
   version__hero__breadcrumbsBarLinks__link__type: versionsPage_version__hero__breadcrumbsBarLinks__link__type_operator
@@ -11959,6 +12947,8 @@ input versionsPage_where {
   version__hero__secondaryButtons__link__url: versionsPage_version__hero__secondaryButtons__link__url_operator
   version__hero__secondaryButtons__link__label: versionsPage_version__hero__secondaryButtons__link__label_operator
   version__hero__secondaryButtons__id: versionsPage_version__hero__secondaryButtons__id_operator
+  version__hero__images__image: versionsPage_version__hero__images__image_operator
+  version__hero__images__id: versionsPage_version__hero__images__id_operator
   version__hero__media: versionsPage_version__hero__media_operator
   version__hero__secondaryMedia: versionsPage_version__hero__secondaryMedia_operator
   version__hero__featureVideo: versionsPage_version__hero__featureVideo_operator
@@ -12030,6 +13020,13 @@ enum versionsPage_version__hero__type_Input {
   form
   home
   livestream
+  gradient
+}
+
+input versionsPage_version__hero__fullBackground_operator {
+  equals: Boolean
+  not_equals: Boolean
+  exists: Boolean
 }
 
 input versionsPage_version__hero__theme_operator {
@@ -12417,6 +13414,22 @@ input versionsPage_version__hero__secondaryButtons__id_operator {
   exists: Boolean
 }
 
+input versionsPage_version__hero__images__image_operator {
+  equals: String
+  not_equals: String
+}
+
+input versionsPage_version__hero__images__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
 input versionsPage_version__hero__media_operator {
   equals: String
   not_equals: String
@@ -12624,6 +13637,7 @@ input versionsPage_where_and {
   version__title: versionsPage_version__title_operator
   version__fullTitle: versionsPage_version__fullTitle_operator
   version__hero__type: versionsPage_version__hero__type_operator
+  version__hero__fullBackground: versionsPage_version__hero__fullBackground_operator
   version__hero__theme: versionsPage_version__hero__theme_operator
   version__hero__enableBreadcrumbsBar: versionsPage_version__hero__enableBreadcrumbsBar_operator
   version__hero__breadcrumbsBarLinks__link__type: versionsPage_version__hero__breadcrumbsBarLinks__link__type_operator
@@ -12663,6 +13677,8 @@ input versionsPage_where_and {
   version__hero__secondaryButtons__link__url: versionsPage_version__hero__secondaryButtons__link__url_operator
   version__hero__secondaryButtons__link__label: versionsPage_version__hero__secondaryButtons__link__label_operator
   version__hero__secondaryButtons__id: versionsPage_version__hero__secondaryButtons__id_operator
+  version__hero__images__image: versionsPage_version__hero__images__image_operator
+  version__hero__images__id: versionsPage_version__hero__images__id_operator
   version__hero__media: versionsPage_version__hero__media_operator
   version__hero__secondaryMedia: versionsPage_version__hero__secondaryMedia_operator
   version__hero__featureVideo: versionsPage_version__hero__featureVideo_operator
@@ -12694,6 +13710,7 @@ input versionsPage_where_or {
   version__title: versionsPage_version__title_operator
   version__fullTitle: versionsPage_version__fullTitle_operator
   version__hero__type: versionsPage_version__hero__type_operator
+  version__hero__fullBackground: versionsPage_version__hero__fullBackground_operator
   version__hero__theme: versionsPage_version__hero__theme_operator
   version__hero__enableBreadcrumbsBar: versionsPage_version__hero__enableBreadcrumbsBar_operator
   version__hero__breadcrumbsBarLinks__link__type: versionsPage_version__hero__breadcrumbsBarLinks__link__type_operator
@@ -12733,6 +13750,8 @@ input versionsPage_where_or {
   version__hero__secondaryButtons__link__url: versionsPage_version__hero__secondaryButtons__link__url_operator
   version__hero__secondaryButtons__link__label: versionsPage_version__hero__secondaryButtons__link__label_operator
   version__hero__secondaryButtons__id: versionsPage_version__hero__secondaryButtons__id_operator
+  version__hero__images__image: versionsPage_version__hero__images__image_operator
+  version__hero__images__id: versionsPage_version__hero__images__id_operator
   version__hero__media: versionsPage_version__hero__media_operator
   version__hero__secondaryMedia: versionsPage_version__hero__secondaryMedia_operator
   version__hero__featureVideo: versionsPage_version__hero__featureVideo_operator
@@ -14668,7 +15687,6 @@ input Form_where {
   emails__subject: Form_emails__subject_operator
   emails__message: Form_emails__message_operator
   emails__id: Form_emails__id_operator
-  leader: Form_leader_operator
   hubSpotFormID: Form_hubSpotFormID_operator
   updatedAt: Form_updatedAt_operator
   createdAt: Form_createdAt_operator
@@ -14812,13 +15830,6 @@ input Form_emails__id_operator {
   exists: Boolean
 }
 
-input Form_leader_operator {
-  equals: JSON
-  not_equals: JSON
-  like: JSON
-  contains: JSON
-}
-
 input Form_hubSpotFormID_operator {
   equals: String
   not_equals: String
@@ -14877,7 +15888,6 @@ input Form_where_and {
   emails__subject: Form_emails__subject_operator
   emails__message: Form_emails__message_operator
   emails__id: Form_emails__id_operator
-  leader: Form_leader_operator
   hubSpotFormID: Form_hubSpotFormID_operator
   updatedAt: Form_updatedAt_operator
   createdAt: Form_createdAt_operator
@@ -14900,7 +15910,6 @@ input Form_where_or {
   emails__subject: Form_emails__subject_operator
   emails__message: Form_emails__message_operator
   emails__id: Form_emails__id_operator
-  leader: Form_leader_operator
   hubSpotFormID: Form_hubSpotFormID_operator
   updatedAt: Form_updatedAt_operator
   createdAt: Form_createdAt_operator
@@ -14925,7 +15934,6 @@ type FormsDocAccessFields {
   confirmationMessage: FormsDocAccessFields_confirmationMessage
   redirect: FormsDocAccessFields_redirect
   emails: FormsDocAccessFields_emails
-  leader: FormsDocAccessFields_leader
   hubSpotFormID: FormsDocAccessFields_hubSpotFormID
   updatedAt: FormsDocAccessFields_updatedAt
   createdAt: FormsDocAccessFields_createdAt
@@ -15313,29 +16321,6 @@ type FormsDocAccessFields_emails_id_Update {
 }
 
 type FormsDocAccessFields_emails_id_Delete {
-  permission: Boolean!
-}
-
-type FormsDocAccessFields_leader {
-  create: FormsDocAccessFields_leader_Create
-  read: FormsDocAccessFields_leader_Read
-  update: FormsDocAccessFields_leader_Update
-  delete: FormsDocAccessFields_leader_Delete
-}
-
-type FormsDocAccessFields_leader_Create {
-  permission: Boolean!
-}
-
-type FormsDocAccessFields_leader_Read {
-  permission: Boolean!
-}
-
-type FormsDocAccessFields_leader_Update {
-  permission: Boolean!
-}
-
-type FormsDocAccessFields_leader_Delete {
   permission: Boolean!
 }
 
@@ -16779,11 +17764,39 @@ type MainMenu {
 
 type MainMenu_Tabs {
   label: String
+  enableDirectLink: Boolean
+  enableDropdown: Boolean
+  link: MainMenu_Tabs_Link
   description: String
   descriptionLinks: [MainMenu_Tabs_DescriptionLinks!]
   navItems: [MainMenu_Tabs_NavItems!]
   id: String
 }
+
+type MainMenu_Tabs_Link {
+  type: MainMenu_Tabs_Link_type
+  newTab: Boolean
+  reference: MainMenu_Tabs_Link_Reference_Relationship
+  url: String
+}
+
+enum MainMenu_Tabs_Link_type {
+  reference
+  custom
+}
+
+type MainMenu_Tabs_Link_Reference_Relationship {
+  relationTo: MainMenu_Tabs_Link_Reference_RelationTo
+  value: MainMenu_Tabs_Link_Reference
+}
+
+enum MainMenu_Tabs_Link_Reference_RelationTo {
+  pages
+  posts
+  case_studies
+}
+
+union MainMenu_Tabs_Link_Reference = Page | Post | CaseStudy
 
 type MainMenu_Tabs_DescriptionLinks {
   link: MainMenu_Tabs_DescriptionLinks_Link
@@ -16972,6 +17985,9 @@ type MainMenuDocAccessFields_tabs_Delete {
 
 type MainMenuDocAccessFields_tabs_Fields {
   label: MainMenuDocAccessFields_tabs_label
+  enableDirectLink: MainMenuDocAccessFields_tabs_enableDirectLink
+  enableDropdown: MainMenuDocAccessFields_tabs_enableDropdown
+  link: MainMenuDocAccessFields_tabs_link
   description: MainMenuDocAccessFields_tabs_description
   descriptionLinks: MainMenuDocAccessFields_tabs_descriptionLinks
   navItems: MainMenuDocAccessFields_tabs_navItems
@@ -16998,6 +18014,175 @@ type MainMenuDocAccessFields_tabs_label_Update {
 }
 
 type MainMenuDocAccessFields_tabs_label_Delete {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_enableDirectLink {
+  create: MainMenuDocAccessFields_tabs_enableDirectLink_Create
+  read: MainMenuDocAccessFields_tabs_enableDirectLink_Read
+  update: MainMenuDocAccessFields_tabs_enableDirectLink_Update
+  delete: MainMenuDocAccessFields_tabs_enableDirectLink_Delete
+}
+
+type MainMenuDocAccessFields_tabs_enableDirectLink_Create {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_enableDirectLink_Read {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_enableDirectLink_Update {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_enableDirectLink_Delete {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_enableDropdown {
+  create: MainMenuDocAccessFields_tabs_enableDropdown_Create
+  read: MainMenuDocAccessFields_tabs_enableDropdown_Read
+  update: MainMenuDocAccessFields_tabs_enableDropdown_Update
+  delete: MainMenuDocAccessFields_tabs_enableDropdown_Delete
+}
+
+type MainMenuDocAccessFields_tabs_enableDropdown_Create {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_enableDropdown_Read {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_enableDropdown_Update {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_enableDropdown_Delete {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link {
+  create: MainMenuDocAccessFields_tabs_link_Create
+  read: MainMenuDocAccessFields_tabs_link_Read
+  update: MainMenuDocAccessFields_tabs_link_Update
+  delete: MainMenuDocAccessFields_tabs_link_Delete
+  fields: MainMenuDocAccessFields_tabs_link_Fields
+}
+
+type MainMenuDocAccessFields_tabs_link_Create {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_Read {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_Update {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_Delete {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_Fields {
+  type: MainMenuDocAccessFields_tabs_link_type
+  newTab: MainMenuDocAccessFields_tabs_link_newTab
+  reference: MainMenuDocAccessFields_tabs_link_reference
+  url: MainMenuDocAccessFields_tabs_link_url
+}
+
+type MainMenuDocAccessFields_tabs_link_type {
+  create: MainMenuDocAccessFields_tabs_link_type_Create
+  read: MainMenuDocAccessFields_tabs_link_type_Read
+  update: MainMenuDocAccessFields_tabs_link_type_Update
+  delete: MainMenuDocAccessFields_tabs_link_type_Delete
+}
+
+type MainMenuDocAccessFields_tabs_link_type_Create {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_type_Read {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_type_Update {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_type_Delete {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_newTab {
+  create: MainMenuDocAccessFields_tabs_link_newTab_Create
+  read: MainMenuDocAccessFields_tabs_link_newTab_Read
+  update: MainMenuDocAccessFields_tabs_link_newTab_Update
+  delete: MainMenuDocAccessFields_tabs_link_newTab_Delete
+}
+
+type MainMenuDocAccessFields_tabs_link_newTab_Create {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_newTab_Read {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_newTab_Update {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_newTab_Delete {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_reference {
+  create: MainMenuDocAccessFields_tabs_link_reference_Create
+  read: MainMenuDocAccessFields_tabs_link_reference_Read
+  update: MainMenuDocAccessFields_tabs_link_reference_Update
+  delete: MainMenuDocAccessFields_tabs_link_reference_Delete
+}
+
+type MainMenuDocAccessFields_tabs_link_reference_Create {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_reference_Read {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_reference_Update {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_reference_Delete {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_url {
+  create: MainMenuDocAccessFields_tabs_link_url_Create
+  read: MainMenuDocAccessFields_tabs_link_url_Read
+  update: MainMenuDocAccessFields_tabs_link_url_Update
+  delete: MainMenuDocAccessFields_tabs_link_url_Delete
+}
+
+type MainMenuDocAccessFields_tabs_link_url_Create {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_url_Read {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_url_Update {
+  permission: Boolean!
+}
+
+type MainMenuDocAccessFields_tabs_link_url_Delete {
   permission: Boolean!
 }
 
@@ -19788,6 +20973,7 @@ type PagesFields_hero_Delete {
 
 type PagesFields_hero_Fields {
   type: PagesFields_hero_type
+  fullBackground: PagesFields_hero_fullBackground
   theme: PagesFields_hero_theme
   enableBreadcrumbsBar: PagesFields_hero_enableBreadcrumbsBar
   breadcrumbsBarLinks: PagesFields_hero_breadcrumbsBarLinks
@@ -19799,6 +20985,7 @@ type PagesFields_hero_Fields {
   secondaryDescription: PagesFields_hero_secondaryDescription
   links: PagesFields_hero_links
   secondaryButtons: PagesFields_hero_secondaryButtons
+  images: PagesFields_hero_images
   media: PagesFields_hero_media
   secondaryMedia: PagesFields_hero_secondaryMedia
   featureVideo: PagesFields_hero_featureVideo
@@ -19826,6 +21013,29 @@ type PagesFields_hero_type_Update {
 }
 
 type PagesFields_hero_type_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_fullBackground {
+  create: PagesFields_hero_fullBackground_Create
+  read: PagesFields_hero_fullBackground_Read
+  update: PagesFields_hero_fullBackground_Update
+  delete: PagesFields_hero_fullBackground_Delete
+}
+
+type PagesFields_hero_fullBackground_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_fullBackground_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_fullBackground_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_fullBackground_Delete {
   permission: Boolean!
 }
 
@@ -21031,6 +22241,81 @@ type PagesFields_hero_secondaryButtons_id_Update {
 }
 
 type PagesFields_hero_secondaryButtons_id_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_images {
+  create: PagesFields_hero_images_Create
+  read: PagesFields_hero_images_Read
+  update: PagesFields_hero_images_Update
+  delete: PagesFields_hero_images_Delete
+  fields: PagesFields_hero_images_Fields
+}
+
+type PagesFields_hero_images_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_images_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_images_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_images_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_images_Fields {
+  image: PagesFields_hero_images_image
+  id: PagesFields_hero_images_id
+}
+
+type PagesFields_hero_images_image {
+  create: PagesFields_hero_images_image_Create
+  read: PagesFields_hero_images_image_Read
+  update: PagesFields_hero_images_image_Update
+  delete: PagesFields_hero_images_image_Delete
+}
+
+type PagesFields_hero_images_image_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_images_image_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_images_image_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_images_image_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_images_id {
+  create: PagesFields_hero_images_id_Create
+  read: PagesFields_hero_images_id_Read
+  update: PagesFields_hero_images_id_Update
+  delete: PagesFields_hero_images_id_Delete
+}
+
+type PagesFields_hero_images_id_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_images_id_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_images_id_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_images_id_Delete {
   permission: Boolean!
 }
 
@@ -22479,7 +23764,6 @@ type FormsFields {
   confirmationMessage: FormsFields_confirmationMessage
   redirect: FormsFields_redirect
   emails: FormsFields_emails
-  leader: FormsFields_leader
   hubSpotFormID: FormsFields_hubSpotFormID
   updatedAt: FormsFields_updatedAt
   createdAt: FormsFields_createdAt
@@ -22867,29 +24151,6 @@ type FormsFields_emails_id_Update {
 }
 
 type FormsFields_emails_id_Delete {
-  permission: Boolean!
-}
-
-type FormsFields_leader {
-  create: FormsFields_leader_Create
-  read: FormsFields_leader_Read
-  update: FormsFields_leader_Update
-  delete: FormsFields_leader_Delete
-}
-
-type FormsFields_leader_Create {
-  permission: Boolean!
-}
-
-type FormsFields_leader_Read {
-  permission: Boolean!
-}
-
-type FormsFields_leader_Update {
-  permission: Boolean!
-}
-
-type FormsFields_leader_Delete {
   permission: Boolean!
 }
 
@@ -23896,6 +25157,9 @@ type MainMenuFields_tabs_Delete {
 
 type MainMenuFields_tabs_Fields {
   label: MainMenuFields_tabs_label
+  enableDirectLink: MainMenuFields_tabs_enableDirectLink
+  enableDropdown: MainMenuFields_tabs_enableDropdown
+  link: MainMenuFields_tabs_link
   description: MainMenuFields_tabs_description
   descriptionLinks: MainMenuFields_tabs_descriptionLinks
   navItems: MainMenuFields_tabs_navItems
@@ -23922,6 +25186,175 @@ type MainMenuFields_tabs_label_Update {
 }
 
 type MainMenuFields_tabs_label_Delete {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_enableDirectLink {
+  create: MainMenuFields_tabs_enableDirectLink_Create
+  read: MainMenuFields_tabs_enableDirectLink_Read
+  update: MainMenuFields_tabs_enableDirectLink_Update
+  delete: MainMenuFields_tabs_enableDirectLink_Delete
+}
+
+type MainMenuFields_tabs_enableDirectLink_Create {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_enableDirectLink_Read {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_enableDirectLink_Update {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_enableDirectLink_Delete {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_enableDropdown {
+  create: MainMenuFields_tabs_enableDropdown_Create
+  read: MainMenuFields_tabs_enableDropdown_Read
+  update: MainMenuFields_tabs_enableDropdown_Update
+  delete: MainMenuFields_tabs_enableDropdown_Delete
+}
+
+type MainMenuFields_tabs_enableDropdown_Create {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_enableDropdown_Read {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_enableDropdown_Update {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_enableDropdown_Delete {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link {
+  create: MainMenuFields_tabs_link_Create
+  read: MainMenuFields_tabs_link_Read
+  update: MainMenuFields_tabs_link_Update
+  delete: MainMenuFields_tabs_link_Delete
+  fields: MainMenuFields_tabs_link_Fields
+}
+
+type MainMenuFields_tabs_link_Create {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_Read {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_Update {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_Delete {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_Fields {
+  type: MainMenuFields_tabs_link_type
+  newTab: MainMenuFields_tabs_link_newTab
+  reference: MainMenuFields_tabs_link_reference
+  url: MainMenuFields_tabs_link_url
+}
+
+type MainMenuFields_tabs_link_type {
+  create: MainMenuFields_tabs_link_type_Create
+  read: MainMenuFields_tabs_link_type_Read
+  update: MainMenuFields_tabs_link_type_Update
+  delete: MainMenuFields_tabs_link_type_Delete
+}
+
+type MainMenuFields_tabs_link_type_Create {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_type_Read {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_type_Update {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_type_Delete {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_newTab {
+  create: MainMenuFields_tabs_link_newTab_Create
+  read: MainMenuFields_tabs_link_newTab_Read
+  update: MainMenuFields_tabs_link_newTab_Update
+  delete: MainMenuFields_tabs_link_newTab_Delete
+}
+
+type MainMenuFields_tabs_link_newTab_Create {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_newTab_Read {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_newTab_Update {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_newTab_Delete {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_reference {
+  create: MainMenuFields_tabs_link_reference_Create
+  read: MainMenuFields_tabs_link_reference_Read
+  update: MainMenuFields_tabs_link_reference_Update
+  delete: MainMenuFields_tabs_link_reference_Delete
+}
+
+type MainMenuFields_tabs_link_reference_Create {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_reference_Read {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_reference_Update {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_reference_Delete {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_url {
+  create: MainMenuFields_tabs_link_url_Create
+  read: MainMenuFields_tabs_link_url_Read
+  update: MainMenuFields_tabs_link_url_Update
+  delete: MainMenuFields_tabs_link_url_Delete
+}
+
+type MainMenuFields_tabs_link_url_Create {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_url_Read {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_url_Update {
+  permission: Boolean!
+}
+
+type MainMenuFields_tabs_link_url_Delete {
   permission: Boolean!
 }
 
@@ -25413,6 +26846,7 @@ input mutationPageInput {
 
 input mutationPage_HeroInput {
   type: Page_Hero_type_MutationInput!
+  fullBackground: Boolean
   theme: Page_Hero_theme_MutationInput
   enableBreadcrumbsBar: Boolean
   breadcrumbsBarLinks: [mutationPage_Hero_BreadcrumbsBarLinksInput]
@@ -25424,6 +26858,7 @@ input mutationPage_HeroInput {
   secondaryDescription: JSON
   links: [mutationPage_Hero_LinksInput]
   secondaryButtons: [mutationPage_Hero_SecondaryButtonsInput]
+  images: [mutationPage_Hero_ImagesInput]
   media: String
   secondaryMedia: String
   featureVideo: String
@@ -25438,6 +26873,7 @@ enum Page_Hero_type_MutationInput {
   form
   home
   livestream
+  gradient
 }
 
 enum Page_Hero_theme_MutationInput {
@@ -25563,6 +26999,11 @@ enum Page_Hero_SecondaryButtons_Link_ReferenceRelationshipInputRelationTo {
   case_studies
 }
 
+input mutationPage_Hero_ImagesInput {
+  image: String!
+  id: String
+}
+
 input mutationPage_Hero_LogosInput {
   logoMedia: String!
   id: String
@@ -25602,6 +27043,7 @@ input mutationPageUpdateInput {
 
 input mutationPageUpdate_HeroInput {
   type: PageUpdate_Hero_type_MutationInput!
+  fullBackground: Boolean
   theme: PageUpdate_Hero_theme_MutationInput
   enableBreadcrumbsBar: Boolean
   breadcrumbsBarLinks: [mutationPageUpdate_Hero_BreadcrumbsBarLinksInput]
@@ -25613,6 +27055,7 @@ input mutationPageUpdate_HeroInput {
   secondaryDescription: JSON
   links: [mutationPageUpdate_Hero_LinksInput]
   secondaryButtons: [mutationPageUpdate_Hero_SecondaryButtonsInput]
+  images: [mutationPageUpdate_Hero_ImagesInput]
   media: String
   secondaryMedia: String
   featureVideo: String
@@ -25627,6 +27070,7 @@ enum PageUpdate_Hero_type_MutationInput {
   form
   home
   livestream
+  gradient
 }
 
 enum PageUpdate_Hero_theme_MutationInput {
@@ -25750,6 +27194,11 @@ enum PageUpdate_Hero_SecondaryButtons_Link_ReferenceRelationshipInputRelationTo 
   pages
   posts
   case_studies
+}
+
+input mutationPageUpdate_Hero_ImagesInput {
+  image: String!
+  id: String
 }
 
 input mutationPageUpdate_Hero_LogosInput {
@@ -25917,7 +27366,6 @@ input mutationFormInput {
   confirmationMessage: JSON
   redirect: mutationForm_RedirectInput!
   emails: [mutationForm_EmailsInput]
-  leader: JSON!
   hubSpotFormID: String
   updatedAt: String
   createdAt: String
@@ -25946,7 +27394,6 @@ input mutationFormUpdateInput {
   confirmationMessage: JSON
   redirect: mutationFormUpdate_RedirectInput!
   emails: [mutationFormUpdate_EmailsInput]
-  leader: JSON
   hubSpotFormID: String
   updatedAt: String
   createdAt: String
@@ -26118,10 +27565,31 @@ input mutationMainMenuInput {
 
 input mutationMainMenu_TabsInput {
   label: String!
+  enableDirectLink: Boolean
+  enableDropdown: Boolean
+  link: mutationMainMenu_Tabs_LinkInput!
   description: String
   descriptionLinks: [mutationMainMenu_Tabs_DescriptionLinksInput]
   navItems: [mutationMainMenu_Tabs_NavItemsInput]
   id: String
+}
+
+input mutationMainMenu_Tabs_LinkInput {
+  type: String
+  newTab: Boolean
+  reference: MainMenu_Tabs_Link_ReferenceRelationshipInput
+  url: String
+}
+
+input MainMenu_Tabs_Link_ReferenceRelationshipInput {
+  relationTo: MainMenu_Tabs_Link_ReferenceRelationshipInputRelationTo
+  value: JSON
+}
+
+enum MainMenu_Tabs_Link_ReferenceRelationshipInputRelationTo {
+  pages
+  posts
+  case_studies
 }
 
 input mutationMainMenu_Tabs_DescriptionLinksInput {

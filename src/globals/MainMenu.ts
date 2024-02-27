@@ -17,6 +17,7 @@ export const MainMenu: GlobalConfig = {
         },
       },
       name: 'tabs',
+      label: 'Main Menu Items',
       type: 'array',
       fields: [
         {
@@ -25,65 +26,45 @@ export const MainMenu: GlobalConfig = {
           type: 'text',
         },
         {
-          name: 'description',
-          type: 'textarea',
+          type: 'row',
+          fields: [
+            {
+              type: 'checkbox',
+              name: 'enableDirectLink',
+            },
+            {
+              type: 'checkbox',
+              name: 'enableDropdown',
+            },
+          ],
         },
         {
-          name: 'descriptionLinks',
-          type: 'array',
+          label: 'Direct Link',
+          type: 'collapsible',
+          admin: {
+            condition: (_, siblingData) => siblingData.enableDirectLink,
+          },
           fields: [
             link({
-              overrides: {
-                label: false,
-              },
               appearances: false,
+              disableLabel: true,
             }),
           ],
         },
         {
-          name: 'navItems',
-          type: 'array',
+          label: 'Dropdown Menu',
+          type: 'collapsible',
           admin: {
-            components: {
-              RowLabel: ({ data }) => {
-                if (data.style === 'default') {
-                  return data.defaultLink?.link.label
-                }
-                if (data.style === 'featured') {
-                  return data.featuredLink?.tag
-                }
-                if (data.style === 'list') {
-                  return data.listLinks?.tag
-                }
-              },
-            },
+            condition: (_, siblingData) => siblingData.enableDropdown,
           },
           fields: [
             {
-              name: 'style',
-              type: 'select',
-              defaultValue: 'default',
-              options: [
-                {
-                  label: 'Default',
-                  value: 'default',
-                },
-                {
-                  label: 'Featured',
-                  value: 'featured',
-                },
-                {
-                  label: 'List',
-                  value: 'list',
-                },
-              ],
+              name: 'description',
+              type: 'textarea',
             },
             {
-              name: 'defaultLink',
-              type: 'group',
-              admin: {
-                condition: (_, siblingData) => siblingData.style === 'default',
-              },
+              name: 'descriptionLinks',
+              type: 'array',
               fields: [
                 link({
                   overrides: {
@@ -91,55 +72,52 @@ export const MainMenu: GlobalConfig = {
                   },
                   appearances: false,
                 }),
-                {
-                  name: 'description',
-                  type: 'textarea',
-                },
               ],
             },
             {
-              name: 'featuredLink',
-              type: 'group',
+              name: 'navItems',
+              type: 'array',
               admin: {
-                condition: (_, siblingData) => siblingData.style === 'featured',
+                components: {
+                  RowLabel: ({ data }) => {
+                    if (data.style === 'default') {
+                      return data.defaultLink?.link.label
+                    }
+                    if (data.style === 'featured') {
+                      return data.featuredLink?.tag
+                    }
+                    if (data.style === 'list') {
+                      return data.listLinks?.tag
+                    }
+                  },
+                },
               },
               fields: [
                 {
-                  name: 'tag',
-                  type: 'text',
-                },
-                {
-                  name: 'label',
-                  type: 'richText',
-                },
-                {
-                  name: 'links',
-                  type: 'array',
-                  fields: [
-                    link({
-                      overrides: {
-                        label: false,
-                      },
-                      appearances: false,
-                    }),
+                  name: 'style',
+                  type: 'select',
+                  defaultValue: 'default',
+                  options: [
+                    {
+                      label: 'Default',
+                      value: 'default',
+                    },
+                    {
+                      label: 'Featured',
+                      value: 'featured',
+                    },
+                    {
+                      label: 'List',
+                      value: 'list',
+                    },
                   ],
                 },
-              ],
-            },
-            {
-              name: 'listLinks',
-              type: 'group',
-              admin: {
-                condition: (_, siblingData) => siblingData.style === 'list',
-              },
-              fields: [
                 {
-                  name: 'tag',
-                  type: 'text',
-                },
-                {
-                  name: 'links',
-                  type: 'array',
+                  name: 'defaultLink',
+                  type: 'group',
+                  admin: {
+                    condition: (_, siblingData) => siblingData.style === 'default',
+                  },
                   fields: [
                     link({
                       overrides: {
@@ -147,6 +125,64 @@ export const MainMenu: GlobalConfig = {
                       },
                       appearances: false,
                     }),
+                    {
+                      name: 'description',
+                      type: 'textarea',
+                    },
+                  ],
+                },
+                {
+                  name: 'featuredLink',
+                  type: 'group',
+                  admin: {
+                    condition: (_, siblingData) => siblingData.style === 'featured',
+                  },
+                  fields: [
+                    {
+                      name: 'tag',
+                      type: 'text',
+                    },
+                    {
+                      name: 'label',
+                      type: 'richText',
+                    },
+                    {
+                      name: 'links',
+                      type: 'array',
+                      fields: [
+                        link({
+                          overrides: {
+                            label: false,
+                          },
+                          appearances: false,
+                        }),
+                      ],
+                    },
+                  ],
+                },
+                {
+                  name: 'listLinks',
+                  type: 'group',
+                  admin: {
+                    condition: (_, siblingData) => siblingData.style === 'list',
+                  },
+                  fields: [
+                    {
+                      name: 'tag',
+                      type: 'text',
+                    },
+                    {
+                      name: 'links',
+                      type: 'array',
+                      fields: [
+                        link({
+                          overrides: {
+                            label: false,
+                          },
+                          appearances: false,
+                        }),
+                      ],
+                    },
                   ],
                 },
               ],
