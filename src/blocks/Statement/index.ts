@@ -14,12 +14,12 @@ export const Statement: Block = {
     blockFields({
       name: 'statementFields',
       fields: [
-        {
-          name: 'heading',
-          type: 'text',
-          required: true,
-        },
-        richText(),
+        richText(
+          {},
+          {
+            elements: ['h1', 'h2'],
+          },
+        ),
         linkGroup({
           appearances: false,
         }),
