@@ -2,9 +2,12 @@ export const formatPagePath = (
   collection: string,
   doc: any, // eslint-disable-line @typescript-eslint/no-explicit-any
 ): string => {
-  const { slug } = doc
+  const { slug, breadcrumbs } = doc
+
+  const nestedSlug = breadcrumbs?.slice(-1)?.[0]?.url
 
   let prefix = ''
+  const slugPath = nestedSlug ?? `/${slug}`
 
   if (collection) {
     switch (collection) {
@@ -19,5 +22,5 @@ export const formatPagePath = (
     }
   }
 
-  return `${prefix}/${slug}`
+  return `${prefix}${slugPath}`
 }

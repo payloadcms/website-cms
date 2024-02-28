@@ -22,7 +22,7 @@ export const CardGrid: Block = {
         }),
         {
           name: 'revealDescription',
-          label: 'Reveal Description?',
+          label: 'Reveal descriptions on hover?',
           type: 'checkbox',
         },
         {
