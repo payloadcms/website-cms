@@ -13,7 +13,7 @@ export const Pricing: Block = {
           name: 'plans',
           type: 'array',
           minRows: 1,
-          maxRows: 3,
+          maxRows: 4,
           fields: [
             {
               name: 'name',
@@ -22,6 +22,10 @@ export const Pricing: Block = {
             },
             {
               name: 'hasPrice',
+              type: 'checkbox',
+            },
+            {
+              name: 'enableCreatePayload',
               type: 'checkbox',
             },
             {
@@ -51,7 +55,6 @@ export const Pricing: Block = {
               type: 'checkbox',
             },
             link({
-              disableLabel: true,
               appearances: false,
               overrides: {
                 admin: {
