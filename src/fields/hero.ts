@@ -104,7 +104,7 @@ export const hero: Field = {
       },
       editor: slateEditor({
         admin: {
-          elements: ['link'],
+          elements: [largeBody, 'ul', label, 'link'],
           leaves: ['underline'],
         },
       }),
@@ -140,7 +140,7 @@ export const hero: Field = {
       },
       editor: slateEditor({
         admin: {
-          elements: ['link'],
+          elements: [largeBody, 'ul', label, 'link'],
           leaves: ['underline'],
         },
       }),
