@@ -21,7 +21,6 @@ export const CodeFeature: Block = {
         {
           name: 'heading',
           type: 'text',
-          required: true,
         },
         richText(undefined, {
           elements: ['ul', 'ol', 'link'],
