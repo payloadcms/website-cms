@@ -100,7 +100,7 @@ export const hero: Field = {
       name: 'description',
       type: 'richText',
       admin: {
-        condition: (_, { type } = {}) => type !== 'livestream',
+        condition: (_, { type } = {}) => type !== 'livestream' && type !== 'centeredContent',
       },
       editor: slateEditor({
         admin: {
