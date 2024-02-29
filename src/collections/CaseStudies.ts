@@ -28,7 +28,6 @@ import { Callout } from '../blocks/Callout'
 import { CaseStudyCards } from '../blocks/CaseStudyCards'
 import { CaseStudyParallax } from '../blocks/CaseStudyParallax'
 import { ExampleTabs } from '../blocks/ExampleTabs'
-import { FeaturedMediaGallery } from '../blocks/FeaturedMediaGallery'
 import { HoverCards } from '../blocks/HoverCards'
 import { LogoGrid } from '../blocks/LogoGrid'
 import { Statement } from '../blocks/Statement'
@@ -114,7 +113,6 @@ export const CaseStudies: CollectionConfig = {
         LinkGrid,
         LogoGrid,
         MediaBlock,
-        FeaturedMediaGallery,
         MediaContent,
         MediaContentAccordion,
         Pricing,

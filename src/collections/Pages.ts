@@ -29,7 +29,6 @@ import { hero } from '../fields/hero'
 import { slugField } from '../fields/slug'
 import { formatPreviewURL } from '../utilities/formatPreviewURL'
 import { revalidatePage } from '../utilities/revalidatePage'
-import { FeaturedMediaGallery } from '../blocks/FeaturedMediaGallery'
 import { Statement } from '../blocks/Statement'
 import { MediaContentAccordion } from '../blocks/MediaContentAccordion'
 
@@ -98,7 +97,6 @@ export const Pages: CollectionConfig = {
                 LinkGrid,
                 LogoGrid,
                 MediaBlock,
-                FeaturedMediaGallery,
                 MediaContent,
                 MediaContentAccordion,
                 Pricing,

@@ -21,7 +21,6 @@ import { HoverHighlights } from '../blocks/HoverHighlights'
 import { LinkGrid } from '../blocks/LinkGrid'
 import { LogoGrid } from '../blocks/LogoGrid'
 import { MediaBlock } from '../blocks/Media'
-import { FeaturedMediaGallery } from '../blocks/FeaturedMediaGallery'
 import { MediaContent } from '../blocks/MediaContent'
 import { Pricing } from '../blocks/Pricing'
 import { Slider } from '../blocks/Slider'
@@ -77,7 +76,6 @@ export const ReusableContent: CollectionConfig = {
         LinkGrid,
         LogoGrid,
         MediaBlock,
-        FeaturedMediaGallery,
         MediaContent,
         MediaContentAccordion,
         Pricing,
