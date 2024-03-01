@@ -11,29 +11,9 @@ export const Slider: Block = {
       fields: [
         {
           type: 'array',
-          name: 'imageSlides',
-          required: true,
-          minRows: 3,
-          admin: {
-            condition: (_, siblingData) => siblingData.sliderType === 'imageSlider',
-          },
-          fields: [
-            {
-              type: 'upload',
-              name: 'image',
-              relationTo: 'media',
-              required: true,
-            },
-          ],
-        },
-        {
-          type: 'array',
           name: 'quoteSlides',
           required: true,
           minRows: 3,
-          admin: {
-            condition: (_, siblingData) => siblingData.sliderType === 'quoteSlider',
-          },
           fields: [
             {
               type: 'text',

@@ -696,25 +696,17 @@ export interface CaseStudy {
             blockType: 'reusableContentBlock';
           }
         | {
-            sliderFields?: {
+            sliderFields: {
               settings?: {
                 theme?: ('light' | 'dark') | null;
               };
-              imageSlides?:
-                | {
-                    image: string | Media;
-                    id?: string | null;
-                  }[]
-                | null;
-              quoteSlides?:
-                | {
-                    leader?: string | null;
-                    quote: string;
-                    author: string;
-                    role?: string | null;
-                    id?: string | null;
-                  }[]
-                | null;
+              quoteSlides: {
+                leader?: string | null;
+                quote: string;
+                author: string;
+                role?: string | null;
+                id?: string | null;
+              }[];
             };
             id?: string | null;
             blockName?: string | null;
@@ -1823,25 +1815,17 @@ export interface Page {
         blockType: 'reusableContentBlock';
       }
     | {
-        sliderFields?: {
+        sliderFields: {
           settings?: {
             theme?: ('light' | 'dark') | null;
           };
-          imageSlides?:
-            | {
-                image: string | Media;
-                id?: string | null;
-              }[]
-            | null;
-          quoteSlides?:
-            | {
-                leader?: string | null;
-                quote: string;
-                author: string;
-                role?: string | null;
-                id?: string | null;
-              }[]
-            | null;
+          quoteSlides: {
+            leader?: string | null;
+            quote: string;
+            author: string;
+            role?: string | null;
+            id?: string | null;
+          }[];
         };
         id?: string | null;
         blockName?: string | null;
@@ -2948,25 +2932,17 @@ export interface ReusableContent {
         blockType: 'pricing';
       }
     | {
-        sliderFields?: {
+        sliderFields: {
           settings?: {
             theme?: ('light' | 'dark') | null;
           };
-          imageSlides?:
-            | {
-                image: string | Media;
-                id?: string | null;
-              }[]
-            | null;
-          quoteSlides?:
-            | {
-                leader?: string | null;
-                quote: string;
-                author: string;
-                role?: string | null;
-                id?: string | null;
-              }[]
-            | null;
+          quoteSlides: {
+            leader?: string | null;
+            quote: string;
+            author: string;
+            role?: string | null;
+            id?: string | null;
+          }[];
         };
         id?: string | null;
         blockName?: string | null;
