@@ -62,17 +62,28 @@ export const Slider: Block = {
             condition: (_, siblingData) => siblingData.sliderType === 'quoteSlider',
           },
           fields: [
-            richText({
-              name: 'richText',
-              required: true,
-            }, {
-              elements: [],
-              leaves: ['underline'],
-            }),
             {
-              type: 'date',
-              name: 'quoteDate',
+              type: 'text',
+              name: 'leader',
+            },
+            {
+              type: 'textarea',
+              name: 'quote',
               required: true,
+            },
+            {
+              type: 'row',
+              fields: [
+                {
+                  type: 'text',
+                  name: 'author',
+                  required: true,
+                },
+                {
+                  type: 'text',
+                  name: 'role',
+                },
+              ],
             },
           ],
         },
