@@ -19,8 +19,35 @@ export const CodeFeature: Block = {
           },
         },
         {
-          name: 'heading',
-          type: 'text',
+          type: 'row',
+          fields: [
+            {
+              name: 'alignment',
+              type: 'select',
+              defaultValue: 'contentCode',
+              options: [
+                {
+                  label: 'Content + Code',
+                  value: 'contentCode',
+                },
+                {
+                  label: 'Code + Content',
+                  value: 'codeContent',
+                },
+              ],
+              admin: {
+                description: 'Choose how to align the content for this block.',
+                width: '50%',
+              },
+            },
+            {
+              name: 'heading',
+              type: 'text',
+              admin: {
+                width: '50%',
+              },
+            },
+          ],
         },
         richText(undefined, {
           elements: ['ul', 'ol', 'link'],
