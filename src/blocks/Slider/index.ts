@@ -10,18 +10,6 @@ export const Slider: Block = {
       name: 'sliderFields',
       fields: [
         {
-          name: 'useLeadingHeader',
-          label: 'Use Leading Header',
-          type: 'checkbox',
-        },
-        richText({
-          name: 'leadingHeader',
-          label: 'Leading Header',
-          admin: {
-            condition: (_, siblingData) => siblingData.useLeadingHeader,
-          },
-        }),
-        {
           type: 'select',
           name: 'sliderType',
           required: true,
