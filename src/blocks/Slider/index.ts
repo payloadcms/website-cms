@@ -10,21 +10,6 @@ export const Slider: Block = {
       name: 'sliderFields',
       fields: [
         {
-          type: 'select',
-          name: 'sliderType',
-          required: true,
-          options: [
-            {
-              label: 'Quote Slider',
-              value: 'quoteSlider',
-            },
-            {
-              label: 'Image Slider',
-              value: 'imageSlider',
-            },
-          ],
-        },
-        {
           type: 'array',
           name: 'imageSlides',
           required: true,

@@ -696,11 +696,10 @@ export interface CaseStudy {
             blockType: 'reusableContentBlock';
           }
         | {
-            sliderFields: {
+            sliderFields?: {
               settings?: {
                 theme?: ('light' | 'dark') | null;
               };
-              sliderType: 'quoteSlider' | 'imageSlider';
               imageSlides?:
                 | {
                     image: string | Media;
@@ -1824,11 +1823,10 @@ export interface Page {
         blockType: 'reusableContentBlock';
       }
     | {
-        sliderFields: {
+        sliderFields?: {
           settings?: {
             theme?: ('light' | 'dark') | null;
           };
-          sliderType: 'quoteSlider' | 'imageSlider';
           imageSlides?:
             | {
                 image: string | Media;
@@ -2950,11 +2948,10 @@ export interface ReusableContent {
         blockType: 'pricing';
       }
     | {
-        sliderFields: {
+        sliderFields?: {
           settings?: {
             theme?: ('light' | 'dark') | null;
           };
-          sliderType: 'quoteSlider' | 'imageSlider';
           imageSlides?:
             | {
                 image: string | Media;
