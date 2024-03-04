@@ -34,6 +34,7 @@ export const ContentGrid: Block = {
         richText({
           name: 'content',
           label: 'Content',
+          required: false,
         }),
         linkGroup({
           appearances: false,
