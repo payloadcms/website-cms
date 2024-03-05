@@ -922,6 +922,16 @@ export interface CaseStudy {
                                   };
                                   type?: ('code' | 'media') | null;
                                   code?: string | null;
+                                  codeBlips?:
+                                    | {
+                                        row: number;
+                                        label: string;
+                                        feature: {
+                                          [k: string]: unknown;
+                                        }[];
+                                        id?: string | null;
+                                      }[]
+                                    | null;
                                   media?: string | Media | null;
                                   id?: string | null;
                                 }[]
@@ -972,6 +982,16 @@ export interface CaseStudy {
                     };
                     type?: ('code' | 'media') | null;
                     code?: string | null;
+                    codeBlips?:
+                      | {
+                          row: number;
+                          label: string;
+                          feature: {
+                            [k: string]: unknown;
+                          }[];
+                          id?: string | null;
+                        }[]
+                      | null;
                     media?: string | Media | null;
                     id?: string | null;
                   }[]
@@ -2043,6 +2063,16 @@ export interface Page {
                               };
                               type?: ('code' | 'media') | null;
                               code?: string | null;
+                              codeBlips?:
+                                | {
+                                    row: number;
+                                    label: string;
+                                    feature: {
+                                      [k: string]: unknown;
+                                    }[];
+                                    id?: string | null;
+                                  }[]
+                                | null;
                               media?: string | Media | null;
                               id?: string | null;
                             }[]
@@ -2093,6 +2123,16 @@ export interface Page {
                 };
                 type?: ('code' | 'media') | null;
                 code?: string | null;
+                codeBlips?:
+                  | {
+                      row: number;
+                      label: string;
+                      feature: {
+                        [k: string]: unknown;
+                      }[];
+                      id?: string | null;
+                    }[]
+                  | null;
                 media?: string | Media | null;
                 id?: string | null;
               }[]
@@ -3162,6 +3202,16 @@ export interface ReusableContent {
                               };
                               type?: ('code' | 'media') | null;
                               code?: string | null;
+                              codeBlips?:
+                                | {
+                                    row: number;
+                                    label: string;
+                                    feature: {
+                                      [k: string]: unknown;
+                                    }[];
+                                    id?: string | null;
+                                  }[]
+                                | null;
                               media?: string | Media | null;
                               id?: string | null;
                             }[]
@@ -3212,6 +3262,16 @@ export interface ReusableContent {
                 };
                 type?: ('code' | 'media') | null;
                 code?: string | null;
+                codeBlips?:
+                  | {
+                      row: number;
+                      label: string;
+                      feature: {
+                        [k: string]: unknown;
+                      }[];
+                      id?: string | null;
+                    }[]
+                  | null;
                 media?: string | Media | null;
                 id?: string | null;
               }[]
