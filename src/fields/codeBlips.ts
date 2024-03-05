@@ -1,5 +1,6 @@
 import type { Field } from 'payload/types'
 import richText from './richText'
+import link from './link'
 
 const codeBlips: Field = {
   name: 'codeBlips',
@@ -20,6 +21,18 @@ const codeBlips: Field = {
       required: true,
     },
     richText({ name: 'feature', required: true }),
+    {
+      type: 'checkbox',
+      name: 'enableLink',
+    },
+    link({
+      appearances: false,
+      overrides: {
+        admin: {
+          condition: (_, { enableLink } = {}) => Boolean(enableLink),
+        },
+      },
+    }),
   ],
 }
 
