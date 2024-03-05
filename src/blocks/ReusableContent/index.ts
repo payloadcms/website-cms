@@ -14,6 +14,14 @@ export const ReusableContent: Block = {
           relationTo: 'reusable-content',
           required: true,
         },
+        {
+          name: 'customId',
+          type: 'text',
+          admin: {
+            description: () =>
+              'This is a custom ID that can be used to target this block with CSS or JavaScript.',
+          },
+        },
       ],
     }),
   ],

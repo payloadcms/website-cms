@@ -692,6 +692,7 @@ export interface CaseStudy {
                 theme?: ('light' | 'dark') | null;
               };
               reusableContent: string | ReusableContent;
+              customId?: string | null;
             };
             id?: string | null;
             blockName?: string | null;
@@ -1833,6 +1834,7 @@ export interface Page {
             theme?: ('light' | 'dark') | null;
           };
           reusableContent: string | ReusableContent;
+          customId?: string | null;
         };
         id?: string | null;
         blockName?: string | null;
@@ -2255,6 +2257,7 @@ export interface Post {
             theme?: ('light' | 'dark') | null;
           };
           reusableContent: string | ReusableContent;
+          customId?: string | null;
         };
         id?: string | null;
         blockName?: string | null;
