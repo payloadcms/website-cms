@@ -3,6 +3,7 @@ import type { Block } from 'payload/types'
 import { blockFields } from '../../fields/blockFields'
 import link from '../../fields/link'
 import richText from '../../fields/richText'
+import codeBlips from '../../fields/codeBlips'
 
 export const StickyHighlights: Block = {
   slug: 'stickyHighlights',
@@ -49,6 +50,12 @@ export const StickyHighlights: Block = {
               name: 'code',
               type: 'code',
               required: true,
+              admin: {
+                condition: (_, { type }) => type === 'code',
+              },
+            },
+            {
+              ...codeBlips,
               admin: {
                 condition: (_, { type }) => type === 'code',
               },

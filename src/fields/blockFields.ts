@@ -8,6 +8,24 @@ interface Args {
   overrides?: Partial<GroupField>
 }
 
+export const themeField: Field = {
+  name: 'theme',
+  type: 'select',
+  admin: {
+    description: 'Leave blank for system default',
+  },
+  options: [
+    {
+      label: 'Light',
+      value: 'light',
+    },
+    {
+      label: 'Dark',
+      value: 'dark',
+    },
+  ],
+}
+
 export const blockFields = ({ name, fields, overrides }: Args): Field =>
   deepMerge(
     {
@@ -21,7 +39,24 @@ export const blockFields = ({ name, fields, overrides }: Args): Field =>
           padding: 0,
         },
       },
-      fields,
+      fields: [
+        {
+          type: 'collapsible',
+          label: 'Settings',
+          fields: [
+            {
+              type: 'group',
+              label: false,
+              admin: {
+                hideGutter: true,
+              },
+              name: 'settings',
+              fields: [themeField],
+            },
+          ],
+        },
+        ...fields,
+      ],
     },
     overrides,
   )

@@ -1,13 +1,12 @@
 import { slateEditor } from '@payloadcms/richtext-slate'
 import type { Field } from 'payload/types'
 
-import carousel from './carousel'
-import commandLine from './commandLine'
 import linkGroup from './linkGroup'
 import livestreamFields from './livestreamFields'
-import logoGroup from './logoGroup'
 import label from './richText/label'
 import largeBody from './richText/largeBody'
+
+import { themeField } from './blockFields'
 
 export const hero: Field = {
   name: 'hero',
@@ -30,6 +29,10 @@ export const hero: Field = {
           value: 'contentMedia',
         },
         {
+          label: 'Centered Content',
+          value: 'centeredContent',
+        },
+        {
           label: 'Form',
           value: 'form',
         },
@@ -42,35 +45,102 @@ export const hero: Field = {
           value: 'livestream',
         },
         {
-          label: 'Centered Carousel',
-          value: 'centeredCarousel',
+          label: 'Gradient',
+          value: 'gradient',
         },
       ],
     },
+    {
+      type: 'checkbox',
+      name: 'fullBackground',
+      admin: {
+        condition: (_, { type } = {}) => type === 'gradient',
+      },
+    },
+    themeField,
+    {
+      type: 'collapsible',
+      label: 'Breadcrumbs Bar',
+      fields: [
+        {
+          type: 'checkbox',
+          name: 'enableBreadcrumbsBar',
+          label: 'Enable Breadcrumbs Bar',
+        },
+        linkGroup({
+          overrides: {
+            name: 'breadcrumbsBarLinks',
+            labels: {
+              singular: 'Link',
+              plural: 'Links',
+            },
+            admin: {
+              condition: (_, { enableBreadcrumbsBar } = {}) => Boolean(enableBreadcrumbsBar),
+            },
+          },
+          appearances: false,
+        }),
+      ],
+    },
     livestreamFields,
-    commandLine,
     {
       name: 'richText',
       type: 'richText',
       admin: {
-        condition: (_, { type }) => type !== 'livestream',
+        condition: (_, { type } = {}) => type !== 'livestream',
       },
       editor: slateEditor({
         admin: {
-          elements: ['h1', largeBody, 'ul', label],
+          elements: ['h1', 'h2', 'h3', 'h6', largeBody, 'ul', label],
           leaves: ['underline'],
         },
       }),
     },
     {
-      name: 'sidebarContent',
+      name: 'description',
       type: 'richText',
       admin: {
-        condition: (_, { type }) => type !== 'livestream',
+        condition: (_, { type } = {}) => type !== 'livestream' && type !== 'centeredContent',
       },
       editor: slateEditor({
         admin: {
-          elements: ['link'],
+          elements: [largeBody, 'ul', label, 'link'],
+          leaves: ['underline'],
+        },
+      }),
+    },
+    linkGroup({
+      appearances: false,
+      overrides: {
+        name: 'primaryButtons',
+        label: 'Primary Buttons',
+        admin: {
+          condition: (_, { type }) => type === 'home',
+        },
+      },
+    }),
+    {
+      name: 'secondaryHeading',
+      type: 'richText',
+      admin: {
+        condition: (_, { type }) => type === 'home',
+      },
+      editor: slateEditor({
+        admin: {
+          elements: ['h2', largeBody, 'ul', label],
+          leaves: ['underline'],
+        },
+      }),
+    },
+    {
+      name: 'secondaryDescription',
+      type: 'richText',
+      admin: {
+        condition: (_, { type }) => type === 'home',
+      },
+      editor: slateEditor({
+        admin: {
+          elements: [largeBody, 'ul', label, 'link'],
           leaves: ['underline'],
         },
       }),
@@ -79,32 +149,36 @@ export const hero: Field = {
       overrides: {
         admin: {
           condition: (_, { type } = {}) =>
-            ['contentMedia', 'default', 'livestream', 'centeredCarousel'].includes(type),
+            ['contentMedia', 'default', 'livestream', 'centeredContent', 'gradient'].includes(type),
         },
       },
     }),
     linkGroup({
       appearances: false,
       overrides: {
-        name: 'actions',
-        label: 'Sidebar Actions',
-        maxRows: 3,
+        name: 'secondaryButtons',
+        label: 'Secondary Buttons',
         admin: {
           condition: (_, { type }) => type === 'home',
         },
       },
     }),
-    linkGroup({
-      appearances: ['primary', 'secondary'],
-      overrides: {
-        name: 'buttons',
-        label: 'Buttons',
-        maxRows: 2,
-        admin: {
-          condition: (_, { type }) => type === 'home',
-        },
+    {
+      name: 'images',
+      type: 'array',
+      minRows: 1,
+      admin: {
+        condition: (_, { type } = {}) => ['gradient'].includes(type),
       },
-    }),
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+      ],
+    },
     {
       name: 'media',
       type: 'upload',
@@ -115,36 +189,19 @@ export const hero: Field = {
       },
     },
     {
-      name: 'mediaWidth',
-      type: 'select',
-      label: 'Media Width',
-      defaultValue: 'normal',
-      options: [
-        {
-          label: 'Normal',
-          value: 'normal',
-        },
-        {
-          label: 'Wide',
-          value: 'wide',
-        },
-      ],
+      name: 'secondaryMedia',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
       admin: {
-        condition: (_, { type } = {}) => ['contentMedia'].includes(type),
+        condition: (_, { type }) => type === 'home',
       },
     },
     {
-      name: 'adjectives',
-      type: 'array',
-      minRows: 3,
-      maxRows: 6,
-      fields: [
-        {
-          name: 'adjective',
-          type: 'text',
-          required: true,
-        },
-      ],
+      name: 'featureVideo',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
       admin: {
         condition: (_, { type }) => type === 'home',
       },
@@ -157,7 +214,21 @@ export const hero: Field = {
         condition: (_, { type }) => type === 'form',
       },
     },
-    logoGroup,
-    carousel,
+    {
+      name: 'logos',
+      type: 'array',
+      fields: [
+        {
+          name: 'logoMedia',
+          label: 'Media',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+      ],
+      admin: {
+        condition: (_, { type }) => type === 'home',
+      },
+    },
   ],
 }

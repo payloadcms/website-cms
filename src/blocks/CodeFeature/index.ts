@@ -1,8 +1,9 @@
 import type { Block } from 'payload/types'
 
 import { blockFields } from '../../fields/blockFields'
-import link from '../../fields/link'
+import linkGroup from '../../fields/linkGroup'
 import richText from '../../fields/richText'
+import codeBlips from '../../fields/codeBlips'
 
 export const CodeFeature: Block = {
   slug: 'codeFeature',
@@ -11,65 +12,91 @@ export const CodeFeature: Block = {
       name: 'codeFeatureFields',
       fields: [
         {
-          name: 'disableBlockSpacing',
+          name: 'forceDarkBackground',
           type: 'checkbox',
-        },
-        {
-          name: 'disableIndent',
-          type: 'checkbox',
-        },
-        {
-          name: 'heading',
-          type: 'text',
-          required: true,
-        },
-        richText(undefined, {
-          elements: ['ul', 'ol', 'link'],
-        }),
-        {
-          name: 'enableLink',
-          type: 'checkbox',
-        },
-        link({
-          overrides: {
-            admin: {
-              condition: (_, { enableLink }) => Boolean(enableLink),
-            },
+          admin: {
+            description: 'Check this box to force this block to have a dark background.',
           },
-        }),
+        },
         {
           type: 'row',
           fields: [
             {
-              name: 'language',
+              name: 'alignment',
               type: 'select',
-              defaultValue: 'none',
+              defaultValue: 'contentCode',
               options: [
                 {
-                  label: 'None',
-                  value: 'none',
+                  label: 'Content + Code',
+                  value: 'contentCode',
                 },
                 {
-                  label: 'JavaScript',
-                  value: 'js',
+                  label: 'Code + Content',
+                  value: 'codeContent',
+                },
+              ],
+              admin: {
+                description: 'Choose how to align the content for this block.',
+                width: '50%',
+              },
+            },
+            {
+              name: 'heading',
+              type: 'text',
+              admin: {
+                width: '50%',
+              },
+            },
+          ],
+        },
+        richText(undefined, {
+          elements: ['ul', 'ol', 'link'],
+        }),
+        linkGroup({
+          appearances: false,
+        }),
+        {
+          name: 'codeTabs',
+          type: 'array',
+          minRows: 1,
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'language',
+                  type: 'select',
+                  defaultValue: 'none',
+                  options: [
+                    {
+                      label: 'None',
+                      value: 'none',
+                    },
+                    {
+                      label: 'JavaScript',
+                      value: 'js',
+                    },
+                    {
+                      label: 'TypeScript',
+                      value: 'ts',
+                    },
+                  ],
                 },
                 {
-                  label: 'TypeScript',
-                  value: 'ts',
+                  name: 'label',
+                  label: 'Tab Label',
+                  type: 'text',
+                  required: true,
                 },
               ],
             },
             {
-              name: 'label',
-              label: 'Code Label',
-              type: 'text',
+              name: 'code',
+              type: 'code',
+              required: true,
             },
+            codeBlips,
           ],
-        },
-        {
-          name: 'code',
-          type: 'code',
-          required: true,
         },
       ],
     }),

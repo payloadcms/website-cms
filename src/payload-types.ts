@@ -44,15 +44,41 @@ export interface CaseStudy {
   introContent: {
     [k: string]: unknown;
   }[];
+  industry?: string | null;
+  useCase?: string | null;
   featuredImage: string | Media;
   layout?:
     | (
         | {
-            ctaFields: {
+            calloutFields: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
               richText: {
                 [k: string]: unknown;
               }[];
-              feature: 'none' | 'cpa';
+              logo: string | Media;
+              author?: string | null;
+              role?: string | null;
+              images?:
+                | {
+                    image: string | Media;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'callout';
+          }
+        | {
+            ctaFields: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
+              richText: {
+                [k: string]: unknown;
+              }[];
               links?:
                 | {
                     link: {
@@ -84,6 +110,9 @@ export interface CaseStudy {
           }
         | {
             cardGridFields: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
               richText: {
                 [k: string]: unknown;
               }[];
@@ -111,6 +140,7 @@ export interface CaseStudy {
                     id?: string | null;
                   }[]
                 | null;
+              revealDescription?: boolean | null;
               cards?:
                 | {
                     title: string;
@@ -143,7 +173,30 @@ export interface CaseStudy {
             blockType: 'cardGrid';
           }
         | {
+            caseStudyCardFields?: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
+              pixels?: boolean | null;
+              cards?:
+                | {
+                    richText: {
+                      [k: string]: unknown;
+                    }[];
+                    caseStudy: string | CaseStudy;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'caseStudyCards';
+          }
+        | {
             caseStudiesHighlightFields: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
               richText: {
                 [k: string]: unknown;
               }[];
@@ -154,37 +207,104 @@ export interface CaseStudy {
             blockType: 'caseStudiesHighlight';
           }
         | {
+            caseStudyParallaxFields?: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
+              items?:
+                | {
+                    quote: string;
+                    author?: string | null;
+                    logo: string | Media;
+                    images?:
+                      | {
+                          image: string | Media;
+                          id?: string | null;
+                        }[]
+                      | null;
+                    tabLabel: string;
+                    caseStudy: string | CaseStudy;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'caseStudyParallax';
+          }
+        | {
             codeFeatureFields: {
-              disableBlockSpacing?: boolean | null;
-              disableIndent?: boolean | null;
-              heading: string;
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
+              forceDarkBackground?: boolean | null;
+              alignment?: ('contentCode' | 'codeContent') | null;
+              heading?: string | null;
               richText: {
                 [k: string]: unknown;
               }[];
-              enableLink?: boolean | null;
-              link?: {
-                type?: ('reference' | 'custom') | null;
-                newTab?: boolean | null;
-                reference?:
-                  | ({
-                      relationTo: 'pages';
-                      value: string | Page;
-                    } | null)
-                  | ({
-                      relationTo: 'posts';
-                      value: string | Post;
-                    } | null)
-                  | ({
-                      relationTo: 'case-studies';
-                      value: string | CaseStudy;
-                    } | null);
-                url?: string | null;
-                label: string;
-                appearance?: ('default' | 'primary' | 'secondary') | null;
-              };
-              language?: ('none' | 'js' | 'ts') | null;
-              label?: string | null;
-              code: string;
+              links?:
+                | {
+                    link: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'case-studies';
+                            value: string | CaseStudy;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              codeTabs?:
+                | {
+                    language?: ('none' | 'js' | 'ts') | null;
+                    label: string;
+                    code: string;
+                    codeBlips?:
+                      | {
+                          row: number;
+                          label: string;
+                          feature: {
+                            [k: string]: unknown;
+                          }[];
+                          enableLink?: boolean | null;
+                          link?: {
+                            type?: ('reference' | 'custom') | null;
+                            newTab?: boolean | null;
+                            reference?:
+                              | ({
+                                  relationTo: 'pages';
+                                  value: string | Page;
+                                } | null)
+                              | ({
+                                  relationTo: 'posts';
+                                  value: string | Post;
+                                } | null)
+                              | ({
+                                  relationTo: 'case-studies';
+                                  value: string | CaseStudy;
+                                } | null);
+                            url?: string | null;
+                            label: string;
+                          };
+                          id?: string | null;
+                        }[]
+                      | null;
+                    id?: string | null;
+                  }[]
+                | null;
             };
             id?: string | null;
             blockName?: string | null;
@@ -192,6 +312,9 @@ export interface CaseStudy {
           }
         | {
             contentFields: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
               useLeadingHeader?: boolean | null;
               leadingHeader?:
                 | {
@@ -219,11 +342,38 @@ export interface CaseStudy {
           }
         | {
             contentGridFields?: {
-              forceDarkBackground?: boolean | null;
-              useLeadingHeader?: boolean | null;
-              leadingHeader?:
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
+              style?: ('gridBelow' | 'sideBySide') | null;
+              showNumbers?: boolean | null;
+              content?:
                 | {
                     [k: string]: unknown;
+                  }[]
+                | null;
+              links?:
+                | {
+                    link: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'case-studies';
+                            value: string | CaseStudy;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                    };
+                    id?: string | null;
                   }[]
                 | null;
               cells?:
@@ -241,7 +391,9 @@ export interface CaseStudy {
           }
         | {
             formFields: {
-              container?: boolean | null;
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
               richText: {
                 [k: string]: unknown;
               }[];
@@ -252,7 +404,48 @@ export interface CaseStudy {
             blockType: 'form';
           }
         | {
+            hoverCardsFields: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
+              richText: {
+                [k: string]: unknown;
+              }[];
+              cards?:
+                | {
+                    title: string;
+                    description?: string | null;
+                    link?: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'case-studies';
+                            value: string | CaseStudy;
+                          } | null);
+                      url?: string | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hoverCards';
+          }
+        | {
             hoverHighlightsFields: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
               richText: {
                 [k: string]: unknown;
               }[];
@@ -291,6 +484,9 @@ export interface CaseStudy {
           }
         | {
             linkGridFields?: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
               links?:
                 | {
                     link: {
@@ -321,23 +517,10 @@ export interface CaseStudy {
             blockType: 'linkGrid';
           }
         | {
-            mediaBlockFields: {
-              position?: ('default' | 'wide') | null;
-              media: string | Media;
-              caption?:
-                | {
-                    [k: string]: unknown;
-                  }[]
-                | null;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'mediaBlock';
-          }
-        | {
-            mediaContentFields: {
-              alignment?: ('contentMedia' | 'mediaContent') | null;
-              container?: boolean | null;
+            logoGridFields: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
               richText: {
                 [k: string]: unknown;
               }[];
@@ -361,18 +544,129 @@ export interface CaseStudy {
                 url?: string | null;
                 label: string;
               };
+              logos?:
+                | {
+                    logoMedia: string | Media;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'logoGrid';
+          }
+        | {
+            mediaBlockFields: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
+              position?: ('default' | 'wide') | null;
               media: string | Media;
+              caption?:
+                | {
+                    [k: string]: unknown;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'mediaBlock';
+          }
+        | {
+            mediaContentFields: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
+              alignment?: ('contentMedia' | 'mediaContent') | null;
+              richText: {
+                [k: string]: unknown;
+              }[];
+              enableLink?: boolean | null;
+              link?: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null)
+                  | ({
+                      relationTo: 'case-studies';
+                      value: string | CaseStudy;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              images?:
+                | {
+                    image: string | Media;
+                    id?: string | null;
+                  }[]
+                | null;
             };
             id?: string | null;
             blockName?: string | null;
             blockType: 'mediaContent';
           }
         | {
+            mediaContentAccordionFields?: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
+              alignment?: ('contentMedia' | 'mediaContent') | null;
+              leader?: string | null;
+              heading?: string | null;
+              accordion?:
+                | {
+                    position?: ('normal' | 'inset' | 'wide') | null;
+                    background?: ('none' | 'gradient' | 'scanlines') | null;
+                    mediaLabel: string;
+                    mediaDescription: {
+                      [k: string]: unknown;
+                    }[];
+                    enableLink?: boolean | null;
+                    link?: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'case-studies';
+                            value: string | CaseStudy;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                    };
+                    media: string | Media;
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'mediaContentAccordion';
+          }
+        | {
             pricingFields?: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
               plans?:
                 | {
                     name: string;
                     hasPrice?: boolean | null;
+                    enableCreatePayload?: boolean | null;
                     price?: string | null;
                     title?: string | null;
                     description?: string | null;
@@ -394,6 +688,7 @@ export interface CaseStudy {
                             value: string | CaseStudy;
                           } | null);
                       url?: string | null;
+                      label: string;
                     };
                     features?:
                       | {
@@ -413,7 +708,11 @@ export interface CaseStudy {
           }
         | {
             reusableContentBlockFields: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
               reusableContent: string | ReusableContent;
+              customId?: string | null;
             };
             id?: string | null;
             blockName?: string | null;
@@ -421,70 +720,139 @@ export interface CaseStudy {
           }
         | {
             sliderFields: {
-              useLeadingHeader?: boolean | null;
-              leadingHeader?:
-                | {
-                    [k: string]: unknown;
-                  }[]
-                | null;
-              sliderType: 'quoteSlider' | 'imageSlider';
-              imageSlides?:
-                | {
-                    image: string | Media;
-                    id?: string | null;
-                  }[]
-                | null;
-              quoteSlides?:
-                | {
-                    richText: {
-                      [k: string]: unknown;
-                    }[];
-                    quoteDate: string;
-                    id?: string | null;
-                  }[]
-                | null;
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
+              quoteSlides: {
+                leader?: string | null;
+                quote: string;
+                author: string;
+                role?: string | null;
+                id?: string | null;
+              }[];
             };
             id?: string | null;
             blockName?: string | null;
             blockType: 'slider';
           }
         | {
+            statementFields: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
+              richText: {
+                [k: string]: unknown;
+              }[];
+              links?:
+                | {
+                    link: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null)
+                        | ({
+                            relationTo: 'case-studies';
+                            value: string | CaseStudy;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'statement';
+          }
+        | {
             stepsFields: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
               steps: {
                 layout?:
                   | (
                       | {
                           codeFeatureFields: {
-                            disableBlockSpacing?: boolean | null;
-                            disableIndent?: boolean | null;
-                            heading: string;
+                            settings?: {
+                              theme?: ('light' | 'dark') | null;
+                            };
+                            forceDarkBackground?: boolean | null;
+                            alignment?: ('contentCode' | 'codeContent') | null;
+                            heading?: string | null;
                             richText: {
                               [k: string]: unknown;
                             }[];
-                            enableLink?: boolean | null;
-                            link?: {
-                              type?: ('reference' | 'custom') | null;
-                              newTab?: boolean | null;
-                              reference?:
-                                | ({
-                                    relationTo: 'pages';
-                                    value: string | Page;
-                                  } | null)
-                                | ({
-                                    relationTo: 'posts';
-                                    value: string | Post;
-                                  } | null)
-                                | ({
-                                    relationTo: 'case-studies';
-                                    value: string | CaseStudy;
-                                  } | null);
-                              url?: string | null;
-                              label: string;
-                              appearance?: ('default' | 'primary' | 'secondary') | null;
-                            };
-                            language?: ('none' | 'js' | 'ts') | null;
-                            label?: string | null;
-                            code: string;
+                            links?:
+                              | {
+                                  link: {
+                                    type?: ('reference' | 'custom') | null;
+                                    newTab?: boolean | null;
+                                    reference?:
+                                      | ({
+                                          relationTo: 'pages';
+                                          value: string | Page;
+                                        } | null)
+                                      | ({
+                                          relationTo: 'posts';
+                                          value: string | Post;
+                                        } | null)
+                                      | ({
+                                          relationTo: 'case-studies';
+                                          value: string | CaseStudy;
+                                        } | null);
+                                    url?: string | null;
+                                    label: string;
+                                  };
+                                  id?: string | null;
+                                }[]
+                              | null;
+                            codeTabs?:
+                              | {
+                                  language?: ('none' | 'js' | 'ts') | null;
+                                  label: string;
+                                  code: string;
+                                  codeBlips?:
+                                    | {
+                                        row: number;
+                                        label: string;
+                                        feature: {
+                                          [k: string]: unknown;
+                                        }[];
+                                        enableLink?: boolean | null;
+                                        link?: {
+                                          type?: ('reference' | 'custom') | null;
+                                          newTab?: boolean | null;
+                                          reference?:
+                                            | ({
+                                                relationTo: 'pages';
+                                                value: string | Page;
+                                              } | null)
+                                            | ({
+                                                relationTo: 'posts';
+                                                value: string | Post;
+                                              } | null)
+                                            | ({
+                                                relationTo: 'case-studies';
+                                                value: string | CaseStudy;
+                                              } | null);
+                                          url?: string | null;
+                                          label: string;
+                                        };
+                                        id?: string | null;
+                                      }[]
+                                    | null;
+                                  id?: string | null;
+                                }[]
+                              | null;
                           };
                           id?: string | null;
                           blockName?: string | null;
@@ -492,6 +860,9 @@ export interface CaseStudy {
                         }
                       | {
                           contentFields: {
+                            settings?: {
+                              theme?: ('light' | 'dark') | null;
+                            };
                             useLeadingHeader?: boolean | null;
                             leadingHeader?:
                               | {
@@ -521,6 +892,9 @@ export interface CaseStudy {
                         }
                       | {
                           hoverHighlightsFields: {
+                            settings?: {
+                              theme?: ('light' | 'dark') | null;
+                            };
                             richText: {
                               [k: string]: unknown;
                             }[];
@@ -559,6 +933,9 @@ export interface CaseStudy {
                         }
                       | {
                           stickyHighlightsFields?: {
+                            settings?: {
+                              theme?: ('light' | 'dark') | null;
+                            };
                             highlights?:
                               | {
                                   richText: {
@@ -586,6 +963,36 @@ export interface CaseStudy {
                                   };
                                   type?: ('code' | 'media') | null;
                                   code?: string | null;
+                                  codeBlips?:
+                                    | {
+                                        row: number;
+                                        label: string;
+                                        feature: {
+                                          [k: string]: unknown;
+                                        }[];
+                                        enableLink?: boolean | null;
+                                        link?: {
+                                          type?: ('reference' | 'custom') | null;
+                                          newTab?: boolean | null;
+                                          reference?:
+                                            | ({
+                                                relationTo: 'pages';
+                                                value: string | Page;
+                                              } | null)
+                                            | ({
+                                                relationTo: 'posts';
+                                                value: string | Post;
+                                              } | null)
+                                            | ({
+                                                relationTo: 'case-studies';
+                                                value: string | CaseStudy;
+                                              } | null);
+                                          url?: string | null;
+                                          label: string;
+                                        };
+                                        id?: string | null;
+                                      }[]
+                                    | null;
                                   media?: string | Media | null;
                                   id?: string | null;
                                 }[]
@@ -606,6 +1013,9 @@ export interface CaseStudy {
           }
         | {
             stickyHighlightsFields?: {
+              settings?: {
+                theme?: ('light' | 'dark') | null;
+              };
               highlights?:
                 | {
                     richText: {
@@ -633,6 +1043,36 @@ export interface CaseStudy {
                     };
                     type?: ('code' | 'media') | null;
                     code?: string | null;
+                    codeBlips?:
+                      | {
+                          row: number;
+                          label: string;
+                          feature: {
+                            [k: string]: unknown;
+                          }[];
+                          enableLink?: boolean | null;
+                          link?: {
+                            type?: ('reference' | 'custom') | null;
+                            newTab?: boolean | null;
+                            reference?:
+                              | ({
+                                  relationTo: 'pages';
+                                  value: string | Page;
+                                } | null)
+                              | ({
+                                  relationTo: 'posts';
+                                  value: string | Post;
+                                } | null)
+                              | ({
+                                  relationTo: 'case-studies';
+                                  value: string | CaseStudy;
+                                } | null);
+                            url?: string | null;
+                            label: string;
+                          };
+                          id?: string | null;
+                        }[]
+                      | null;
                     media?: string | Media | null;
                     id?: string | null;
                   }[]
@@ -642,6 +1082,7 @@ export interface CaseStudy {
             blockName?: string | null;
             blockType: 'stickyHighlights';
           }
+        | ExampleTabsBlock
       )[]
     | null;
   slug?: string | null;
@@ -673,7 +1114,34 @@ export interface Page {
   title: string;
   fullTitle?: string | null;
   hero: {
-    type: 'default' | 'contentMedia' | 'form' | 'home' | 'livestream' | 'centeredCarousel';
+    type: 'default' | 'contentMedia' | 'centeredContent' | 'form' | 'home' | 'livestream' | 'gradient';
+    fullBackground?: boolean | null;
+    theme?: ('light' | 'dark') | null;
+    enableBreadcrumbsBar?: boolean | null;
+    breadcrumbsBarLinks?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: string | Post;
+                } | null)
+              | ({
+                  relationTo: 'case-studies';
+                  value: string | CaseStudy;
+                } | null);
+            url?: string | null;
+            label: string;
+          };
+          id?: string | null;
+        }[]
+      | null;
     livestream?: {
       id?: string | null;
       date: string;
@@ -692,13 +1160,46 @@ export interface Page {
           }[]
         | null;
     };
-    commandLine?: string | null;
     richText?:
       | {
           [k: string]: unknown;
         }[]
       | null;
-    sidebarContent?:
+    description?:
+      | {
+          [k: string]: unknown;
+        }[]
+      | null;
+    primaryButtons?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: string | Post;
+                } | null)
+              | ({
+                  relationTo: 'case-studies';
+                  value: string | CaseStudy;
+                } | null);
+            url?: string | null;
+            label: string;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    secondaryHeading?:
+      | {
+          [k: string]: unknown;
+        }[]
+      | null;
+    secondaryDescription?:
       | {
           [k: string]: unknown;
         }[]
@@ -728,7 +1229,7 @@ export interface Page {
           id?: string | null;
         }[]
       | null;
-    actions?:
+    secondaryButtons?:
       | {
           link: {
             type?: ('reference' | 'custom') | null;
@@ -752,63 +1253,54 @@ export interface Page {
           id?: string | null;
         }[]
       | null;
-    buttons?:
+    images?:
       | {
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?:
-              | ({
-                  relationTo: 'pages';
-                  value: string | Page;
-                } | null)
-              | ({
-                  relationTo: 'posts';
-                  value: string | Post;
-                } | null)
-              | ({
-                  relationTo: 'case-studies';
-                  value: string | CaseStudy;
-                } | null);
-            url?: string | null;
-            label: string;
-            appearance?: ('primary' | 'secondary') | null;
-          };
+          image: string | Media;
           id?: string | null;
         }[]
       | null;
     media?: string | Media | null;
-    mediaWidth?: ('normal' | 'wide') | null;
-    adjectives?:
-      | {
-          adjective: string;
-          id?: string | null;
-        }[]
-      | null;
+    secondaryMedia?: string | Media | null;
+    featureVideo?: string | Media | null;
     form?: (string | null) | Form;
-    logoGroup?: {
-      label?: string | null;
-      logos?:
-        | {
-            logo: string | Media;
-            id?: string | null;
-          }[]
-        | null;
-    };
-    carousel?:
+    logos?:
       | {
-          image: string | Media;
+          logoMedia: string | Media;
           id?: string | null;
         }[]
       | null;
   };
   layout: (
     | {
-        ctaFields: {
+        calloutFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
-          feature: 'none' | 'cpa';
+          logo: string | Media;
+          author?: string | null;
+          role?: string | null;
+          images?:
+            | {
+                image: string | Media;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'callout';
+      }
+    | {
+        ctaFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          richText: {
+            [k: string]: unknown;
+          }[];
           links?:
             | {
                 link: {
@@ -840,6 +1332,9 @@ export interface Page {
       }
     | {
         cardGridFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
@@ -867,6 +1362,7 @@ export interface Page {
                 id?: string | null;
               }[]
             | null;
+          revealDescription?: boolean | null;
           cards?:
             | {
                 title: string;
@@ -900,6 +1396,9 @@ export interface Page {
       }
     | {
         caseStudyCardFields?: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           pixels?: boolean | null;
           cards?:
             | {
@@ -917,6 +1416,9 @@ export interface Page {
       }
     | {
         caseStudiesHighlightFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
@@ -927,37 +1429,104 @@ export interface Page {
         blockType: 'caseStudiesHighlight';
       }
     | {
+        caseStudyParallaxFields?: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          items?:
+            | {
+                quote: string;
+                author?: string | null;
+                logo: string | Media;
+                images?:
+                  | {
+                      image: string | Media;
+                      id?: string | null;
+                    }[]
+                  | null;
+                tabLabel: string;
+                caseStudy: string | CaseStudy;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'caseStudyParallax';
+      }
+    | {
         codeFeatureFields: {
-          disableBlockSpacing?: boolean | null;
-          disableIndent?: boolean | null;
-          heading: string;
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          forceDarkBackground?: boolean | null;
+          alignment?: ('contentCode' | 'codeContent') | null;
+          heading?: string | null;
           richText: {
             [k: string]: unknown;
           }[];
-          enableLink?: boolean | null;
-          link?: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?:
-              | ({
-                  relationTo: 'pages';
-                  value: string | Page;
-                } | null)
-              | ({
-                  relationTo: 'posts';
-                  value: string | Post;
-                } | null)
-              | ({
-                  relationTo: 'case-studies';
-                  value: string | CaseStudy;
-                } | null);
-            url?: string | null;
-            label: string;
-            appearance?: ('default' | 'primary' | 'secondary') | null;
-          };
-          language?: ('none' | 'js' | 'ts') | null;
-          label?: string | null;
-          code: string;
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          codeTabs?:
+            | {
+                language?: ('none' | 'js' | 'ts') | null;
+                label: string;
+                code: string;
+                codeBlips?:
+                  | {
+                      row: number;
+                      label: string;
+                      feature: {
+                        [k: string]: unknown;
+                      }[];
+                      enableLink?: boolean | null;
+                      link?: {
+                        type?: ('reference' | 'custom') | null;
+                        newTab?: boolean | null;
+                        reference?:
+                          | ({
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null)
+                          | ({
+                              relationTo: 'posts';
+                              value: string | Post;
+                            } | null)
+                          | ({
+                              relationTo: 'case-studies';
+                              value: string | CaseStudy;
+                            } | null);
+                        url?: string | null;
+                        label: string;
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
+                id?: string | null;
+              }[]
+            | null;
         };
         id?: string | null;
         blockName?: string | null;
@@ -965,6 +1534,9 @@ export interface Page {
       }
     | {
         contentFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           useLeadingHeader?: boolean | null;
           leadingHeader?:
             | {
@@ -992,11 +1564,38 @@ export interface Page {
       }
     | {
         contentGridFields?: {
-          forceDarkBackground?: boolean | null;
-          useLeadingHeader?: boolean | null;
-          leadingHeader?:
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          style?: ('gridBelow' | 'sideBySide') | null;
+          showNumbers?: boolean | null;
+          content?:
             | {
                 [k: string]: unknown;
+              }[]
+            | null;
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
               }[]
             | null;
           cells?:
@@ -1014,7 +1613,9 @@ export interface Page {
       }
     | {
         formFields: {
-          container?: boolean | null;
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
@@ -1025,7 +1626,48 @@ export interface Page {
         blockType: 'form';
       }
     | {
+        hoverCardsFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          richText: {
+            [k: string]: unknown;
+          }[];
+          cards?:
+            | {
+                title: string;
+                description?: string | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hoverCards';
+      }
+    | {
         hoverHighlightsFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
@@ -1064,6 +1706,9 @@ export interface Page {
       }
     | {
         linkGridFields?: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           links?:
             | {
                 link: {
@@ -1094,23 +1739,10 @@ export interface Page {
         blockType: 'linkGrid';
       }
     | {
-        mediaBlockFields: {
-          position?: ('default' | 'wide') | null;
-          media: string | Media;
-          caption?:
-            | {
-                [k: string]: unknown;
-              }[]
-            | null;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'mediaBlock';
-      }
-    | {
-        mediaContentFields: {
-          alignment?: ('contentMedia' | 'mediaContent') | null;
-          container?: boolean | null;
+        logoGridFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
@@ -1134,18 +1766,129 @@ export interface Page {
             url?: string | null;
             label: string;
           };
+          logos?:
+            | {
+                logoMedia: string | Media;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'logoGrid';
+      }
+    | {
+        mediaBlockFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          position?: ('default' | 'wide') | null;
           media: string | Media;
+          caption?:
+            | {
+                [k: string]: unknown;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaBlock';
+      }
+    | {
+        mediaContentFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          alignment?: ('contentMedia' | 'mediaContent') | null;
+          richText: {
+            [k: string]: unknown;
+          }[];
+          enableLink?: boolean | null;
+          link?: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: string | Post;
+                } | null)
+              | ({
+                  relationTo: 'case-studies';
+                  value: string | CaseStudy;
+                } | null);
+            url?: string | null;
+            label: string;
+          };
+          images?:
+            | {
+                image: string | Media;
+                id?: string | null;
+              }[]
+            | null;
         };
         id?: string | null;
         blockName?: string | null;
         blockType: 'mediaContent';
       }
     | {
+        mediaContentAccordionFields?: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          alignment?: ('contentMedia' | 'mediaContent') | null;
+          leader?: string | null;
+          heading?: string | null;
+          accordion?:
+            | {
+                position?: ('normal' | 'inset' | 'wide') | null;
+                background?: ('none' | 'gradient' | 'scanlines') | null;
+                mediaLabel: string;
+                mediaDescription: {
+                  [k: string]: unknown;
+                }[];
+                enableLink?: boolean | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                media: string | Media;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaContentAccordion';
+      }
+    | {
         pricingFields?: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           plans?:
             | {
                 name: string;
                 hasPrice?: boolean | null;
+                enableCreatePayload?: boolean | null;
                 price?: string | null;
                 title?: string | null;
                 description?: string | null;
@@ -1167,6 +1910,7 @@ export interface Page {
                         value: string | CaseStudy;
                       } | null);
                   url?: string | null;
+                  label: string;
                 };
                 features?:
                   | {
@@ -1186,7 +1930,11 @@ export interface Page {
       }
     | {
         reusableContentBlockFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           reusableContent: string | ReusableContent;
+          customId?: string | null;
         };
         id?: string | null;
         blockName?: string | null;
@@ -1194,70 +1942,139 @@ export interface Page {
       }
     | {
         sliderFields: {
-          useLeadingHeader?: boolean | null;
-          leadingHeader?:
-            | {
-                [k: string]: unknown;
-              }[]
-            | null;
-          sliderType: 'quoteSlider' | 'imageSlider';
-          imageSlides?:
-            | {
-                image: string | Media;
-                id?: string | null;
-              }[]
-            | null;
-          quoteSlides?:
-            | {
-                richText: {
-                  [k: string]: unknown;
-                }[];
-                quoteDate: string;
-                id?: string | null;
-              }[]
-            | null;
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          quoteSlides: {
+            leader?: string | null;
+            quote: string;
+            author: string;
+            role?: string | null;
+            id?: string | null;
+          }[];
         };
         id?: string | null;
         blockName?: string | null;
         blockType: 'slider';
       }
     | {
+        statementFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          richText: {
+            [k: string]: unknown;
+          }[];
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'statement';
+      }
+    | {
         stepsFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           steps: {
             layout?:
               | (
                   | {
                       codeFeatureFields: {
-                        disableBlockSpacing?: boolean | null;
-                        disableIndent?: boolean | null;
-                        heading: string;
+                        settings?: {
+                          theme?: ('light' | 'dark') | null;
+                        };
+                        forceDarkBackground?: boolean | null;
+                        alignment?: ('contentCode' | 'codeContent') | null;
+                        heading?: string | null;
                         richText: {
                           [k: string]: unknown;
                         }[];
-                        enableLink?: boolean | null;
-                        link?: {
-                          type?: ('reference' | 'custom') | null;
-                          newTab?: boolean | null;
-                          reference?:
-                            | ({
-                                relationTo: 'pages';
-                                value: string | Page;
-                              } | null)
-                            | ({
-                                relationTo: 'posts';
-                                value: string | Post;
-                              } | null)
-                            | ({
-                                relationTo: 'case-studies';
-                                value: string | CaseStudy;
-                              } | null);
-                          url?: string | null;
-                          label: string;
-                          appearance?: ('default' | 'primary' | 'secondary') | null;
-                        };
-                        language?: ('none' | 'js' | 'ts') | null;
-                        label?: string | null;
-                        code: string;
+                        links?:
+                          | {
+                              link: {
+                                type?: ('reference' | 'custom') | null;
+                                newTab?: boolean | null;
+                                reference?:
+                                  | ({
+                                      relationTo: 'pages';
+                                      value: string | Page;
+                                    } | null)
+                                  | ({
+                                      relationTo: 'posts';
+                                      value: string | Post;
+                                    } | null)
+                                  | ({
+                                      relationTo: 'case-studies';
+                                      value: string | CaseStudy;
+                                    } | null);
+                                url?: string | null;
+                                label: string;
+                              };
+                              id?: string | null;
+                            }[]
+                          | null;
+                        codeTabs?:
+                          | {
+                              language?: ('none' | 'js' | 'ts') | null;
+                              label: string;
+                              code: string;
+                              codeBlips?:
+                                | {
+                                    row: number;
+                                    label: string;
+                                    feature: {
+                                      [k: string]: unknown;
+                                    }[];
+                                    enableLink?: boolean | null;
+                                    link?: {
+                                      type?: ('reference' | 'custom') | null;
+                                      newTab?: boolean | null;
+                                      reference?:
+                                        | ({
+                                            relationTo: 'pages';
+                                            value: string | Page;
+                                          } | null)
+                                        | ({
+                                            relationTo: 'posts';
+                                            value: string | Post;
+                                          } | null)
+                                        | ({
+                                            relationTo: 'case-studies';
+                                            value: string | CaseStudy;
+                                          } | null);
+                                      url?: string | null;
+                                      label: string;
+                                    };
+                                    id?: string | null;
+                                  }[]
+                                | null;
+                              id?: string | null;
+                            }[]
+                          | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -1265,6 +2082,9 @@ export interface Page {
                     }
                   | {
                       contentFields: {
+                        settings?: {
+                          theme?: ('light' | 'dark') | null;
+                        };
                         useLeadingHeader?: boolean | null;
                         leadingHeader?:
                           | {
@@ -1294,6 +2114,9 @@ export interface Page {
                     }
                   | {
                       hoverHighlightsFields: {
+                        settings?: {
+                          theme?: ('light' | 'dark') | null;
+                        };
                         richText: {
                           [k: string]: unknown;
                         }[];
@@ -1332,6 +2155,9 @@ export interface Page {
                     }
                   | {
                       stickyHighlightsFields?: {
+                        settings?: {
+                          theme?: ('light' | 'dark') | null;
+                        };
                         highlights?:
                           | {
                               richText: {
@@ -1359,6 +2185,36 @@ export interface Page {
                               };
                               type?: ('code' | 'media') | null;
                               code?: string | null;
+                              codeBlips?:
+                                | {
+                                    row: number;
+                                    label: string;
+                                    feature: {
+                                      [k: string]: unknown;
+                                    }[];
+                                    enableLink?: boolean | null;
+                                    link?: {
+                                      type?: ('reference' | 'custom') | null;
+                                      newTab?: boolean | null;
+                                      reference?:
+                                        | ({
+                                            relationTo: 'pages';
+                                            value: string | Page;
+                                          } | null)
+                                        | ({
+                                            relationTo: 'posts';
+                                            value: string | Post;
+                                          } | null)
+                                        | ({
+                                            relationTo: 'case-studies';
+                                            value: string | CaseStudy;
+                                          } | null);
+                                      url?: string | null;
+                                      label: string;
+                                    };
+                                    id?: string | null;
+                                  }[]
+                                | null;
                               media?: string | Media | null;
                               id?: string | null;
                             }[]
@@ -1379,6 +2235,9 @@ export interface Page {
       }
     | {
         stickyHighlightsFields?: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           highlights?:
             | {
                 richText: {
@@ -1406,6 +2265,36 @@ export interface Page {
                 };
                 type?: ('code' | 'media') | null;
                 code?: string | null;
+                codeBlips?:
+                  | {
+                      row: number;
+                      label: string;
+                      feature: {
+                        [k: string]: unknown;
+                      }[];
+                      enableLink?: boolean | null;
+                      link?: {
+                        type?: ('reference' | 'custom') | null;
+                        newTab?: boolean | null;
+                        reference?:
+                          | ({
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null)
+                          | ({
+                              relationTo: 'posts';
+                              value: string | Post;
+                            } | null)
+                          | ({
+                              relationTo: 'case-studies';
+                              value: string | CaseStudy;
+                            } | null);
+                        url?: string | null;
+                        label: string;
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
                 media?: string | Media | null;
                 id?: string | null;
               }[]
@@ -1446,6 +2335,9 @@ export interface Post {
   content: (
     | {
         bannerFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           type?: ('default' | 'success' | 'warning' | 'error') | null;
           addCheckmark?: boolean | null;
           content: {
@@ -1458,6 +2350,9 @@ export interface Post {
       }
     | {
         blogContentFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
@@ -1468,8 +2363,41 @@ export interface Post {
       }
     | {
         codeFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           language?: ('none' | 'js' | 'ts') | null;
           code: string;
+          codeBlips?:
+            | {
+                row: number;
+                label: string;
+                feature: {
+                  [k: string]: unknown;
+                }[];
+                enableLink?: boolean | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
         };
         id?: string | null;
         blockName?: string | null;
@@ -1477,6 +2405,9 @@ export interface Post {
       }
     | {
         blogMarkdownFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           markdown: string;
         };
         id?: string | null;
@@ -1485,6 +2416,9 @@ export interface Post {
       }
     | {
         mediaBlockFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           position?: ('default' | 'wide') | null;
           media: string | Media;
           caption?:
@@ -1499,7 +2433,11 @@ export interface Post {
       }
     | {
         reusableContentBlockFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           reusableContent: string | ReusableContent;
+          customId?: string | null;
         };
         id?: string | null;
         blockName?: string | null;
@@ -1525,6 +2463,9 @@ export interface ReusableContent {
   layout: (
     | {
         bannerFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           type?: ('default' | 'success' | 'warning' | 'error') | null;
           addCheckmark?: boolean | null;
           content: {
@@ -1537,6 +2478,9 @@ export interface ReusableContent {
       }
     | {
         blogContentFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
@@ -1547,6 +2491,9 @@ export interface ReusableContent {
       }
     | {
         blogMarkdownFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           markdown: string;
         };
         id?: string | null;
@@ -1554,11 +2501,35 @@ export interface ReusableContent {
         blockType: 'blogMarkdown';
       }
     | {
-        ctaFields: {
+        calloutFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
-          feature: 'none' | 'cpa';
+          logo: string | Media;
+          author?: string | null;
+          role?: string | null;
+          images?:
+            | {
+                image: string | Media;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'callout';
+      }
+    | {
+        ctaFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          richText: {
+            [k: string]: unknown;
+          }[];
           links?:
             | {
                 link: {
@@ -1590,6 +2561,9 @@ export interface ReusableContent {
       }
     | {
         cardGridFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
@@ -1617,6 +2591,7 @@ export interface ReusableContent {
                 id?: string | null;
               }[]
             | null;
+          revealDescription?: boolean | null;
           cards?:
             | {
                 title: string;
@@ -1650,6 +2625,9 @@ export interface ReusableContent {
       }
     | {
         caseStudyCardFields?: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           pixels?: boolean | null;
           cards?:
             | {
@@ -1667,6 +2645,9 @@ export interface ReusableContent {
       }
     | {
         caseStudiesHighlightFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
@@ -1677,9 +2658,68 @@ export interface ReusableContent {
         blockType: 'caseStudiesHighlight';
       }
     | {
+        caseStudyParallaxFields?: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          items?:
+            | {
+                quote: string;
+                author?: string | null;
+                logo: string | Media;
+                images?:
+                  | {
+                      image: string | Media;
+                      id?: string | null;
+                    }[]
+                  | null;
+                tabLabel: string;
+                caseStudy: string | CaseStudy;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'caseStudyParallax';
+      }
+    | {
         codeFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           language?: ('none' | 'js' | 'ts') | null;
           code: string;
+          codeBlips?:
+            | {
+                row: number;
+                label: string;
+                feature: {
+                  [k: string]: unknown;
+                }[];
+                enableLink?: boolean | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
         };
         id?: string | null;
         blockName?: string | null;
@@ -1687,36 +2727,77 @@ export interface ReusableContent {
       }
     | {
         codeFeatureFields: {
-          disableBlockSpacing?: boolean | null;
-          disableIndent?: boolean | null;
-          heading: string;
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          forceDarkBackground?: boolean | null;
+          alignment?: ('contentCode' | 'codeContent') | null;
+          heading?: string | null;
           richText: {
             [k: string]: unknown;
           }[];
-          enableLink?: boolean | null;
-          link?: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?:
-              | ({
-                  relationTo: 'pages';
-                  value: string | Page;
-                } | null)
-              | ({
-                  relationTo: 'posts';
-                  value: string | Post;
-                } | null)
-              | ({
-                  relationTo: 'case-studies';
-                  value: string | CaseStudy;
-                } | null);
-            url?: string | null;
-            label: string;
-            appearance?: ('default' | 'primary' | 'secondary') | null;
-          };
-          language?: ('none' | 'js' | 'ts') | null;
-          label?: string | null;
-          code: string;
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          codeTabs?:
+            | {
+                language?: ('none' | 'js' | 'ts') | null;
+                label: string;
+                code: string;
+                codeBlips?:
+                  | {
+                      row: number;
+                      label: string;
+                      feature: {
+                        [k: string]: unknown;
+                      }[];
+                      enableLink?: boolean | null;
+                      link?: {
+                        type?: ('reference' | 'custom') | null;
+                        newTab?: boolean | null;
+                        reference?:
+                          | ({
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null)
+                          | ({
+                              relationTo: 'posts';
+                              value: string | Post;
+                            } | null)
+                          | ({
+                              relationTo: 'case-studies';
+                              value: string | CaseStudy;
+                            } | null);
+                        url?: string | null;
+                        label: string;
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
+                id?: string | null;
+              }[]
+            | null;
         };
         id?: string | null;
         blockName?: string | null;
@@ -1724,6 +2805,9 @@ export interface ReusableContent {
       }
     | {
         contentFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           useLeadingHeader?: boolean | null;
           leadingHeader?:
             | {
@@ -1751,11 +2835,38 @@ export interface ReusableContent {
       }
     | {
         contentGridFields?: {
-          forceDarkBackground?: boolean | null;
-          useLeadingHeader?: boolean | null;
-          leadingHeader?:
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          style?: ('gridBelow' | 'sideBySide') | null;
+          showNumbers?: boolean | null;
+          content?:
             | {
                 [k: string]: unknown;
+              }[]
+            | null;
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
               }[]
             | null;
           cells?:
@@ -1774,7 +2885,9 @@ export interface ReusableContent {
     | ExampleTabsBlock
     | {
         formFields: {
-          container?: boolean | null;
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
@@ -1785,7 +2898,48 @@ export interface ReusableContent {
         blockType: 'form';
       }
     | {
+        hoverCardsFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          richText: {
+            [k: string]: unknown;
+          }[];
+          cards?:
+            | {
+                title: string;
+                description?: string | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hoverCards';
+      }
+    | {
         hoverHighlightsFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
@@ -1824,6 +2978,9 @@ export interface ReusableContent {
       }
     | {
         linkGridFields?: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           links?:
             | {
                 link: {
@@ -1854,23 +3011,10 @@ export interface ReusableContent {
         blockType: 'linkGrid';
       }
     | {
-        mediaBlockFields: {
-          position?: ('default' | 'wide') | null;
-          media: string | Media;
-          caption?:
-            | {
-                [k: string]: unknown;
-              }[]
-            | null;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'mediaBlock';
-      }
-    | {
-        mediaContentFields: {
-          alignment?: ('contentMedia' | 'mediaContent') | null;
-          container?: boolean | null;
+        logoGridFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           richText: {
             [k: string]: unknown;
           }[];
@@ -1894,18 +3038,129 @@ export interface ReusableContent {
             url?: string | null;
             label: string;
           };
+          logos?:
+            | {
+                logoMedia: string | Media;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'logoGrid';
+      }
+    | {
+        mediaBlockFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          position?: ('default' | 'wide') | null;
           media: string | Media;
+          caption?:
+            | {
+                [k: string]: unknown;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaBlock';
+      }
+    | {
+        mediaContentFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          alignment?: ('contentMedia' | 'mediaContent') | null;
+          richText: {
+            [k: string]: unknown;
+          }[];
+          enableLink?: boolean | null;
+          link?: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: string | Post;
+                } | null)
+              | ({
+                  relationTo: 'case-studies';
+                  value: string | CaseStudy;
+                } | null);
+            url?: string | null;
+            label: string;
+          };
+          images?:
+            | {
+                image: string | Media;
+                id?: string | null;
+              }[]
+            | null;
         };
         id?: string | null;
         blockName?: string | null;
         blockType: 'mediaContent';
       }
     | {
+        mediaContentAccordionFields?: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          alignment?: ('contentMedia' | 'mediaContent') | null;
+          leader?: string | null;
+          heading?: string | null;
+          accordion?:
+            | {
+                position?: ('normal' | 'inset' | 'wide') | null;
+                background?: ('none' | 'gradient' | 'scanlines') | null;
+                mediaLabel: string;
+                mediaDescription: {
+                  [k: string]: unknown;
+                }[];
+                enableLink?: boolean | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                media: string | Media;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaContentAccordion';
+      }
+    | {
         pricingFields?: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           plans?:
             | {
                 name: string;
                 hasPrice?: boolean | null;
+                enableCreatePayload?: boolean | null;
                 price?: string | null;
                 title?: string | null;
                 description?: string | null;
@@ -1927,6 +3182,7 @@ export interface ReusableContent {
                         value: string | CaseStudy;
                       } | null);
                   url?: string | null;
+                  label: string;
                 };
                 features?:
                   | {
@@ -1946,70 +3202,139 @@ export interface ReusableContent {
       }
     | {
         sliderFields: {
-          useLeadingHeader?: boolean | null;
-          leadingHeader?:
-            | {
-                [k: string]: unknown;
-              }[]
-            | null;
-          sliderType: 'quoteSlider' | 'imageSlider';
-          imageSlides?:
-            | {
-                image: string | Media;
-                id?: string | null;
-              }[]
-            | null;
-          quoteSlides?:
-            | {
-                richText: {
-                  [k: string]: unknown;
-                }[];
-                quoteDate: string;
-                id?: string | null;
-              }[]
-            | null;
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          quoteSlides: {
+            leader?: string | null;
+            quote: string;
+            author: string;
+            role?: string | null;
+            id?: string | null;
+          }[];
         };
         id?: string | null;
         blockName?: string | null;
         blockType: 'slider';
       }
     | {
+        statementFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
+          richText: {
+            [k: string]: unknown;
+          }[];
+          links?:
+            | {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'statement';
+      }
+    | {
         stepsFields: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           steps: {
             layout?:
               | (
                   | {
                       codeFeatureFields: {
-                        disableBlockSpacing?: boolean | null;
-                        disableIndent?: boolean | null;
-                        heading: string;
+                        settings?: {
+                          theme?: ('light' | 'dark') | null;
+                        };
+                        forceDarkBackground?: boolean | null;
+                        alignment?: ('contentCode' | 'codeContent') | null;
+                        heading?: string | null;
                         richText: {
                           [k: string]: unknown;
                         }[];
-                        enableLink?: boolean | null;
-                        link?: {
-                          type?: ('reference' | 'custom') | null;
-                          newTab?: boolean | null;
-                          reference?:
-                            | ({
-                                relationTo: 'pages';
-                                value: string | Page;
-                              } | null)
-                            | ({
-                                relationTo: 'posts';
-                                value: string | Post;
-                              } | null)
-                            | ({
-                                relationTo: 'case-studies';
-                                value: string | CaseStudy;
-                              } | null);
-                          url?: string | null;
-                          label: string;
-                          appearance?: ('default' | 'primary' | 'secondary') | null;
-                        };
-                        language?: ('none' | 'js' | 'ts') | null;
-                        label?: string | null;
-                        code: string;
+                        links?:
+                          | {
+                              link: {
+                                type?: ('reference' | 'custom') | null;
+                                newTab?: boolean | null;
+                                reference?:
+                                  | ({
+                                      relationTo: 'pages';
+                                      value: string | Page;
+                                    } | null)
+                                  | ({
+                                      relationTo: 'posts';
+                                      value: string | Post;
+                                    } | null)
+                                  | ({
+                                      relationTo: 'case-studies';
+                                      value: string | CaseStudy;
+                                    } | null);
+                                url?: string | null;
+                                label: string;
+                              };
+                              id?: string | null;
+                            }[]
+                          | null;
+                        codeTabs?:
+                          | {
+                              language?: ('none' | 'js' | 'ts') | null;
+                              label: string;
+                              code: string;
+                              codeBlips?:
+                                | {
+                                    row: number;
+                                    label: string;
+                                    feature: {
+                                      [k: string]: unknown;
+                                    }[];
+                                    enableLink?: boolean | null;
+                                    link?: {
+                                      type?: ('reference' | 'custom') | null;
+                                      newTab?: boolean | null;
+                                      reference?:
+                                        | ({
+                                            relationTo: 'pages';
+                                            value: string | Page;
+                                          } | null)
+                                        | ({
+                                            relationTo: 'posts';
+                                            value: string | Post;
+                                          } | null)
+                                        | ({
+                                            relationTo: 'case-studies';
+                                            value: string | CaseStudy;
+                                          } | null);
+                                      url?: string | null;
+                                      label: string;
+                                    };
+                                    id?: string | null;
+                                  }[]
+                                | null;
+                              id?: string | null;
+                            }[]
+                          | null;
                       };
                       id?: string | null;
                       blockName?: string | null;
@@ -2017,6 +3342,9 @@ export interface ReusableContent {
                     }
                   | {
                       contentFields: {
+                        settings?: {
+                          theme?: ('light' | 'dark') | null;
+                        };
                         useLeadingHeader?: boolean | null;
                         leadingHeader?:
                           | {
@@ -2046,6 +3374,9 @@ export interface ReusableContent {
                     }
                   | {
                       hoverHighlightsFields: {
+                        settings?: {
+                          theme?: ('light' | 'dark') | null;
+                        };
                         richText: {
                           [k: string]: unknown;
                         }[];
@@ -2084,6 +3415,9 @@ export interface ReusableContent {
                     }
                   | {
                       stickyHighlightsFields?: {
+                        settings?: {
+                          theme?: ('light' | 'dark') | null;
+                        };
                         highlights?:
                           | {
                               richText: {
@@ -2111,6 +3445,36 @@ export interface ReusableContent {
                               };
                               type?: ('code' | 'media') | null;
                               code?: string | null;
+                              codeBlips?:
+                                | {
+                                    row: number;
+                                    label: string;
+                                    feature: {
+                                      [k: string]: unknown;
+                                    }[];
+                                    enableLink?: boolean | null;
+                                    link?: {
+                                      type?: ('reference' | 'custom') | null;
+                                      newTab?: boolean | null;
+                                      reference?:
+                                        | ({
+                                            relationTo: 'pages';
+                                            value: string | Page;
+                                          } | null)
+                                        | ({
+                                            relationTo: 'posts';
+                                            value: string | Post;
+                                          } | null)
+                                        | ({
+                                            relationTo: 'case-studies';
+                                            value: string | CaseStudy;
+                                          } | null);
+                                      url?: string | null;
+                                      label: string;
+                                    };
+                                    id?: string | null;
+                                  }[]
+                                | null;
                               media?: string | Media | null;
                               id?: string | null;
                             }[]
@@ -2131,6 +3495,9 @@ export interface ReusableContent {
       }
     | {
         stickyHighlightsFields?: {
+          settings?: {
+            theme?: ('light' | 'dark') | null;
+          };
           highlights?:
             | {
                 richText: {
@@ -2158,6 +3525,36 @@ export interface ReusableContent {
                 };
                 type?: ('code' | 'media') | null;
                 code?: string | null;
+                codeBlips?:
+                  | {
+                      row: number;
+                      label: string;
+                      feature: {
+                        [k: string]: unknown;
+                      }[];
+                      enableLink?: boolean | null;
+                      link?: {
+                        type?: ('reference' | 'custom') | null;
+                        newTab?: boolean | null;
+                        reference?:
+                          | ({
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null)
+                          | ({
+                              relationTo: 'posts';
+                              value: string | Post;
+                            } | null)
+                          | ({
+                              relationTo: 'case-studies';
+                              value: string | CaseStudy;
+                            } | null);
+                        url?: string | null;
+                        label: string;
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
                 media?: string | Media | null;
                 id?: string | null;
               }[]
@@ -2330,9 +3727,6 @@ export interface Form {
         id?: string | null;
       }[]
     | null;
-  leader: {
-    [k: string]: unknown;
-  }[];
   hubSpotFormID?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -2466,6 +3860,7 @@ export interface Footer {
   id: string;
   columns?:
     | {
+        label: string;
         navItems?:
           | {
               link: {
@@ -2498,9 +3893,12 @@ export interface Footer {
 }
 export interface MainMenu {
   id: string;
-  navItems?:
+  tabs?:
     | {
-        link: {
+        label: string;
+        enableDirectLink?: boolean | null;
+        enableDropdown?: boolean | null;
+        link?: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
           reference?:
@@ -2517,8 +3915,119 @@ export interface MainMenu {
                 value: string | CaseStudy;
               } | null);
           url?: string | null;
-          label: string;
         };
+        description?: string | null;
+        descriptionLinks?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null)
+                  | ({
+                      relationTo: 'case-studies';
+                      value: string | CaseStudy;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        navItems?:
+          | {
+              style?: ('default' | 'featured' | 'list') | null;
+              defaultLink?: {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null)
+                    | ({
+                        relationTo: 'case-studies';
+                        value: string | CaseStudy;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                description?: string | null;
+              };
+              featuredLink?: {
+                tag?: string | null;
+                label?:
+                  | {
+                      [k: string]: unknown;
+                    }[]
+                  | null;
+                links?:
+                  | {
+                      link: {
+                        type?: ('reference' | 'custom') | null;
+                        newTab?: boolean | null;
+                        reference?:
+                          | ({
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null)
+                          | ({
+                              relationTo: 'posts';
+                              value: string | Post;
+                            } | null)
+                          | ({
+                              relationTo: 'case-studies';
+                              value: string | CaseStudy;
+                            } | null);
+                        url?: string | null;
+                        label: string;
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
+              };
+              listLinks?: {
+                tag?: string | null;
+                links?:
+                  | {
+                      link: {
+                        type?: ('reference' | 'custom') | null;
+                        newTab?: boolean | null;
+                        reference?:
+                          | ({
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null)
+                          | ({
+                              relationTo: 'posts';
+                              value: string | Post;
+                            } | null)
+                          | ({
+                              relationTo: 'case-studies';
+                              value: string | CaseStudy;
+                            } | null);
+                        url?: string | null;
+                        label: string;
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;

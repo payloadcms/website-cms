@@ -4,17 +4,22 @@ import { blockFields } from '../../fields/blockFields'
 import linkGroup from '../../fields/linkGroup'
 import richText from '../../fields/richText'
 
-export const CallToAction: Block = {
-  slug: 'cta',
+export const Statement: Block = {
+  slug: 'statement',
   labels: {
-    singular: 'Call to Action',
-    plural: 'Calls to Action',
+    singular: 'Statement',
+    plural: 'Statements',
   },
   fields: [
     blockFields({
-      name: 'ctaFields',
+      name: 'statementFields',
       fields: [
-        richText(),
+        richText(
+          {},
+          {
+            elements: ['h1', 'h2'],
+          },
+        ),
         linkGroup({
           appearances: false,
         }),

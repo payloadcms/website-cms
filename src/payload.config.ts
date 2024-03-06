@@ -69,15 +69,6 @@ export default buildConfig({
     formBuilder({
       formOverrides: {
         fields: [
-          richText(
-            {
-              name: 'leader',
-              label: 'Leader Text',
-            },
-            {
-              elements: [],
-            },
-          ),
           {
             name: 'hubSpotFormID',
             type: 'text',
