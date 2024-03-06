@@ -78,7 +78,7 @@ export const CommunityHelp: CollectionConfig = {
         afterRead: [
           ({ data }) => {
             if (data?.communityHelpType === 'discord') {
-              return extractDescription(data.communityHelpJSON.intro.content)
+              return extractDescription(data?.communityHelpJSON?.intro?.content)
             }
             return extractDescription(data?.communityHelpJSON.body)
           },

@@ -52,13 +52,13 @@ export const syncToAlgolia = async (): Promise<void> => {
 
   const { docs } = await payload.find({
     collection: 'community-help',
-    limit: 0,
+    limit: 2500,
   })
 
   const discordDocs: DiscordDoc[] = []
   const githubDocs: GithubDoc[] = []
 
-  docs.forEach((doc) => {
+  docs.forEach(doc => {
     const { communityHelpJSON, discordID, githubID, helpful } = doc
 
     if (discordID) {
@@ -68,7 +68,7 @@ export const syncToAlgolia = async (): Promise<void> => {
         platform: 'Discord',
         name: info.name,
         createdAt: info.createdAt,
-        author: intro.authorName,
+        author: intro?.authorName,
         messages: messages.map(message => {
           return {
             author: message.authorName,
@@ -99,13 +99,13 @@ export const syncToAlgolia = async (): Promise<void> => {
         comments: (comments || []).map(comment => {
           const replies = comment.replies?.map(reply => {
             return {
-              author: reply.author.name,
+              author: reply.author?.name,
               content: reply.body,
             }
           })
 
           return {
-            author: comment.author.name,
+            author: comment.author?.name,
             content: comment.body,
             replies: replies || [],
           }
