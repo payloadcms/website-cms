@@ -52,13 +52,13 @@ export const syncToAlgolia = async (): Promise<void> => {
 
   const { docs } = await payload.find({
     collection: 'community-help',
-    limit: 0,
+    limit: 3000,
   })
 
   const discordDocs: DiscordDoc[] = []
   const githubDocs: GithubDoc[] = []
 
-  docs.forEach((doc) => {
+  docs.forEach(doc => {
     const { communityHelpJSON, discordID, githubID, helpful } = doc
 
     if (discordID) {
