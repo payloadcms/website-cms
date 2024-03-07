@@ -17,6 +17,9 @@ export const CallToAction: Block = {
         richText(),
         linkGroup({
           appearances: false,
+          additions: {
+            npmCta: true,
+          },
         }),
       ],
     }),

@@ -8,16 +8,59 @@ import link from './link'
 type LinkGroupType = (options?: {
   overrides?: Partial<ArrayField>
   appearances?: LinkAppearances[] | false
+  additions?: {
+    npmCta?: boolean
+  }
 }) => Field
 
-const linkGroup: LinkGroupType = ({ overrides = {}, appearances } = {}) => {
+const additionalFields: Field[] = [
+  {
+    name: 'type',
+    type: 'select',
+    defaultValue: 'link',
+    options: [
+      { value: 'link', label: 'Link' },
+      { value: 'npmCta', label: 'NPM CTA' },
+    ],
+  },
+  {
+    name: 'npmCta',
+    type: 'group',
+    fields: [
+      {
+        name: 'label',
+        type: 'text',
+        required: true,
+      },
+    ],
+    admin: {
+      condition: (_, { type }) => Boolean(type === 'npmCta'),
+    },
+  },
+]
+
+const linkGroup: LinkGroupType = ({ overrides = {}, appearances, additions } = {}) => {
   const generatedLinkGroup: Field = {
     name: 'links',
     type: 'array',
     fields: [
-      link({
-        appearances,
-      }),
+      ...(additions?.npmCta
+        ? [
+            ...additionalFields,
+            link({
+              overrides: {
+                admin: {
+                  condition: (_, { type }) => Boolean(type === 'link'),
+                },
+              },
+              appearances,
+            }),
+          ]
+        : [
+            link({
+              appearances,
+            }),
+          ]),
     ],
   }
 
