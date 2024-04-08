@@ -304,6 +304,8 @@ type CaseStudy {
   id: String
   title: String
   introContent(depth: Int): JSON
+  industry: String
+  useCase: String
   featuredImage(where: CaseStudy_FeaturedImage_where): Media
   layout: [CaseStudy_Layout!]
   slug: String
@@ -648,7 +650,7 @@ input CaseStudy_FeaturedImage_where_or {
   OR: [CaseStudy_FeaturedImage_where_or]
 }
 
-union CaseStudy_Layout = Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | FeaturedMediaGallery | MediaContent | Pricing | ReusableContentBlock | Slider | Statement | Steps | StickyHighlights | ExampleTabsBlock
+union CaseStudy_Layout = Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | MediaContent | MediaContentAccordion | Pricing | ReusableContentBlock | Slider | Statement | Steps | StickyHighlights | ExampleTabsBlock
 
 type Callout {
   calloutFields: Callout_CalloutFields
@@ -1023,8 +1025,19 @@ enum Cta_CtaFields_Settings_theme {
 }
 
 type Cta_CtaFields_Links {
+  type: Cta_CtaFields_Links_type
+  npmCta: Cta_CtaFields_Links_NpmCta
   link: Cta_CtaFields_Links_Link
   id: String
+}
+
+enum Cta_CtaFields_Links_type {
+  link
+  npmCta
+}
+
+type Cta_CtaFields_Links_NpmCta {
+  label: String
 }
 
 type Cta_CtaFields_Links_Link {
@@ -1081,6 +1094,7 @@ type Page_Hero {
   secondaryHeading(depth: Int): JSON
   secondaryDescription(depth: Int): JSON
   links: [Page_Hero_Links!]
+  buttons: [Page_Hero_Buttons!]
   secondaryButtons: [Page_Hero_SecondaryButtons!]
   images: [Page_Hero_Images!]
   media(where: Page_Hero_Media_where): Media
@@ -1098,6 +1112,7 @@ enum Page_Hero_type {
   home
   livestream
   gradient
+  three
 }
 
 enum Page_Hero_theme {
@@ -1398,8 +1413,36 @@ type Code_CodeFields_CodeBlips {
   row: Float
   label: String
   feature(depth: Int): JSON
+  enableLink: Boolean
+  link: Code_CodeFields_CodeBlips_Link
   id: String
 }
+
+type Code_CodeFields_CodeBlips_Link {
+  type: Code_CodeFields_CodeBlips_Link_type
+  newTab: Boolean
+  reference: Code_CodeFields_CodeBlips_Link_Reference_Relationship
+  url: String
+  label: String
+}
+
+enum Code_CodeFields_CodeBlips_Link_type {
+  reference
+  custom
+}
+
+type Code_CodeFields_CodeBlips_Link_Reference_Relationship {
+  relationTo: Code_CodeFields_CodeBlips_Link_Reference_RelationTo
+  value: Code_CodeFields_CodeBlips_Link_Reference
+}
+
+enum Code_CodeFields_CodeBlips_Link_Reference_RelationTo {
+  pages
+  posts
+  case_studies
+}
+
+union Code_CodeFields_CodeBlips_Link_Reference = Page | Post | CaseStudy
 
 type BlogMarkdown {
   blogMarkdownFields: BlogMarkdown_BlogMarkdownFields
@@ -1620,6 +1663,7 @@ type ReusableContentBlock {
 type ReusableContentBlock_ReusableContentBlockFields {
   settings: ReusableContentBlock_ReusableContentBlockFields_Settings
   reusableContent: ReusableContent
+  customId: String
 }
 
 type ReusableContentBlock_ReusableContentBlockFields_Settings {
@@ -1639,7 +1683,7 @@ type ReusableContent {
   createdAt: DateTime
 }
 
-union ReusableContent_Layout = Banner | BlogContent | BlogMarkdown | Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | Code | CodeFeature | Content | ContentGrid | ExampleTabsBlock | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | FeaturedMediaGallery | MediaContent | Pricing | Slider | Statement | Steps | StickyHighlights
+union ReusableContent_Layout = Banner | BlogContent | BlogMarkdown | Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | Code | CodeFeature | Content | ContentGrid | ExampleTabsBlock | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | MediaContent | MediaContentAccordion | Pricing | Slider | Statement | Steps | StickyHighlights
 
 type CardGrid {
   cardGridFields: CardGrid_CardGridFields
@@ -2145,6 +2189,7 @@ type CodeFeature {
 type CodeFeature_CodeFeatureFields {
   settings: CodeFeature_CodeFeatureFields_Settings
   forceDarkBackground: Boolean
+  alignment: CodeFeature_CodeFeatureFields_alignment
   heading: String
   richText(depth: Int): JSON
   links: [CodeFeature_CodeFeatureFields_Links!]
@@ -2158,6 +2203,11 @@ type CodeFeature_CodeFeatureFields_Settings {
 enum CodeFeature_CodeFeatureFields_Settings_theme {
   light
   dark
+}
+
+enum CodeFeature_CodeFeatureFields_alignment {
+  contentCode
+  codeContent
 }
 
 type CodeFeature_CodeFeatureFields_Links {
@@ -2209,8 +2259,36 @@ type CodeFeature_CodeFeatureFields_CodeTabs_CodeBlips {
   row: Float
   label: String
   feature(depth: Int): JSON
+  enableLink: Boolean
+  link: CodeFeature_CodeFeatureFields_CodeTabs_CodeBlips_Link
   id: String
 }
+
+type CodeFeature_CodeFeatureFields_CodeTabs_CodeBlips_Link {
+  type: CodeFeature_CodeFeatureFields_CodeTabs_CodeBlips_Link_type
+  newTab: Boolean
+  reference: CodeFeature_CodeFeatureFields_CodeTabs_CodeBlips_Link_Reference_Relationship
+  url: String
+  label: String
+}
+
+enum CodeFeature_CodeFeatureFields_CodeTabs_CodeBlips_Link_type {
+  reference
+  custom
+}
+
+type CodeFeature_CodeFeatureFields_CodeTabs_CodeBlips_Link_Reference_Relationship {
+  relationTo: CodeFeature_CodeFeatureFields_CodeTabs_CodeBlips_Link_Reference_RelationTo
+  value: CodeFeature_CodeFeatureFields_CodeTabs_CodeBlips_Link_Reference
+}
+
+enum CodeFeature_CodeFeatureFields_CodeTabs_CodeBlips_Link_Reference_RelationTo {
+  pages
+  posts
+  case_studies
+}
+
+union CodeFeature_CodeFeatureFields_CodeTabs_CodeBlips_Link_Reference = Page | Post | CaseStudy
 
 type Content {
   contentFields: Content_ContentFields
@@ -3198,247 +3276,6 @@ input LogoGrid_LogoGridFields_Logos_LogoMedia_where_or {
   OR: [LogoGrid_LogoGridFields_Logos_LogoMedia_where_or]
 }
 
-type FeaturedMediaGallery {
-  featuredMediaGalleryFields: FeaturedMediaGallery_FeaturedMediaGalleryFields
-  id: String
-  blockName: String
-  blockType: String
-}
-
-type FeaturedMediaGallery_FeaturedMediaGalleryFields {
-  settings: FeaturedMediaGallery_FeaturedMediaGalleryFields_Settings
-  background: FeaturedMediaGallery_FeaturedMediaGalleryFields_background
-  alignment: FeaturedMediaGallery_FeaturedMediaGalleryFields_alignment
-  leader: String
-  title: String
-  description(depth: Int): JSON
-  links: [FeaturedMediaGallery_FeaturedMediaGalleryFields_Links!]
-  featuredMediaTabs: [FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs!]
-}
-
-type FeaturedMediaGallery_FeaturedMediaGalleryFields_Settings {
-  theme: FeaturedMediaGallery_FeaturedMediaGalleryFields_Settings_theme
-}
-
-enum FeaturedMediaGallery_FeaturedMediaGalleryFields_Settings_theme {
-  light
-  dark
-}
-
-enum FeaturedMediaGallery_FeaturedMediaGalleryFields_background {
-  black
-  dark
-}
-
-enum FeaturedMediaGallery_FeaturedMediaGalleryFields_alignment {
-  contentMediaGallery
-  mediaGalleryContent
-}
-
-type FeaturedMediaGallery_FeaturedMediaGalleryFields_Links {
-  link: FeaturedMediaGallery_FeaturedMediaGalleryFields_Links_Link
-  id: String
-}
-
-type FeaturedMediaGallery_FeaturedMediaGalleryFields_Links_Link {
-  type: FeaturedMediaGallery_FeaturedMediaGalleryFields_Links_Link_type
-  newTab: Boolean
-  reference: FeaturedMediaGallery_FeaturedMediaGalleryFields_Links_Link_Reference_Relationship
-  url: String
-  label: String
-}
-
-enum FeaturedMediaGallery_FeaturedMediaGalleryFields_Links_Link_type {
-  reference
-  custom
-}
-
-type FeaturedMediaGallery_FeaturedMediaGalleryFields_Links_Link_Reference_Relationship {
-  relationTo: FeaturedMediaGallery_FeaturedMediaGalleryFields_Links_Link_Reference_RelationTo
-  value: FeaturedMediaGallery_FeaturedMediaGalleryFields_Links_Link_Reference
-}
-
-enum FeaturedMediaGallery_FeaturedMediaGalleryFields_Links_Link_Reference_RelationTo {
-  pages
-  posts
-  case_studies
-}
-
-union FeaturedMediaGallery_FeaturedMediaGalleryFields_Links_Link_Reference = Page | Post | CaseStudy
-
-type FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs {
-  mediaScanline: Boolean
-  mediaLabel: String
-  mediaAlignment: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_mediaAlignment
-  media(where: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_where): Media
-  id: String
-}
-
-enum FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_mediaAlignment {
-  center
-  fill
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_where {
-  alt: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_alt_operator
-  darkModeFallback: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_darkModeFallback_operator
-  updatedAt: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_updatedAt_operator
-  createdAt: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_createdAt_operator
-  url: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_url_operator
-  filename: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_filename_operator
-  mimeType: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_mimeType_operator
-  filesize: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_filesize_operator
-  width: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_width_operator
-  height: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_height_operator
-  id: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_id_operator
-  AND: [FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_where_and]
-  OR: [FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_where_or]
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_alt_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_darkModeFallback_operator {
-  equals: String
-  not_equals: String
-  exists: Boolean
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_updatedAt_operator {
-  equals: DateTime
-  not_equals: DateTime
-  greater_than_equal: DateTime
-  greater_than: DateTime
-  less_than_equal: DateTime
-  less_than: DateTime
-  like: DateTime
-  exists: Boolean
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_createdAt_operator {
-  equals: DateTime
-  not_equals: DateTime
-  greater_than_equal: DateTime
-  greater_than: DateTime
-  less_than_equal: DateTime
-  less_than: DateTime
-  like: DateTime
-  exists: Boolean
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_url_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_filename_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_mimeType_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_filesize_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-  exists: Boolean
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_width_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-  exists: Boolean
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_height_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-  exists: Boolean
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_id_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_where_and {
-  alt: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_alt_operator
-  darkModeFallback: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_darkModeFallback_operator
-  updatedAt: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_updatedAt_operator
-  createdAt: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_createdAt_operator
-  url: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_url_operator
-  filename: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_filename_operator
-  mimeType: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_mimeType_operator
-  filesize: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_filesize_operator
-  width: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_width_operator
-  height: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_height_operator
-  id: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_id_operator
-  AND: [FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_where_and]
-  OR: [FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_where_or]
-}
-
-input FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_where_or {
-  alt: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_alt_operator
-  darkModeFallback: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_darkModeFallback_operator
-  updatedAt: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_updatedAt_operator
-  createdAt: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_createdAt_operator
-  url: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_url_operator
-  filename: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_filename_operator
-  mimeType: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_mimeType_operator
-  filesize: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_filesize_operator
-  width: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_width_operator
-  height: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_height_operator
-  id: FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_id_operator
-  AND: [FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_where_and]
-  OR: [FeaturedMediaGallery_FeaturedMediaGalleryFields_FeaturedMediaTabs_Media_where_or]
-}
-
 type MediaContent {
   mediaContentFields: MediaContent_MediaContentFields
   id: String
@@ -3660,6 +3497,244 @@ input MediaContent_MediaContentFields_Images_Image_where_or {
   OR: [MediaContent_MediaContentFields_Images_Image_where_or]
 }
 
+type MediaContentAccordion {
+  mediaContentAccordionFields: MediaContentAccordion_MediaContentAccordionFields
+  id: String
+  blockName: String
+  blockType: String
+}
+
+type MediaContentAccordion_MediaContentAccordionFields {
+  settings: MediaContentAccordion_MediaContentAccordionFields_Settings
+  alignment: MediaContentAccordion_MediaContentAccordionFields_alignment
+  leader: String
+  heading: String
+  accordion: [MediaContentAccordion_MediaContentAccordionFields_Accordion!]
+}
+
+type MediaContentAccordion_MediaContentAccordionFields_Settings {
+  theme: MediaContentAccordion_MediaContentAccordionFields_Settings_theme
+}
+
+enum MediaContentAccordion_MediaContentAccordionFields_Settings_theme {
+  light
+  dark
+}
+
+enum MediaContentAccordion_MediaContentAccordionFields_alignment {
+  contentMedia
+  mediaContent
+}
+
+type MediaContentAccordion_MediaContentAccordionFields_Accordion {
+  position: MediaContentAccordion_MediaContentAccordionFields_Accordion_position
+  background: MediaContentAccordion_MediaContentAccordionFields_Accordion_background
+  mediaLabel: String
+  mediaDescription(depth: Int): JSON
+  enableLink: Boolean
+  link: MediaContentAccordion_MediaContentAccordionFields_Accordion_Link
+  media(where: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_where): Media
+  id: String
+}
+
+enum MediaContentAccordion_MediaContentAccordionFields_Accordion_position {
+  normal
+  inset
+  wide
+}
+
+enum MediaContentAccordion_MediaContentAccordionFields_Accordion_background {
+  none
+  gradient
+  scanlines
+}
+
+type MediaContentAccordion_MediaContentAccordionFields_Accordion_Link {
+  type: MediaContentAccordion_MediaContentAccordionFields_Accordion_Link_type
+  newTab: Boolean
+  reference: MediaContentAccordion_MediaContentAccordionFields_Accordion_Link_Reference_Relationship
+  url: String
+  label: String
+}
+
+enum MediaContentAccordion_MediaContentAccordionFields_Accordion_Link_type {
+  reference
+  custom
+}
+
+type MediaContentAccordion_MediaContentAccordionFields_Accordion_Link_Reference_Relationship {
+  relationTo: MediaContentAccordion_MediaContentAccordionFields_Accordion_Link_Reference_RelationTo
+  value: MediaContentAccordion_MediaContentAccordionFields_Accordion_Link_Reference
+}
+
+enum MediaContentAccordion_MediaContentAccordionFields_Accordion_Link_Reference_RelationTo {
+  pages
+  posts
+  case_studies
+}
+
+union MediaContentAccordion_MediaContentAccordionFields_Accordion_Link_Reference = Page | Post | CaseStudy
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_where {
+  alt: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_alt_operator
+  darkModeFallback: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_darkModeFallback_operator
+  updatedAt: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_updatedAt_operator
+  createdAt: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_createdAt_operator
+  url: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_url_operator
+  filename: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_filename_operator
+  mimeType: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_mimeType_operator
+  filesize: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_filesize_operator
+  width: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_width_operator
+  height: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_height_operator
+  id: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_id_operator
+  AND: [MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_where_and]
+  OR: [MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_where_or]
+}
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_darkModeFallback_operator {
+  equals: String
+  not_equals: String
+  exists: Boolean
+}
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_where_and {
+  alt: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_alt_operator
+  darkModeFallback: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_darkModeFallback_operator
+  updatedAt: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_updatedAt_operator
+  createdAt: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_createdAt_operator
+  url: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_url_operator
+  filename: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_filename_operator
+  mimeType: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_mimeType_operator
+  filesize: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_filesize_operator
+  width: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_width_operator
+  height: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_height_operator
+  id: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_id_operator
+  AND: [MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_where_and]
+  OR: [MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_where_or]
+}
+
+input MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_where_or {
+  alt: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_alt_operator
+  darkModeFallback: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_darkModeFallback_operator
+  updatedAt: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_updatedAt_operator
+  createdAt: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_createdAt_operator
+  url: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_url_operator
+  filename: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_filename_operator
+  mimeType: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_mimeType_operator
+  filesize: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_filesize_operator
+  width: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_width_operator
+  height: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_height_operator
+  id: MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_id_operator
+  AND: [MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_where_and]
+  OR: [MediaContentAccordion_MediaContentAccordionFields_Accordion_Media_where_or]
+}
+
 type Pricing {
   pricingFields: Pricing_PricingFields
   id: String
@@ -3685,6 +3760,7 @@ enum Pricing_PricingFields_Settings_theme {
 type Pricing_PricingFields_Plans {
   name: String
   hasPrice: Boolean
+  enableCreatePayload: Boolean
   price: String
   title: String
   description: String
@@ -3699,6 +3775,7 @@ type Pricing_PricingFields_Plans_Link {
   newTab: Boolean
   reference: Pricing_PricingFields_Plans_Link_Reference_Relationship
   url: String
+  label: String
 }
 
 enum Pricing_PricingFields_Plans_Link_type {
@@ -3739,11 +3816,7 @@ type Slider {
 
 type Slider_SliderFields {
   settings: Slider_SliderFields_Settings
-  useLeadingHeader: Boolean
-  leadingHeader(depth: Int): JSON
-  sliderType: Slider_SliderFields_sliderType
-  imageSlides: [Slider_SliderFields_ImageSlides!]
-  quoteSlides: [Slider_SliderFields_QuoteSlides!]
+  quoteSlides: [Slider_SliderFields_QuoteSlides!]!
 }
 
 type Slider_SliderFields_Settings {
@@ -3755,179 +3828,11 @@ enum Slider_SliderFields_Settings_theme {
   dark
 }
 
-enum Slider_SliderFields_sliderType {
-  quoteSlider
-  imageSlider
-}
-
-type Slider_SliderFields_ImageSlides {
-  image(where: Slider_SliderFields_ImageSlides_Image_where): Media
-  id: String
-}
-
-input Slider_SliderFields_ImageSlides_Image_where {
-  alt: Slider_SliderFields_ImageSlides_Image_alt_operator
-  darkModeFallback: Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator
-  updatedAt: Slider_SliderFields_ImageSlides_Image_updatedAt_operator
-  createdAt: Slider_SliderFields_ImageSlides_Image_createdAt_operator
-  url: Slider_SliderFields_ImageSlides_Image_url_operator
-  filename: Slider_SliderFields_ImageSlides_Image_filename_operator
-  mimeType: Slider_SliderFields_ImageSlides_Image_mimeType_operator
-  filesize: Slider_SliderFields_ImageSlides_Image_filesize_operator
-  width: Slider_SliderFields_ImageSlides_Image_width_operator
-  height: Slider_SliderFields_ImageSlides_Image_height_operator
-  id: Slider_SliderFields_ImageSlides_Image_id_operator
-  AND: [Slider_SliderFields_ImageSlides_Image_where_and]
-  OR: [Slider_SliderFields_ImageSlides_Image_where_or]
-}
-
-input Slider_SliderFields_ImageSlides_Image_alt_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-}
-
-input Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator {
-  equals: String
-  not_equals: String
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_updatedAt_operator {
-  equals: DateTime
-  not_equals: DateTime
-  greater_than_equal: DateTime
-  greater_than: DateTime
-  less_than_equal: DateTime
-  less_than: DateTime
-  like: DateTime
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_createdAt_operator {
-  equals: DateTime
-  not_equals: DateTime
-  greater_than_equal: DateTime
-  greater_than: DateTime
-  less_than_equal: DateTime
-  less_than: DateTime
-  like: DateTime
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_url_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_filename_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_mimeType_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_filesize_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_width_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_height_operator {
-  equals: Float
-  not_equals: Float
-  greater_than_equal: Float
-  greater_than: Float
-  less_than_equal: Float
-  less_than: Float
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_id_operator {
-  equals: String
-  not_equals: String
-  like: String
-  contains: String
-  in: [String]
-  not_in: [String]
-  all: [String]
-  exists: Boolean
-}
-
-input Slider_SliderFields_ImageSlides_Image_where_and {
-  alt: Slider_SliderFields_ImageSlides_Image_alt_operator
-  darkModeFallback: Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator
-  updatedAt: Slider_SliderFields_ImageSlides_Image_updatedAt_operator
-  createdAt: Slider_SliderFields_ImageSlides_Image_createdAt_operator
-  url: Slider_SliderFields_ImageSlides_Image_url_operator
-  filename: Slider_SliderFields_ImageSlides_Image_filename_operator
-  mimeType: Slider_SliderFields_ImageSlides_Image_mimeType_operator
-  filesize: Slider_SliderFields_ImageSlides_Image_filesize_operator
-  width: Slider_SliderFields_ImageSlides_Image_width_operator
-  height: Slider_SliderFields_ImageSlides_Image_height_operator
-  id: Slider_SliderFields_ImageSlides_Image_id_operator
-  AND: [Slider_SliderFields_ImageSlides_Image_where_and]
-  OR: [Slider_SliderFields_ImageSlides_Image_where_or]
-}
-
-input Slider_SliderFields_ImageSlides_Image_where_or {
-  alt: Slider_SliderFields_ImageSlides_Image_alt_operator
-  darkModeFallback: Slider_SliderFields_ImageSlides_Image_darkModeFallback_operator
-  updatedAt: Slider_SliderFields_ImageSlides_Image_updatedAt_operator
-  createdAt: Slider_SliderFields_ImageSlides_Image_createdAt_operator
-  url: Slider_SliderFields_ImageSlides_Image_url_operator
-  filename: Slider_SliderFields_ImageSlides_Image_filename_operator
-  mimeType: Slider_SliderFields_ImageSlides_Image_mimeType_operator
-  filesize: Slider_SliderFields_ImageSlides_Image_filesize_operator
-  width: Slider_SliderFields_ImageSlides_Image_width_operator
-  height: Slider_SliderFields_ImageSlides_Image_height_operator
-  id: Slider_SliderFields_ImageSlides_Image_id_operator
-  AND: [Slider_SliderFields_ImageSlides_Image_where_and]
-  OR: [Slider_SliderFields_ImageSlides_Image_where_or]
-}
-
 type Slider_SliderFields_QuoteSlides {
-  richText(depth: Int): JSON
-  quoteDate: DateTime
+  leader: String
+  quote: String!
+  author: String!
+  role: String
   id: String
 }
 
@@ -3940,7 +3845,6 @@ type Statement {
 
 type Statement_StatementFields {
   settings: Statement_StatementFields_Settings
-  heading: String
   richText(depth: Int): JSON
   links: [Statement_StatementFields_Links!]
 }
@@ -4040,6 +3944,7 @@ type StickyHighlights_StickyHighlightsFields_Highlights {
   link: StickyHighlights_StickyHighlightsFields_Highlights_Link
   type: StickyHighlights_StickyHighlightsFields_Highlights_type
   code: String
+  codeBlips: [StickyHighlights_StickyHighlightsFields_Highlights_CodeBlips!]
   media(where: StickyHighlights_StickyHighlightsFields_Highlights_Media_where): Media
   id: String
 }
@@ -4074,6 +3979,41 @@ enum StickyHighlights_StickyHighlightsFields_Highlights_type {
   code
   media
 }
+
+type StickyHighlights_StickyHighlightsFields_Highlights_CodeBlips {
+  row: Float
+  label: String
+  feature(depth: Int): JSON
+  enableLink: Boolean
+  link: StickyHighlights_StickyHighlightsFields_Highlights_CodeBlips_Link
+  id: String
+}
+
+type StickyHighlights_StickyHighlightsFields_Highlights_CodeBlips_Link {
+  type: StickyHighlights_StickyHighlightsFields_Highlights_CodeBlips_Link_type
+  newTab: Boolean
+  reference: StickyHighlights_StickyHighlightsFields_Highlights_CodeBlips_Link_Reference_Relationship
+  url: String
+  label: String
+}
+
+enum StickyHighlights_StickyHighlightsFields_Highlights_CodeBlips_Link_type {
+  reference
+  custom
+}
+
+type StickyHighlights_StickyHighlightsFields_Highlights_CodeBlips_Link_Reference_Relationship {
+  relationTo: StickyHighlights_StickyHighlightsFields_Highlights_CodeBlips_Link_Reference_RelationTo
+  value: StickyHighlights_StickyHighlightsFields_Highlights_CodeBlips_Link_Reference
+}
+
+enum StickyHighlights_StickyHighlightsFields_Highlights_CodeBlips_Link_Reference_RelationTo {
+  pages
+  posts
+  case_studies
+}
+
+union StickyHighlights_StickyHighlightsFields_Highlights_CodeBlips_Link_Reference = Page | Post | CaseStudy
 
 input StickyHighlights_StickyHighlightsFields_Highlights_Media_where {
   alt: StickyHighlights_StickyHighlightsFields_Highlights_Media_alt_operator
@@ -4837,6 +4777,55 @@ enum Page_Hero_Links_Link_appearance {
   default
   primary
   secondary
+}
+
+union Page_Hero_Buttons = Link | Command
+
+type Link {
+  link: Link_Link
+  id: String
+  blockName: String
+  blockType: String
+}
+
+type Link_Link {
+  type: Link_Link_type
+  newTab: Boolean
+  reference: Link_Link_Reference_Relationship
+  url: String
+  label: String
+  appearance: Link_Link_appearance
+}
+
+enum Link_Link_type {
+  reference
+  custom
+}
+
+type Link_Link_Reference_Relationship {
+  relationTo: Link_Link_Reference_RelationTo
+  value: Link_Link_Reference
+}
+
+enum Link_Link_Reference_RelationTo {
+  pages
+  posts
+  case_studies
+}
+
+union Link_Link_Reference = Page | Post | CaseStudy
+
+enum Link_Link_appearance {
+  default
+  primary
+  secondary
+}
+
+type Command {
+  command: String
+  id: String
+  blockName: String
+  blockType: String
 }
 
 type Page_Hero_SecondaryButtons {
@@ -5680,7 +5669,7 @@ input Page_Hero_Logos_LogoMedia_where_or {
   OR: [Page_Hero_Logos_LogoMedia_where_or]
 }
 
-union Page_Layout = Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | FeaturedMediaGallery | MediaContent | Pricing | ReusableContentBlock | Slider | Statement | Steps | StickyHighlights | ExampleTabsBlock
+union Page_Layout = Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | MediaContent | MediaContentAccordion | Pricing | ReusableContentBlock | Slider | Statement | Steps | StickyHighlights | ExampleTabsBlock
 
 type Page_Meta {
   title: String
@@ -6048,6 +6037,8 @@ type CaseStudies {
 input CaseStudy_where {
   title: CaseStudy_title_operator
   introContent: CaseStudy_introContent_operator
+  industry: CaseStudy_industry_operator
+  useCase: CaseStudy_useCase_operator
   featuredImage: CaseStudy_featuredImage_operator
   slug: CaseStudy_slug_operator
   url: CaseStudy_url_operator
@@ -6077,6 +6068,28 @@ input CaseStudy_introContent_operator {
   not_equals: JSON
   like: JSON
   contains: JSON
+}
+
+input CaseStudy_industry_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input CaseStudy_useCase_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
 }
 
 input CaseStudy_featuredImage_operator {
@@ -6181,6 +6194,8 @@ input CaseStudy_id_operator {
 input CaseStudy_where_and {
   title: CaseStudy_title_operator
   introContent: CaseStudy_introContent_operator
+  industry: CaseStudy_industry_operator
+  useCase: CaseStudy_useCase_operator
   featuredImage: CaseStudy_featuredImage_operator
   slug: CaseStudy_slug_operator
   url: CaseStudy_url_operator
@@ -6198,6 +6213,8 @@ input CaseStudy_where_and {
 input CaseStudy_where_or {
   title: CaseStudy_title_operator
   introContent: CaseStudy_introContent_operator
+  industry: CaseStudy_industry_operator
+  useCase: CaseStudy_useCase_operator
   featuredImage: CaseStudy_featuredImage_operator
   slug: CaseStudy_slug_operator
   url: CaseStudy_url_operator
@@ -6224,6 +6241,8 @@ type case_studiesDocAccess {
 type CaseStudiesDocAccessFields {
   title: CaseStudiesDocAccessFields_title
   introContent: CaseStudiesDocAccessFields_introContent
+  industry: CaseStudiesDocAccessFields_industry
+  useCase: CaseStudiesDocAccessFields_useCase
   featuredImage: CaseStudiesDocAccessFields_featuredImage
   layout: CaseStudiesDocAccessFields_layout
   slug: CaseStudiesDocAccessFields_slug
@@ -6277,6 +6296,52 @@ type CaseStudiesDocAccessFields_introContent_Update {
 }
 
 type CaseStudiesDocAccessFields_introContent_Delete {
+  permission: Boolean!
+}
+
+type CaseStudiesDocAccessFields_industry {
+  create: CaseStudiesDocAccessFields_industry_Create
+  read: CaseStudiesDocAccessFields_industry_Read
+  update: CaseStudiesDocAccessFields_industry_Update
+  delete: CaseStudiesDocAccessFields_industry_Delete
+}
+
+type CaseStudiesDocAccessFields_industry_Create {
+  permission: Boolean!
+}
+
+type CaseStudiesDocAccessFields_industry_Read {
+  permission: Boolean!
+}
+
+type CaseStudiesDocAccessFields_industry_Update {
+  permission: Boolean!
+}
+
+type CaseStudiesDocAccessFields_industry_Delete {
+  permission: Boolean!
+}
+
+type CaseStudiesDocAccessFields_useCase {
+  create: CaseStudiesDocAccessFields_useCase_Create
+  read: CaseStudiesDocAccessFields_useCase_Read
+  update: CaseStudiesDocAccessFields_useCase_Update
+  delete: CaseStudiesDocAccessFields_useCase_Delete
+}
+
+type CaseStudiesDocAccessFields_useCase_Create {
+  permission: Boolean!
+}
+
+type CaseStudiesDocAccessFields_useCase_Read {
+  permission: Boolean!
+}
+
+type CaseStudiesDocAccessFields_useCase_Update {
+  permission: Boolean!
+}
+
+type CaseStudiesDocAccessFields_useCase_Delete {
   permission: Boolean!
 }
 
@@ -6625,6 +6690,8 @@ type CaseStudyVersion {
 type CaseStudyVersion_Version {
   title: String
   introContent(depth: Int): JSON
+  industry: String
+  useCase: String
   featuredImage(where: CaseStudyVersion_Version_FeaturedImage_where): Media
   layout: [CaseStudyVersion_Version_Layout!]
   slug: String
@@ -6795,7 +6862,7 @@ input CaseStudyVersion_Version_FeaturedImage_where_or {
   OR: [CaseStudyVersion_Version_FeaturedImage_where_or]
 }
 
-union CaseStudyVersion_Version_Layout = Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | FeaturedMediaGallery | MediaContent | Pricing | ReusableContentBlock | Slider | Statement | Steps | StickyHighlights | ExampleTabsBlock
+union CaseStudyVersion_Version_Layout = Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | MediaContent | MediaContentAccordion | Pricing | ReusableContentBlock | Slider | Statement | Steps | StickyHighlights | ExampleTabsBlock
 
 type CaseStudyVersion_Version_Meta {
   title: String
@@ -6986,6 +7053,8 @@ input versionsCaseStudy_where {
   parent: versionsCaseStudy_parent_operator
   version__title: versionsCaseStudy_version__title_operator
   version__introContent: versionsCaseStudy_version__introContent_operator
+  version__industry: versionsCaseStudy_version__industry_operator
+  version__useCase: versionsCaseStudy_version__useCase_operator
   version__featuredImage: versionsCaseStudy_version__featuredImage_operator
   version__slug: versionsCaseStudy_version__slug_operator
   version__url: versionsCaseStudy_version__url_operator
@@ -7027,6 +7096,28 @@ input versionsCaseStudy_version__introContent_operator {
   not_equals: JSON
   like: JSON
   contains: JSON
+}
+
+input versionsCaseStudy_version__industry_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsCaseStudy_version__useCase_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
 }
 
 input versionsCaseStudy_version__featuredImage_operator {
@@ -7160,6 +7251,8 @@ input versionsCaseStudy_where_and {
   parent: versionsCaseStudy_parent_operator
   version__title: versionsCaseStudy_version__title_operator
   version__introContent: versionsCaseStudy_version__introContent_operator
+  version__industry: versionsCaseStudy_version__industry_operator
+  version__useCase: versionsCaseStudy_version__useCase_operator
   version__featuredImage: versionsCaseStudy_version__featuredImage_operator
   version__slug: versionsCaseStudy_version__slug_operator
   version__url: versionsCaseStudy_version__url_operator
@@ -7181,6 +7274,8 @@ input versionsCaseStudy_where_or {
   parent: versionsCaseStudy_parent_operator
   version__title: versionsCaseStudy_version__title_operator
   version__introContent: versionsCaseStudy_version__introContent_operator
+  version__industry: versionsCaseStudy_version__industry_operator
+  version__useCase: versionsCaseStudy_version__useCase_operator
   version__featuredImage: versionsCaseStudy_version__featuredImage_operator
   version__slug: versionsCaseStudy_version__slug_operator
   version__url: versionsCaseStudy_version__url_operator
@@ -8770,6 +8865,7 @@ enum Page_hero__type_Input {
   home
   livestream
   gradient
+  three
 }
 
 input Page_hero__fullBackground_operator {
@@ -9597,6 +9693,7 @@ type PagesDocAccessFields_hero_Fields {
   secondaryHeading: PagesDocAccessFields_hero_secondaryHeading
   secondaryDescription: PagesDocAccessFields_hero_secondaryDescription
   links: PagesDocAccessFields_hero_links
+  buttons: PagesDocAccessFields_hero_buttons
   secondaryButtons: PagesDocAccessFields_hero_secondaryButtons
   images: PagesDocAccessFields_hero_images
   media: PagesDocAccessFields_hero_media
@@ -10658,6 +10755,29 @@ type PagesDocAccessFields_hero_links_id_Delete {
   permission: Boolean!
 }
 
+type PagesDocAccessFields_hero_buttons {
+  create: PagesDocAccessFields_hero_buttons_Create
+  read: PagesDocAccessFields_hero_buttons_Read
+  update: PagesDocAccessFields_hero_buttons_Update
+  delete: PagesDocAccessFields_hero_buttons_Delete
+}
+
+type PagesDocAccessFields_hero_buttons_Create {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_buttons_Read {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_buttons_Update {
+  permission: Boolean!
+}
+
+type PagesDocAccessFields_hero_buttons_Delete {
+  permission: Boolean!
+}
+
 type PagesDocAccessFields_hero_secondaryButtons {
   create: PagesDocAccessFields_hero_secondaryButtons_Create
   read: PagesDocAccessFields_hero_secondaryButtons_Read
@@ -11568,6 +11688,7 @@ type PageVersion_Version_Hero {
   secondaryHeading(depth: Int): JSON
   secondaryDescription(depth: Int): JSON
   links: [PageVersion_Version_Hero_Links!]
+  buttons: [PageVersion_Version_Hero_Buttons!]
   secondaryButtons: [PageVersion_Version_Hero_SecondaryButtons!]
   images: [PageVersion_Version_Hero_Images!]
   media(where: PageVersion_Version_Hero_Media_where): Media
@@ -11585,6 +11706,7 @@ enum PageVersion_Version_Hero_type {
   home
   livestream
   gradient
+  three
 }
 
 enum PageVersion_Version_Hero_theme {
@@ -11866,6 +11988,8 @@ enum PageVersion_Version_Hero_Links_Link_appearance {
   primary
   secondary
 }
+
+union PageVersion_Version_Hero_Buttons = Link | Command
 
 type PageVersion_Version_Hero_SecondaryButtons {
   link: PageVersion_Version_Hero_SecondaryButtons_Link
@@ -12708,7 +12832,7 @@ input PageVersion_Version_Hero_Logos_LogoMedia_where_or {
   OR: [PageVersion_Version_Hero_Logos_LogoMedia_where_or]
 }
 
-union PageVersion_Version_Layout = Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | FeaturedMediaGallery | MediaContent | Pricing | ReusableContentBlock | Slider | Statement | Steps | StickyHighlights | ExampleTabsBlock
+union PageVersion_Version_Layout = Callout | Cta | CardGrid | CaseStudyCards | CaseStudiesHighlight | CaseStudyParallax | CodeFeature | Content | ContentGrid | FormBlock | HoverCards | HoverHighlights | LinkGrid | LogoGrid | MediaBlock | MediaContent | MediaContentAccordion | Pricing | ReusableContentBlock | Slider | Statement | Steps | StickyHighlights | ExampleTabsBlock
 
 type PageVersion_Version_Meta {
   title: String
@@ -13021,6 +13145,7 @@ enum versionsPage_version__hero__type_Input {
   home
   livestream
   gradient
+  three
 }
 
 input versionsPage_version__hero__fullBackground_operator {
@@ -17402,6 +17527,7 @@ type Footer {
 }
 
 type Footer_Columns {
+  label: String
   navItems: [Footer_Columns_NavItems!]
   id: String
 }
@@ -17474,8 +17600,32 @@ type FooterDocAccessFields_columns_Delete {
 }
 
 type FooterDocAccessFields_columns_Fields {
+  label: FooterDocAccessFields_columns_label
   navItems: FooterDocAccessFields_columns_navItems
   id: FooterDocAccessFields_columns_id
+}
+
+type FooterDocAccessFields_columns_label {
+  create: FooterDocAccessFields_columns_label_Create
+  read: FooterDocAccessFields_columns_label_Read
+  update: FooterDocAccessFields_columns_label_Update
+  delete: FooterDocAccessFields_columns_label_Delete
+}
+
+type FooterDocAccessFields_columns_label_Create {
+  permission: Boolean!
+}
+
+type FooterDocAccessFields_columns_label_Read {
+  permission: Boolean!
+}
+
+type FooterDocAccessFields_columns_label_Update {
+  permission: Boolean!
+}
+
+type FooterDocAccessFields_columns_label_Delete {
+  permission: Boolean!
 }
 
 type FooterDocAccessFields_columns_navItems {
@@ -19628,6 +19778,8 @@ type case_studiesAccess {
 type CaseStudiesFields {
   title: CaseStudiesFields_title
   introContent: CaseStudiesFields_introContent
+  industry: CaseStudiesFields_industry
+  useCase: CaseStudiesFields_useCase
   featuredImage: CaseStudiesFields_featuredImage
   layout: CaseStudiesFields_layout
   slug: CaseStudiesFields_slug
@@ -19681,6 +19833,52 @@ type CaseStudiesFields_introContent_Update {
 }
 
 type CaseStudiesFields_introContent_Delete {
+  permission: Boolean!
+}
+
+type CaseStudiesFields_industry {
+  create: CaseStudiesFields_industry_Create
+  read: CaseStudiesFields_industry_Read
+  update: CaseStudiesFields_industry_Update
+  delete: CaseStudiesFields_industry_Delete
+}
+
+type CaseStudiesFields_industry_Create {
+  permission: Boolean!
+}
+
+type CaseStudiesFields_industry_Read {
+  permission: Boolean!
+}
+
+type CaseStudiesFields_industry_Update {
+  permission: Boolean!
+}
+
+type CaseStudiesFields_industry_Delete {
+  permission: Boolean!
+}
+
+type CaseStudiesFields_useCase {
+  create: CaseStudiesFields_useCase_Create
+  read: CaseStudiesFields_useCase_Read
+  update: CaseStudiesFields_useCase_Update
+  delete: CaseStudiesFields_useCase_Delete
+}
+
+type CaseStudiesFields_useCase_Create {
+  permission: Boolean!
+}
+
+type CaseStudiesFields_useCase_Read {
+  permission: Boolean!
+}
+
+type CaseStudiesFields_useCase_Update {
+  permission: Boolean!
+}
+
+type CaseStudiesFields_useCase_Delete {
   permission: Boolean!
 }
 
@@ -20984,6 +21182,7 @@ type PagesFields_hero_Fields {
   secondaryHeading: PagesFields_hero_secondaryHeading
   secondaryDescription: PagesFields_hero_secondaryDescription
   links: PagesFields_hero_links
+  buttons: PagesFields_hero_buttons
   secondaryButtons: PagesFields_hero_secondaryButtons
   images: PagesFields_hero_images
   media: PagesFields_hero_media
@@ -22042,6 +22241,29 @@ type PagesFields_hero_links_id_Update {
 }
 
 type PagesFields_hero_links_id_Delete {
+  permission: Boolean!
+}
+
+type PagesFields_hero_buttons {
+  create: PagesFields_hero_buttons_Create
+  read: PagesFields_hero_buttons_Read
+  update: PagesFields_hero_buttons_Update
+  delete: PagesFields_hero_buttons_Delete
+}
+
+type PagesFields_hero_buttons_Create {
+  permission: Boolean!
+}
+
+type PagesFields_hero_buttons_Read {
+  permission: Boolean!
+}
+
+type PagesFields_hero_buttons_Update {
+  permission: Boolean!
+}
+
+type PagesFields_hero_buttons_Delete {
   permission: Boolean!
 }
 
@@ -24837,8 +25059,32 @@ type FooterFields_columns_Delete {
 }
 
 type FooterFields_columns_Fields {
+  label: FooterFields_columns_label
   navItems: FooterFields_columns_navItems
   id: FooterFields_columns_id
+}
+
+type FooterFields_columns_label {
+  create: FooterFields_columns_label_Create
+  read: FooterFields_columns_label_Read
+  update: FooterFields_columns_label_Update
+  delete: FooterFields_columns_label_Delete
+}
+
+type FooterFields_columns_label_Create {
+  permission: Boolean!
+}
+
+type FooterFields_columns_label_Read {
+  permission: Boolean!
+}
+
+type FooterFields_columns_label_Update {
+  permission: Boolean!
+}
+
+type FooterFields_columns_label_Delete {
+  permission: Boolean!
 }
 
 type FooterFields_columns_navItems {
@@ -26701,6 +26947,8 @@ input mutationAnnouncementUpdateInput {
 input mutationCaseStudyInput {
   title: String!
   introContent: JSON!
+  industry: String
+  useCase: String
   featuredImage: String!
   layout: JSON
   slug: String
@@ -26725,6 +26973,8 @@ enum CaseStudy__status_MutationInput {
 input mutationCaseStudyUpdateInput {
   title: String
   introContent: JSON
+  industry: String
+  useCase: String
   featuredImage: String
   layout: JSON
   slug: String
@@ -26857,6 +27107,7 @@ input mutationPage_HeroInput {
   secondaryHeading: JSON
   secondaryDescription: JSON
   links: [mutationPage_Hero_LinksInput]
+  buttons: JSON
   secondaryButtons: [mutationPage_Hero_SecondaryButtonsInput]
   images: [mutationPage_Hero_ImagesInput]
   media: String
@@ -26874,6 +27125,7 @@ enum Page_Hero_type_MutationInput {
   home
   livestream
   gradient
+  three
 }
 
 enum Page_Hero_theme_MutationInput {
@@ -27054,6 +27306,7 @@ input mutationPageUpdate_HeroInput {
   secondaryHeading: JSON
   secondaryDescription: JSON
   links: [mutationPageUpdate_Hero_LinksInput]
+  buttons: JSON
   secondaryButtons: [mutationPageUpdate_Hero_SecondaryButtonsInput]
   images: [mutationPageUpdate_Hero_ImagesInput]
   media: String
@@ -27071,6 +27324,7 @@ enum PageUpdate_Hero_type_MutationInput {
   home
   livestream
   gradient
+  three
 }
 
 enum PageUpdate_Hero_theme_MutationInput {
@@ -27529,6 +27783,7 @@ input mutationFooterInput {
 }
 
 input mutationFooter_ColumnsInput {
+  label: String!
   navItems: [mutationFooter_Columns_NavItemsInput]
   id: String
 }

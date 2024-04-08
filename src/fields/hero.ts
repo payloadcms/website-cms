@@ -2,6 +2,7 @@ import { slateEditor } from '@payloadcms/richtext-slate'
 import type { Field } from 'payload/types'
 
 import linkGroup from './linkGroup'
+import link from './link'
 import livestreamFields from './livestreamFields'
 import label from './richText/label'
 import largeBody from './richText/largeBody'
@@ -47,6 +48,10 @@ export const hero: Field = {
         {
           label: 'Gradient',
           value: 'gradient',
+        },
+        {
+          label: '3.0',
+          value: 'three',
         },
       ],
     },
@@ -100,7 +105,8 @@ export const hero: Field = {
       name: 'description',
       type: 'richText',
       admin: {
-        condition: (_, { type } = {}) => type !== 'livestream' && type !== 'centeredContent',
+        condition: (_, { type } = {}) =>
+          type !== 'livestream' && type !== 'centeredContent' && type !== 'three',
       },
       editor: slateEditor({
         admin: {
@@ -153,6 +159,41 @@ export const hero: Field = {
         },
       },
     }),
+    {
+      name: 'buttons',
+      type: 'blocks',
+      labels: {
+        singular: 'Button',
+        plural: 'Buttons',
+      },
+      admin: {
+        condition: (_, { type }) => type === 'three',
+      },
+      blocks: [
+        {
+          slug: 'link',
+          labels: {
+            singular: 'Link',
+            plural: 'Links',
+          },
+          fields: [link()],
+        },
+        {
+          slug: 'command',
+          labels: {
+            singular: 'Command Line',
+            plural: 'Command Lines',
+          },
+          fields: [
+            {
+              name: 'command',
+              type: 'text',
+              required: true,
+            },
+          ],
+        },
+      ],
+    },
     linkGroup({
       appearances: false,
       overrides: {
