@@ -14,12 +14,7 @@ export const Statement: Block = {
     blockFields({
       name: 'statementFields',
       fields: [
-        richText(
-          {},
-          {
-            elements: ['h1', 'h2'],
-          },
-        ),
+        richText({}, { elements: ['h1'] }),
         linkGroup({
           appearances: false,
         }),
