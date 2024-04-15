@@ -89,6 +89,23 @@ export const hero: Field = {
     },
     livestreamFields,
     {
+      name: 'enableAnnouncement',
+      type: 'checkbox',
+      admin: {
+        condition: (_, { type }) => type === 'home',
+      },
+      label: 'Enable Announcement?',
+    },
+    link({
+      appearances: false,
+      overrides: {
+        name: 'announcementLink',
+        admin: {
+          condition: (_, { enableAnnouncement }) => enableAnnouncement,
+        },
+      },
+    }),
+    {
       name: 'richText',
       type: 'richText',
       admin: {
