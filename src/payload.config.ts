@@ -15,11 +15,11 @@ import { CommunityHelp } from './collections/CommunityHelp'
 import { Docs } from './collections/Docs'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
+import { Partners } from './collections/Partners'
 import { Posts } from './collections/Posts'
 import { ReusableContent } from './collections/ReusableContent'
 import { Users } from './collections/Users'
 import SyncDocsButton from './components/SyncDocsButton'
-import richText from './fields/richText'
 import { Footer } from './globals/Footer'
 import { MainMenu } from './globals/MainMenu'
 import { TopBar } from './globals/TopBar'
@@ -43,6 +43,7 @@ export default buildConfig({
     Docs,
     Media,
     Pages,
+    Partners,
     Posts,
     ReusableContent,
     Users,
