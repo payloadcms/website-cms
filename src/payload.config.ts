@@ -23,6 +23,7 @@ import SyncDocsButton from './components/SyncDocsButton'
 import { Footer } from './globals/Footer'
 import { MainMenu } from './globals/MainMenu'
 import { TopBar } from './globals/TopBar'
+import { PartnerProgram } from './globals/PartnerProgram'
 import syncDocs from './scripts/syncDocs'
 
 dotenv.config({
@@ -55,7 +56,7 @@ export default buildConfig({
       handler: syncDocs,
     },
   ],
-  globals: [Footer, MainMenu, TopBar],
+  globals: [Footer, MainMenu, TopBar, PartnerProgram],
   graphQL: {
     disablePlaygroundInProduction: false,
   },
