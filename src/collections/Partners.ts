@@ -152,7 +152,7 @@ export const Partners: CollectionConfig = {
               required: true,
             },
             {
-              name: 'caseStudies',
+              name: 'caseStudy',
               type: 'relationship',
               relationTo: 'case-studies',
             },
@@ -166,6 +166,7 @@ export const Partners: CollectionConfig = {
                   fields: [
                     {
                       name: 'type',
+                      required: true,
                       type: 'select',
                       options: [
                         {
@@ -181,6 +182,7 @@ export const Partners: CollectionConfig = {
                     {
                       name: 'number',
                       type: 'number',
+                      required: true,
                     },
                   ],
                 },
@@ -192,16 +194,19 @@ export const Partners: CollectionConfig = {
               maxRows: 4,
               fields: [
                 {
-                  name: 'title',
-                  type: 'text',
+                  name: 'year',
+                  type: 'number',
+                  required: true,
                 },
                 {
-                  name: 'description',
-                  type: 'textarea',
+                  name: 'name',
+                  type: 'text',
+                  required: true,
                 },
                 {
                   name: 'link',
                   type: 'text',
+                  required: true,
                 },
               ],
             },

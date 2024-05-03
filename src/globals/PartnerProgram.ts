@@ -1,4 +1,5 @@
 import { GlobalConfig } from 'payload/types'
+import { isAdmin } from '../access/isAdmin'
 
 import linkGroup from '../fields/linkGroup'
 import { Callout } from '../blocks/Callout'
@@ -32,22 +33,26 @@ export const PartnerProgram: GlobalConfig = {
   admin: {
     group: 'Agency Partner Program',
   },
+  access: {
+    read: () => true,
+    update: isAdmin,
+  },
   fields: [
     {
       name: 'hero',
       type: 'group',
       fields: [
+        {
+          name: 'richText',
+          type: 'richText',
+          label: 'Hero Text',
+        },
         linkGroup({
           overrides: {
             name: 'breadcrumbBarLinks',
           },
           appearances: false,
         }),
-        {
-          name: 'richText',
-          type: 'richText',
-          label: 'Hero Text',
-        },
         linkGroup({
           overrides: {
             name: 'heroLinks',

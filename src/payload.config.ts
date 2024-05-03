@@ -56,7 +56,7 @@ export default buildConfig({
       handler: syncDocs,
     },
   ],
-  globals: [Footer, MainMenu, TopBar, PartnerProgram],
+  globals: [PartnerProgram, Footer, MainMenu, TopBar],
   graphQL: {
     disablePlaygroundInProduction: false,
   },
