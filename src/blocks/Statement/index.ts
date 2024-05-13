@@ -19,10 +19,37 @@ export const Statement: Block = {
           appearances: false,
         }),
         {
+          name: 'assetType',
+          label: 'Asset Type',
+          type: 'select',
+          defaultValue: 'media',
+          options: [
+            {
+              label: 'Media',
+              value: 'media',
+            },
+            {
+              label: 'Code',
+              value: 'code',
+            },
+          ],
+        },
+        {
           name: 'media',
           label: 'Media',
           type: 'upload',
           relationTo: 'media',
+          admin: {
+            condition: (_, siblingData) => siblingData.assetType === 'media',
+          },
+        },
+        {
+          name: 'code',
+          label: 'Code',
+          type: 'code',
+          admin: {
+            condition: (_, siblingData) => siblingData.assetType === 'code',
+          },
         },
         {
           type: 'row',
@@ -32,6 +59,10 @@ export const Statement: Block = {
               label: 'Media Width',
               type: 'select',
               defaultValue: 'medium',
+              admin: {
+                condition: (_, siblingData) => siblingData.assetType === 'media',
+                width: '50%',
+              },
               options: [
                 {
                   label: 'Small',
