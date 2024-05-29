@@ -31,7 +31,7 @@ export const PartnerProgram: GlobalConfig = {
   slug: 'partner-program',
   label: 'Program Page',
   admin: {
-    group: 'Agency Partner Program',
+    group: 'Partner Program',
   },
   access: {
     read: () => true,

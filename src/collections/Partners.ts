@@ -12,7 +12,7 @@ export const Partners: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
-    group: 'Agency Partner Program',
+    group: 'Partner Program',
   },
   access: {
     create: isAdmin,
@@ -222,182 +222,30 @@ export const Partners: CollectionConfig = {
             },
             {
               name: 'regions',
-              type: 'select',
+              type: 'relationship',
+              relationTo: 'regions',
               hasMany: true,
-              options: [
-                {
-                  label: 'Asia',
-                  value: 'asia',
-                },
-                {
-                  label: 'Africa',
-                  value: 'africa',
-                },
-                {
-                  label: 'Australia and New Zealand',
-                  value: 'aus-nz',
-                },
-                {
-                  label: 'Europe',
-                  value: 'europe',
-                },
-                {
-                  label: 'Latin America',
-                  value: 'latin-america',
-                },
-                {
-                  label: 'Middle East',
-                  value: 'middle-east',
-                },
-                {
-                  label: 'North America',
-                  value: 'north-america',
-                },
-              ],
+              required: true,
+            },
+            {
+              name: 'specialties',
+              type: 'relationship',
+              relationTo: 'specialties',
+              hasMany: true,
               required: true,
             },
             {
               name: 'budgets',
-              type: 'select',
+              type: 'relationship',
+              relationTo: 'budgets',
               hasMany: true,
-              options: [
-                {
-                  label: '$0 - $10,000',
-                  value: '_0_10k',
-                },
-                {
-                  label: '$10,000 - $50,000',
-                  value: '_10k_50k',
-                },
-                {
-                  label: '$50,000 - $100,000',
-                  value: '_50k_100k',
-                },
-                {
-                  label: '$100,000 - $250,000',
-                  value: '_100k_250k',
-                },
-                {
-                  label: '$250,000 - $500,000',
-                  value: '_250k-500k',
-                },
-                {
-                  label: '$500,000+',
-                  value: 'over_500k',
-                },
-              ],
               required: true,
             },
             {
               name: 'industries',
-              type: 'select',
+              type: 'relationship',
+              relationTo: 'industries',
               hasMany: true,
-              options: [
-                {
-                  label: 'E-commerce',
-                  value: 'ecommerce',
-                },
-                {
-                  label: 'Healthcare',
-                  value: 'healthcare',
-                },
-                {
-                  label: 'Finance',
-                  value: 'finance',
-                },
-                {
-                  label: 'Education',
-                  value: 'education',
-                },
-                {
-                  label: 'Technology',
-                  value: 'technology',
-                },
-                {
-                  label: 'Hospitality',
-                  value: 'hospitality',
-                },
-                {
-                  label: 'Entertainment',
-                  value: 'entertainment',
-                },
-                {
-                  label: 'Manufacturing',
-                  value: 'manufacturing',
-                },
-                {
-                  label: 'Retail',
-                  value: 'retail',
-                },
-                {
-                  label: 'Travel and Tourism',
-                  value: 'travel-tourism',
-                },
-                {
-                  label: 'Fashion',
-                  value: 'fashion',
-                },
-                {
-                  label: 'Food and Beverage',
-                  value: 'food-beverage',
-                },
-              ],
-              required: true,
-            },
-            {
-              name: 'technologies',
-              type: 'select',
-              hasMany: true,
-              options: [
-                {
-                  label: 'React',
-                  value: 'react',
-                },
-                {
-                  label: 'Next.js',
-                  value: 'nextjs',
-                },
-                {
-                  label: 'Angular',
-                  value: 'angular',
-                },
-                {
-                  label: 'Vue',
-                  value: 'vue',
-                },
-                {
-                  label: 'ASP.NET',
-                  value: 'aspnet',
-                },
-                {
-                  label: 'Ruby',
-                  value: 'ruby',
-                },
-                {
-                  label: 'Svelte',
-                  value: 'svelte',
-                },
-                {
-                  label: 'Gatsby',
-                  value: 'gatsby',
-                },
-                {
-                  label: 'Remix',
-                  value: 'remix',
-                },
-                {
-                  label: 'Solid',
-                  value: 'solid',
-                },
-                {
-                  label: 'Astro',
-                  value: 'astro',
-                },
-                {
-                  label: 'Qwik',
-                  value: 'qwik',
-                },
-              ],
               required: true,
             },
             {

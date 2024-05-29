@@ -25,6 +25,7 @@ import { MainMenu } from './globals/MainMenu'
 import { TopBar } from './globals/TopBar'
 import { PartnerProgram } from './globals/PartnerProgram'
 import syncDocs from './scripts/syncDocs'
+import { Budgets, Industries, Regions, Specialties } from './collections/PartnerFilters'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -45,6 +46,10 @@ export default buildConfig({
     Media,
     Pages,
     Partners,
+    Industries,
+    Specialties,
+    Regions,
+    Budgets,
     Posts,
     ReusableContent,
     Users,
