@@ -3876,7 +3876,7 @@ export interface Partner {
   agency_status?: ('active' | 'inactive') | null;
   hubspotID?: string | null;
   featured?: boolean | null;
-  badges?: 'top-contributor'[] | null;
+  badges?: 'Top Contributor'[] | null;
   logo: string | Media;
   content: {
     bannerImage: string | Media;

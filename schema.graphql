@@ -14324,7 +14324,7 @@ enum Partner_agency_status {
 }
 
 enum Partner_badges {
-  top_contributor
+  TopContributor
 }
 
 input Partner_Logo_where {
@@ -14856,7 +14856,7 @@ input Partner_badges_operator {
 }
 
 enum Partner_badges_Input {
-  top_contributor
+  TopContributor
 }
 
 input Partner_logo_operator {
@@ -33555,7 +33555,7 @@ enum Partner_agency_status_MutationInput {
 }
 
 enum Partner_badges_MutationInput {
-  top_contributor
+  TopContributor
 }
 
 input mutationPartner_ContentInput {
@@ -33630,7 +33630,7 @@ enum PartnerUpdate_agency_status_MutationInput {
 }
 
 enum PartnerUpdate_badges_MutationInput {
-  top_contributor
+  TopContributor
 }
 
 input mutationPartnerUpdate_ContentInput {

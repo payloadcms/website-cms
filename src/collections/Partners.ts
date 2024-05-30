@@ -86,7 +86,7 @@ export const Partners: CollectionConfig = {
       options: [
         {
           label: 'Top Contributor',
-          value: 'top-contributor',
+          value: 'Top Contributor',
         },
       ],
     },
