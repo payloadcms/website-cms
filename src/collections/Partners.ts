@@ -3,6 +3,7 @@ import { isAdmin } from '../access/isAdmin'
 import { CollectionConfig } from 'payload/types'
 import { slugField } from '../fields/slug'
 import { slateEditor } from '@payloadcms/richtext-slate'
+import { validateContributions } from '../utilities/validateContributions'
 
 export const Partners: CollectionConfig = {
   slug: 'partners',
@@ -72,25 +73,6 @@ export const Partners: CollectionConfig = {
       },
     },
     {
-      name: 'featured',
-      type: 'checkbox',
-      label: 'Featured',
-      admin: {
-        hidden: true,
-      },
-    },
-    {
-      name: 'badges',
-      type: 'select',
-      hasMany: true,
-      options: [
-        {
-          label: 'Top Contributor',
-          value: 'Top Contributor',
-        },
-      ],
-    },
-    {
       name: 'logo',
       type: 'upload',
       relationTo: 'media',
@@ -98,6 +80,25 @@ export const Partners: CollectionConfig = {
         position: 'sidebar',
       },
       required: true,
+    },
+    {
+      name: 'featured',
+      type: 'checkbox',
+      label: 'Featured',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description:
+          'This field is managed by the Featured Partners field in the Partner Program collection',
+      },
+    },
+    {
+      name: 'topContributor',
+      type: 'checkbox',
+      label: 'Top Contributor?',
+      admin: {
+        position: 'sidebar',
+      },
     },
     {
       type: 'tabs',
@@ -177,12 +178,23 @@ export const Partners: CollectionConfig = {
                           label: 'Pull Request',
                           value: 'pr',
                         },
+                        {
+                          label: 'Issue',
+                          value: 'issue',
+                        },
                       ],
+                      admin: {
+                        width: '50%',
+                      },
                     },
                     {
                       name: 'number',
                       type: 'number',
                       required: true,
+                      validate: validateContributions,
+                      admin: {
+                        width: '50%',
+                      },
                     },
                   ],
                 },
@@ -260,6 +272,7 @@ export const Partners: CollectionConfig = {
                       name: 'platform',
                       type: 'select',
                       label: 'Platform',
+                      required: true,
                       admin: {
                         width: '50%',
                       },
@@ -288,20 +301,13 @@ export const Partners: CollectionConfig = {
                           label: 'GitHub',
                           value: 'github',
                         },
-                        {
-                          label: 'Dribbble',
-                          value: 'dribbble',
-                        },
-                        {
-                          label: 'Behance',
-                          value: 'behance',
-                        },
                       ],
                     },
                     {
                       name: 'url',
                       type: 'text',
                       label: 'URL',
+                      required: true,
                       admin: {
                         width: '50%',
                       },

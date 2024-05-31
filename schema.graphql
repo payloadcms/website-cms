@@ -14304,9 +14304,9 @@ type Partner {
   slug: String!
   agency_status: Partner_agency_status
   hubspotID: String
-  featured: Boolean
-  badges: [Partner_badges!]
   logo(where: Partner_Logo_where): Media!
+  featured: Boolean
+  topContributor: Boolean
   content: Partner_Content
   city: String!
   regions: [Region!]!
@@ -14321,10 +14321,6 @@ type Partner {
 enum Partner_agency_status {
   active
   inactive
-}
-
-enum Partner_badges {
-  TopContributor
 }
 
 input Partner_Logo_where {
@@ -14666,6 +14662,7 @@ type Partner_Content_Contributions {
 enum Partner_Content_Contributions_type {
   discussion
   pr
+  issue
 }
 
 type Partner_Content_Projects {
@@ -14720,8 +14717,6 @@ enum Partner_Social_platform {
   instagram
   youtube
   github
-  dribbble
-  behance
 }
 
 type Partners {
@@ -14745,9 +14740,9 @@ input Partner_where {
   slug: Partner_slug_operator
   agency_status: Partner_agency_status_operator
   hubspotID: Partner_hubspotID_operator
-  featured: Partner_featured_operator
-  badges: Partner_badges_operator
   logo: Partner_logo_operator
+  featured: Partner_featured_operator
+  topContributor: Partner_topContributor_operator
   content__bannerImage: Partner_content__bannerImage_operator
   content__overview: Partner_content__overview_operator
   content__services: Partner_content__services_operator
@@ -14840,28 +14835,21 @@ input Partner_hubspotID_operator {
   exists: Boolean
 }
 
+input Partner_logo_operator {
+  equals: String
+  not_equals: String
+}
+
 input Partner_featured_operator {
   equals: Boolean
   not_equals: Boolean
   exists: Boolean
 }
 
-input Partner_badges_operator {
-  equals: Partner_badges_Input
-  not_equals: Partner_badges_Input
-  in: [Partner_badges_Input]
-  not_in: [Partner_badges_Input]
-  all: [Partner_badges_Input]
+input Partner_topContributor_operator {
+  equals: Boolean
+  not_equals: Boolean
   exists: Boolean
-}
-
-enum Partner_badges_Input {
-  TopContributor
-}
-
-input Partner_logo_operator {
-  equals: String
-  not_equals: String
 }
 
 input Partner_content__bannerImage_operator {
@@ -14910,6 +14898,7 @@ input Partner_content__contributions__type_operator {
 enum Partner_content__contributions__type_Input {
   discussion
   pr
+  issue
 }
 
 input Partner_content__contributions__number_operator {
@@ -15020,7 +15009,6 @@ input Partner_social__platform_operator {
   in: [Partner_social__platform_Input]
   not_in: [Partner_social__platform_Input]
   all: [Partner_social__platform_Input]
-  exists: Boolean
 }
 
 enum Partner_social__platform_Input {
@@ -15030,8 +15018,6 @@ enum Partner_social__platform_Input {
   instagram
   youtube
   github
-  dribbble
-  behance
 }
 
 input Partner_social__url_operator {
@@ -15042,7 +15028,6 @@ input Partner_social__url_operator {
   in: [String]
   not_in: [String]
   all: [String]
-  exists: Boolean
 }
 
 input Partner_social__id_operator {
@@ -15096,9 +15081,9 @@ input Partner_where_and {
   slug: Partner_slug_operator
   agency_status: Partner_agency_status_operator
   hubspotID: Partner_hubspotID_operator
-  featured: Partner_featured_operator
-  badges: Partner_badges_operator
   logo: Partner_logo_operator
+  featured: Partner_featured_operator
+  topContributor: Partner_topContributor_operator
   content__bannerImage: Partner_content__bannerImage_operator
   content__overview: Partner_content__overview_operator
   content__services: Partner_content__services_operator
@@ -15133,9 +15118,9 @@ input Partner_where_or {
   slug: Partner_slug_operator
   agency_status: Partner_agency_status_operator
   hubspotID: Partner_hubspotID_operator
-  featured: Partner_featured_operator
-  badges: Partner_badges_operator
   logo: Partner_logo_operator
+  featured: Partner_featured_operator
+  topContributor: Partner_topContributor_operator
   content__bannerImage: Partner_content__bannerImage_operator
   content__overview: Partner_content__overview_operator
   content__services: Partner_content__services_operator
@@ -15178,9 +15163,9 @@ type PartnersDocAccessFields {
   slug: PartnersDocAccessFields_slug
   agency_status: PartnersDocAccessFields_agency_status
   hubspotID: PartnersDocAccessFields_hubspotID
-  featured: PartnersDocAccessFields_featured
-  badges: PartnersDocAccessFields_badges
   logo: PartnersDocAccessFields_logo
+  featured: PartnersDocAccessFields_featured
+  topContributor: PartnersDocAccessFields_topContributor
   bannerImage: PartnersDocAccessFields_bannerImage
   overview: PartnersDocAccessFields_overview
   services: PartnersDocAccessFields_services
@@ -15336,6 +15321,29 @@ type PartnersDocAccessFields_hubspotID_Delete {
   permission: Boolean!
 }
 
+type PartnersDocAccessFields_logo {
+  create: PartnersDocAccessFields_logo_Create
+  read: PartnersDocAccessFields_logo_Read
+  update: PartnersDocAccessFields_logo_Update
+  delete: PartnersDocAccessFields_logo_Delete
+}
+
+type PartnersDocAccessFields_logo_Create {
+  permission: Boolean!
+}
+
+type PartnersDocAccessFields_logo_Read {
+  permission: Boolean!
+}
+
+type PartnersDocAccessFields_logo_Update {
+  permission: Boolean!
+}
+
+type PartnersDocAccessFields_logo_Delete {
+  permission: Boolean!
+}
+
 type PartnersDocAccessFields_featured {
   create: PartnersDocAccessFields_featured_Create
   read: PartnersDocAccessFields_featured_Read
@@ -15359,49 +15367,26 @@ type PartnersDocAccessFields_featured_Delete {
   permission: Boolean!
 }
 
-type PartnersDocAccessFields_badges {
-  create: PartnersDocAccessFields_badges_Create
-  read: PartnersDocAccessFields_badges_Read
-  update: PartnersDocAccessFields_badges_Update
-  delete: PartnersDocAccessFields_badges_Delete
+type PartnersDocAccessFields_topContributor {
+  create: PartnersDocAccessFields_topContributor_Create
+  read: PartnersDocAccessFields_topContributor_Read
+  update: PartnersDocAccessFields_topContributor_Update
+  delete: PartnersDocAccessFields_topContributor_Delete
 }
 
-type PartnersDocAccessFields_badges_Create {
+type PartnersDocAccessFields_topContributor_Create {
   permission: Boolean!
 }
 
-type PartnersDocAccessFields_badges_Read {
+type PartnersDocAccessFields_topContributor_Read {
   permission: Boolean!
 }
 
-type PartnersDocAccessFields_badges_Update {
+type PartnersDocAccessFields_topContributor_Update {
   permission: Boolean!
 }
 
-type PartnersDocAccessFields_badges_Delete {
-  permission: Boolean!
-}
-
-type PartnersDocAccessFields_logo {
-  create: PartnersDocAccessFields_logo_Create
-  read: PartnersDocAccessFields_logo_Read
-  update: PartnersDocAccessFields_logo_Update
-  delete: PartnersDocAccessFields_logo_Delete
-}
-
-type PartnersDocAccessFields_logo_Create {
-  permission: Boolean!
-}
-
-type PartnersDocAccessFields_logo_Read {
-  permission: Boolean!
-}
-
-type PartnersDocAccessFields_logo_Update {
-  permission: Boolean!
-}
-
-type PartnersDocAccessFields_logo_Delete {
+type PartnersDocAccessFields_topContributor_Delete {
   permission: Boolean!
 }
 
@@ -20536,6 +20521,7 @@ type PayloadPreferencesDeleteDocAccess {
 }
 
 type PartnerProgram {
+  contactForm: Form!
   hero: PartnerProgram_Hero
   featuredPartners: PartnerProgram_FeaturedPartners
   contentBlocks: PartnerProgram_ContentBlocks
@@ -20632,11 +20618,35 @@ type partner_programDocAccess {
 }
 
 type PartnerProgramDocAccessFields {
+  contactForm: PartnerProgramDocAccessFields_contactForm
   hero: PartnerProgramDocAccessFields_hero
   featuredPartners: PartnerProgramDocAccessFields_featuredPartners
   contentBlocks: PartnerProgramDocAccessFields_contentBlocks
   updatedAt: PartnerProgramDocAccessFields_updatedAt
   createdAt: PartnerProgramDocAccessFields_createdAt
+}
+
+type PartnerProgramDocAccessFields_contactForm {
+  create: PartnerProgramDocAccessFields_contactForm_Create
+  read: PartnerProgramDocAccessFields_contactForm_Read
+  update: PartnerProgramDocAccessFields_contactForm_Update
+  delete: PartnerProgramDocAccessFields_contactForm_Delete
+}
+
+type PartnerProgramDocAccessFields_contactForm_Create {
+  permission: Boolean!
+}
+
+type PartnerProgramDocAccessFields_contactForm_Read {
+  permission: Boolean!
+}
+
+type PartnerProgramDocAccessFields_contactForm_Update {
+  permission: Boolean!
+}
+
+type PartnerProgramDocAccessFields_contactForm_Delete {
+  permission: Boolean!
 }
 
 type PartnerProgramDocAccessFields_hero {
@@ -27110,9 +27120,9 @@ type PartnersFields {
   slug: PartnersFields_slug
   agency_status: PartnersFields_agency_status
   hubspotID: PartnersFields_hubspotID
-  featured: PartnersFields_featured
-  badges: PartnersFields_badges
   logo: PartnersFields_logo
+  featured: PartnersFields_featured
+  topContributor: PartnersFields_topContributor
   bannerImage: PartnersFields_bannerImage
   overview: PartnersFields_overview
   services: PartnersFields_services
@@ -27268,6 +27278,29 @@ type PartnersFields_hubspotID_Delete {
   permission: Boolean!
 }
 
+type PartnersFields_logo {
+  create: PartnersFields_logo_Create
+  read: PartnersFields_logo_Read
+  update: PartnersFields_logo_Update
+  delete: PartnersFields_logo_Delete
+}
+
+type PartnersFields_logo_Create {
+  permission: Boolean!
+}
+
+type PartnersFields_logo_Read {
+  permission: Boolean!
+}
+
+type PartnersFields_logo_Update {
+  permission: Boolean!
+}
+
+type PartnersFields_logo_Delete {
+  permission: Boolean!
+}
+
 type PartnersFields_featured {
   create: PartnersFields_featured_Create
   read: PartnersFields_featured_Read
@@ -27291,49 +27324,26 @@ type PartnersFields_featured_Delete {
   permission: Boolean!
 }
 
-type PartnersFields_badges {
-  create: PartnersFields_badges_Create
-  read: PartnersFields_badges_Read
-  update: PartnersFields_badges_Update
-  delete: PartnersFields_badges_Delete
+type PartnersFields_topContributor {
+  create: PartnersFields_topContributor_Create
+  read: PartnersFields_topContributor_Read
+  update: PartnersFields_topContributor_Update
+  delete: PartnersFields_topContributor_Delete
 }
 
-type PartnersFields_badges_Create {
+type PartnersFields_topContributor_Create {
   permission: Boolean!
 }
 
-type PartnersFields_badges_Read {
+type PartnersFields_topContributor_Read {
   permission: Boolean!
 }
 
-type PartnersFields_badges_Update {
+type PartnersFields_topContributor_Update {
   permission: Boolean!
 }
 
-type PartnersFields_badges_Delete {
-  permission: Boolean!
-}
-
-type PartnersFields_logo {
-  create: PartnersFields_logo_Create
-  read: PartnersFields_logo_Read
-  update: PartnersFields_logo_Update
-  delete: PartnersFields_logo_Delete
-}
-
-type PartnersFields_logo_Create {
-  permission: Boolean!
-}
-
-type PartnersFields_logo_Read {
-  permission: Boolean!
-}
-
-type PartnersFields_logo_Update {
-  permission: Boolean!
-}
-
-type PartnersFields_logo_Delete {
+type PartnersFields_topContributor_Delete {
   permission: Boolean!
 }
 
@@ -30350,11 +30360,35 @@ type partner_programAccess {
 }
 
 type PartnerProgramFields {
+  contactForm: PartnerProgramFields_contactForm
   hero: PartnerProgramFields_hero
   featuredPartners: PartnerProgramFields_featuredPartners
   contentBlocks: PartnerProgramFields_contentBlocks
   updatedAt: PartnerProgramFields_updatedAt
   createdAt: PartnerProgramFields_createdAt
+}
+
+type PartnerProgramFields_contactForm {
+  create: PartnerProgramFields_contactForm_Create
+  read: PartnerProgramFields_contactForm_Read
+  update: PartnerProgramFields_contactForm_Update
+  delete: PartnerProgramFields_contactForm_Delete
+}
+
+type PartnerProgramFields_contactForm_Create {
+  permission: Boolean!
+}
+
+type PartnerProgramFields_contactForm_Read {
+  permission: Boolean!
+}
+
+type PartnerProgramFields_contactForm_Update {
+  permission: Boolean!
+}
+
+type PartnerProgramFields_contactForm_Delete {
+  permission: Boolean!
 }
 
 type PartnerProgramFields_hero {
@@ -33535,9 +33569,9 @@ input mutationPartnerInput {
   slug: String!
   agency_status: Partner_agency_status_MutationInput
   hubspotID: String
-  featured: Boolean
-  badges: [Partner_badges_MutationInput]
   logo: String!
+  featured: Boolean
+  topContributor: Boolean
   content: mutationPartner_ContentInput
   city: String!
   regions: [String]
@@ -33552,10 +33586,6 @@ input mutationPartnerInput {
 enum Partner_agency_status_MutationInput {
   active
   inactive
-}
-
-enum Partner_badges_MutationInput {
-  TopContributor
 }
 
 input mutationPartner_ContentInput {
@@ -33577,6 +33607,7 @@ input mutationPartner_Content_ContributionsInput {
 enum Partner_Content_Contributions_type_MutationInput {
   discussion
   pr
+  issue
 }
 
 input mutationPartner_Content_ProjectsInput {
@@ -33587,8 +33618,8 @@ input mutationPartner_Content_ProjectsInput {
 }
 
 input mutationPartner_SocialInput {
-  platform: Partner_Social_platform_MutationInput
-  url: String
+  platform: Partner_Social_platform_MutationInput!
+  url: String!
   id: String
 }
 
@@ -33599,8 +33630,6 @@ enum Partner_Social_platform_MutationInput {
   instagram
   youtube
   github
-  dribbble
-  behance
 }
 
 input mutationPartnerUpdateInput {
@@ -33610,9 +33639,9 @@ input mutationPartnerUpdateInput {
   slug: String
   agency_status: PartnerUpdate_agency_status_MutationInput
   hubspotID: String
-  featured: Boolean
-  badges: [PartnerUpdate_badges_MutationInput]
   logo: String
+  featured: Boolean
+  topContributor: Boolean
   content: mutationPartnerUpdate_ContentInput
   city: String
   regions: [String]
@@ -33627,10 +33656,6 @@ input mutationPartnerUpdateInput {
 enum PartnerUpdate_agency_status_MutationInput {
   active
   inactive
-}
-
-enum PartnerUpdate_badges_MutationInput {
-  TopContributor
 }
 
 input mutationPartnerUpdate_ContentInput {
@@ -33652,6 +33677,7 @@ input mutationPartnerUpdate_Content_ContributionsInput {
 enum PartnerUpdate_Content_Contributions_type_MutationInput {
   discussion
   pr
+  issue
 }
 
 input mutationPartnerUpdate_Content_ProjectsInput {
@@ -33662,8 +33688,8 @@ input mutationPartnerUpdate_Content_ProjectsInput {
 }
 
 input mutationPartnerUpdate_SocialInput {
-  platform: PartnerUpdate_Social_platform_MutationInput
-  url: String
+  platform: PartnerUpdate_Social_platform_MutationInput!
+  url: String!
   id: String
 }
 
@@ -33674,8 +33700,6 @@ enum PartnerUpdate_Social_platform_MutationInput {
   instagram
   youtube
   github
-  dribbble
-  behance
 }
 
 input mutationIndustryInput {
@@ -34033,6 +34057,7 @@ enum PayloadPreferenceUpdate_UserRelationshipInputRelationTo {
 }
 
 input mutationPartnerProgramInput {
+  contactForm: String
   hero: mutationPartnerProgram_HeroInput
   featuredPartners: mutationPartnerProgram_FeaturedPartnersInput!
   contentBlocks: mutationPartnerProgram_ContentBlocksInput

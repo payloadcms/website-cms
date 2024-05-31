@@ -39,6 +39,12 @@ export const PartnerProgram: GlobalConfig = {
   },
   fields: [
     {
+      name: 'contactForm',
+      type: 'relationship',
+      relationTo: 'forms',
+      required: true,
+    },
+    {
       name: 'hero',
       type: 'group',
       fields: [
@@ -77,6 +83,40 @@ export const PartnerProgram: GlobalConfig = {
           required: true,
           minRows: 4,
           maxRows: 4,
+          hooks: {
+            afterChange: [
+              async ({ value, previousValue, req }) => {
+                if (value !== previousValue) {
+                  const payload = await req.payload
+                  await payload
+                    .update({
+                      collection: 'partners',
+                      where: {
+                        featured: {
+                          equals: true,
+                        },
+                      },
+                      data: {
+                        featured: false,
+                      },
+                    })
+                    .then(async () => {
+                      await payload.update({
+                        collection: 'partners',
+                        where: {
+                          id: {
+                            in: value,
+                          },
+                        },
+                        data: {
+                          featured: true,
+                        },
+                      })
+                    })
+                }
+              },
+            ],
+          },
         },
       ],
     },
