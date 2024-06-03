@@ -13,7 +13,6 @@ export const Partners: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
-    group: 'Partner Program',
   },
   access: {
     create: isAdmin,

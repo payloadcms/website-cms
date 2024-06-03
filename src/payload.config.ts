@@ -45,7 +45,6 @@ export default buildConfig({
     Docs,
     Media,
     Pages,
-    Partners,
     Industries,
     Specialties,
     Regions,
@@ -53,6 +52,7 @@ export default buildConfig({
     Posts,
     ReusableContent,
     Users,
+    Partners,
   ],
   endpoints: [
     {
@@ -61,7 +61,7 @@ export default buildConfig({
       handler: syncDocs,
     },
   ],
-  globals: [PartnerProgram, Footer, MainMenu, TopBar],
+  globals: [Footer, MainMenu, TopBar, PartnerProgram],
   graphQL: {
     disablePlaygroundInProduction: false,
   },

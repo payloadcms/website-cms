@@ -29,10 +29,7 @@ import { MediaContentAccordion } from '../blocks/MediaContentAccordion'
 
 export const PartnerProgram: GlobalConfig = {
   slug: 'partner-program',
-  label: 'Program Page',
-  admin: {
-    group: 'Partner Program',
-  },
+  label: 'Partner Program Directory',
   access: {
     read: () => true,
     update: isAdmin,
@@ -123,10 +120,15 @@ export const PartnerProgram: GlobalConfig = {
     {
       name: 'contentBlocks',
       type: 'group',
-      label: 'Content Blocks',
+      label: false,
       fields: [
         {
           name: 'beforeDirectory',
+          label: 'Before Directory Blocks',
+          labels: {
+            singular: 'Block',
+            plural: 'Blocks',
+          },
           type: 'blocks',
           blocks: [
             Callout,
@@ -158,6 +160,11 @@ export const PartnerProgram: GlobalConfig = {
         {
           name: 'afterDirectory',
           type: 'blocks',
+          label: 'After Directory Blocks',
+          labels: {
+            singular: 'Block',
+            plural: 'Blocks',
+          },
           blocks: [
             Callout,
             CallToAction,
