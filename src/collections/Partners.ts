@@ -187,12 +187,21 @@ export const Partners: CollectionConfig = {
                       },
                     },
                     {
+                      name: 'repo',
+                      type: 'text',
+                      required: true,
+                      defaultValue: 'payload',
+                      admin: {
+                        width: '25%',
+                      },
+                    },
+                    {
                       name: 'number',
                       type: 'number',
                       required: true,
                       validate: validateContributions,
                       admin: {
-                        width: '50%',
+                        width: '25%',
                       },
                     },
                   ],

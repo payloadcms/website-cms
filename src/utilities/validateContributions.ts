@@ -13,7 +13,7 @@ export const validateContributions: Validate = async (value, { siblingData }) =>
       body: JSON.stringify({
         query: `
       query {
-        repository(owner: "payloadcms", name: "payload") {
+        repository(owner: "payloadcms", name: "${siblingData.repo}) {
           discussion(number: ${value}) {
             title
             url
@@ -36,7 +36,7 @@ export const validateContributions: Validate = async (value, { siblingData }) =>
       body: JSON.stringify({
         query: `
           query {
-            repository(owner: "payloadcms", name: "payload") {
+            repository(owner: "payloadcms", name: "${siblingData.repo}") {
               issue(number: ${value}) {
                 title
                 url
@@ -59,7 +59,7 @@ export const validateContributions: Validate = async (value, { siblingData }) =>
       body: JSON.stringify({
         query: `
           query {
-            repository(owner: "payloadcms", name: "payload") {
+            repository(owner: "payloadcms", name: "${siblingData.repo}") {
               pullRequest(number: ${value}) {
                 title
                 url
