@@ -40,6 +40,9 @@ export const PartnerProgram: GlobalConfig = {
       type: 'relationship',
       relationTo: 'forms',
       required: true,
+      admin: {
+        description: 'Select the form that should be used for the contact form.',
+      },
     },
     {
       name: 'hero',

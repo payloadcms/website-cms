@@ -18,7 +18,7 @@ const Filter: (slug: string, label: string) => CollectionConfig = (slug, label) 
     fields: [
       {
         name: 'name',
-        label,
+        label: label + 'Label',
         type: 'text',
         required: true,
         unique: true,
@@ -29,6 +29,9 @@ const Filter: (slug: string, label: string) => CollectionConfig = (slug, label) 
         type: 'text',
         required: true,
         unique: true,
+        admin: {
+          description: 'Must contain only lowercase letters, numbers, hyphens, and underscores',
+        },
       },
     ],
   }

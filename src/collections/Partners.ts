@@ -61,6 +61,7 @@ export const Partners: CollectionConfig = {
       defaultValue: 'active',
       admin: {
         position: 'sidebar',
+        description: 'Set to inactive to hide this partner from the directory.',
       },
     },
     {
@@ -160,6 +161,10 @@ export const Partners: CollectionConfig = {
               name: 'contributions',
               label: 'Contributions',
               type: 'array',
+              admin: {
+                description:
+                  "Contributions to Payload. Must be a valid GitHub issue, pull request, or discussion URL from a repo in the 'payloadcms' organization.",
+              },
               fields: [
                 {
                   type: 'row',
@@ -193,6 +198,7 @@ export const Partners: CollectionConfig = {
                       defaultValue: 'payload',
                       admin: {
                         width: '25%',
+                        description: ({ path, value }) => `github.com/payloadcms/${value || ''}`,
                       },
                     },
                     {
@@ -210,6 +216,7 @@ export const Partners: CollectionConfig = {
             },
             {
               name: 'projects',
+              label: 'Projects built with Payload',
               type: 'array',
               maxRows: 4,
               fields: [
