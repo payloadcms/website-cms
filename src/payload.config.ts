@@ -15,15 +15,17 @@ import { CommunityHelp } from './collections/CommunityHelp'
 import { Docs } from './collections/Docs'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
+import { Partners } from './collections/Partners'
 import { Posts } from './collections/Posts'
 import { ReusableContent } from './collections/ReusableContent'
 import { Users } from './collections/Users'
 import SyncDocsButton from './components/SyncDocsButton'
-import richText from './fields/richText'
 import { Footer } from './globals/Footer'
 import { MainMenu } from './globals/MainMenu'
 import { TopBar } from './globals/TopBar'
+import { PartnerProgram } from './globals/PartnerProgram'
 import syncDocs from './scripts/syncDocs'
+import { Budgets, Industries, Regions, Specialties } from './collections/PartnerFilters'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -43,9 +45,14 @@ export default buildConfig({
     Docs,
     Media,
     Pages,
+    Industries,
+    Specialties,
+    Regions,
+    Budgets,
     Posts,
     ReusableContent,
     Users,
+    Partners,
   ],
   endpoints: [
     {
@@ -54,7 +61,7 @@ export default buildConfig({
       handler: syncDocs,
     },
   ],
-  globals: [Footer, MainMenu, TopBar],
+  globals: [Footer, MainMenu, TopBar, PartnerProgram],
   graphQL: {
     disablePlaygroundInProduction: false,
   },
