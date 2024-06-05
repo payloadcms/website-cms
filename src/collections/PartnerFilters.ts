@@ -18,7 +18,7 @@ const Filter: (slug: string, label: string) => CollectionConfig = (slug, label) 
     fields: [
       {
         name: 'name',
-        label: label + 'Label',
+        label: label + ' Label',
         type: 'text',
         required: true,
         unique: true,
