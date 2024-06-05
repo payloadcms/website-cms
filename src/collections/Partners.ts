@@ -3,7 +3,6 @@ import { isAdmin } from '../access/isAdmin'
 import { CollectionConfig } from 'payload/types'
 import { slugField } from '../fields/slug'
 import { slateEditor } from '@payloadcms/richtext-slate'
-import { validateContributions } from '../utilities/validateContributions'
 
 export const Partners: CollectionConfig = {
   slug: 'partners',
@@ -205,7 +204,6 @@ export const Partners: CollectionConfig = {
                       name: 'number',
                       type: 'number',
                       required: true,
-                      validate: validateContributions,
                       admin: {
                         width: '25%',
                       },
