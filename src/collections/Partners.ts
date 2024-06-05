@@ -1,4 +1,4 @@
-import { isAdmin } from '../access/isAdmin'
+import { isAdmin, isAdminFieldLevel } from '../access/isAdmin'
 
 import { CollectionConfig } from 'payload/types'
 import { slugField } from '../fields/slug'
@@ -69,6 +69,9 @@ export const Partners: CollectionConfig = {
       label: 'HubSpot ID',
       admin: {
         position: 'sidebar',
+      },
+      access: {
+        read: isAdminFieldLevel,
       },
     },
     {
