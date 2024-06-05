@@ -29,7 +29,7 @@ const start = async (): Promise<void> => {
     express: app,
     email: {
       fromName: 'Payload CMS',
-      fromAddress: 'info@payloadcms.org',
+      fromAddress: 'info@payloadcms.com',
       ...sendgridConfig,
     },
     onInit: () => {
