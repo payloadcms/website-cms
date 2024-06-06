@@ -14,46 +14,84 @@ export const HoverHighlights: Block = {
     blockFields({
       name: 'hoverHighlightsFields',
       fields: [
-        richText(),
         {
-          name: 'addRowNumbers',
-          type: 'checkbox',
+          name: 'beforeHighlights',
+          type: 'textarea',
         },
         {
           name: 'highlights',
           type: 'array',
           fields: [
             {
-              name: 'title',
+              name: 'text',
               type: 'text',
               required: true,
             },
             {
-              name: 'description',
-              type: 'text',
-              required: true,
-            },
-            {
+              type: 'group',
               name: 'media',
-              type: 'upload',
-              relationTo: 'media',
-              required: true,
-            },
-            {
-              name: 'enableLink',
-              type: 'checkbox',
+              label: 'Media',
+              admin: {
+                hideGutter: true,
+              },
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'topLeft',
+                      type: 'upload',
+                      relationTo: 'media',
+                      admin: {
+                        width: '50%',
+                      },
+                    },
+                    {
+                      name: 'topRight',
+                      type: 'upload',
+                      relationTo: 'media',
+                      admin: {
+                        width: '50%',
+                      },
+                    },
+                  ],
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'bottomLeft',
+                      type: 'upload',
+                      relationTo: 'media',
+                      admin: {
+                        width: '50%',
+                      },
+                    },
+                    {
+                      name: 'bottomRight',
+                      type: 'upload',
+                      relationTo: 'media',
+                      admin: {
+                        width: '50%',
+                      },
+                    },
+                  ],
+                },
+              ],
             },
             link({
               appearances: false,
               disableLabel: true,
-              overrides: {
-                admin: {
-                  condition: (_, { enableLink }) => Boolean(enableLink),
-                },
-              },
             }),
           ],
         },
+        {
+          name: 'afterHighlights',
+          type: 'textarea',
+        },
+        link({
+          appearances: false,
+        }),
       ],
     }),
   ],
