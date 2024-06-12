@@ -1,0 +1,11 @@
+@import '~payload/scss';
+
+.redeploy-button {
+	@extend %btn-reset;
+	padding-top: base(0.75);
+	cursor: pointer;
+
+	&:disabled {
+		cursor: not-allowed;
+	}
+}

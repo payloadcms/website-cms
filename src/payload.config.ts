@@ -26,6 +26,8 @@ import { TopBar } from './globals/TopBar'
 import { PartnerProgram } from './globals/PartnerProgram'
 import syncDocs from './scripts/syncDocs'
 import { Budgets, Industries, Regions, Specialties } from './collections/PartnerFilters'
+import redeployWebsite from './scripts/redeployWebsite'
+import RedeployButton from './components/RedeployButton'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -59,6 +61,11 @@ export default buildConfig({
       path: '/sync/docs',
       method: 'get',
       handler: syncDocs,
+    },
+    {
+      path: '/redeploy/website',
+      method: 'post',
+      handler: redeployWebsite,
     },
   ],
   globals: [Footer, MainMenu, TopBar, PartnerProgram],
@@ -161,7 +168,7 @@ export default buildConfig({
       },
     }),
     components: {
-      afterNavLinks: [SyncDocsButton],
+      afterNavLinks: [SyncDocsButton, RedeployButton],
     },
   },
 })
