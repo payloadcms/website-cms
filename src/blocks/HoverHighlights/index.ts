@@ -39,15 +39,7 @@ export const HoverHighlights: Block = {
                   type: 'row',
                   fields: [
                     {
-                      name: 'topLeft',
-                      type: 'upload',
-                      relationTo: 'media',
-                      admin: {
-                        width: '50%',
-                      },
-                    },
-                    {
-                      name: 'topRight',
+                      name: 'top',
                       type: 'upload',
                       relationTo: 'media',
                       admin: {
@@ -60,15 +52,7 @@ export const HoverHighlights: Block = {
                   type: 'row',
                   fields: [
                     {
-                      name: 'bottomLeft',
-                      type: 'upload',
-                      relationTo: 'media',
-                      admin: {
-                        width: '50%',
-                      },
-                    },
-                    {
-                      name: 'bottomRight',
+                      name: 'bottom',
                       type: 'upload',
                       relationTo: 'media',
                       admin: {
