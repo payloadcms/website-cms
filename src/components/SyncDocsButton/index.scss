@@ -2,11 +2,15 @@
 
 .sync-docs-button {
 	@extend %btn-reset;
-	border-top: 1px solid var(--theme-elevation-100);
 	padding-top: base(0.75);
 	cursor: pointer;
 
+	&:hover {
+		text-decoration: underline;
+	}
+
 	&:disabled {
 		cursor: not-allowed;
+		opacity: 0.5;
 	}
 }
