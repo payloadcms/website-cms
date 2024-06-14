@@ -3,6 +3,8 @@ import { isAdmin, isAdminFieldLevel } from '../access/isAdmin'
 import { CollectionConfig } from 'payload/types'
 import { slugField } from '../fields/slug'
 import { slateEditor } from '@payloadcms/richtext-slate'
+import { formatPreviewURL } from '../utilities/formatPreviewURL'
+import { revalidatePage } from '../utilities/revalidatePage'
 
 export const Partners: CollectionConfig = {
   slug: 'partners',
@@ -10,8 +12,12 @@ export const Partners: CollectionConfig = {
     singular: 'Partner',
     plural: 'Partners',
   },
+  versions: {
+    drafts: true,
+  },
   admin: {
     useAsTitle: 'name',
+    preview: doc => formatPreviewURL('partners', doc),
   },
   access: {
     create: isAdmin,
@@ -337,4 +343,15 @@ export const Partners: CollectionConfig = {
       ],
     },
   ],
+  hooks: {
+    afterChange: [
+      ({ req: { payload }, doc }) => {
+        revalidatePage({
+          payload,
+          collection: 'partners',
+          doc,
+        })
+      },
+    ],
+  },
 }
