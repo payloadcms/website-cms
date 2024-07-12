@@ -86,6 +86,11 @@ export const CaseStudies: CollectionConfig = {
           name: 'useCase',
           type: 'text',
         },
+        {
+          name: 'agency',
+          type: 'relationship',
+          relationTo: 'partners',
+        },
       ],
     },
     {
