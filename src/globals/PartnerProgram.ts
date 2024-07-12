@@ -45,29 +45,6 @@ export const PartnerProgram: GlobalConfig = {
       },
     },
     {
-      name: 'hero',
-      type: 'group',
-      fields: [
-        {
-          name: 'richText',
-          type: 'richText',
-          label: 'Hero Text',
-        },
-        linkGroup({
-          overrides: {
-            name: 'breadcrumbBarLinks',
-          },
-          appearances: false,
-        }),
-        linkGroup({
-          overrides: {
-            name: 'heroLinks',
-          },
-          appearances: false,
-        }),
-      ],
-    },
-    {
       name: 'featuredPartners',
       type: 'group',
       fields: [
