@@ -31,17 +31,37 @@ To do so, you'll need the following software:
 **1. Clone the repo by running the following command at your terminal:**
 
 ```bash
-git clone git@github.com:payloadcms/public-demo.git
+git clone git@github.com:payloadcms/website-cms.git
 ```
 
-**Navigate to folder and install dependencies**
+**Navigate to the folder and install dependencies**
 
-Type `cd ./payload-website` and then `yarn` or `npm install --legacy-peer-deps` to add all required dependencies.
+Type `cd ./website-cms` and then `yarn` or `npm install --legacy-peer-deps` to add all required dependencies.
 
 **Duplicate the example `.env` file and fill in your own values**
 
 Type `cp .env.example .env` in your terminal to make a copy of the example `.env` file, and then edit that file to fill in your own values.
 
+
 **Fire up the development server**
 
 Finally, type `yarn dev` to start up the server and see it in action!
+
+### Connect your local cms to the Payload website
+
+Update NEXT_PUBLIC_CMS_URL in payload website `.env` file 
+
+```
+NEXT_PUBLIC_CMS_URL=http://cms.local.payloadcms.com:8000
+```
+
+### Hosts file
+
+The locally running app must run on `cms.local.payloadcms.com:8000` because of http-only cookie policies and how the GitHub App redirects the user back to the site after authenticating. To do this, you'll need to add the following to your hosts file:
+
+```
+127.0.0.1 cms.local.payloadcms.com
+```
+
+> On Mac you can find the hosts file at `/etc/hosts`. On Windows, it's at `C:\Windows\System32\drivers\etc\hosts`:
+
