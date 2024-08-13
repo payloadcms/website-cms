@@ -92,7 +92,7 @@ export const hero: Field = {
       name: 'enableAnnouncement',
       type: 'checkbox',
       admin: {
-        condition: (_, { type }) => type === 'home',
+        condition: (_, { type }) => ['home', 'three'].includes(type),
       },
       label: 'Enable Announcement?',
     },
@@ -225,8 +225,9 @@ export const hero: Field = {
       name: 'images',
       type: 'array',
       minRows: 1,
+      maxRows: 2,
       admin: {
-        condition: (_, { type } = {}) => ['gradient'].includes(type),
+        condition: (_, { type } = {}) => ['gradient', 'three'].includes(type),
       },
       fields: [
         {
