@@ -76,6 +76,10 @@ export const Statement: Block = {
                   label: 'Large',
                   value: 'large',
                 },
+                {
+                  label: 'Full',
+                  value: 'full',
+                },
               ],
             },
             {
