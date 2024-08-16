@@ -1,22 +1,15 @@
 {
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node",
-      "cwd": "${workspaceFolder}",
-      "runtimeArgs": [
-        "-r",
-        "./node_modules/ts-node/register"
-      ],
+      "command": "yarn run dev",
+      "name": "Run Dev",
       "request": "launch",
-      "name": "Launch Payload Website CMS",
-      "program": "${workspaceFolder}/src/server.ts",
-      "env": {
-        "PAYLOAD_CONFIG_PATH": "src/payload.config.ts"
-      },
-      "outputCapture": "std",
-
-      // "preLaunchTask": "npm: build:server",
-    },
+      "type": "node-terminal",
+      "cwd": "${workspaceFolder}"
+    }
   ]
 }
