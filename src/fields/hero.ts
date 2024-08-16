@@ -177,6 +177,47 @@ export const hero: Field = {
       },
     }),
     {
+      name: 'threeCTA',
+      type: 'radio',
+      label: 'CTA?',
+      required: true,
+      admin: {
+        condition: (_, { type }) => type === 'three',
+      },
+      options: [
+        {
+          label: 'Newsletter Sign Up',
+          value: 'newsletter',
+        },
+        {
+          label: 'Buttons',
+          value: 'buttons',
+        },
+      ],
+    },
+    {
+      name: 'newsletter',
+      type: 'group',
+      admin: {
+        condition: (_, { type, threeCTA }) => type === 'three' && threeCTA === 'newsletter',
+        hideGutter: true,
+      },
+      fields: [
+        {
+          name: 'placeholder',
+          type: 'text',
+          admin: { placeholder: 'Enter your email' },
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          admin: {
+            placeholder: 'Sign up to receive periodic updates and feature releases to your email.',
+          },
+        },
+      ],
+    },
+    {
       name: 'buttons',
       type: 'blocks',
       labels: {
@@ -184,7 +225,7 @@ export const hero: Field = {
         plural: 'Buttons',
       },
       admin: {
-        condition: (_, { type }) => type === 'three',
+        condition: (_, { type, threeCTA }) => type === 'three' && threeCTA === 'buttons',
       },
       blocks: [
         {
