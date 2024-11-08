@@ -137,6 +137,8 @@ export async function fetchDiscordThreads(payload: Payload): Promise<void> {
           }
           return acc
         }, [])
+
+      if (!intro) console.log('No intro found for thread', info.name)
       return {
         info: {
           name: info.name,

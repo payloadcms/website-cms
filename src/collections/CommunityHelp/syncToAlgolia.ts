@@ -4,7 +4,6 @@ import payload from 'payload'
 
 import { fetchDiscordThreads } from '../../scripts/fetch-discord'
 import { fetchGithubDiscussions } from '../../scripts/fetch-github'
-import { CommunityHelp } from 'payload/generated-types'
 
 const appID = process.env.ALGOLIA_CH_ID || ''
 const apiKey = process.env.ALGOLIA_API_KEY || ''
@@ -77,7 +76,7 @@ export const syncToAlgolia = async (): Promise<void> => {
         }),
         messageCount: messageCount,
         slug,
-        helpful,
+        helpful: Boolean(helpful),
       })
     }
 
@@ -95,7 +94,7 @@ export const syncToAlgolia = async (): Promise<void> => {
         upvotes,
         author: author.name,
         slug,
-        helpful,
+        helpful: Boolean(helpful),
         comments: (comments || []).map(comment => {
           const replies = comment.replies?.map(reply => {
             return {
