@@ -1,5 +1,7 @@
 # Payload Website CMS
 
+## 🚨 All functionality moved to [payloadcms/website](https://github.com/payloadcms/website)
+
 This is the code that powers the official website CMS for [Payload](https://github.com/payloadcms/payload). The frontend is built with NextJS and [the code can be found here](https://github.com/payloadcms/website).
 
 ### Features shown
